@@ -306,7 +306,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       {/* Stitch Botanical Cotton Hero */}
       <section className="relative w-full h-[400px] rounded-3xl overflow-hidden glass-card glass-edge mb-8">
         <div className="absolute inset-0 z-0 opacity-80 mix-blend-luminosity">
-          <img alt="Botanical Cotton" className="w-full h-full object-cover" src="/basml-cotton-dashboard/bg-cotton.png" />
+          <img alt="Botanical Cotton" className="w-full h-full object-cover" src="/basml-cotton-yarn-dashboard/bg-cotton.png" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent"></div>
         </div>
 
@@ -459,7 +459,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
             </div>
           </div>
           <div className="border border-outline-variant rounded-xl overflow-hidden bg-surface flex items-center justify-center p-2">
-            <img src="/basml-cotton-dashboard/yarn_quality_testing.png" className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
+            <img src="/basml-cotton-yarn-dashboard/yarn_quality_testing.png" className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
           </div>
         </div>
       </div>

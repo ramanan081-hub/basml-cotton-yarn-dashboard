@@ -1377,7 +1377,7 @@ function App() {
 function GlobalDashboard({ data, darkMode, colors }) {
   return (
     <div className="space-y-gutter">
-      <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: 'url(/basml-cotton-yarn-dashboard/cotton_glow_bg.jpg)' }}>
+      <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: 'url(/basml-cotton-yarn-dashboard/bg-cotton.png)' }}>
         <div className="absolute inset-0 bg-gradient-to-r from-primary-container/90 via-primary-container/70 to-transparent z-0"></div>
         <div className="relative z-10 text-left space-y-4 max-w-xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider">
