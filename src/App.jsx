@@ -1490,8 +1490,8 @@ function GlobalDashboard({ data, darkMode, colors }) {
                 <LineChart data={data.prices.monthlyTrend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="month" />
-                  <YAxis domain={['auto', 'auto']} tickFormatter={(value) => `$${formatPrice(value)}`} />
-                  <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value) => `$${formatPrice(value)}`} />
+                  <YAxis domain={['auto', 'auto']} tickFormatter={(value) => `${formatPrice(value)}¢`} />
+                  <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value) => `${formatPrice(value)}¢`} />
                   <Legend />
                   <Line type="monotone" dataKey="AIndex" stroke={colors.tertiary} strokeWidth={3} dot={false} name="A-Index (USD)" />
                   <Line type="monotone" dataKey="US" stroke={colors.primary} strokeWidth={2} dot={false} name="US Upland (USD)" />
@@ -1616,11 +1616,11 @@ function GlobalDashboard({ data, darkMode, colors }) {
                         <div className="text-xs text-outline font-medium mt-0.5">{p.quality}</div>
                       </td>
                       <td className="py-3 text-right font-semibold">
-                        <div>${formatPrice(p.current)}</div>
+                        <div>{formatPrice(p.current)}¢</div>
                         <div className="text-xs text-outline font-normal">(${formatPrice((p.current * 2.20462)/100)}/kg)</div>
                       </td>
                       <td className="py-3 text-right font-bold table-highlight-text">
-                        <div>${formatPrice(p.est)}</div>
+                        <div>{formatPrice(p.est)}¢</div>
                         <div className="text-xs table-highlight-text font-normal">(${formatPrice((p.est * 2.20462)/100)}/kg)</div>
                       </td>
                       <td className={`py-3 text-right font-bold ${p.yoy.includes('+') ? 'text-forest-green' : 'text-error'}`}>
