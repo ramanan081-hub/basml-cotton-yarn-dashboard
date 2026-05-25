@@ -108,7 +108,10 @@ function PresentationDashboard({ data, darkMode, colors }) {
                 {data.indianCotton.prices.types.map((p, i) => (
                   <tr key={i} className="hover:bg-surface-container-high/30">
                     <td className="py-3">
-                      <strong className="text-on-surface">{p.type}</strong>
+                      <strong className="text-on-surface flex items-center gap-1.5 flex-wrap">
+                        {p.type}
+                        <FreshnessBadge type={p.type} />
+                      </strong>
                       <br />
                       <span className="text-[10px] text-on-surface-variant">Quality: {p.staple}</span>
                     </td>
@@ -382,6 +385,25 @@ const formatPrice = (val, isINR = false) => {
     return num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
   }
   return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+};
+
+const isLivePrice = (typeName) => {
+  const name = typeName.toLowerCase();
+  return name.includes('ice') || name.includes('exchange rate') || name.includes('usd/inr');
+};
+
+const FreshnessBadge = ({ type }) => {
+  const live = isLivePrice(type);
+  return (
+    <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ml-1.5 border shrink-0 ${
+      live 
+        ? 'bg-forest-green/20 text-forest-green border-forest-green/30' 
+        : 'bg-amber-500/10 text-amber-500 border-amber-500/20'
+    }`}>
+      <span className={`w-1 h-1 rounded-full ${live ? 'bg-forest-green animate-pulse' : 'bg-amber-500'}`}></span>
+      {live ? 'Live API' : 'Simulated'}
+    </span>
+  );
 };
 
 function CottonVarietyExplorer({ mode, data, colors }) {
@@ -1030,6 +1052,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
 
 function App() {
   const [data, setData] = useState(() => generateUpdatedData(initialData));
+  const [lastUpdated, setLastUpdated] = useState(new Date());
   const [activeTab, setActiveTab] = useState('global'); 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -1102,6 +1125,7 @@ function App() {
         }
         return updated;
       });
+      setLastUpdated(new Date());
     } catch (error) {
       console.error('Error during data fetch:', error);
     }
@@ -1128,9 +1152,11 @@ function App() {
   useEffect(() => {
     const interval = setInterval(() => {
       setData(prevData => generateUpdatedData(prevData));
+      setLastUpdated(new Date());
     }, 30 * 1000);
     return () => clearInterval(interval);
   }, []);
+
 
   useEffect(() => {
     const handleMouseMove = (e) => {
@@ -1302,14 +1328,32 @@ function App() {
             </span>
           </div>
           <div className="flex items-center gap-4">
+            <div className="hidden lg:flex flex-col items-end text-right mr-2 select-none">
+              <span className="text-[9px] font-mono font-bold text-on-surface-variant/70 uppercase tracking-widest">System Sync Status</span>
+              <span className="text-xs font-mono font-medium text-primary">
+                {lastUpdated.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST
+              </span>
+            </div>
             <button onClick={() => setDarkMode(!darkMode)} className="text-primary hover:bg-surface-container p-2 rounded-full transition-colors hidden sm:block">
               <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
             </button>
           </div>
         </header>
 
+        {/* Sticky warning/status banner */}
+        <div className="fixed top-16 right-0 left-0 md:left-[240px] h-10 z-30 bg-amber-500/10 dark:bg-amber-500/5 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 md:px-6 text-[10px] md:text-xs font-mono text-amber-600 dark:text-amber-500">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
+            <span className="truncate"><strong>DEMO / ANALYSIS MODE:</strong> Live feeds for USD/INR & ICE Cotton. Mandi/Yarn counts are simulated (May 2026).</span>
+          </div>
+          <div className="flex items-center gap-3 shrink-0 ml-4">
+            <span className="hidden sm:inline opacity-70">Sync: {lastUpdated.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST</span>
+            <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-[9px] uppercase tracking-wider font-bold text-amber-700 dark:text-amber-400">SIMULATION ACTIVE</span>
+          </div>
+        </div>
+
         {/* Dashboard Content Container */}
-        <div className="pt-24 px-4 md:px-6 pb-10 flex-1 max-w-[1600px] w-full relative z-10">
+        <div className="pt-28 px-4 md:px-6 pb-10 flex-1 max-w-[1600px] w-full relative z-10">
           {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
@@ -1323,7 +1367,7 @@ function App() {
         {/* Footer */}
         <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
           <div>
-            <p className="font-mono font-semibold">© 2025 BASML.COTTON.YARN.ANALYSIS</p>
+            <p className="font-mono font-semibold">© 2026 BASML.COTTON.YARN.ANALYSIS</p>
             <p className="opacity-70 mt-0.5">Confidential Industrial Intelligence - Internal Use Only</p>
           </div>
           <div className="flex gap-6 font-mono">
@@ -1593,7 +1637,10 @@ function GlobalDashboard({ data, darkMode, colors }) {
                   {data.prices.types.map((p, i) => (
                     <tr key={i} className="hover:bg-soft-orange/5 transition-colors">
                       <td className="py-3 pr-2">
-                        <div className="font-bold text-on-surface">{p.type}</div>
+                        <div className="font-bold text-on-surface flex items-center gap-1.5 flex-wrap">
+                          {p.type}
+                          <FreshnessBadge type={p.type} />
+                        </div>
                         <div className="text-xs text-outline font-medium mt-0.5">{p.quality}</div>
                       </td>
                       <td className="py-3 text-right font-semibold">
@@ -1973,7 +2020,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                   {data.prices.types.map((p, i) => (
                     <tr key={i}>
                       <td className="py-2.5">
-                        <div className="font-semibold text-sm table-highlight-text">{p.type}</div>
+                        <div className="font-semibold text-sm table-highlight-text flex items-center gap-1.5 flex-wrap">{p.type} <FreshnessBadge type={p.type} /></div>
                         <div className="text-[10px] text-on-surface-variant font-mono mt-0.5">Quality: {p.staple}</div>
                       </td>
                       <td className="py-2.5">
@@ -2402,7 +2449,10 @@ function YarnDashboard({ data, darkMode, colors }) {
                 <tbody>
                   {data.global.prices.map((p, i) => (
                     <tr key={i}>
-                      <td className="font-semibold">{p.type}</td>
+                      <td className="font-semibold flex items-center gap-1.5 flex-wrap">
+                        {p.type}
+                        <FreshnessBadge type={p.type} />
+                      </td>
                       <td className="text-right font-bold">${formatPrice(p.current)}</td>
                       <td className="text-right font-bold table-highlight-text">${formatPrice(p.est)}</td>
                       <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
@@ -2458,7 +2508,10 @@ function YarnDashboard({ data, darkMode, colors }) {
                 <tbody>
                   {data.india.prices.map((p, i) => (
                     <tr key={i}>
-                      <td className="font-semibold">{p.type}</td>
+                      <td className="font-semibold flex items-center gap-1.5 flex-wrap">
+                        {p.type}
+                        <FreshnessBadge type={p.type} />
+                      </td>
                       <td className="text-right font-bold">₹{formatPrice(p.current, true)}</td>
                       <td className="text-right font-bold table-highlight-text">₹{formatPrice(p.est, true)}</td>
                       <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
@@ -2980,7 +3033,10 @@ function YarnDashboard({ data, darkMode, colors }) {
             <tbody>
               {data.marketYarnsList.map((yarn, idx) => (
                 <tr key={idx}>
-                  <td className="font-bold table-highlight-text">{yarn.countSpec}</td>
+                  <td className="font-bold table-highlight-text flex items-center gap-1.5 flex-wrap">
+                    {yarn.countSpec}
+                    <FreshnessBadge type={yarn.countSpec} />
+                  </td>
                   <td>{yarn.region}</td>
                   <td className="text-right font-bold text-on-surface">₹{formatPrice(yarn.price, true)}</td>
                   <td className="text-right font-bold table-highlight-text">₹{formatPrice(yarn.bagPrice, true)}</td>
@@ -3028,7 +3084,10 @@ function YarnDashboard({ data, darkMode, colors }) {
                   <tbody>
                     {data.nonCotton.global.prices.map((p, i) => (
                       <tr key={i}>
-                        <td className="font-semibold">{p.type}</td>
+                        <td className="font-semibold flex items-center gap-1.5 flex-wrap">
+                          {p.type}
+                          <FreshnessBadge type={p.type} />
+                        </td>
                         <td className="text-right font-bold">${formatPrice(p.current)}</td>
                         <td className="text-right font-bold table-highlight-text">${formatPrice(p.est)}</td>
                         <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
@@ -3084,7 +3143,10 @@ function YarnDashboard({ data, darkMode, colors }) {
                   <tbody>
                     {data.nonCotton.india.prices.map((p, i) => (
                       <tr key={i}>
-                        <td className="font-semibold">{p.type}</td>
+                        <td className="font-semibold flex items-center gap-1.5 flex-wrap">
+                          {p.type}
+                          <FreshnessBadge type={p.type} />
+                        </td>
                         <td className="text-right font-bold">₹{formatPrice(p.current, true)}</td>
                         <td className="text-right font-bold table-highlight-text">₹{formatPrice(p.est, true)}</td>
                         <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
