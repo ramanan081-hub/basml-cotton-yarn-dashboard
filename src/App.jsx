@@ -1242,12 +1242,18 @@ function App() {
     <div className="min-h-screen bg-background text-on-surface font-body flex">
       {/* Sidebar Navigation - Desktop */}
       <aside className="sidebar-desktop hidden md:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
-        <div className="px-2 mb-8 flex items-center justify-center">
+        <div className="px-2 mb-8 flex items-center gap-2.5">
           <img 
             src="/basml-cotton-yarn-dashboard/logo.png" 
             alt="BASML Logo" 
-            className="w-12 h-12 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
+            className="w-10 h-10 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
           />
+          <div>
+            <h1 className="font-headline text-md font-black tracking-tight text-primary leading-tight">
+              <span className="liquid-glass-text">BASML Analytics</span>
+            </h1>
+            <p className="font-mono text-[9px] text-on-surface-variant uppercase tracking-wider font-bold">Cotton & Yarn</p>
+          </div>
         </div>
         <nav className="flex-1 space-y-1">
           {navItems.map((item) => (
@@ -1281,11 +1287,16 @@ function App() {
         <div className="fixed inset-0 bg-black/50 z-50 md:hidden" onClick={() => setSidebarOpen(false)}>
           <aside className="w-[240px] h-full glass-card border-r border-white/10 rounded-none py-6 px-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center px-2 mb-8">
-              <img 
-                src="/basml-cotton-yarn-dashboard/logo.png" 
-                alt="BASML Logo" 
-                className="w-10 h-10 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
-              />
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/basml-cotton-yarn-dashboard/logo.png" 
+                  alt="BASML Logo" 
+                  className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20"
+                />
+                <h1 className="font-headline text-sm font-black tracking-tight text-primary leading-tight">
+                  <span className="liquid-glass-text">BASML Analytics</span>
+                </h1>
+              </div>
               <button onClick={() => setSidebarOpen(false)} className="text-on-surface-variant">
                 <span className="material-symbols-outlined">close</span>
               </button>
@@ -1335,8 +1346,11 @@ function App() {
             <img 
               src="/basml-cotton-yarn-dashboard/logo.png" 
               alt="BASML Logo" 
-              className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20 shadow-sm animate-pulse"
+              className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
             />
+            <span className="font-headline text-base md:text-lg font-bold text-primary tracking-tight">
+              BASML.COTTON.YARN.ANALYSIS
+            </span>
             <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-container/20 text-primary border border-primary/20">
               <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
               Live AI Monitor
