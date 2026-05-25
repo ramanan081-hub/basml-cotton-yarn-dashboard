@@ -1,0 +1,725 @@
+Global cotton remains in mild oversupply in 2025–26, with world lint production projected
+around 26 million tonnes against consumption near 25.2–25.7 million tonnes, keeping stocks
+historically high even as the gap narrows slightly. Prices are subdued versus the post‑pandemic
+peak: the Cotlook A Index has traded mostly in the mid‑70s cents per pound range, and
+international futures are hovering near the low‑60s cents per pound, though late‑2025 and
+early‑2026 showed some firming from five‑year lows. Brazil and the United States remain the
+dominant exporters, while Asian spinning hubs led by Bangladesh, Vietnam, China, India and
+Pakistan anchor import demand, with India’s own imports picking up as domestic quality and
+price conditions fluctuate.[ 2][ 4][ 6][ 8][ 10][^11]
+India, China, Brazil, the United States, Pakistan and Australia together account for the bulk of
+global production, with China (~35.5 million bales), India (23.5 million), Brazil (19.5 million), the
+United States (13.9 million), Pakistan (5.0 million) and Australia (4.5 million) forming the core
+supply base in 2025–26. Within India, Maharashtra, Gujarat and Telangana are now the top
+producing states in the 2025–26 advance estimates, while Karnataka and Rajasthan form the
+second tier. State‑level wholesale prices in December 2025 clustered around ₹7,000–7,800 per
+quintal (roughly ₹70–78 per kg), with Telangana and Maharashtra at the higher end and Gujarat
+and Rajasthan somewhat lower, reflecting quality, logistics and MSP procurement dynamics.[
+13][ 14][ 9][^16]
+Geopolitics and logistics remain key risk drivers: the Russia–Ukraine war has lifted energy and
+chemical costs, the US–China trade conflict continues to reshape cotton and textile flows, and
+the Gaza‑linked Red Sea crisis has lengthened routes and raised freight and insurance,
+especially on Asia–Europe lanes. Climate risk is rising in major cotton belts, with half of global
+cotton‑growing regions expected to face high exposure to at least one climate hazard (heat,
+drought, flood, or storms) by 2040, and India, Pakistan, West Africa, northern China and parts
+of Australia particularly exposed. For mills and textile groups, the next 2–3 years likely bring
+modest demand recovery, continued pressure on margins from low yarn and fabric prices, and a
+premium on supply‑chain resilience, diversified sourcing and risk‑managed raw‑cotton
+procurement.[ 18][ 20][ 22][ 24][ 26][ 28][^29]
+Global Cotton Market 2025–26: Data-Driven
+Report for Textile Decision-Makers
+Executive summary
+1][ 3][ 5][ 7][ 9][
+12]
+[ 7][ 15][
+17][ 19][ 21][ 23][ 25][ 27][
+1. Latest international cotton market news (2025–2026)
+
+-- 1 of 15 --
+
+ICAC’s 2025/26 projections and the February 2026 "Cotton This Month" report indicate world lint
+production around 26 million tonnes versus consumption near 25.2–25.7 million tonnes,
+implying a continued surplus of roughly 0.3–0.8 million tonnes. USDA’s March 2026 World
+Markets and Trade circular similarly projects 2025/26 global production at about 121.0 million
+480‑lb bales (≈26.3 million tonnes) and mill use at 118.6 million bales, with ending stocks near
+76.4 million bales — still elevated by historical standards but slightly lower than recent peaks.
+ICAC also notes that China, India and Brazil will continue to dominate supply, while China,
+India and Pakistan lead consumption, reinforcing Asia’s central role in the cotton value chain.
+[ 4][ 9][ 1]
+The Cotlook A Index averaged around 81 cents per pound in 2024/25, with ICAC’s mid‑point
+forecast for 2025/26 near 73 cents per pound within a wide 56–95 cents band, reflecting
+uncertainty on demand, tariffs and macro conditions. By late 2025, ICAC and Cotton Inc data
+show the A Index easing into the low‑ to mid‑70s cents range, while New York ICE nearby
+futures traded mostly in the low‑ to mid‑60s cents per pound. TradingEconomics data for April 9,
+2026 shows spot cotton at about 71.6 US cents per pound, up around 7–8 percent year‑on‑year
+but still well below 2021–22 highs.[ 2][ 32][ 10][ 34]
+Country benchmarks show a wide spread around the A Index: USDA’s March 2026 price table
+reports US FOB spot cotton at about 61 cents per pound, India’s Shankar‑6 at roughly 76 cents,
+Brazil at ~68 cents, and China’s CCIndex 3128B equivalent near 110 cents — underscoring how
+domestic policy, taxes and logistics create persistent differentials. PJTSAU’s January 2026
+Outlook confirms late‑2025 values in a similar range, with Indian spot around 74 cents, Pakistani
+spot near 66 cents, and the CCIndex in China at about 94–96 cents per pound.[ 9]
+USDA’s December 2025 and March 2026 outlooks suggest world trade in 2025/26 at about 43.9
+million bales, up around 5 percent from the prior season as mill use recovers modestly and
+freight conditions stabilise. ICAC sees trade at roughly 9.7 million tonnes in 2025/26, with a 2–5
+percent rebound from 2024/25 driven by higher imports in China, Bangladesh, Vietnam and
+India. Brazil is projected to remain the largest exporter with roughly 14.5 million bales (≈3.16
+million tonnes), followed by the United States at about 12.0 million bales and Australia near 5.7
+million bales, while Bangladesh and Vietnam remain the largest importers. Global ending
+stocks, while still high at about 76 million bales, are stabilising rather than rising sharply, as
+production growth slows and demand gradually improves.[ 36][ 5][ 9][ 11][ 30]
+1.1 Global supply–demand balance
+30][ 5][ 11][
+1.2 Price levels and volatility
+31][ 3][ 7][ 33][
+7][
+1.3 Trade flows and stock changes
+35][ 4][ 6][ 37][ 1][
+2. Nation‑to‑nation cotton price differences and key drivers
+
+-- 2 of 15 --
+
+USDA’s March 6, 2026 price matrix (in cents per pound) shows the following benchmark quotes:
+Cotlook A Index 74.7, US spot 61.0, China CCIndex 109.7, India Shankar‑6 75.5, Brazil
+mill‑delivered 67.8, with Pakistan data suspended from the Karachi Cotton Association after
+December 2025. PJTSAU’s December 2025 data place Indian spot at 74.3–74.6 cents per pound
+(≈₹52,000 per candy), Pakistani spot at 65.5–67.2 cents per pound (≈PKR 15,300 per maund), and
+the CCIndex at 94–96 cents per pound, consistent with the USDA differentials.[ 7]
+Other sources show national price ranges that fit this pattern: Moirai estimates India’s average
+farm‑gate cotton price in August 2025 at roughly ₹65–95 per kg depending on staple and
+location, aligning with wholesale mandi prices around ₹7,000–7,800 per quintal. In Brazil, the
+CEPEA/ESALQ index closed 2025 at about BRL 3.4862 per pound (around 0.64 USD/lb at
+prevailing exchange rates), while average cotton export prices over 2025 were about 0.738 USD
+per pound. Pakistan’s domestic market in late 2025 showed lint cotton in Punjab and Sindh at
+roughly PKR 14,500–16,200 per maund (≈PKR 7,300–9,800 per 40 kg), consistent with a mid‑60s
+cents per pound equivalent. Australian export‑linked prices largely tracked ICE futures and the
+A Index within a narrow 65–70 cents per pound band through 2025, with industry reports
+noting gin prices above AUD 600 per bale when futures held above 60 cents and the Australian
+dollar remained weak.[ 6][ 39][ 41][ 42][ 34][^7]
+Policy and support systems. China maintains domestic cotton prices above world levels via
+target price‑based subsidies in Xinjiang (roughly 18,600 yuan/ton or about 2,620 USD/ton),
+keeping mill‑gate prices significantly above the A Index and US levels. India’s MSP, CCI
+procurement and import duties (currently 11 percent on raw cotton) underpin a floor for
+Shankar‑6 and other domestic benchmarks, which often trade at a small premium or discount to
+the A Index depending on crop quality and currency. In contrast, Brazil and Australia are highly
+export‑oriented, with prices strongly arbitraged to ICE futures and the A Index, minus logistics
+and quality adjustments, leading to quotes only a few cents from global benchmarks.[ 6][
+8][ 43][ 7][^9]
+Quality and origin premiums. Australian and US cottons often earn premiums for staple length,
+strength and contamination‑free status, supporting slightly higher merchant prices than
+similarly situated origins, especially in high‑count yarn markets. Indian Shankar‑6 trades near
+or slightly above the A Index in periods of tight domestic supply because of its suitability for a
+wide range of ring‑spun yarns and strong local demand. Brazilian cotton has gained share by
+offering consistent quality and competitive fob prices, but domestic oversupply in 2025 pushed
+CEPEA’s domestic index down nearly 17 percent even as Brazil’s share of global trade reached
+about 31 percent.[ 8][ 37][ 33][^7]
+Currency and macro factors. Exchange‑rate swings significantly shape local‑currency prices: in
+2025 the US dollar appreciated about 5 percent versus the Indian rupee (USD/INR average ≈87.2),
+while depreciating roughly 12.5 percent against the Brazilian real (USD/BRL average ≈5.59),
+altering relative export competitiveness. A stronger real amplified the fall in Brazil’s
+dollar‑denominated prices, while rupee depreciation cushioned Indian farm‑gate prices in local
+terms despite weaker global benchmarks.[ 48][ 6][ 9]
+2.1 Current price spread snapshot
+9][
+13][ 38][ 40][ 10][ 43][
+2.2 Structural drivers of price differentials
+44][ 45]
+[ 37][ 33][
+6][ 46][ 47][
+41][ 13][ 7][
+
+-- 3 of 15 --
+
+Logistics and risk premia. The Red Sea crisis and broader freight volatility have produced
+higher delivered costs for cotton shipped from South Asia and East Africa to Europe and the
+eastern Mediterranean, which can widen landed‑price differentials between nearby suppliers
+(e.g., Turkey, West Africa) and more distant origins. Insurance surcharges and longer transit
+times also lead some mills to pay modest premiums for geographically advantaged or less
+geopolitically exposed origins, such as West African cotton into Europe or Brazilian cotton into
+East Asia via alternative routes.[ 50][ 20][ 51][^17]
+The table below summarises indicative benchmark prices around late‑2025 to early‑2026,
+converted to cents per pound where possible for comparability. These are reference levels, not
+transactional quotes.
+Country /
+Benchmark
+Indicative
+price
+(cents/lb)
+Timeframe & basis 	Key notes
+Global – Cotlook A
+Index ~73–75 A Index Nov–Dec 2025,
+early 2026
+Average of cheapest 5 upland quotes
+CFR Far East; near five‑year lows but
+stabilising.[ 7][^9]
+United States –
+AMS spot ~61
+USDA March 6, 2026 spot,
+strict low middling, FOB
+car/truck
+Farm price projected at 60 cents/lb for
+2025/26; futures around mid‑60s.[ 52]
+India – Shankar‑6 	~74–76
+PJTSAU Dec 2025 spot;
+USDA March 2026 price
+series
+Supported by MSP and CCI; ex‑gin
+Gujarat around ₹52,000 per candy.[ 9]
+[^44]
+China – CCIndex
+3128B ~94–110 PJTSAU Nov–Dec 2025;
+USDA March 2026
+Domestic price 14,750–15,000
+RMB/ton; remains well above world
+price under subsidy regime.[ 45][^9]
+Brazil –
+CEPEA/ESALQ &
+export
+~64–74
+CEPEA Dec 2025 domestic;
+2025 average export price
+0.738 USD/lb
+Domestic index fell ~17% in 2025;
+strong exports absorbed record crop.[
+8]
+Pakistan – spot /
+KCA ~65–67
+PJTSAU Nov–Dec 2025
+Pakistani spot; KCA series
+suspended Dec 2025
+Domestic lint around PKR 14,500–
+16,200 per maund; rupee weakness
+keeps dollar prices competitive.[ 38]
+[ 53]
+Australia –
+export‑linked ~65–70
+ACSA and ABARES 2025
+commentary; linked to ICE
+and A Index
+High‑quality lint; gin prices >AUD
+600/bale when ICE stays >60 cents
+and AUD is weak.[ 42][ 37]
+49][ 19][ 23][
+3. International cotton price comparison table (USA, India, China, Brazil,
+Pakistan, Australia)
+31][
+9][
+7][
+7][
+6]
+[
+7][
+39][
+10][ 43][
+4. Cotton harvest analysis
+
+-- 4 of 15 --
+
+USDA’s March 2026 World Markets and Trade report provides detailed country projections for
+2025/26 production (lint, 1,000 480‑lb bales), summarised below.[^9]
+Rank 	Country 2025/26 production
+(million bales) Approx. share of world total
+1 	China 	35.5 	~29% of world production.[ 14][^11]
+2 	India 	23.5 	~19% of world production.[^9]
+3 	Brazil 	19.5 ~16% of world production; strong area and yield
+gains.[ 8]
+4 	United States 	13.9 ~11% of world production; modestly lower area but
+better yields.[ 30]
+5 	Pakistan 	5.0 	~4% share; recovering from prior crop losses.[ 54]
+6 	Australia 	4.5 ~4% share; still above 10‑year average despite
+expected 2025–26 decline.[ 37][^16]
+– Others (Turkey, West
+Africa, etc.) ~17.0 Remaining ~17–18% spread across dozens of
+producers.[ 4]
+These six countries together contribute roughly four‑fifths of global cotton output,
+underscoring the concentration of supply risk in a small set of regions. China’s production
+rebound is driven by higher area and yields in Xinjiang, where the National Bureau of Statistics
+reported 6.641 million tonnes in 2025, up 7.7 percent year‑on‑year. Brazil’s 2024–25 crop is
+estimated at just over 4.0 million tonnes, with Conab and Abrapa projecting further expansion
+to about 4.1 million tonnes in 2025 as area and yields rise.[ 14][ 8][ 9]
+USDA’s detailed tables show a long tail of smaller cotton producers, many of them in
+Sub‑Saharan Africa, Central Asia and Latin America, with annual production often below 0.25–
+0.3 million bales per country. Examples include Senegal (~0.05 million bales), Togo (~0.10
+million), Chad (~0.14 million), Niger (~0.10 million), Peru (~0.05 million) and several Central
+American and Caribbean states with production under 0.05 million bales. These countries
+collectively account for only a few percent of global production, but cotton can be a major rural
+employer and export earner, making them highly sensitive to price changes and external
+shocks.[ 55][^9]
+Structural challenges for low‑volume origins include limited access to inputs and finance, aging
+ginning equipment, higher per‑unit logistics costs, and vulnerability to climate and pest shocks,
+which can cause large year‑to‑year swings in output. At the same time, some West African
+origins (Benin, Burkina Faso, Mali, Côte d’Ivoire) have built reputations for rain‑fed,
+hand‑picked cotton that can command modest quality premia in certain markets, even at
+relatively small scale.[ 26][ 9]
+4.1 Highest‑producing countries (2025–26)
+9][
+9][
+9][
+9][
+9][
+9][
+55][ 45][ 6][
+4.2 Lower‑producing countries and structural constraints
+56][
+25][ 56][
+
+-- 5 of 15 --
+
+PJTSAU’s January 2026 Cotton Outlook, based on the Government of India’s first advance
+estimates for 2025–26, pegs the national crop at about 292.15 lakh bales, slightly below 297.24
+lakh bales in 2024–25. Within this, Maharashtra leads with 72.66 lakh bales, followed by Gujarat
+(70.99 lakh), Telangana (54.40 lakh), Karnataka (25.54 lakh) and Rajasthan (19.71 lakh),
+confirming a west‑ and south‑centric production profile. Earlier CAI estimates for 2024–25
+pressings show broadly similar state rankings, with Maharashtra at 90 lakh bales, Gujarat at 80
+lakh, Madhya Pradesh around 19 lakh, Telangana 34 lakh, Karnataka 22 lakh and Andhra
+Pradesh 12 lakh.[ 7]
+The table below summarises the latest available state‑level crop estimates.
+State (India) 2025–26 production
+(lakh bales, PJTSAU)
+2024–25 pressings
+(lakh bales, CAI) Notes
+Maharashtra 	72.66 	90.00
+Largest producer; high area (≈38.4 lakh
+ha) with significant MSP procurement.[
+15]
+Gujarat 	70.99 	80.00 Second‑largest; premium Shankar‑6
+variety; area ~20.8 lakh ha.[ 15]
+Telangana 	54.40 	34.00 Rapid growth in recent years; area ~18.6
+lakh ha and high MSP purchases.[ 15]
+Karnataka 	25.54 	22.00
+Growing role; supported by CCI
+procurement and improved irrigation.[
+15]
+Rajasthan 	19.71 21.00 (Upper+Lower
+≈21)
+Important in North & Central zones; partly
+irrigated.[ 15]
+Andhra
+Pradesh – (included in “others”) 12.00 Smaller but stable crop; 4.13 lakh ha under
+cotton.[ 15]
+Tamil Nadu 	– 	4.00 Limited area; net cotton importer for
+spinning sector.[^15]
+Punjab,
+Haryana – 	~3.0 and 12.0
+High yields but shrinking area due to
+competing crops and water constraints.[
+28]
+Odisha &
+Others – ~5.25 (Odisha +
+others)
+Fragmented, rain‑fed smallholder
+production.[^15]
+States like Maharashtra, Gujarat and Telangana together now contribute well over half of
+India’s cotton, while traditional northern states (Punjab, Haryana, parts of Rajasthan) have
+seen area decline due to water concerns and better returns from competing crops. Smaller
+producing states and "others" (including Odisha and eastern states) collectively supply a
+modest share but often face higher climatic and price risk because crops are largely rain‑fed.[
+28][ 15]
+5. India cotton analysis
+5.1 State‑wise cotton production (high and low producing states)
+15][
+7]
+[
+7][
+7][
+7]
+[
+7][
+7][
+15]
+[
+57]
+[ 7][
+
+-- 6 of 15 --
+
+PJTSAU’s January 2026 report provides Agmarknet‑derived wholesale prices for December 2025
+by major cotton‑growing states, along with month‑on‑month (MoM) and year‑on‑year (YoY)
+changes.[^7]
+State Dec 2025 avg wholesale price
+(₹/quintal)
+MoM change vs Nov
+2025
+YoY change vs Dec
+2024
+Andhra Pradesh 	7,283.67 	+0.9% 	+2.9%[^7]
+Gujarat 	7,132.35 	+3.5% 	+0.6%[^7]
+Haryana 	7,135.97 	+2.9% 	−0.4%[^7]
+Karnataka 	7,365.34 	+3.7% 	+3.8%[^7]
+Maharashtra 	7,546.41 	+6.0% 	+5.1%[^7]
+Odisha 	7,589.48 	+20.9% 	+2.0%[^7]
+Punjab 	7,534.05 	+1.5% 	+4.2%[^7]
+Rajasthan 	6,990.75 	+0.6% 	−4.5%[^7]
+Telangana 	7,804.58 	+4.7% 	+7.9%[^7]
+Average
+(sample) 7,354.45 	+4.9% (approx.) 	–[^7]
+These wholesale prices translate roughly to ₹70–78 per kg of lint, consistent with Moirai’s
+reported all‑India farm‑gate range of ₹65–95 per kg depending on staple and region. The sharp
+MoM jump in Odisha reflects a catch‑up from previously low prices and possible quality‑mix
+effects, while Maharashtra and Telangana show strong increases tied to MSP procurement
+intensity and weather‑related quality issues. Rajasthan’s negative YoY change despite higher
+MoM prices suggests softer local demand or quality discounts in that season, highlighting
+regional heterogeneity in price dynamics.[ 7]
+At the mandi level, intra‑state dispersion is also material: PJTSAU’s data for Warangal market
+(Telangana) in December 2025 show daily modal prices mostly between ₹6,900 and ₹7,350 per
+quintal, with noticeable day‑to‑day volatility linked to arrivals and quality. CCI procurement
+remains significant — about 35 lakh bales purchased by mid‑December 2025, estimated at
+around 40 percent of arrivals — and continues to support prices around the MSP when
+open‑market bids soften.[ 59][^7]
+The Russia–Ukraine conflict has primarily affected cotton and textiles indirectly through
+energy and chemical markets, as well as consumer demand in Europe. Higher oil and natural gas
+prices have raised costs for petrochemical‑based fibres (polyester, nylon) and for dyes and
+auxiliaries, tightening cost spreads between cotton and synthetics at times and contributing to
+5.2 State‑wise cotton price movement trend
+13][
+58][
+6. Impact of global issues
+6.1 Russia–Ukraine war
+
+-- 7 of 15 --
+
+volatility in cotton futures. Analysts note that elevated energy prices and weakened European
+consumer confidence have dampened demand for apparel and home textiles, thereby
+moderating cotton mill use growth in the EU and nearby markets.[ 22][^60]
+In West and Central Asia and parts of Europe, logistics risks around the Black Sea have
+complicated some trade routes and financing for textile inputs, though the direct share of raw
+cotton shipped through these corridors is relatively small compared with Asian maritime routes.
+Overall, the war has added to global macro uncertainty and price volatility rather than
+structurally changing cotton trade flows, but sustained high energy costs could structurally
+shift fibre mix and sourcing decisions over time.[ 61][ 21]
+The Israel–Gaza conflict triggered Houthi attacks on commercial vessels transiting the Red Sea
+and Bab‑el‑Mandeb from late 2023, causing major disruptions to Suez Canal traffic through
+2024 and into 2025. Think‑tank and industry analyses report freight cost increases of 40–60
+percent and insurance surcharges of 15–20 percent on some Asia–Europe routes, with transit
+times extended by up to 2–3 weeks as ships rerouted around the Cape of Good Hope. Container
+throughput via the Suez Canal fell by about 75 percent in 2024 versus 2023, highlighting the
+scale of diversion.[ 20][ 17][^49]
+Textile and apparel exporters in India, Bangladesh, Pakistan and other Asian hubs report
+delayed deliveries, renegotiated FOB terms and squeezed margins, especially on lower‑value
+products where freight is a high share of price. For raw cotton, the impact is most acute on
+shipments from South Asia, East Africa and the Gulf to European and Mediterranean mills, as
+longer voyages and higher freight reduce price competitiveness versus nearer origins such as
+Turkey or West Africa. Some mills and brands are responding by extending lead times,
+diversifying routes and shifting part of sourcing to origins less reliant on the Red Sea corridor.
+[ 64][ 65][ 49][^19]
+Section 301 tariffs on Chinese imports and China’s retaliatory tariffs on US raw cotton and
+textiles have reshaped cotton and apparel trade patterns since 2018 and continue to influence
+flows in 2025–26. Chinese in‑quota tariffs on US raw cotton effectively rose to about 26 percent
+(including an additional 25 percent), with out‑of‑quota rates around 65 percent, making US
+cotton significantly less competitive into China compared with Brazilian, Australian or West
+African origins. USITC and academic analyses show that these tariffs reduced US apparel
+imports from China by roughly 15–40 percent in 2019–2021, with sourcing shifting to Vietnam,
+Bangladesh, India and other countries, while also raising import costs from non‑Chinese
+origins due to limited capacity and higher risk premia.[ 66][ 68][ 21]
+The Uyghur Forced Labor Prevention Act (UFLPA) and related actions against Xinjiang cotton
+have intensified pressure on brands to avoid Chinese cotton in US‑bound supply chains, further
+redirecting demand toward India, Brazil, the US, West Africa and other origins. At the same
+time, China has promoted domestic substitution and encouraged local brands to highlight
+Xinjiang cotton, creating a split between domestic and export‑oriented value chains and
+sustaining a structural premium of Chinese domestic prices over the A Index. Overall, US–China
+21][
+22][ 62][
+6.2 Gaza conflict & Red Sea shipping crisis
+19][ 23][
+63][ 51][ 17][
+6.3 US–China trade war and policy tensions
+18][ 67][ 24][
+
+-- 8 of 15 --
+
+tensions have increased trade fragmentation and risk, making diversified sourcing strategies
+more valuable for mills and retailers.[ 18][ 9]
+Climate risk assessments such as the Cotton 2040 report and associated WTW analysis
+conclude that by 2040, half of global cotton‑growing regions will face high or very high risk
+from at least one climate hazard (heat stress, water scarcity, flooding, storms or wildfire). The six
+largest producing countries — India, USA, China, Brazil, Pakistan and Australia — are all
+projected to see increased exposure to meteorological drought, heat waves above 40°C, or
+extreme rainfall events, with Gujarat (India), parts of Pakistan, northern China and eastern
+Australia especially vulnerable to water stress. Empirical and modelling work shows that
+without adequate irrigation and management, higher temperatures and erratic precipitation
+increase risks of boll shedding, yield loss and fibre quality degradation, particularly in rain‑fed
+systems.[ 27][ 29][ 57]
+In India, district‑level simulations suggest that increased temperature and reduced rainfall
+could lower yields in parts of the North Zone and Gujarat without adaptation, though improved
+varieties and agronomic practices can partly offset these losses. Globally, process‑based
+modelling (LPJmL) indicates that irrigated cotton might maintain or even increase yields under
+elevated CO₂, but rain‑fed cotton — including much of Africa and parts of South Asia — is more
+sensitive to climate variability, raising the importance of irrigation infrastructure and
+climate‑resilient practices. On the logistics side, beyond the Red Sea, recurring container
+shortages, port congestion, and higher fuel costs have become recurrent challenges for textile
+supply chains, prompting greater emphasis on multi‑port strategies, digital tracking and
+near‑shoring where feasible.[ 27][ 69][ 57][^26]
+Brazil has consolidated its position as the world’s largest cotton exporter, shipping around 2.89
+million tonnes in calendar 2025 (up about 4.2 percent year‑on‑year) and accounting for roughly
+31 percent of global cotton trade. USDA’s March 2026 projections place Brazil’s 2025/26 exports
+at about 14.5 million bales, compared with 12.0 million bales for the United States and 5.7 million
+bales for Australia. Strong Brazilian output (over 4.0 million tonnes), competitive costs and
+favourable currency dynamics have allowed Brazil to capture market share, particularly in
+China, Pakistan, Bangladesh, Vietnam and India.[ 37][ 9]
+The United States remains a crucial supplier, particularly to high‑quality yarn and denim
+markets, but faces intense competition from Brazil and Australia and ongoing demand
+uncertainty linked to trade policy and slow global apparel sales. USDA projects US exports at
+around 12.0 million bales in 2025/26, down from peaks but still representing roughly 28 percent
+of global exports, even as domestic producers struggle with high input costs and weak
+farm‑gate prices. Australia, after several strong seasons, is expected to see production and
+exports moderate to about 4.1 million and 4.9–5.7 million bales respectively in MY 2025/26, still
+45][ 21][
+6.4 Climate change and logistics disruptions
+26][ 28][ 25][
+61][ 28][ 19][
+7. Impact on global cotton exports and imports
+7.1 Exporters: Brazil, US, Australia and others
+8][ 6][
+
+-- 9 of 15 --
+
+above its 10‑year average and reinforcing its role as a reliable high‑quality supplier.[ 37][ 16]
+[ 9]
+West African exporters (Benin, Burkina Faso, Mali, Côte d’Ivoire) collectively contribute a
+meaningful share of global trade, with combined exports often exceeding 3 million bales,
+benefiting from duty‑free access into the EU and a reputation for hand‑picked lint. However,
+they remain exposed to climate volatility, infrastructure constraints and policy uncertainty,
+which can cause sharp swings in export volumes. Turkey, Greece and a few Central Asian
+origins (Uzbekistan, Turkmenistan, Tajikistan) also participate in exports but at much smaller
+scale than Brazil, the US and Australia.[ 56][^9]
+Bangladesh and Vietnam are forecast to be the world’s largest cotton importers in 2025/26,
+each buying around 7.9–8.0 million bales as they continue to expand spinning capacity and
+apparel exports. China’s raw‑cotton imports are expected to remain in the 5.6 million bales
+range, lower than historical peaks due to high domestic production and policies favouring
+Xinjiang cotton, though import demand fluctuates with quota allocations and reserve‑stock
+management. Pakistan’s imports, by contrast, are projected around 5.5 million bales as better
+domestic crops reduce but do not eliminate reliance on foreign lint.[ 54][ 9]
+India’s import role is changing: USDA and CAI data indicate rising imports (≈3.2–4.0 million bales
+in 2025/26) as mills seek high‑quality and long‑staple cotton for exports, especially when
+domestic prices are supported by MSP and CCI procurement or when weather‑related quality
+issues arise. At the same time, India’s exports are modest at an estimated 1.3–1.4 million bales, as
+domestic consumption near 313 lakh bales absorbs most of the crop. Overall, global cotton
+trade is increasingly centred on South and Southeast Asia, with Europe’s import growth more
+modest and partly constrained by economic uncertainty and logistics issues around the Red Sea
+and Black Sea.[ 5][ 15][ 7][^9]
+Global cotton in 2025–26 is in a phase of moderate oversupply, with production only slightly
+above mill use, high but stable stocks, and prices in the low‑ to mid‑70s cents per pound on the
+A Index. The centre of gravity for both production and consumption remains firmly in Asia, with
+China, India and Brazil leading supply and China, India, Pakistan, Bangladesh and Vietnam
+dominating mill demand and imports. Price differentials between origins are substantial —
+Chinese domestic cotton is often 30–40 cents per pound above the A Index, Indian cotton
+trades moderately above or near it, and Brazilian, US and Australian cotton typically price
+slightly below or near the index depending on freight and quality.[ 35][ 4][ 7][^9]
+For India specifically, production is broadly stable but shifting geographically, with
+Maharashtra, Gujarat and Telangana strengthening their dominance and smaller states facing
+greater variability. State‑wise prices show a mild upward trend into late‑2025, supported by MSP
+operations and limited farmer selling, but still leave many growers with tight margins given
+52][ 47][
+30][
+25][
+7.2 Importers: Asia’s spinning hubs
+4][ 45][
+54][ 23][ 19][
+8. Summary, key risks and future outlook
+8.1 Key takeaways for textile decision‑makers
+43][ 1][ 6][
+
+-- 10 of 15 --
+
+rising labour and input costs. Mills face the challenge of balancing domestic and imported
+cotton, managing basis risk versus ICE and the A Index, and coping with persistent volatility in
+freight, energy and policy.[ 13][^7]
+Geopolitical and trade risk. Escalation or new rounds of US–China tariffs, new sanctions
+regimes, or an extended Red Sea crisis could further reroute trade, alter relative landed
+costs and increase working‑capital needs for cotton and yarn shipments.[ 24][ 19]
+Climate and production risk. Increased frequency of droughts, heat waves and extreme
+rainfall, especially in India, Pakistan, West Africa, northern China and Australia, raises the
+probability of yield and quality shocks in any given season.[ 28][ 25]
+Demand and substitution risk. Slow global growth, cost‑of‑living pressures, and
+competition from synthetics, particularly from China, could cap cotton mill use growth
+even at relatively low price levels. Sustainability regulations and traceability requirements
+may also favour some origins over others, further segmenting the market.[ 1][ 18][^21]
+Financial and logistics risk. High interest rates, currency volatility and volatile freight rates
+increase the cost of holding inventory and the risk of mismatches between raw‑cotton
+purchase prices and yarn or fabric realisations.[ 19][^61]
+Most medium‑term forecasts point to modest growth in global cotton consumption, with USDA
+and ICAC expecting mill use to edge higher as macro conditions stabilise, though cotton’s share
+of global fibre demand may remain under pressure from synthetics. ICAC’s longer‑term Outlook
+suggests that by the mid‑2030s China and India will remain the top producers (each around 22–
+23 percent of global output), with Brazil surpassing the US as the third‑largest producer,
+reinforcing the Americas‑plus‑Asia supply axis. Market‑research firms such as Technavio project
+the global cotton market to grow by roughly USD 9.6 billion between 2026 and 2030 at a CAGR
+of about 3.4 percent, driven by population, income growth and continued demand for natural
+fibres.[ 1][ 55]
+For the next 2–3 years, baseline expectations are for:
+Prices: A Index to trade mostly in a broad 65–85 cents per pound range, with downside
+limited by lower investment in cotton area at very low prices and upside capped by large
+stocks and competition from synthetics.[ 31][^52]
+Trade: World trade to gradually expand toward mid‑40s million bales, led by Brazil, the US
+and Australia on the export side and Bangladesh, Vietnam, China, India and Pakistan on
+the import side.[ 9]
+India : Production in the 290–310 lakh bales band barring major weather shocks, with MSP
+and CCI continuing to shape farmer realisations; imports will remain an important tool for
+mills needing quality and timing flexibility.[ 7][^15]
+Strategy: Mills and brands will increasingly prioritise resilience—diversified sourcing across
+origins, deeper relationships with key suppliers, and better use of hedging tools—over pure
+15][
+8.2 Key risks
+23][ 65][
+16][ 26][
+70][ 52][
+52][
+8.3 Future outlook (2026–2028)
+36][ 70][
+2][
+4][
+54][
+
+-- 11 of 15 --
+
+lowest‑cost procurement.[ 65][^19]
+For textile decision‑makers, this environment favours disciplined raw‑cotton buying linked to
+transparent benchmarks (A Index, ICE), careful monitoring of origin spreads and freight, and
+building optionality across regions to manage geopolitical and climate shocks.
+ . Global Cotton Oversupply to Persist in 2025/2026 - ICAC - Global cotton imports and
+exports could reach 9.7 million tonnes in 2025/2026. This volume represent...
+ . 2025 Cotton Price Review and 2026 Cotton Market Outlook - The highest price for the main
+Zhengzhou cotton contract in 2025 was around 14,300 in mid-July, comp...
+ . Cotton - Price - Chart - Historical Data - News - Cotton fell to 71.55 USd/Lbs on April 9, 2026,
+down 0.17% from the previous day. Over the past month...
+ . Production Continues to Exceed Consumption, Some Growers ... - ... world cotton market.
+World cotton lint production in 2025/26 is expected to be led by China, fol...
+ . Global 2025-26 cotton production to reduce to $119....
+ . Brazil cotton prices slide in 2025 as exports absorb surplus - Brazil cotton prices slide in 2025
+as exports absorb surplus. 31 Dec ... Average export prices fell ...
+ . Cotton Outlook – January 2026
+ . Abrapa Cotton Brazil Report - 2025 11 VF - In October, Brazil exported 293.9 thousand tonnes
+of cotton (+4.6% compared to the same month in 202...
+ . Cotton: World Markets and Trade - The U.S. season-average farm price for 2025/26 is
+projected unchanged at 60 cents per pound. 2025/26...
+  . Agricultural Commodities Report September 2025 - ABARES - DAFF - Download full report
+and dataThis report contains ABARES forecasts for the value, volume and price o...
+  . The ICAC Releases Its 2025/26 World Cotton Market Projections - World cotton trade is
+projected to rebound by 2% to reach 9.65 million tonnes due to increased stock...
+  . CAI revises India's 24–25 cotton production estimate to 311.4 L bales - This includes an
+increase of 5 lakh bales in Maharashtra, 1.50 lakh bales each in Gujarat and Madhya...
+  . Cotton Price Trends in India: What to Expect in 2025 - Moirai - Stay updated on the cotton
+price per kg in India for 2025. Access essential data and trends to navig...
+  . China cotton output rises 7.7% in 2025 on higher area and ... - China's cotton output rose to
+6.641 million tonnes in 2025, up 7.7 per cent YoY, driven by a 5 per c...
+  . [PDF] CROP REPORT - Cotton Association of India
+  . Australian Crop Report September 2025 - Download full report and dataThe Australian Crop
+Report contains ABARES forecasts for the area, yiel...
+  . Red Sea crisis to adversely impact trade volumes in 2024 - The disruption is significantly
+affecting Indian trade, especially with the Middle East, Africa and ...
+62][
+References
+
+-- 12 of 15 --
+
+  . US fashion sector reels as tariffs on China imports stay in place - The US apparel and retail
+sectors react after the Biden Administration announced it is retaining Sec...
+  . Threads Under Tension: Logistics in Textiles & Apparel 2025 - Read article about Textile and
+apparel logistics in 2025 faced prolonged Red Sea disruptions and lon...
+  . THE EFFECT OF THE ISRAEL-GAZA WAR ON MARITIME ... - This study investigates the impact
+of the Israel-Gaza War on global maritime trade and transportatio...
+  . Global Textile Supply Chains : Geopolitical Challenges & ... - Meanwhile, the Russia–Ukraine
+war has driven up energy and chemical raw material prices, indirectly ...
+  . How the Ukraine Crisis Impacts Cotton and Textiles - The cotton market, which is
+experiencing a tight supply, will see uncertainty and added volatility d...
+  . The Red Sea crisis: Ceasefire in Gaza could signal end of ... - The Red Sea crisis: Ceasefire in
+Gaza could signal end of vessel attacks · A ceasefire was announced...
+  . Timeline of the U.S.–China Trade Dispute and Tariffs on Cotton and ... - In 2018, the Trump
+Administration proclaimed significant changes in tariff actions on a variety of U...
+  . Physical climate risk for global cotton production - WTW - Many cotton growing regions are
+set to experience insufficient rainfall, while others will experienc...
+  . COTTON AND CLIMATE - This paper broadly covers two interconnected topics: 1. The
+expected impact of climate change on cot...
+  . Global cotton production under climate change - HESS - Abstract. Being an extensively
+produced natural fiber on earth, cotton is of importance for economie...
+  . Climate change and cotton production in India-impact analysis ... - Impact of climate change
+on mean yield of 22 years is expressed as percentage change from baseline m...
+  . Physical Climate Risk for Global Cotton Production - WTW - The growing season is projected
+to increase across central and southern Africa, eastern Australian, ...
+  . Cotton and Wool Outlook: December 2025 - Approved by USDA’s World Agricultural Outlook
+Board Economic Research Service | Situation and Outloo...
+  . ICAC Forecasts Steady Global Cotton Production and Trade - The ICAC projects global cotton
+production and consumption to stabilize in 2025-26, with trade recov...
+  . The ICAC releases its 2025/26 world cotton market projections
+  . Technical Analysis - The Secretariat's current price forecast for the 2024/25 season average
+A Index stands at 81 cents p...
+  . Market Report - May 2025
+  . Global Cotton Trade 2025 Review & Outlook for 2026 - The USDA predicts cotton production
+of 118.4 million bales in 2025/26; a 1.5 million bales decrease ...
+  . USDA Projects Lower Global Cotton Stocks In 2025/26 As ... - Global cotton stocks are
+expected to tighten in the 2025/26 season, driven by rising mill use, moder...
+  . [PDF] Report Name: Cotton and Products Annual - USDA/FAS - ... Australian cotton exports
+will decline by 11 percent to 4.9 million bales in. MY 2025/26, down f...
+
+-- 13 of 15 --
+
+  . Cotton market steady; Sindh, Punjab, Balochistan rates hold - Trading volume remains low;
+Phutti and Primark cotton prices stable
+  . Cotton Price Today in Pakistan 2025 / Phutti Rates List - BrieflyShort - Cotton price in
+Pakistan ranges between 7,350 Rs to 9,800 Rs Per 40 Kg, depending on the region and ...
+  . Cotton Rate in Pakistan 2025 | Today Kapas Rate in Pakistan - Curious about Cotton Rate in
+Pakistan Today? View the latest Kapas Rate in Pakistan Today. Kissan St...
+  . USD to BRL Exchange Rate History for 2025 - View 2025 exchange rate history between the
+US Dollar and the Brazilian Real. Accurate conversions, ...
+  . Apr 2025 Market Report
+  . Australia's Cotton Industry in 2025: Navigating Markets ... - This article examines the latest
+market report from the Australian Cotton Shippers Association, prov...
+  . COTTON - International Scenario: 3.1 As per ICAC Journal 'Cotton This Month published on
+November 2025, Globa...
+  . Report Name: Cotton and Products Update - The consecutive month-on- month increases
+from July to September suggest China's cotton import deman...
+  . Economics - Cotton Australia - ... cotton in exportable locations, reaching an average price of
+$664/bale. The average price for co...
+  . Mixed quality reported as cotton ginning hits 25pc mark - Grain Central - Ginning of
+Australia’s cotton crop now seen as hitting 5.4M bales has reached the 25pc mark, accordi...
+  . USD to INR Exchange Rate History for 2025 - View 2025 exchange rate history between the
+US Dollar and the Indian Rupee. Accurate conversions, ta...
+  . Navigating the Red Sea Crisis: Adapting Strategies for ... - The global textile industry is at a
+pivotal juncture in 2024, grappling with the aftermath of the Re...
+  . The Red Sea Shipping Crisis (2024–2025): Houthi Attacks ... - Since November 2023, Houthi
+attacks (over 190 by October 2024) significantly disrupted Red Sea/Aden ...
+  . Hanging by a Thread—The Red Sea Blockade and Jordan's Fragile ... - Houthi attacks have
+revealed an industrial paradox.
+  . 2026 Cotton Outlook and Market Situation - CAES Field Report - The key points for the 2026
+season are: Cotton remains financially strained by high input costs, ele...
+  . 01 January, 2026
+  . USDA lowers 2025-26 global cotton production estimate to 119.43 ... - ; The US Department of
+Agriculture has lowered its estimate for global cotton output in 2025-26 (Aug...
+  . Global Cotton Outlook 2025/26 - 2034/35 - However, Brazil (15%) is expected to surpass the
+U.S. (12%) as the third largest producer, following...
+  . Cotton in West Africa - In West Africa, approximately 16 million people depend directly or
+indirectly on cotton cultivation....
+  . Climate Change: Impacts on global cotton production - Changes in precipitation patterns
+increase the likelihood of short-run crop failures and long-run pr...
+
+-- 14 of 15 --
+
+  . State Wise CCI Cotton Sales – 2024-25 - A state-wise breakdown of sales indicates strong
+activity from Maharashtra, Telangana, and Gujarat, ...
+  . 2024-25: State-wise CCI Cotton Sales - A state-wise breakdown of sales indicates strong
+activity from Maharashtra, Telangana, and Gujarat, ...
+  . The impact of the war in Ukraine on the European fashion ... - In January 2023, Russia's sales
+volume is estimated to be $32.72bn, January 2024's forecast is $34.7...
+  . How Supply Chain Hurdles Impact Textile Printing In 2025 - The textile printing industry in
+2025 faces supply chain disruptions and global trade shifts. Innova...
+  . Global Textile Market 2025: Transformation Amid Volatility ... - Global textile market 2025 has
+undergone major transformations. Learn trends, sustainability shifts,...
+  . Red Sea Attacks and the Global Textile and Apparel Trade ... - Some EU fashion companies say
+“the crisis has delayed stock deliveries “by three to four weeks” and ...
+  . The Red Sea crisis started affecting the apparel export - Bangladesh's garment export has
+been facing yet another challenge for crisis in the Red Sea channel ...
+  . Will market volatility pose challenges for the textile and ... - The market environment in 2026
+continues to carry significant uncertainties related to tariffs, geop...
+  . section 301 – FASH455 Global Apparel & Textile Trade and Sourcing - Posts about section 301
+written by Sheng Lu
+  . Understanding Section 301 as it pertains to apparel and textiles - Learn how Section 301
+tariffs on Chinese imports drive up costs, shift supply chains and challenge U...
+  . March 2023 – FASH455 Global Apparel & Textile Trade and Sourcing - 3 posts published by
+Sheng Lu during March 2023
+  . Global tensions are now disrupting textile trade worldwide. ... - Shipping routes are becoming
+longer and more uncertain. Freight costs and delivery delays are increa...
+  . Cotton Market Analysis, Size, and Forecast 2026-2030 - The Cotton Market size is expected
+to grow by USD 9603.8 million from 2026-2030 expanding at a CAGR ...
+
+-- 15 of 15 --
+

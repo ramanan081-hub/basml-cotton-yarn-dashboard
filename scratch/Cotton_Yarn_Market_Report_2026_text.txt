@@ -1,0 +1,253 @@
+n GLOBAL & INDIA COTTON & YARN
+MARKET INTELLIGENCE REPORT
+Raw Cotton Types · Current Prices · Indian Varieties · Yarn Market · Manufacturers
+Data as of May 2026 | Sources: USDA, IMF/FRED, CCI, MCX, ICAC, Industry Reports
+Global Cotton Price
+(May 2026)
+ICE Futures
+(May 2026)
+India MSP
+(Medium Staple)
+India MSP
+(Long Staple)
+Global Production
+2025/26
+~76.9¢/lb
+(IMF/FRED) ~83–87¢/lb n6,620/qtl n7,020/qtl 122.6 M Bales
+(USDA WASDE)
+Source: USDA WASDE May 2026; IMF Primary Commodity Prices (FRED); Government of India CCI
+SECTION 1 — GLOBAL RAW COTTON: TYPES & CURRENT PRICES
+Cotton is the world's most widely used natural fiber. It is classified globally by staple length, grade (color, brightness,
+purity), and character (fiber strength and uniformity). The four major global cotton categories are: Extra-Long Staple
+(ELS), Long Staple (LS), Medium Staple, and Short Staple. Prices are quoted on ICE Futures (US cents/lb) and
+benchmarked by the IMF Primary Commodity Price index.
+Cotton Type / Variety Origin Country Staple Length Key Use Approx. Price (USD/lb)
+May 2026
+Pima / Extra-Long Staple (ELS) USA, Peru, Egypt ≥ 35mm Luxury apparel, fine fabrics $1.80 – $2.50
+Egyptian Giza (ELS) Egypt 34–36mm High-end textiles, lingerie $1.90 – $2.70
+Upland Cotton (Standard) USA (main exporter) 25–32mm General apparel, denim ~79–87¢/lb
+Brazilian Cerrado Cotton Brazil 28–34mm Apparel, home textiles, export ~76–85¢/lb
+Xinjiang Cotton (China) China 27–32mm Domestic spinning, yarn ~18,600 CNY/ton
+Australian Cotton Australia 28–34mm Fine yarn, export (China, India) ~78–86¢/lb
+Pakistani Cotton Pakistan 25–30mm Yarn, woven fabric ~72–80¢/lb
+West African Cotton Burkina Faso, Mali 26–30mm Export raw fiber ~70–78¢/lb
+Organic Cotton (certified) Multiple Varies Sustainable fashion brands +20–40% premium
+Source: USDA AMS Cotton Market News (Week May 7, 2026); IMF Global Cotton Price FRED/PCOTTINDUSDM (Mar 2026: 76.94¢/lb); ICE
+Futures; USDA World Markets & Trade Circular Apr 2026. Official links: https://www.ams.usda.gov/mnreports/cnwwcmr.pdf |
+https://fred.stlouisfed.org/series/PCOTTINDUSDM | https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf
+1.1 Global Supply & Demand Snapshot (2025/26)
+USDA WASDE (May 2026) revised 2025/26 global production upward to 122.6 million bales — the highest since
+2012/13. Global mill use is projected at 119.1 million bales. With production exceeding consumption, world ending stocks
+are forecast at 77.0 million bales (highest since 2019/20). Top producers: India, China, USA, Brazil, Pakistan, Australia.
+Top exporters: USA and Brazil account for over half of global supply.
+
+-- 1 of 7 --
+
+Indicator 2024/25 2025/26 (Est.) 2026/27 (Proj.) Source
+Global Production (M bales) 119.7 122.6 116.0 USDA WASDE May 2026
+Global Mill Use (M bales) 119.4 119.1 — USDA ERS
+Global Ending Stocks (M bales) 74.1 77.0 — USDA WASDE
+US Production (M bales) 14.4 13.9 13.3 USDA WASDE
+ICE Spot Price (¢/lb avg) ~64.8 ~75–87 ~80–90 est. AMS/ICE
+IMF Benchmark (¢/lb) ~77.4 (2025 avg) 76.94 (Mar 2026) — FRED/IMF
+Source: USDA Economic Research Service (ERS): https://www.ers.usda.gov/topics/crops/cotton-and-wool/market-outlook | USDA WASDE May
+2026 | IMF via FRED: https://fred.stlouisfed.org/series/PCOTTINDUSDM
+
+-- 2 of 7 --
+
+SECTION 2 — INDIAN RAW COTTON: TYPES & PRICES
+India is the world's largest cotton producer, accounting for ~23% of global output. Indian cotton is classified into four
+staple-length categories. Each variety grows in specific states and is suited to different yarn counts and textile
+applications. India produced ~320.5 lakh bales in 2025-26 (revised upward). The government sets Minimum Support
+Prices (MSP) through the Cabinet Committee on Economic Affairs.
+2.1 Indian Cotton Classification by Staple Length
+Category Staple Length Key Varieties Growing States Main Use
+Extra-Long Staple (ELS) ≥ 32.5 mm Suvin, MCU-5, DCH-32 TN, Karnataka, AP	Fine count yarns (Ne 80s+), luxury textiles, towels
+Long Staple (LS) 27.5–32.0 mmShankar-6, Bunny, Brahma, MECH-1Gujarat, MaharashtraThin & strong yarns, woven fabrics, denim
+Medium-Long Staple 25.0–27.0 mm J-34, LRA-5166 Punjab, Haryana, Rajasthan Spinning, various clothing types
+Medium Staple 20.5–24.5 mm Jayadhar, V-797, Y-1 Maharashtra, Telangana Good quality cotton clothes, knits
+Short Staple < 20.0 mm Bengal Desi, Assam Comilla West Bengal, Assam Denim, thick textiles, industrial
+Source: Cotton Corporation of India (CCI); A One Export; Kaushik Cotton (KCC); Dial4Trade Industry Database 2025 | https://cotcorp.org.in |
+https://aoneexport.com/raw-cotton/
+2.2 Indian Raw Cotton Variety Profiles & Prices (2025-26)
+Variety State Staple
+(mm) Micronaire Strength
+(g/tex)
+Market Price
+(n/qtl) USD Equiv.
+Shankar-6 (S-6) Gujarat 29–31 3.8–4.5 28–30 n6,800–7,500 ~$81–90
+MCU-5 Tamil Nadu / AP 31–33 3.5–4.0 30–32 n7,200–8,000 ~$86–96
+DCH-32 / Suvin Karnataka / TN 33–36 3.2–3.8 33–36 n8,500–11,000 ~$102–132
+MECH-1 (Bunny/Brahma)Gujarat / Maha. 28–30 3.8–4.5 27–30 n6,500–7,200 ~$78–86
+J-34 Punjab / Haryana 25–27 4.0–5.0 25–28 n6,400–7,000 ~$77–84
+LRA-5166 Rajasthan / MP 25–27 4.0–5.0 25–27 n6,200–6,800 ~$74–82
+V-797 Maharashtra / AP 21–24 4.5–5.5 22–25 n6,000–6,600 ~$72–79
+Y-1 Multiple 20–24 4.5–5.5 22–25 n5,900–6,500 ~$71–78
+Bengal Desi West Bengal < 20 5.5–7.0 18–22 n5,200–5,800 ~$62–70
+Organic Cotton (certified) Multiple Varies Varies Varies n8,000–12,000 ~$96–144
+Source: CCI MSP Notification 2025-26; MCX Cotton Futures; Moirai Market Report 2025; Mandi data (Gujarat/Maharashtra APMCs) | Official
+CCI: https://cotcorp.org.in | MCX: https://www.mcxindia.com | Agmarknet: https://agmarknet.gov.in
+2.3 Government MSP & Policy (2025-26)
+Cotton Grade MSP 2025-26 (n/Qtl) Change vs 2024-25 Authority
+Medium Staple Cotton n6,620 per quintal +n500 approx. Cabinet Committee on Economic Affairs (CCEA)
+Long Staple Cotton n7,020 per quintal +n500 approx. Cabinet Committee on Economic Affairs (CCEA)
+Import Duty Exemption Nil (waived Aug–Dec 2025)Extended by Finance Ministry Government of India
+Source: Ministry of Agriculture & Farmers Welfare, Government of India | https://agricoop.nic.in | Cotton Corporation of India: https://cotcorp.org.in
+
+-- 3 of 7 --
+
+SECTION 3 — GLOBAL YARN MARKET: TYPES & PRICES
+Yarn is produced from cotton and other fibers through spinning processes. Key types include ring-spun, open-end (OE),
+compact, air-jet, and vortex yarns. International yarn prices are tracked by ICE, EmergingTextiles.com, and Textile
+Exchange. Counts (Ne) indicate fineness — higher Ne = finer yarn.
+3.1 Global Yarn Categories & Specifications
+Yarn Type Process Count Range Fiber Content Key Markets Price Range (USD/kg)
+Ring Spun Cotton Ring Spinning Ne 20s–100s 100% CottonApparel, home textiles worldwide$1.80 – $4.50
+Open-End (OE) / Rotor Rotor Spinning Ne 6s–30s 100% Cotton Denim, towels, industrial $1.20 – $2.20
+Compact Cotton Compact Ring Ne 30s–120s 100% Cotton Premium knits, wovens $2.20 – $5.00
+Combed Cotton Ring + Combing Ne 30s–80s 100% Cotton Luxury apparel, fine knits $2.00 – $4.80
+Carded Cotton Ring Spinning Ne 16s–40s 100% Cotton Standard apparel, hosiery $1.60 – $2.80
+Air-Jet / Vortex Air-Jet Spinning Ne 20s–60s Cotton/Blends Fast fashion, sportswear $1.50 – $3.00
+Poly-Cotton Blend Ring/OE Ne 20s–60s 65/35 or 52/48 PCUniform, workwear, shirting $1.40 – $2.50
+Organic Cotton Yarn Ring/Compact Ne 20s–80s Certified Organic Sustainable fashion brands $3.50 – $7.00
+Recycled Cotton Yarn OE/Ring Ne 10s–30s Recycled fiber Circular fashion, eco brands $2.00 – $4.00
+Viscose/Modal Yarn Wet Spinning Ne 30s–80s Viscose/Modal Drapey apparel, intimates $2.50 – $5.50
+Polyester Spun (PSF) Ring/OE Ne 20s–60s 100% Polyester Blends, budget apparel $1.00 – $2.00
+Linen / Flax Yarn Wet/Dry Spinning Ne 10s–50s 100% Flax Summer apparel, home linen $3.00 – $8.00
+Silk Yarn Reeling/Twisting Fine denier 100% Silk Luxury, sarees, scarves $15 – $60/kg
+Wool / Merino Yarn Woolen/Worsted Nm 20–80 100% Wool Knitwear, suits, blankets $8 – $40/kg
+Source: EmergingTextiles.com International Yarn Price Reports (Apr 2026); Textile Exchange Preferred Fiber Report 2025; ITMF International
+Textile Manufacturers Federation | https://www.emergingtextiles.com/yarn-market-prices/international-yarn-market-prices/ |
+https://textileexchange.org/preferred-fiber-and-materials-market-report/
+3.2 International Export Yarn Prices — May 2026
+Count / Type India Export
+(USD/kg)
+Pakistan Export
+(USD/kg)
+China Import
+(USD/kg) Trend (Apr–May 2026)
+Ne 20s Carded $1.70 – $2.00 $1.60 – $1.90 $1.80 – $2.10 ↑ Rising
+Ne 30s Carded $1.90 – $2.20 $1.80 – $2.10 $2.00 – $2.30 ↑ Rising
+Ne 30s Combed $2.30 – $2.70 $2.20 – $2.60 $2.40 – $2.80 ↑ Rising
+Ne 40s Combed $2.60 – $3.10 $2.50 – $3.00 $2.70 – $3.20 ↑ Rising
+Ne 40s Compact $2.90 – $3.50 $2.80 – $3.40 $3.00 – $3.60 ↑ Rising
+Ne 60s Combed $3.50 – $4.20 Limited supply $3.80 – $4.50 → Stable
+Source: EmergingTextiles.com International Yarn Market Prices, April 2026 — 'International spun yarn prices rose broadly in April across all
+major origins, driven by tighter cotton supply and sustained Chinese restocking demand.' | https://www.emergingtextiles.com/yarn-market-prices/
+
+-- 4 of 7 --
+
+SECTION 4 — INDIAN YARN MARKET: TYPES & DOMESTIC PRICES
+India is the world's largest exporter of cotton yarn, with a market valued at USD 10.16 billion in 2024, projected to grow to
+USD 22.5 billion by 2035 (CAGR 7.4%). Major spinning hubs: Coimbatore (TN), Ludhiana (Punjab), Ahmedabad
+(Gujarat), Mumbai/Ichalkaranji (Maharashtra), Rajkot (Gujarat), Bhiwani (Haryana). India exports yarn to China,
+Bangladesh, Vietnam, Pakistan, Indonesia, Turkey, and Europe.
+4.1 Indian Cotton Yarn Types & Domestic Prices (May 2026)
+Yarn Type / Count Spinning Method Domestic Price
+(n/kg) excl. GST USD equiv. Primary Application
+Ne 10s–16s Carded Open-End / Ring n180 – n215 $2.16–$2.58 Denim, heavy fabrics, towels
+Ne 20s Carded Warp Ring Spun n210 – n240 $2.52–$2.88 Shirting warp, hosiery base
+Ne 24s–26s Carded Ring Spun n230 – n260 $2.76–$3.12 T-shirts, knits, fabrics
+Ne 30s Carded Ring Spun n250 – n290 $3.00–$3.48 Standard knit fabrics, hosiery
+Ne 30s Combed Ring + Combing n280 – n330 $3.36–$3.96 Fine knits, premium T-shirts
+Ne 40s Combed Ring + Combing n320 – n390 $3.84–$4.68 Premium apparel, fine fabrics
+Ne 30s Compact Compact Ring n295 – n350 $3.54–$4.20 High-quality knits, exports
+Ne 40s Compact Compact Ring n340 – n420 $4.08–$5.04 Fine weaving, premium exports
+Ne 60s Combed Ring + Combing n420 – n520 $5.04–$6.24 Fine shirting, luxury fabrics
+Ne 80s–100s Combed Ring + Combing n550 – n750 $6.60–$9.00 Luxury apparel, fine yarns
+Poly-Cotton 60/40 (30s) Ring Spun n185 – n230 $2.22–$2.76 Uniform, school wear, workwear
+Poly-Cotton 52/48 (30s) Ring Spun n175 – $220 $2.10–$2.64 Shirting, budget apparel
+Viscose Spun (30s) Ring Spun n230 – n310 $2.76–$3.72 Sarees, drapey apparel
+Organic Cotton (30s) Compact Ring n350 – n480 $4.20–$5.76 Sustainable brands, exports
+Recycled Cotton (20s) Open-End n175 – n240 $2.10–$2.88 Eco fashion, industrial
+Melange / Grindle Ring Spun n240 – n320 $2.88–$3.84 Casual knitwear, sportswear
+Source: EmergingTextiles.com India Yarn Market Prices (Apr 1, 2026); CottonYarnMarket.net; Fibre2Fashion Trade Reports; Texprocil Yarn
+Export Data | https://www.emergingtextiles.com/yarn-market-prices/india-yarn-market-prices/ | https://www.cottonyarnmarket.net |
+https://www.texprocil.org
+Note: Raw cotton mandi prices (Sep–Nov 2025): n6,500–n7,500 per quintal (~n65–75/kg). Yarn prices surged in early 2026 driven by
+rebounding Chinese demand and rising crude oil costs pulling up synthetic fiber alternatives. Exchange rate used: 1 USD ≈ n83.3
+
+-- 5 of 7 --
+
+SECTION 5 — LEADING INDIAN YARN MANUFACTURERS
+India has over 1,800 spinning mills with more than 50 million spindles, making it one of the largest spinning nations
+globally. Key hubs are Coimbatore, Tiruppur (Tamil Nadu), Ludhiana (Punjab), Ahmedabad (Gujarat), and Ichalkaranji
+(Maharashtra).
+5.1 Top Indian Yarn & Textile Manufacturers (2025-26)
+Company HQ Spindle
+Capacity Yarn Types Produced Export
+Countries Website
+Vardhman Textiles Ltd. Ludhiana, Punjab 2M+ spindles
+22 plants
+Cotton, Polyester, Acrylic Blends, Compact, Combed, Carded, Threads	75+ countries vardhman.com
+Arvind Limited Ahmedabad, Gujarat Large scale
+integratedCotton yarn, Denim yarn, Woven fabrics	Global (Arrow, Gap etc.) arvind.com
+KPR Mill Ltd. Coimbatore, TN 400,000+
+spindles
+Cotton yarn (knitting & weaving), Compact, Combed, Garments	USA, EU, Asia-Pacifickprmilllimited.com
+Welspun India Ltd. Mumbai / Gujarat Integrated
+mega plant
+Cotton yarn for home textiles, terry, bed linen	50+ countries (Walmart, IKEA)	welspunindia.com
+Trident Group Barnala, Punjab Large scale	Combed, Carded yarn; Bed/Bath linen, Towels	USA, EU, Global tridentindia.com
+Nahar Spinning Mills Ludhiana, Punjab Large scale
+multi-plant
+Cotton & synthetic yarns, blended, woven fabric	Europe, N. America, ME nahar.com
+Alok Industries Ltd. Silvassa / Mumbai Integrated	Cotton yarn, Polyester yarn, Apparel fabric, Home textiles	Global (major retailers) alokind.com
+Ambika Cotton Mills Coimbatore / Dindigul 1,08,288
+spindles (4 plants)
+Premium Compact & Elitwist yarn (hosiery/weaving)	Italy, Taiwan, Vietnam (~60% export)	ambikacotton.com
+RSWM Ltd. (LNJ Bhilwara)	Bhilwara, Rajasthan Large scale	Cotton, Polyester, Viscose, Blended yarns, Denim	Europe, Asia, Americas rswm.in
+Nitin Spinners Ltd. Bhilwara, Rajasthan Mid-large100% Cotton yarn, Knitted fabrics, Compact	Global export focus nitinspinners.com
+SEL Manufacturing Punjab / Rajasthan Integrated	Cotton yarn, Terry towels, Knitting, Garments	Europe (large supplier) selgroup.in
+Himatsingka Seide Bengaluru, Karnataka Luxury focus	Premium bed/bath linen, Linen & cotton blends	Four Seasons, Ritz-Carlton	himatsingka.com
+AYM Syntex (Welspun Syntex) Gujarat SpecialtyPolyester, Nylon specialty yarns, Texturized	Global synthetic exportaymsyntex.com
+Grasim (Aditya Birla) Multiple states Large scale	Viscose Staple Fiber (VSF), Linen yarn, Blended	Global (Birla brands) birlatextile.com
+Mohan Spintex India (MSIL)Vijayawada, AP Mid-scale Cotton yarn, Knitting yarn Domestic & exportmohanspintex.com
+Source: Market Research Future India Cotton Yarn Market Report 2025; QL Textiles Top Textile Companies 2026; RG Fibers Industry Blog; The
+Yarn Bazaar Spinning Mills Database; Company Annual Reports 2024-25 | https://qltextiles.com/top-textile-companies-in-india/ |
+https://theyarnbazaar.com/spinning-mills-in-india.html | https://www.marketresearchfuture.com/reports/india-cotton-yarn-market-47925
+5.2 Indian Yarn Export Performance (FY 2024-25)
+Metric FY 2023-24 FY 2024-25 Change Source
+Cotton Yarn Export Volume 1,214.71 M kg 1,150.02 M kg -5.3% Texprocil
+Cotton Yarn Export Value USD 3,780.23 M USD 3,553.19 M -6.0% Texprocil
+Cotton Fabric & Madeups Lower value Higher value +ve growth Texprocil
+India's Global Yarn Share ~25% of world exports ~24–25% Stable ITMF
+Top Export Destinations China, Bangladesh, Vietnam	China, Bangladesh, Vietnam, Turkey	China #1 DGFT
+Source: Texprocil (The Cotton Textiles Export Promotion Council): https://www.texprocil.org | DGFT Export Data: https://www.dgft.gov.in | ITMF:
+https://www.itmf.org
+
+-- 6 of 7 --
+
+SECTION 6 — OFFICIAL DATA SOURCES & REFERENCE LINKS
+All price data and market figures in this report are sourced from official government agencies, intergovernmental
+organizations, and recognized industry trade bodies. Readers are encouraged to verify current prices directly from these
+primary sources.
+# Organization Data Provided Official URL
+1	USDA – Agricultural Marketing Service (AMS)	US cotton spot prices, weekly market news, export sales	https://www.ams.usda.gov/mnreports/cnwwcmr.pdf
+2USDA – Economic Research Service (ERS)	Cotton & Wool Market Outlook, global supply/demand	https://www.ers.usda.gov/topics/crops/cotton-and-wool/market-outlook
+3USDA – Foreign Agricultural Service (FAS)	World Markets & Trade Circular (cotton)https://apps.fas.usda.gov/psdonline/circulars/cotton.pdf
+4 USDA – WASDE Report (May 2026)	Global production, mill use, ending stocks https://www.usda.gov/oce/commodity/wasde/
+5IMF Primary Commodity Prices (via FRED)	Global benchmark cotton price (¢/lb, monthly)https://fred.stlouisfed.org/series/PCOTTINDUSDM
+6ICE Futures US (Intercontinental Exchange)	Cotton futures prices (CT contract) https://www.theice.com/products/254/Cotton-No-2-Futures
+7	ICAC – International Cotton Advisory Committee	Global cotton statistics, country data https://icac.org/
+8 Cotton Corporation of India (CCI)	India MSP, procurement, cotton market data https://cotcorp.org.in/
+9 Ministry of Agriculture, GoIMSP notifications, crop production estimates https://agricoop.nic.in/
+10MCX – Multi Commodity Exchange India	Indian cotton futures prices (daily) https://www.mcxindia.com/market-data/commodity-price
+11 Agmarknet (DACFW, GoI) Mandi arrival prices across Indian states https://agmarknet.gov.in/
+12	Texprocil (Cotton Textile Export Promo Council)	India yarn export statistics, FOB prices https://www.texprocil.org/
+13 EmergingTextiles.comIndia/Pakistan/China yarn market prices (weekly)	https://www.emergingtextiles.com/yarn-market-prices/
+14 Textile ExchangePreferred Fiber & Materials Market Report, organic data	https://textileexchange.org/preferred-fiber-and-materials-market-report/
+15	DGFT (Directorate General of Foreign Trade)	India textile export data, HS code trade stats https://www.dgft.gov.in/
+16	ITMF (Intl. Textile Manufacturers Federation)	Global spinning capacity, cost benchmarks https://www.itmf.org/
+17 Fibre2Fashion Market Intelligence India yarn price trends, trade news https://www.fibre2fashion.com/market-intelligence/
+18 The Yarn Bazaar (India) Spinning mills database, yarn price listings https://theyarnbazaar.com/
+19 Procurement Resource Cotton price trend analysis, quarterly forecasts	https://www.procurementresource.com/resource-center/cotton-price-trends
+20 SunSirs Commodity DataChina cotton prices, Xinjiang target price policy	https://www.sunsirs.com/uk/detail_news-29338.html
+DISCLAIMER: Cotton and yarn prices are highly dynamic and change daily based on global commodity markets, weather, trade policies,
+and currency fluctuations. All prices in this report are indicative ranges compiled from official and industry sources as of April–May 2026.
+For trading or procurement decisions, always verify current prices directly from official exchanges (ICE, MCX) and recognized market
+reports. Exchange rate: 1 USD ≈ n83.3 (approximate, May 2026).
+Report compiled by Claude AI (Anthropic) | Data sourced from USDA, IMF, CCI, MCX, Texprocil, EmergingTextiles | May 2026
+
+-- 7 of 7 --
+

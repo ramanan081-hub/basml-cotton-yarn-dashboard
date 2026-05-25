@@ -1,0 +1,462 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #4f378a;
+  --color-primary-container: #6750a4;
+  --color-primary-fixed: #e9ddff;
+  --color-primary-fixed-dim: #cfbcff;
+  --color-on-primary: #ffffff;
+  --color-on-primary-container: #e0d2ff;
+  --color-on-primary-fixed-variant: #4f378a;
+  --color-on-primary-fixed: #22005d;
+
+  --color-secondary: #63597c;
+  --color-secondary-container: #e1d4fd;
+  --color-secondary-fixed: #e9ddff;
+  --color-secondary-fixed-dim: #cdc0e9;
+  --color-on-secondary: #ffffff;
+  --color-on-secondary-container: #1f1635;
+
+  --color-tertiary: #765b00;
+  --color-tertiary-container: #c9a74d;
+  --color-on-tertiary-container: #503d00;
+  --color-on-tertiary: #ffffff;
+  --color-on-tertiary-fixed: #241a00;
+  --color-on-tertiary-fixed-variant: #594400;
+
+  --color-background: #fdf7ff;
+  --color-surface: #fdf7ff;
+  --color-surface-dim: #ded8e0;
+  --color-surface-bright: #fdf7ff;
+  --color-surface-container-lowest: #ffffff;
+  --color-surface-container-low: #f8f2fa;
+  --color-surface-container: #f2ecf4;
+  --color-surface-container-high: #ece6ee;
+  --color-surface-container-highest: #e6e0e9;
+  --color-surface-variant: #e6e0e9;
+
+  --color-on-surface: #1d1b20;
+  --color-on-surface-variant: #494551;
+  --color-inverse-surface: #322f35;
+  --color-inverse-on-surface: #f5eff7;
+
+  --color-outline: #7a7582;
+  --color-outline-variant: #cbc4d2;
+
+  --color-error: #ba1a1a;
+  --color-error-container: #ffdad6;
+  --color-on-error: #ffffff;
+  --color-on-error-container: #93000a;
+
+  --font-headline: "Google Sans", "Google Sans Text", sans-serif;
+  --font-body: "Google Sans Text", "Google Sans", sans-serif;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-xxl: 32px;
+
+  --spacing-gutter: 24px;
+  --spacing-margin-desktop: 64px;
+  --spacing-margin-mobile: 20px;
+  --spacing-card-padding: 24px;
+  --spacing-sidebar-width: 240px;
+
+  --color-forest-green: #1b5e20;
+  --color-soft-orange: #fca130;
+}
+
+.dark {
+  --color-primary: #cfbcff;
+  --color-primary-container: #4f378a;
+  --color-primary-fixed: #e9ddff;
+  --color-primary-fixed-dim: #cfbcff;
+  --color-on-primary: #381e72;
+  --color-on-primary-container: #e0d2ff;
+  --color-on-primary-fixed-variant: #4f378a;
+  --color-on-primary-fixed: #22005d;
+
+  --color-secondary: #cdc0e9;
+  --color-secondary-container: #4b4263;
+  --color-secondary-fixed: #e9ddff;
+  --color-secondary-fixed-dim: #cdc0e9;
+  --color-on-secondary: #332b49;
+  --color-on-secondary-container: #e1d4fd;
+
+  --color-tertiary: #ffdf93;
+  --color-tertiary-container: #765b00;
+  --color-on-tertiary-container: #ffdf93;
+  --color-on-tertiary: #3e2e00;
+  --color-on-tertiary-fixed: #241a00;
+  --color-on-tertiary-fixed-variant: #594400;
+
+  --color-background: #141218;
+  --color-surface: #141218;
+  --color-surface-dim: #141218;
+  --color-surface-bright: #3b383e;
+  --color-surface-container-lowest: #0f0d13;
+  --color-surface-container-low: #1d1b22;
+  --color-surface-container: #211f26;
+  --color-surface-container-high: #2b2930;
+  --color-surface-container-highest: #36343b;
+  --color-surface-variant: #49454f;
+
+  --color-on-surface: #e6e1e9;
+  --color-on-surface-variant: #cac4d0;
+  --color-inverse-surface: #e6e1e9;
+  --color-inverse-on-surface: #313033;
+
+  --color-outline: #938f99;
+  --color-outline-variant: #49454f;
+
+  --color-error: #ffb4ab;
+  --color-error-container: #93000a;
+  --color-on-error: #690005;
+  --color-on-error-container: #ffdad6;
+}
+
+:root {
+  --box-shadow-raised: 20px 20px 60px #e0dad1, -20px -20px 60px #ffffff;
+  --box-shadow-raised-sm: 10px 10px 30px #e0dad1, -10px -10px 30px #ffffff;
+  --box-shadow-inset: inset 6px 6px 12px #e0dad1, inset -6px -6px 12px #ffffff;
+  --card-bg: #fffefe;
+  --color-glass-surface: rgba(255, 255, 255, 0.1);
+  --color-glass-stroke: rgba(255, 255, 255, 0.2);
+  --color-yarn-white: #F2F2F7;
+  --color-fiber-gold: #FFD60A;
+  --color-analysis-blue: #0A84FF;
+}
+
+.dark:root {
+  --box-shadow-raised: 20px 20px 60px #0b0a0d, -20px -20px 60px #1d1b22;
+  --box-shadow-raised-sm: 10px 10px 30px #0b0a0d, -10px -10px 30px #1d1b22;
+  --box-shadow-inset: inset 6px 6px 12px #0b0a0d, inset -6px -6px 12px #1d1b22;
+  --card-bg: #1f1f21;
+}
+
+body {
+  @apply bg-background text-on-surface font-body;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-headline font-semibold text-primary;
+}
+
+/* Material Symbols Outlined Configuration */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Custom Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-outline-variant);
+  border-radius: 10px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-outline);
+}
+
+/* Tables styling */
+table {
+  @apply w-full text-left border-collapse;
+}
+
+th {
+  @apply border-b border-outline-variant/30 px-4 py-3 font-mono text-xs text-on-surface-variant uppercase tracking-wider font-bold;
+}
+
+td {
+  @apply px-4 py-3 border-b border-outline-variant/30 font-mono text-[15px];
+}
+
+tr:hover td {
+  @apply bg-surface-container-high/50 transition-colors;
+}
+
+/* Neumorphic Styles */
+.neumorphic-raised {
+  box-shadow: var(--box-shadow-raised);
+  background-color: var(--card-bg);
+}
+
+.neumorphic-raised-sm {
+  box-shadow: var(--box-shadow-raised-sm);
+  background-color: var(--card-bg);
+}
+
+.neumorphic-inset {
+  box-shadow: var(--box-shadow-inset);
+  background-color: var(--card-bg);
+}
+
+.glass-overlay {
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.dark .glass-overlay {
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Glassmorphism Utilities */
+.glass-card {
+  background: var(--color-glass-surface);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid var(--color-glass-stroke);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.2);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 1px 1px rgba(255, 255, 255, 0.4), 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.glass-card:hover {
+  transform: translateY(-2px);
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.light .glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.liquid-glass-card {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 1.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.light .liquid-glass-card {
+  background: rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.liquid-glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+}
+
+.liquid-glass-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(255, 255, 255, 0.3);
+  box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
+}
+
+.light .liquid-glass-card:hover {
+  border-color: rgba(255, 255, 255, 0.8);
+  box-shadow: 0 20px 40px -12px rgba(92, 95, 97, 0.15);
+}
+
+/* Specular Highlight for Cards */
+.specular-highlight {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0) 70%);
+  pointer-events: none;
+  mix-blend-mode: overlay;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.light .specular-highlight {
+  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
+}
+
+.liquid-glass-card:hover .specular-highlight {
+  opacity: 1;
+}
+
+/* Micro-viewer lens effect */
+.lens-effect {
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.2), 0 0 0 8px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.light .lens-effect {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.lens-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
+  pointer-events: none;
+}
+
+.light .lens-effect::after {
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+}
+
+/* Recharts styling tweaks to respect dark mode */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--color-outline-variant) !important;
+  opacity: 0.4;
+}
+
+.recharts-legend-item-text {
+  color: var(--color-on-surface) !important;
+  font-size: 11px !important;
+  font-family: Inter, sans-serif !important;
+}
+
+.recharts-text {
+  fill: var(--color-on-surface-variant) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+}
+
+.recharts-tooltip-cursor {
+  fill: var(--color-surface-container-high) !important;
+  opacity: 0.3;
+}
+
+/* Deep Muted Green for Table Highlights */
+.table-highlight-text {
+  color: #1b5e20 !important;
+}
+.dark .table-highlight-text {
+  color: #81c784 !important;
+}
+
+.table-highlight-bg {
+  background-color: rgba(27, 94, 32, 0.1) !important;
+  color: #1b5e20 !important;
+  border-color: rgba(27, 94, 32, 0.2) !important;
+}
+.dark .table-highlight-bg {
+  background-color: rgba(129, 199, 132, 0.1) !important;
+  color: #81c784 !important;
+  border-color: rgba(129, 199, 132, 0.2) !important;
+}
+
+/* Liquid Glass Text - 3D glossy gel look */
+.liquid-glass-text {
+  font-family: 'Google Sans', sans-serif;
+  font-weight: 800;
+  background: linear-gradient(180deg, #ffffff 0%, #e0f2f1 20%, #4db6ac 60%, #00796b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+    0px 2px 3px rgba(255, 255, 255, 0.8),
+    0px -1px 2px rgba(0, 0, 0, 0.1),
+    1px 4px 6px rgba(0, 0, 0, 0.2);
+  letter-spacing: -0.02em;
+  display: inline-block;
+}
+
+.dark .liquid-glass-text {
+  background: linear-gradient(180deg, #ffffff 0%, #e0f7fa 20%, #4dd0e1 60%, #00acc1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 
+    0px 2px 3px rgba(255, 255, 255, 0.2),
+    0px -1px 2px rgba(0, 0, 0, 0.3),
+    1px 4px 6px rgba(0, 0, 0, 0.5);
+}
+
+/* Hover elevation and z-index rise for Bento Cards */
+.neumorphic-raised, .neumorphic-raised-sm, .glass-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0.3s;
+}
+
+.neumorphic-raised:hover, .neumorphic-raised-sm:hover, .glass-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 14px 28px rgba(0, 0, 0, 0.15), 
+    0 10px 10px rgba(0, 0, 0, 0.1);
+  z-index: 40 !important;
+}
+
+/* Ensure desktop sidebar is position: fixed and never moves or scales on hover */
+.sidebar-desktop {
+  position: fixed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.sidebar-desktop:hover {
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* Ensure all Recharts Tooltips render above other containers */
+.recharts-tooltip-wrapper {
+  z-index: 1000 !important;
+}
+
+/* Premium Low-Translucent Glassmorphic Chart Styling */
+.recharts-rectangle, .recharts-bar-rectangle {
+  fill-opacity: 0.8 !important;
+}
+
+.recharts-line-curve {
+  stroke-opacity: 0.85 !important;
+}
+
+.recharts-area-area {
+  fill-opacity: 0.75 !important;
+}
+
+.recharts-pie-sector, .recharts-sector {
+  fill-opacity: 0.85 !important;
+}
+
+/* Card specific soft gradients for Tables and Charts */
+.card-table-orange {
+  background: linear-gradient(135deg, rgba(252, 161, 48, 0.07) 0%, rgba(245, 158, 11, 0.03) 50%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(252, 161, 48, 0.16) !important;
+}
+.dark .card-table-orange {
+  background: linear-gradient(135deg, rgba(252, 161, 48, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(252, 161, 48, 0.28) !important;
+}
+
+.card-chart-green {
+  background: linear-gradient(135deg, rgba(27, 94, 32, 0.07) 0%, rgba(16, 185, 129, 0.03) 50%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(27, 94, 32, 0.16) !important;
+}
+.dark .card-chart-green {
+  background: linear-gradient(135deg, rgba(27, 94, 32, 0.12) 0%, rgba(16, 185, 129, 0.05) 50%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(27, 94, 32, 0.28) !important;
+}
+
+

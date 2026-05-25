@@ -1,0 +1,621 @@
+350:       </div>
+351:     </div>
+352:   );
+353: }
+354: }// src/App.jsx
+355: import HomeStitch from './HomeStitch';
+356: import YarnAnalysisStitch from './YarnAnalysisStitch';
+357: import QualityExpressionStitch from './QualityExpressionStitch';
+358: import React, { useState, useEffect } from 'react';
+359: import { initialData, generateUpdatedData } from './data';
+360: import { cottonAnalysis, yarnAnalysis, globalIncidents, strategicGrowth } from './analysisData';
+361: import { 
+362:   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, ComposedChart,
+363:   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area
+364: } from 'recharts';
+365: import { 
+366:         <button 
+367:           onClick={nextSlide} 
+368:           disabled={currentSlide === totalSlides}
+369:           className="flex items-center gap-1 text-xs font-bold font-headline py-2 px-4 rounded-lg glass-card border-transparent hover:bg-surface-container-high transition-colors disabled:opacity-50 disabled:hover:bg-surface"
+370:         >
+371:           Next <span className="material-symbols-outlined text-sm">chevron_right</span>
+372:         </button>
+373:       </div>
+374:     </div>
+375:   );
+376: }// src/App.jsx
+377: import HomeStitch from './HomeStitch';
+378: import YarnAnalysisStitch from './YarnAnalysisStitch';
+379: import QualityExpressionStitch from './QualityExpressionStitch';
+380: import React, { useState, useEffect } from 'react';
+381: import { initialData, generateUpdatedData } from './data';
+382: import { cottonAnalysis, yarnAnalysis, globalIncidents, strategicGrowth } from './analysisData';
+383: import { 
+384:   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, ComposedChart,
+385:   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area
+386: } from 'recharts';
+387: import { 
+388:   Globe, Activity, Cpu, ShieldCheck, TrendingUp, AlertCircle, 
+389:   Building2, Leaf, ExternalLink, Sun, Moon, Menu, X, Settings, Bell, HelpCircle, LogOut 
+390: } from 'lucide-react';
+391: import LiveNews from './components/LiveNews';
+392: import YarnQualityDashboard from './components/YarnQualityDashboard';
+393: 
+394: const formatPrice = (val, isINR = false) => {
+395:   if (val == null) return '';
+396:   const num = parseFloat(val);
+397:   if (isINR) {
+398:     return num.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+399:   }
+400:   return num.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 4 });
+401: };
+402: 
+403: function App() {
+404:   const [data, setData] = useState(initialData);
+405:   const [activeTab, setActiveTab] = useState('global'); 
+406:   const [sidebarOpen, setSidebarOpen] = useState(false);
+407:   const [darkMode, setDarkMode] = useState(() => {
+408:     return localStorage.getItem('theme') === 'dark' || 
+409:       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+410:   });
+411: 
+412:   useEffect(() => {
+413:     if (darkMode) {
+414:       document.documentElement.classList.add('dark');
+415:       localStorage.setItem('theme', 'dark');
+416:     } else {
+417:       document.documentElement.classList.remove('dark');
+418:       localStorage.setItem('theme', 'light');
+419:     }
+420:   }, [darkMode]);
+421: 
+422:   useEffect(() => {
+423:     const interval = setInterval(() => {
+424:       setData(prevData => generateUpdatedData(prevData));
+425:     }, 5 * 60 * 60 * 1000); // 5 hours in milliseconds
+426:     return () => clearInterval(interval);
+427:   }, []);
+428: 
+429:   useEffect(() => {
+430:     const handleMouseMove = (e) => {
+431:       const x = e.clientX / window.innerWidth;
+432:       const y = e.clientY / window.innerHeight;
+433:       const propEl = document.getElementById('floating-3d-props');
+434:       if (propEl) {
+435:         propEl.style.transform = `translate(${x * 20}px, ${y * 20}px)`;
+436:       }
+437:     };
+438:     window.addEventListener('mousemove', handleMouseMove);
+439:   const themeColors = darkMode ? {
+440:     primary: '#cfbcff',
+441:     primaryContainer: '#4f378a',
+442:     secondary: '#cdc0e9',
+443:     tertiary: '#ffdf93',
+444:     outline: '#938f99',
+445:     outlineVariant: '#49454f',
+446:     text: '#e4e2e4',
+447:     background: '#131315',
+448:     surface: '#131315',
+449:     surfaceContainerLow: '#1b1b1d',
+450:     surfaceContainerHigh: '#2a2a2c',
+451:     chartPalette: ['#adc6ff', '#c6c6cb', '#ffb595', '#4b8eff', '#FFD60A']
+452:   } : {
+453:     primary: '#003ec7',
+454:     primaryContainer: '#0052ff',
+455:     secondary: '#505f76',
+456:     tertiary: '#005569',
+457:     outline: '#737688',
+458:     outlineVariant: '#c3c5d9',
+459:     text: '#191c1e',
+460:     background: '#f7f9fb',
+461:     surface: '#f7f9fb',
+462:     surfaceContainerLow: '#f2f4f6',
+463:     surfaceContainerHigh: '#e6e8ea',
+464:     chartPalette: ['#003ec7', '#505f76', '#8e4b49', '#0052ff', '#005569']
+465:   };
+466: 
+467:   const navItems = [
+468:     { id: 'global', label: 'Global Focus', icon: 'globe' },
+469:     { id: 'india', label: 'India Focus', icon: 'map' },
+470:     { id: 'yarn', label: 'Yarn Markets', icon: 'trending_up' },
+471:     { id: 'news', label: 'Live News', icon: 'feed' },
+472:     { id: 'analysis', label: 'Analysis', icon: 'analytics' },
+473:     { id: 'presentation', label: 'Presentation Deck', icon: 'slideshow' },
+474:     { id: 'quality', label: 'Yarn Quality', icon: 'biotech' },
+475:   ];
+476: 
+477:   return (
+478:     <div className="min-h-screen bg-background text-on-surface font-body flex">
+479:       {/* Sidebar Navigation - Desktop */}
+480:       <aside className="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
+481:         <div className="px-2 mb-8">
+482:           <h1 className="font-headline text-xl font-black tracking-tight text-primary flex items-center gap-2">
+483:             <span className="material-symbols-outlined text-2xl">factory</span>
+484:             BASML ANALYTICS
+485:           </h1>
+486:           <p className="font-mono text-[10px] text-on-surface-variant uppercase tracking-wider mt-1">Cotton Yarn Division</p>
+487:         </div>
+488:         <nav className="flex-1 space-y-1">
+489:           {navItems.map((item) => (
+490:             <button
+491:               key={item.id}
+492:               onClick={() => setActiveTab(item.id)}
+493:               className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm ${
+494:                 activeTab === item.id
+495:                   ? 'bg-primary text-on-primary font-semibold shadow-sm'
+496:                   : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
+497:               }`}
+498:             >
+499:               <span className="material-symbols-outlined text-lg">{item.icon}</span>
+500:               <span>{item.label}</span>
+501:             </button>
+502:           ))}
+503:         </nav>
+504:                 key={item.id}
+505:                 onClick={() => setActiveTab(item.id)}
+506:                 className={`w-full flex items-center gap-3 p-3 transition-all text-left ${
+507:                   activeTab === item.id
+508:                     ? 'bg-primary text-on-primary rounded-xl shadow-lg m-2 w-[calc(100%-16px)]'
+509:                     : 'text-on-surface-variant hover:bg-surface-variant/50 rounded-xl m-2 w-[calc(100%-16px)]'
+510:                 }`}
+511:               >
+512:                 <span className="material-symbols-outlined text-lg">{item.icon}</span>
+513:                 <span className="font-label-lg text-label-lg">{item.label}</span>
+514:               </button>
+515:             ))}
+516:           </div>
+517:         </div>
+518:         {/* Footer Actions */}
+519:         <div className="px-2">
+520:           <a className="text-on-surface-variant hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 p-3 transition-all text-left m-2 block" href="#">
+521:             <span className="material-symbols-outlined">help</span>
+522:             <span className="font-label-lg text-label-lg">Help Center</span>
+523:           </a>
+524:           <button
+525:             onClick={() => setDarkMode(!darkMode)}
+526:             className="w-full text-on-surface-variant hover:bg-surface-variant/50 rounded-xl flex items-center gap-3 p-3 transition-all text-left m-2"
+527:           >
+528:             <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
+529:             <span className="font-label-lg text-label-lg">{darkMode ? 'Light Theme' : 'Dark Theme'}</span>
+530:           </button>
+531:           <div className="mt-4 px-3 py-2 flex items-center gap-3 border-t border-outline-variant/20 pt-4">
+532:             <div className="w-8 h-8 rounded-full bg-primary-container text-on-primary-container flex items-center justify-center font-bold text-xs">JD</div>
+533:             <div className="overflow-hidden">
+534:               <p className="text-xs font-bold truncate">John Director</p>
+535:               <p className="text-[10px] text-outline truncate">Strategic Lead</p>
+536:             </div>
+537:           </div>
+538:         </div>
+539:       </aside>
+540:                 <span className="material-symbols-outlined">close</span>
+541:               </button>
+542:             </div>
+543:             <nav className="flex-1 space-y-1">
+544:               {navItems.map((item) => (
+545:                 <button
+546:                   key={item.id}
+547:                   onClick={() => {
+548:                     setActiveTab(item.id);
+549:                     setSidebarOpen(false);
+550:                   }}
+551:                   className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm ${
+552:                     activeTab === item.id
+553:                       ? 'bg-primary text-on-primary font-semibold'
+554:                       : 'text-on-surface-variant hover:bg-surface-container-high'
+555:                   }`}
+556:                 >
+557:                   <span className="material-symbols-outlined text-lg">{item.icon}</span>
+558:                   <span>{item.label}</span>
+559:                 </button>
+560:           
+561:           <div className="flex items-center gap-4">
+562:             <button onClick={() => setDarkMode(!darkMode)} className="text-primary hover:bg-surface-container p-2 rounded-full transition-colors hidden sm:block">
+563:               <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
+564:             </button>
+565:           </div>
+566:         </header>
+567: 
+568:         {/* Dashboard Content Container */}
+569:         <div className="pt-24 px-6 md:px-10 pb-10 flex-1 max-w-[1600px] mx-auto w-full relative z-10">
+570:           {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} darkMode={darkMode} colors={themeColors} />}
+571:           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} darkMode={darkMode} colors={themeColors} />}
+572:           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
+573:           {activeTab === 'news' && <LiveNews exchangeRates={data.exchangeRates} darkMode={darkMode} colors={themeColors} />}
+574:           {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} />}
+575:           {activeTab === 'presentation' && <PresentationDashboard data={data} darkMode={darkMode} colors={themeColors} />}
+576:           {activeTab === 'quality' && <YarnQualityDashboard darkMode={darkMode} colors={themeColors} />}
+577:         </div>
+578: 
+579:         {/* Footer */}
+580:         <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+581:         <header className="fixed top-0 right-0 left-0 md:left-[280px] h-16 z-40 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-6 md:px-10 border-b border-outline-variant/20">
+582:           <div className="flex items-center gap-4">
+583:             <button onClick={() => setSidebarOpen(true)} className="md:hidden text-primary p-1 hover:bg-surface-container rounded-md">
+584:               <span className="material-symbols-outlined">menu</span>
+585:           <div className="flex gap-6 font-mono">
+586:             <a href="#" className="hover:text-primary transition-colors">Privacy Protocol</a>
+587:             <a href="#" className="hover:text-primary transition-colors">System Health</a>
+588:             <a href="#" className="hover:text-primary transition-colors">Support Portal</a>
+589:           </div>
+590:         </footer>
+591:       </main>
+592: 
+593:       {/* Mobile Navigation Bar (Bottom) - Only active on mobile when drawer is closed */}
+594:       <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-outline-variant flex items-center justify-around px-4 z-50">
+595:         <button onClick={() => setActiveTab('global')} className={`flex flex-col items-center gap-1 ${activeTab === 'global' ? 'text-primary' : 'text-on-surface-variant'}`}>
+596:           <span className="material-symbols-outlined">public</span>
+597:           <span className="font-mono text-[9px]">GLOBAL</span>
+598:         </button>
+599:         <button onClick={() => setActiveTab('india')} className={`flex flex-col items-center gap-1 ${activeTab === 'india' ? 'text-primary' : 'text-on-surface-variant'}`}>
+600:           <span className="material-symbols-outlined">location_on</span>
+601:           <span className="font-mono text-[9px]">INDIA</span>
+602:         </button>
+603:         <button onClick={() => setActiveTab('yarn')} className={`flex flex-col items-center gap-1 ${activeTab === 'yarn' ? 'text-primary' : 'text-on-surface-variant'}`}>
+604:           <span className="material-symbols-outlined">show_chart</span>
+605:           <span className="font-mono text-[9px]">YARN</span>
+606:         </button>
+607:         <button onClick={() => setActiveTab('quality')} className={`flex flex-col items-center gap-1 ${activeTab === 'quality' ? 'text-primary' : 'text-on-surface-variant'}`}>
+608:           <span className="material-symbols-outlined">verified</span>
+609:           <span className="font-mono text-[9px]">QUALITY</span>
+610:         </button>
+611:         <button onClick={() => setSidebarOpen(true)} className="flex flex-col items-center gap-1 text-on-surface-variant">
+612:           <span className="material-symbols-outlined">menu</span>
+613:           <span className="font-mono text-[9px]">MORE</span>
+614:         </button>
+615:       </nav>
+616: 
+617:         {/* Footer */}
+618:         <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+619:           <div>
+620:             <p className="font-mono font-semibold">© 2025 BASML.COTTON.YARN.ANALYSIS</p>
+621:             <p className="opacity-70 mt-0.5">Confidential Industrial Intelligence - Internal Use Only</p>
+622:           </div>
+623:           <div className="flex gap-6 font-mono">
+624:             <a href="#" className="hover:text-primary transition-colors">Privacy Protocol</a>
+625:             <a href="#" className="hover:text-primary transition-colors">System Health</a>
+626:             <a href="#" className="hover:text-primary transition-colors">Support Portal</a>
+627:           </div>
+628:         </footer>
+629:       </main>
+630: 
+631:           <span className="font-mono text-[9px]">QUALITY</span>
+632:         </button>
+633:         <button onClick={() => setSidebarOpen(true)} className="flex flex-col items-center gap-1 text-on-surface-variant">
+634:           <span className="material-symbols-outlined">menu</span>
+635:           <span className="font-mono text-[9px]">MORE</span>
+636:         </button>
+637:       </nav>
+638: 
+639:       {/* Floating 3D Props for Atmospheric Visuals */}
+640:       <div id="floating-3d-props" className="fixed right-10 bottom-20 z-0 pointer-events-none opacity-40 select-none hidden md:block transition-transform duration-300 ease-out">
+641:         <div className="relative">
+642:           {/* Torus prop */}
+643:           <div className="w-32 h-32 rounded-full border-[12px] border-[#e0dad1] dark:border-[#49454f] shadow-[15px_15px_30px_rgba(0,0,0,0.1),-15px_-15px_30px_rgba(255,255,255,0.05)] rotate-45 transform-gpu"></div>
+644:           {/* Leaf props */}
+645:           <div className="absolute -top-10 -right-5 w-12 h-16 bg-forest-green/20 rounded-[50%_50%_50%_50%_/_70%_70%_30%_30%] blur-[2px] -rotate-12"></div>
+646:           <div className="absolute bottom-5 -left-10 w-8 h-12 bg-forest-green/10 rounded-[50%_50%_50%_50%_/_70%_70%_30%_30%] blur-[1px] rotate-45"></div>
+647:           {/* Pebble */}
+648:           <div className="absolute -bottom-8 right-10 w-16 h-12 bg-surface-variant rounded-full shadow-inner opacity-60"></div>
+649:         </div>
+650:           </span>
+651:           <h2 className="font-headline text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+652:             The Future of Cotton Intelligence.
+653:           </h2>
+654:           <p className="text-white/80 font-body text-sm md:text-base max-w-xl">
+655:             Deep integration of global supply chain logistics, predictive pricing models, and industrial-grade quality assurance metrics.
+656:           </p>
+657:         </div>
+658:         <div className="absolute right-12 bottom-0 w-64 h-64 z-20 md:block hidden">
+659:           <img 
+660:             alt="Yarn Spool Machine" 
+661:             className="w-full h-full object-contain filter drop-shadow-2xl" 
+662:             src="/basml-cotton-dashboard/cotton_spinning_spindles.png"
+663:           />
+664:         </div>
+665:       </section>
+666: 
+667:       {/* Main Dashboard Bento Grid */}
+668:       <div className="grid grid-cols-12 gap-gutter">
+669:         {/* Left Column: Charts and tables */}
+670:         <div className="col-span-12 lg:col-span-8 space-y-gutter">
+671:           {/* Card 1: Balance Sheet */}
+672:           <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+673:             <div className="flex justify-between items-center mb-6">
+674:               <div>
+675:                 <h3 className="font-headline text-lg font-bold text-primary flex items-center gap-2">
+676:                   <span className="material-symbols-outlined text-lg">analytics</span>
+677:                   5-Year Balance Sheet Tren
+678:           </p>
+679:         </div>
+680:         <div className="absolute right-12 bottom-0 w-64 h-64 z-20 md:block hidden">
+681:           <img 
+682: 
+683:           <h2 className="font-headline text-3xl md:text-4xl font-extrabold text-white mb-2 leading-tight">
+684:             The Future of Cotton Intelligence.
+685:                 <BarChart data={data.balanceSheet.historical} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
+686:                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
+687:                   <XAxis dataKey="year" fontSize={9} />
+688:                   <YAxis fontSize={9} />
+689:                   <Tooltip contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}} />
+690:                   <Legend wrapperStyle={{ fontSize: 10 }} />
+691:                   <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={12} radius={[2, 2, 0, 0]} />
+692:                   <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={12} radius={[2, 2, 0, 0]} />
+693:                 </BarChart>
+694:               </ResponsiveContainer>
+695:             </div>
+696:             
+697:             <div className="overflow-x-auto mt-6 border border-outline-variant/30 rounded-xl bg-surface-container-lowest">
+698:               <table className="min-w-full">
+699:                 <thead>
+700:                   <tr className="bg-surface-container-low">
+701:         {/* Left Column: Charts and tables */}
+702:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Supply</th>
+703:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Production</th>
+704:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Imports</th>
+705:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Exports</th>
+706:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Demand</th>
+707:                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Stocks</th>
+708:                   </tr>
+709:                 </thead>
+710:                 <tbody className="text-xs divide-y divide-outline-variant/10">
+711:                   {data.balanceSheet.historical.map((row, i) => (
+712:                     <tr key={i} className="hover:bg-surface-container-high/30">
+713:                       <td className={`px-4 py-2 font-semibold ${row.year.includes('Est') ? 'table-highlight-text font-bold' : ''}`}>{row.year}</td>
+714:                       <td className="px-4 py-2 text-right">{row.supply}M</td>
+715:                       <td className="px-4 py-2 text-right">{row.production}M</td>
+716:                       <td className="px-4 py-2 text-right">{row.imports}M</td>
+717:                       <td className="px-4 py-2 text-right">{row.exports}M</td>
+718:                       <td className="px-4 py-2 text-right font-semibold">{row.demand}M</td>
+719:                       <td className="px-4 py-2 text-right table-highlight-text font-semibold">{row.endingStocks}M</td>
+720:                     </tr>
+721: MISSING
+722: MISSING
+723: MISSING
+724: MISSING
+725: MISSING
+726: MISSING
+727: MISSING
+728: MISSING
+729: MISSING
+730:                   <XAxis dataKey="month" />
+731:                   <YAxis domain={['auto', 'auto']} tickFormatter={(value) => `$${formatPrice(value)}`} />
+732:                   <Tooltip contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value) => `$${formatPrice(value)}`} />
+733:                   <Legend />
+734:                   <Line type="monotone" dataKey="AIndex" stroke={colors.tertiary} strokeWidth={3} dot={false} name="A-Index (USD)" />
+735:                   <Line type="monotone" dataKey="US" stroke={colors.primary} strokeWidth={2} dot={false} name="US Upland (USD)" />
+736:                   <Line type="monotone" dataKey="Brazil" stroke={colors.secondary} strokeWidth={2} dot={false} name="Brazil (USD)" />
+737:                 </LineChart>
+738:               </ResponsiveContainer>
+739:             </div>
+740:           </div>
+741:           <div className="bg-primary-container/10 border border-primary-container/20 p-4 rounded-md mt-4">
+742:             <h4 className="text-xs font-bold text-primary uppercase tracking-wider mb-2 flex items-center gap-1.5">
+743:               <span className="material-symbols-outlined text-sm">online_prediction</span>
+744:               Next 2-Month Price Movement Estimation
+745:             </h4>
+746:             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+747:               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
+748:                 <span className="text-on-surface-variant block mb-0.5">May 30/31 Close:</span>
+749:                 <span className="font-semibold text-primary">{data.forecastNarrative.mayClose}</span>
+750:               </div>
+751:               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
+752:                 <span className="text-on-surface-variant block mb-0.5">June Start:</span>
+753:                 <span className="font-semibold text-primary">{data.forecastNarrative.junStart}</span>
+754:               </div>
+755:               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
+756:                 <span className="text-on-surface-variant block mb-0.5">July & Aug Outlook:</span>
+757:                 <span className="font-semibold text-primary">{data.forecastNarrative.julAug}</span>
+758:               </div>
+759:             </div>
+760:         <div className="col-span-12 lg:col-span-4 space-y-gutter">
+761:           {/* Card 3: Stock Holding Pie */}
+762:           <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between h-full">
+763:             <div>
+764:               <h3 className="font-headline text-lg font-bold text-primary mb-2 flex items-center gap-2">
+765:                 <span className="material-symbols-outlined text-lg">pie_chart</span>
+766:                 Stock Holding
+767:               </h3>
+768:               <p className="text-on-surface-variant text-xs mb-6">Strategic Distribution Briefing</p>
+769:               
+770:               <div className="h-48 w-full relative flex items-center justify-center">
+771:                 <ResponsiveContainer width="100%" height="100%">
+772:                   <PieChart>
+773:                     <Pie data={data.stockHolding} cx="50%" cy="50%" innerRadius={50} outerRadius={80} paddingAngle={4} dataKey="value" nameKey="holder">
+774:                       {data.stockHolding.map((entry, index) => (
+775:                         <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
+776:                       ))}
+777:                     </Pie>
+778:                     <Tooltip contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}} formatter={(value, name, props) => props.payload.bales ? `${value}% (${props.payload.bales} M Bales)` : `${value}%`} />
+779:                   </PieChart>
+780:                 </ResponsiveContainer>
+781:                 <div className="absolute flex flex-col items-center justify-center pointer-events-none">
+782:                   <span className="text-xl font-extrabold text-primary">84%</span>
+783:                   <span className="text-[9px] text-outline font-bold uppercase">Optimized</span>
+784:                 </div>
+785:               </div>
+786:               
+787:               <div className="w-full space-y-3 mt-6">
+788:                 {data.stockHolding.map((entry, idx) => (
+789:                   <div key={idx} className="flex items-center justify-between text-xs border-b border-outline-variant/10 pb-1.5">
+790:                     <div className="flex items-center gap-2">
+791:                       <span className="w-2.5 h-2.5 rounded-sm" style={{ backgroundColor: colors.chartPalette[idx % colors.chartPalette.length] }}></span>
+792:                       <span className="font-medium text-on-surface">{entry.holder}</span>
+793:                     </div>
+794:                     <span className="font-bold text-primary">{entry.value}%</span>
+795:                   </div>
+796:                 ))}
+797:               </div>
+798:             </div>
+799: 
+800:             <div className="mt-8 pt-6 border-t border-outline-variant/20">
+801:               <div className="bg-surface-container-low p-4 rounded-xl flex items-center gap-4">
+802:                 <span className="material-symbols-outlined text-primary">info</span>
+803:                 <p className="text-[11px] text-on-surface-variant leading-relaxed">
+804:                   Confidential briefing: total 7+ pages real data stream integrated from official sourcing protocols.
+805:                 </p>
+806:               </div>
+807:             </div>
+808:           </div>
+809:         </div>
+810: 
+811:         {/* Center Bottom Grid Row */}
+812:         {/* Card 4: Price Estimation Table */}
+813:         <div className="col-span-12 lg:col-span-7">
+814:           <div className="bg-gradient-to-br from-soft-orange/10 to-soft-orange/5 border border-soft-orange/20 rounded-xxl neumorphic-raised p-card-padding h-full">
+815:             <div className="flex justify-between items-center mb-6">
+816:               <h3 className="font-headline text-lg font-bold text-soft-orange flex items-center gap-2">
+817:                 <span className="material-symbols-outlined">table_rows</span>
+818:                 Price Estimation (Variety Index)
+819:               </h3>
+820:               <span className="bg-soft-orange/20 text-soft-orange text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+821:                 FOB Forecast
+822:               </span>
+823:             </div>
+824:             
+825:             <div className="overflow-x-auto">
+826:               <table className="w-full text-left">
+827:                 <thead>
+828:                   <tr className="border-b border-outline-variant/20 text-[10px] text-outline font-bold">
+829:                     <th className="pb-3 text-left">INDEX TYPE</th>
+830:                     <th className="pb-3 text-right">CURRENT</th>
+831:                     <th className="pb-3 text-right">FORECAST</th>
+832:                     <th className="pb-3 text-right">YOY CHANGE</th>
+833:                   </tr>
+834:                 </thead>
+835:                 <tbody className="text-xs divide-y divide-outline-variant/10">
+836:                   {data.prices.types.map((p, i) => (
+837:                     <tr key={i} className="hover:bg-soft-orange/5 transition-colors">
+838:                       <td className="py-3 pr-2">
+839:                         <div className="font-bold text-on-surface">{p.type}</div>
+840:                         <div className="text-[9px] text-outline font-medium mt-0.5">{p.quality}</div>
+841:                       </td>
+842:                       <td className="py-3 text-right font-semibold">
+843:                         <div>${formatPrice(p.current)}</div>
+844:                         <div className="text-[9px] text-outline font-normal">(${formatPrice((p.current * 2.20462)/100)}/kg)</div>
+845:                       </td>
+846:                       <td className="py-3 text-right font-bold table-highlight-text">
+847:                         <div>${formatPrice(p.est)}</div>
+848:                         <div className="text-[9px] table-highlight-text font-normal">(${formatPrice((p.est * 2.20462)/100)}/kg)</div>
+849:                       </td>
+850:                       <td className={`py-3 text-right font-bold ${p.yoy.includes('+') ? 'text-forest-green' : 'text-error'}`}>
+851:                         {p.yoy}
+852:                       </td>
+853:                     </tr>
+854:                   ))}
+855:                 </tbody>
+856:               </table>
+857:             </div>
+858:           </div>
+859:         </div>
+860: 
+861:         {/* Card 5: Global Strategic Overview */}
+862:         <div className="col-span-12 lg:col-span-5">
+863:           <div className="bg-gradient-to-br from-forest-green/10 to-forest-green/5 border border-forest-green/20 rounded-xxl neumorphic-raised p-card-padding h-full flex flex-col justify-between">
+864:             <div>
+865:               <div className="flex justify-between items-start mb-6">
+866:                 <div>
+867:                   <h3 className="font-headline text-lg font-bold text-forest-green flex items-center gap-2">
+868:                     <span className="material-symbols-outlined">psychology</span>
+869:                     Global Strategic Overview
+870:                   </h3>
+871:                   <p className="text-[10px] text-outline font-medium">Predictive risk assessment engine</p>
+872:                 </div>
+873:                 <span className="bg-forest-green/20 text-forest-green text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+874:                   Active
+875:                 </span>
+876:               </div>
+877:               
+878:               <div className="space-y-4">
+879:                 <div className="bg-white/40 dark:bg-black/40 p-4 rounded-xl border border-white/40 dark:border-black/20 glass-overlay flex items-center gap-4">
+880:                   <div className="w-10 h-10 rounded-full bg-forest-green/20 flex items-center justify-center text-forest-green shrink-0">
+881:                     <span className="material-symbols-outlined">online_prediction</span>
+882:                   </div>
+883:                   <div>
+884:                     <p className="font-bold text-xs text-on-surface">Next 2-Month Close Outlook</p>
+885:                     <p className="text-[10px] text-outline mt-0.5">May close: {data.forecastNarrative.mayClose}. June open: {data.forecastNarrative.junStart}.</p>
+886:                   </div>
+887:                 </div>
+888:                 
+889:                 <div className="bg-white/40 dark:bg-black/40 p-4 rounded-xl border border-white/40 dark:border-black/20 glass-overlay flex items-center gap-4">
+890:                   <div className="w-10 h-10 rounded-full bg-soft-orange/20 flex items-center justify-center text-soft-orange sh
+891:                       <span className="font-medium text-on-surface">{entry.holder}</span>
+892:                     </div>
+893:                     <span className="font-mono text-primary font-bold">{entry.value}%</span>
+894:                   </div>
+895:                 ))}
+896:               </div>
+897:                 </div>
+898:               </div>
+899:             </div>
+900:             
+901:             <div className="mt-6 pt-4 border-t border-outline-variant/10 text-[10px] text-outline italic">
+902:               * Crop metrics updated every 5 hours directly from WASDE.
+903:             </div>
+904:           </div>
+905:         </div>
+906:       </div>
+907:     </div>
+908:   );
+909: }
+910: 
+911: function IndiaDashboard({ data, darkMode, colors }) {
+912:   const cci = data.cciOfficialData;
+913:   const latestCci = cci ? cci.historical[0] : null;
+914: 
+915:   return (
+916:     <div className="space-y-6">
+917:       {/* Tab Header / Welcome bar */}
+918:       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-outline-variant">
+919:         <div>
+920:           <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">India Cotton Focus</h2>
+921:           <p className="text-sm text-on-surface-variant mt-1">Domestic raw cotton production, CCI MSP procurements, and district harvest mapping.</p>
+922:         </div>
+923:         <div className="flex items-center gap-3">
+924:           <button className="glass-card border-transparent text-on-surface px-4 py-2 text-xs font-semibold rounded-md flex items-center gap-2 hover:bg-surface-container transition-colors">
+925:             <span className="material-symbols-outlined text-base">calendar_today</span>
+926:             <span>Jan - Mar 2025</span>
+927:           </button>
+928:           <button className="bg-primary text-on-primary px-4 py-2 text-xs font-semibold rounded-md flex items-center gap-2 hover:opacity-90 transition-opacity">
+929:             <span className="material-symbols-outlined text-base">download</span>
+930:             <span>Export Report</span>
+931:           </button>
+932:         </div>
+933:                   </div>
+934:                   <div>
+935:          
+936:                 <Tooltip 
+937:                   contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} 
+938:                   formatter={(value, name, props) => [`${value} Lakh Bales (GOT: ${props.payload.got} | Active Ginners: ${props.payload.activeGinningMills})`, `Harvest: ${props.payload.harvestType} | Dominant: ${props.payload.dominantVariety}`]} 
+939:                 />
+940:                 <Legend />
+941:                 <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)" radius={[2, 2, 0, 0]}>
+942:                   {data.tnDistricts.map((entry, index) => (
+943:                     <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
+944:                   ))}
+945:                 </Bar>
+946:               </BarChart>
+947:             </ResponsiveContainer>
+948:           </div>
+949:         </div>
+950:         
+951:         {/* Card 6: Spot Prices & Alerts */}
+952:         <div className="bg-surface-container-lowest border border-outline-variant p-6 rounded-lg flex flex-col justify-between">
+953:           <div>
+954:             <h3 className="text-base font-bold text-primary mb-4 flex items-center gap-2">
+955:               <span className="material-symbols-outlined text-lg">sell</span>
+956:               Spot Prices & Planning Alerts (₹ / Candy)
+957:             </h3>
+958:             <div className="overflow-x-auto border border-outline-variant rounded">
+959:               <table>
+960:                 <thead>
+961:                   <tr>
+962: function IndiaDashboard({ data, darkMode, colors }) {
+963:   const cci = data.cciOfficialData;
+964:   const latestCci = cci ? cci.historical[0] : null;
+965: 
+966:   return (
+967:     <div className="space-y-6">
+968:       {/* Tab Header / Welcome bar */}
+969:       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-outline-variant">
+970:         <div>
