@@ -7,8 +7,8 @@ let lastFetchTime = 0;
 const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
 
 export async function fetchLiveExchangeRates() {
-  let usdInr = 85.50;
-  let eurInr = 90.62;
+  let usdInr = 95.82;
+  let eurInr = 101.62;
   let success = false;
   try {
     let response = await fetch('/api-exchangerate/v4/latest/USD');
@@ -34,7 +34,7 @@ export async function fetchLiveExchangeRates() {
 }
 
 export async function fetchLiveICECotton() {
-  let iceCottonPrice = 83.00;
+  let iceCottonPrice = 77.42;
   let success = false;
   try {
     let response = await fetch('/api-yahoo/v8/finance/chart/CT=F');

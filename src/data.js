@@ -27,20 +27,20 @@ export const initialData = {
         { month: 'Feb 26', AIndex: 92.5, US: 82.5, Brazil: 78.5 },
         { month: 'Mar 26', AIndex: 94.0, US: 83.9, Brazil: 79.6 },
         { month: 'Apr 26', AIndex: 95.0, US: 84.5, Brazil: 80.0 },
-        { month: 'May 26', AIndex: 95.0, US: 84.5, Brazil: 80.0 }
+        { month: 'May 26', AIndex: 87.92, US: 77.42, Brazil: 72.92 }
       ],
       types: [
-        { type: 'Cotlook A-Index', current: 95.0, est: 96.5, yoy: '+4.5%', quality: 'Middling 1-1/8"' },
-        { type: 'ICE US Cotton No. 2', current: 84.50, est: 86.00, yoy: '+3.1%', quality: 'Futures Benchmark (Color 41, 1-1/16")' },
-        { type: 'US Upland (7-Mkt Avg)', current: 84.5, est: 86.0, yoy: '+3.2%', quality: 'Color 41, 1-1/16"' },
-        { type: 'Brazil ESALQ / Cerrado', current: 80.0, est: 81.5, yoy: '+2.8%', quality: 'SLM 1-1/8"' },
-        { type: 'Supima / Pima (ELS)', current: 175.0, est: 180.0, yoy: '+12.5%', quality: 'Grade 2, 1-7/16"' },
-        { type: 'Egyptian Giza (ELS)', current: 230.0, est: 235.0, yoy: '+8.4%', quality: 'Giza 88/92, 1-1/2"' },
-        { type: 'Australian Premium', current: 102.0, est: 105.0, yoy: '+6.1%', quality: 'Middling 1-5/32"' },
-        { type: 'China Index (Xinjiang)', current: 121.0, est: 124.0, yoy: '+5.0%', quality: 'Grade 3, 28mm' },
-        { type: 'Pakistani Cotton (KCA)', current: 76.0, est: 77.5, yoy: '-1.5%', quality: 'Afzal 26mm' },
-        { type: 'Organic Cotton (Certified)', current: 135.0, est: 138.0, yoy: '+6.5%', quality: 'GOTS Certified' },
-        { type: 'West African (Mali/Benin)', current: 89.0, est: 91.0, yoy: '+2.2%', quality: 'Middling 1-3/32"' }
+        { type: 'Cotlook A-Index', current: 87.92, est: 89.20, yoy: '-7.5%', quality: 'Middling 1-1/8"' },
+        { type: 'ICE US Cotton No. 2', current: 77.42, est: 78.90, yoy: '-8.4%', quality: 'Futures Benchmark (Color 41, 1-1/16")' },
+        { type: 'US Upland (7-Mkt Avg)', current: 77.42, est: 78.80, yoy: '-8.3%', quality: 'Color 41, 1-1/16"' },
+        { type: 'Brazil ESALQ / Cerrado', current: 72.92, est: 74.50, yoy: '-8.8%', quality: 'SLM 1-1/8"' },
+        { type: 'Supima / Pima (ELS)', current: 162.58, est: 167.50, yoy: '-7.1%', quality: 'Grade 2, 1-7/16"' },
+        { type: 'Egyptian Giza (ELS)', current: 209.03, est: 213.20, yoy: '-9.1%', quality: 'Giza 88/92, 1-1/2"' },
+        { type: 'Australian Premium', current: 92.90, est: 95.20, yoy: '-8.9%', quality: 'Middling 1-5/32"' },
+        { type: 'China Index (Xinjiang)', current: 123.87, est: 126.30, yoy: '+2.4%', quality: 'Grade 3, 28mm' },
+        { type: 'Pakistani Cotton (KCA)', current: 69.68, est: 71.40, yoy: '-8.3%', quality: 'Afzal 26mm' },
+        { type: 'Organic Cotton (Certified)', current: 123.87, est: 126.35, yoy: '-8.2%', quality: 'GOTS Certified' },
+        { type: 'West African (Mali/Benin)', current: 81.29, est: 82.90, yoy: '-8.7%', quality: 'Middling 1-3/32"' }
       ]
     },
     stockHolding: [
