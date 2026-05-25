@@ -4274,6 +4274,10 @@ function DataSourcesDashboard({ data, darkMode, colors }) {
     }, 800);
   };
 
+  useEffect(() => {
+    handleTestApi();
+  }, [selectedApi]);
+
   const getCodeSnippet = () => {
     if (selectedApi === 'usda') {
       return `// JavaScript: Fetch global S&D data from USDA PSD API
