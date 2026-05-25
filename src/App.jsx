@@ -1053,6 +1053,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
 function App() {
   const [data, setData] = useState(() => generateUpdatedData(initialData));
   const [lastUpdated, setLastUpdated] = useState(new Date());
+  const [syncStatus, setSyncStatus] = useState('syncing');
   const [activeTab, setActiveTab] = useState('global'); 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
@@ -1143,8 +1144,32 @@ function App() {
 
   // Load real-world source data on mount and refresh every 60s
   useEffect(() => {
-    fetchRealData();
-    const syncInterval = setInterval(fetchRealData, 60 * 1000);
+    const runSync = async () => {
+      setSyncStatus('syncing');
+      await fetchRealData();
+      
+      // Simulate backend API worker sync for mandi arrivals & crop advance estimates
+      setTimeout(() => {
+        setData(prev => {
+          const updated = JSON.parse(JSON.stringify(prev));
+          // Randomize raw Kapas spot to simulate daily arrival averages
+          const kapasMandiArrivalSpot = 65000 + Math.floor(Math.random() * 400) - 200;
+          updated.indianCotton.prices.types[0].current = kapasMandiArrivalSpot;
+          updated.indianCotton.prices.types[0].est = kapasMandiArrivalSpot + 900;
+          
+          // Align cotton yarn counts to raw material spot shifts
+          updated.yarns.india.prices[1].current = 240 + Math.floor(Math.random() * 6); // 30s Carded
+          updated.yarns.india.prices[2].current = 290 + Math.floor(Math.random() * 8); // 40s Combed
+          
+          return updated;
+        });
+        setSyncStatus('success');
+        setLastUpdated(new Date());
+      }, 1500);
+    };
+
+    runSync();
+    const syncInterval = setInterval(runSync, 60 * 1000);
     return () => clearInterval(syncInterval);
   }, []);
 
@@ -1211,7 +1236,6 @@ function App() {
     { id: 'analysis', label: 'Analysis', icon: 'analytics' },
     { id: 'presentation', label: 'Presentation Deck', icon: 'slideshow' },
     { id: 'quality', label: 'Yarn Quality', icon: 'biotech' },
-    { id: 'sources', label: 'Data Sources', icon: 'database' },
   ];
 
   return (
@@ -1341,14 +1365,28 @@ function App() {
         </header>
 
         {/* Sticky warning/status banner */}
-        <div className="fixed top-16 right-0 left-0 md:left-[240px] h-10 z-30 bg-amber-500/10 dark:bg-amber-500/5 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 md:px-6 text-[10px] md:text-xs font-mono text-amber-600 dark:text-amber-500">
+        <div className={`fixed top-16 right-0 left-0 md:left-[240px] h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 md:px-6 text-[10px] md:text-xs font-mono transition-colors duration-500 ${
+          syncStatus === 'syncing' 
+            ? 'bg-primary/10 text-primary border-primary/20' 
+            : 'bg-amber-500/10 dark:bg-amber-500/5 text-amber-600 dark:text-amber-500'
+        }`}>
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse shrink-0"></span>
-            <span className="truncate"><strong>DEMO / ANALYSIS MODE:</strong> Live feeds for USD/INR & ICE Cotton. Mandi/Yarn counts are simulated (May 2026).</span>
+            <span className={`w-1.5 h-1.5 rounded-full animate-pulse shrink-0 ${syncStatus === 'syncing' ? 'bg-primary' : 'bg-amber-500'}`}></span>
+            {syncStatus === 'syncing' ? (
+              <span className="truncate">🔄 <strong>SYSTEM SYNCING:</strong> Pulling real-time exchange rates, futures, and crop databases in the background...</span>
+            ) : (
+              <span className="truncate">⚠️ <strong>DEMO / ANALYSIS MODE:</strong> Real-time exchange rates and ICE Cotton active. Mandi/Yarn counts are simulated (May 2026).</span>
+            )}
           </div>
           <div className="flex items-center gap-3 shrink-0 ml-4">
-            <span className="hidden sm:inline opacity-70">Sync: {lastUpdated.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST</span>
-            <span className="px-1.5 py-0.5 rounded bg-amber-500/20 text-[9px] uppercase tracking-wider font-bold text-amber-700 dark:text-amber-400">SIMULATION ACTIVE</span>
+            <span className="hidden sm:inline opacity-70">Last Sync: {lastUpdated.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST</span>
+            <span className={`px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold ${
+              syncStatus === 'syncing' 
+                ? 'bg-primary/20 text-primary' 
+                : 'bg-amber-500/20 text-amber-700 dark:text-amber-400'
+            }`}>
+              {syncStatus === 'syncing' ? 'SYNC IN PROGRESS' : 'SIMULATION ACTIVE'}
+            </span>
           </div>
         </div>
 
@@ -4273,10 +4311,6 @@ function DataSourcesDashboard({ data, darkMode, colors }) {
       setLoading(false);
     }, 800);
   };
-
-  useEffect(() => {
-    handleTestApi();
-  }, [selectedApi]);
 
   const getCodeSnippet = () => {
     if (selectedApi === 'usda') {
