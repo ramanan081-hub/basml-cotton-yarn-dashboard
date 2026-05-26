@@ -60,7 +60,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
   return (
     <div className="space-y-gutter">
       {/* Slide 1: Cover Slide */}
-      <div className="relative h-[320px] rounded-xxl overflow-hidden flex items-center justify-center p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: 'url(/basml_cotton_cover.png)' }}>
+      <div className="relative h-[320px] rounded-xxl overflow-hidden flex items-center justify-center p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}basml_cotton_cover.png)` }}>
         <div className="absolute inset-0 bg-primary-container/85 backdrop-blur-sm z-0"></div>
         <div className="relative z-10 text-center space-y-4 max-w-2xl px-4">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-xs font-mono font-bold uppercase tracking-wider">
@@ -131,7 +131,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
               </tbody>
             </table>
           </div>
-          <div className="rounded-xl overflow-hidden border border-outline-variant/30 bg-cover bg-center h-full min-h-[180px] md:min-h-0" style={{ backgroundImage: 'url(/cotton_spinning_spindles.png)' }}></div>
+          <div className="rounded-xl overflow-hidden border border-outline-variant/30 bg-cover bg-center h-full min-h-[180px] md:min-h-0" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}cotton_spinning_spindles.png)` }}></div>
         </div>
       </div>
 
@@ -1196,7 +1196,7 @@ function App() {
       <aside className="sidebar-desktop hidden md:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
         <div className="px-2 mb-8 flex items-center gap-2.5">
           <img 
-            src="/logo.png" 
+            src={`${import.meta.env.BASE_URL}logo.png`} 
             alt="BASML Logo" 
             className="w-10 h-10 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
           />
@@ -1241,7 +1241,7 @@ function App() {
             <div className="flex justify-between items-center px-2 mb-8">
               <div className="flex items-center gap-2">
                 <img 
-                  src="/logo.png" 
+                  src={`${import.meta.env.BASE_URL}logo.png`} 
                   alt="BASML Logo" 
                   className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20"
                 />
@@ -1296,7 +1296,7 @@ function App() {
               <span className="material-symbols-outlined">menu</span>
             </button>
             <img 
-              src="/logo.png" 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="BASML Logo" 
               className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
             />
@@ -1729,7 +1729,7 @@ function ImportExportDashboard({ colors, data }) {
   return (
     <div className="space-y-gutter">
       {/* Welcome Banner */}
-      <section className="relative mb-gutter h-48 rounded-xxl overflow-hidden flex items-center p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: 'url(/basml_cotton_cover.png)' }}>
+      <section className="relative mb-gutter h-48 rounded-xxl overflow-hidden flex items-center p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}basml_cotton_cover.png)` }}>
         <div className="absolute inset-0 bg-gradient-to-r from-primary-container/90 via-primary-container/70 to-transparent z-0"></div>
         <div className="relative z-10 text-left space-y-2 max-w-2xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider">
@@ -2733,7 +2733,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
 
   return (
     <div className="space-y-gutter">
-      <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: 'url(/bg-cotton.png)' }}>
+      <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
         <div className="absolute inset-0 bg-gradient-to-r from-primary-container/90 via-primary-container/70 to-transparent z-0"></div>
         <div className="relative z-10 text-left space-y-4 max-w-xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider">
@@ -2751,7 +2751,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
           <img 
             alt="Yarn Spool Machine" 
             className="w-full h-full object-contain filter drop-shadow-2xl" 
-            src="/cotton_spinning_spindles.png"
+            src={`${import.meta.env.BASE_URL}cotton_spinning_spindles.png`}
           />
         </div>
       </section>
@@ -4827,7 +4827,7 @@ function AnalysisDashboard({ darkMode, colors }) {
           <p className="font-body text-sm text-on-surface-variant">Real-time Optical Analysis of Cotton Fiber Structures</p>
         </div>
         <div className="w-[250px] h-[250px] md:w-[350px] md:h-[350px] lens-effect shrink-0">
-          <img className="w-full h-full object-cover scale-[3] hover:scale-[3.5] transition-transform duration-[2s] ease-linear" src="/cotton_microscope_scan.png" alt="Microscope Lens" />
+          <img className="w-full h-full object-cover scale-[3] hover:scale-[3.5] transition-transform duration-[2s] ease-linear" src={`${import.meta.env.BASE_URL}cotton_microscope_scan.png`} alt="Microscope Lens" />
           <div className="absolute inset-0 border-2 border-primary/30 rounded-full animate-pulse pointer-events-none"></div>
         </div>
       </div>

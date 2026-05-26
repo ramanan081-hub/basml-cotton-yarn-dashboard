@@ -459,7 +459,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
             </div>
           </div>
           <div className="border border-outline-variant rounded-xl overflow-hidden bg-surface flex items-center justify-center p-2">
-            <img src="/yarn_quality_testing.png" className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
+            <img src={`${import.meta.env.BASE_URL}yarn_quality_testing.png`} className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
           </div>
         </div>
       </div>
