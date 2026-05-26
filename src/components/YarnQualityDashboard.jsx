@@ -306,7 +306,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       {/* Stitch Botanical Cotton Hero */}
       <section className="relative w-full h-[400px] rounded-3xl overflow-hidden glass-card glass-edge mb-8">
         <div className="absolute inset-0 z-0 opacity-80 mix-blend-luminosity">
-          <img alt="Botanical Cotton" className="w-full h-full object-cover" src="/basml-cotton-yarn-dashboard/bg-cotton.png" />
+          <img alt="Botanical Cotton" className="w-full h-full object-cover" src="/bg-cotton.png" />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent"></div>
         </div>
 
@@ -459,7 +459,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
             </div>
           </div>
           <div className="border border-outline-variant rounded-xl overflow-hidden bg-surface flex items-center justify-center p-2">
-            <img src="/basml-cotton-yarn-dashboard/yarn_quality_testing.png" className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
+            <img src="/yarn_quality_testing.png" className="max-h-[300px] w-auto rounded-lg object-contain" alt="Yarn quality spool testing in textile laboratory" />
           </div>
         </div>
       </div>
@@ -478,9 +478,17 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
             </h4>
             <div className="h-[300px] font-mono">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.countRun} margin={{ top: 10, right: 30, left: -20, bottom: 0 }}>
+                <LineChart 
+                  data={data.countRun.map((item, index) => {
+                    const d = new Date();
+                    d.setDate(d.getDate() - (15 - index));
+                    const dateStr = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+                    return { ...item, dateLabel: dateStr };
+                  })} 
+                  margin={{ top: 10, right: 30, left: -20, bottom: 0 }}
+                >
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
-                  <XAxis dataKey="day" label={{ value: 'Daily Batch Run #', position: 'insideBottom', offset: -5 }} fontSize={9} />
+                  <XAxis dataKey="dateLabel" label={{ value: 'Test Date', position: 'insideBottom', offset: -5 }} fontSize={9} />
                   <YAxis domain={['auto', 'auto']} fontSize={9} />
                   <Tooltip
                     contentStyle={{

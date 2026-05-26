@@ -367,29 +367,17 @@ tr:hover td {
   border-color: rgba(129, 199, 132, 0.2) !important;
 }
 
-/* Liquid Glass Text - 3D glossy gel look */
+/* Liquid Glass Text - Clean, normal, bold branding */
 .liquid-glass-text {
-  font-family: 'Google Sans', sans-serif;
+  font-family: var(--font-headline);
   font-weight: 800;
-  background: linear-gradient(180deg, #ffffff 0%, #e0f2f1 20%, #4db6ac 60%, #00796b 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 
-    0px 2px 3px rgba(255, 255, 255, 0.8),
-    0px -1px 2px rgba(0, 0, 0, 0.1),
-    1px 4px 6px rgba(0, 0, 0, 0.2);
+  color: var(--color-primary);
   letter-spacing: -0.02em;
   display: inline-block;
 }
 
 .dark .liquid-glass-text {
-  background: linear-gradient(180deg, #ffffff 0%, #e0f7fa 20%, #4dd0e1 60%, #00acc1 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  text-shadow: 
-    0px 2px 3px rgba(255, 255, 255, 0.2),
-    0px -1px 2px rgba(0, 0, 0, 0.3),
-    1px 4px 6px rgba(0, 0, 0, 0.5);
+  color: var(--color-primary);
 }
 
 /* Hover elevation and z-index rise for Bento Cards */

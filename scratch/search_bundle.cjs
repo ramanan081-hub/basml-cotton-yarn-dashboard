@@ -1,11 +1,19 @@
 const fs = require('fs');
-const bundle = fs.readFileSync('dist/assets/index-D2AN5NCu.js', 'utf8');
 
-let idx = bundle.indexOf("BASML ANALYTICS");
-if (idx !== -1) {
-  console.log('Found BASML ANALYTICS at', idx);
-  // Let's print from idx - 2000 to idx + 8000
-  const chunk = bundle.substring(idx - 2000, idx + 8000);
-  fs.writeFileSync('scratch/search_built.cjs', chunk, 'utf-8');
-  console.log('Saved to scratch/search_built.cjs');
+const bundlePath = "c:/Users/RAMANAN/Downloads/BASML.COTTON.YARN.ANALYSIS.WEB.DEV/dist/assets/index-Cd_Uf0Ad.js";
+if (fs.existsSync(bundlePath)) {
+    const code = fs.readFileSync(bundlePath, 'utf8');
+    const idx = code.indexOf('ImportExportDashboard');
+    if (idx !== -1) {
+        console.log("Found ImportExportDashboard at index: " + idx);
+        // Print 4000 characters before and after to see
+        const start = Math.max(0, idx - 500);
+        const end = Math.min(code.length, idx + 10000);
+        console.log("--- BUNDLE EXCERPT ---");
+        console.log(code.substring(start, end));
+    } else {
+        console.log("ImportExportDashboard not found in the bundle.");
+    }
+} else {
+    console.log("Bundle path does not exist!");
 }
