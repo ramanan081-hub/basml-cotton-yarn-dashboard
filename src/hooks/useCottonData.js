@@ -81,8 +81,9 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           const types = updated.indianCotton.prices.types;
           const iceInrEquivalent = Math.floor(iceCottonPrice * 7.84 * usdInr);
           
-          // Shankar-6 Spot
-          const shankar6Spot = Math.floor(iceInrEquivalent * 1.18);
+          // Shankar-6 Spot - economically model with an MSP-supported domestic floor (~54,500 INR/candy)
+          // and a dynamic relationship with import parity under high international rates.
+          const shankar6Spot = Math.max(54500, Math.floor(iceInrEquivalent * 0.965));
           types[0].current = shankar6Spot;
           types[0].est = Math.floor(shankar6Spot * 1.015);
 
@@ -140,30 +141,31 @@ export function useCottonData(refreshInterval = 60 * 1000) {
         }
 
         // Dynamically update Indian yarn prices
+        // Modeled using: Yarn Price = (Cotton Price / Yield) + Conversion Cost
         if (updated.yarns && updated.yarns.india && updated.yarns.india.prices) {
           const prices = updated.yarns.india.prices;
           const shankar6Spot = updated.indianCotton.prices.types[0].current;
           const iceInrEquivalent = updated.indianCotton.prices.types[6].current;
 
-          prices[0].current = Math.floor((shankar6Spot / 356) * 1.05 * 1.01); // 10s-16s Carded
+          prices[0].current = Math.floor((shankar6Spot / 356) * 1.0 + 40); // 10s-16s Carded
           prices[0].est = Math.floor(prices[0].current * 1.035);
 
-          prices[1].current = Math.floor((shankar6Spot / 356) * 1.32 * 1.01); // 20s Carded
+          prices[1].current = Math.floor((shankar6Spot / 356) * 1.1 + 45); // 20s Carded
           prices[1].est = Math.floor(prices[1].current * 1.03);
 
-          prices[2].current = Math.floor((shankar6Spot / 356) * 1.50 * 1.01); // 30s Combed
+          prices[2].current = Math.floor((shankar6Spot / 356) * 1.25 + 65); // 30s Combed
           prices[2].est = Math.floor(prices[2].current * 1.035);
 
-          prices[3].current = Math.floor((shankar6Spot / 356) * 1.60 * 1.01); // 40s Compact
+          prices[3].current = Math.floor((shankar6Spot / 356) * 1.30 + 95); // 40s Compact
           prices[3].est = Math.floor(prices[3].current * 1.045);
 
-          prices[4].current = Math.floor((shankar6Spot / 356) * 2.10 * 1.01); // 60s Combed
+          prices[4].current = Math.floor((shankar6Spot / 356) * 1.6 + 160); // 60s Combed
           prices[4].est = Math.floor(prices[4].current * 1.035);
 
-          prices[5].current = Math.floor((shankar6Spot / 356) * 2.80 * 1.01); // 80s Compact
+          prices[5].current = Math.floor((shankar6Spot / 356) * 2.0 + 265); // 80s Compact
           prices[5].est = Math.floor(prices[5].current * 1.035);
 
-          prices[6].current = Math.floor((shankar6Spot / 356) * 3.60 * 1.01); // 100s Compact ELS
+          prices[6].current = Math.floor((shankar6Spot / 356) * 2.3 + 360); // 100s Compact ELS
           prices[6].est = Math.floor(prices[6].current * 1.035);
 
           prices[7].current = Math.floor(prices[2].current * 1.23); // Organic Cotton 30s
