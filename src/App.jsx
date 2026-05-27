@@ -2127,6 +2127,37 @@ function ImportExportDashboard({ colors, data }) {
             </button>
           </div>
 
+          {/* Sourcing Corridor Flow Visualizer */}
+          <div className="card-chart-green p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-xl text-primary animate-pulse">route</span>
+              <div>
+                <strong className="text-primary block text-xs">Active Sourcing Corridor</strong>
+                <span className="text-on-surface-variant font-medium">All global and interstate logistics corridors terminate at your Tamil Nadu main factory.</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-2 flex-wrap justify-center w-full md:w-auto">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-sm">
+                  {importChannel === 'global' ? 'public' : 'home_pin'}
+                </span>
+                <span>{importChannel === 'global' ? `Global Nation: ${importOrigin}` : `Domestic State: ${formatStateName(importOrigin)}`}</span>
+              </div>
+              
+              <div className="flex items-center text-primary">
+                <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
+                <span className="text-[8px] font-bold px-1 text-primary/80 uppercase">Landed Gate</span>
+                <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
+              </div>
+              
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/20 border border-primary/30 text-primary font-bold">
+                <span className="material-symbols-outlined text-sm">factory</span>
+                <span>Tamil Nadu Factory Gate (Main Hub)</span>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-12 gap-gutter">
             {/* Left Column: Cost Calculator */}
             <div className="col-span-12 lg:col-span-6 space-y-gutter">
@@ -2153,7 +2184,7 @@ function ImportExportDashboard({ colors, data }) {
                   <div className="col-span-2">
                     {importChannel === 'global' ? (
                       <div>
-                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS SOURCING (FOB USD Basis)</label>
+                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS IMPORTING TO TAMIL NADU (FOB USD Basis)</label>
                         <div className="flex flex-wrap gap-1.5">
                           {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
                             <button
@@ -2172,7 +2203,7 @@ function ImportExportDashboard({ colors, data }) {
                       </div>
                     ) : (
                       <div>
-                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC INDIAN STATES (Mandi INR Basis)</label>
+                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">INDIAN DOMESTIC STATES SOURCING TO TAMIL NADU (Mandi INR Basis)</label>
                         <div className="flex flex-wrap gap-1.5">
                           {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
                             <button
@@ -2209,7 +2240,7 @@ function ImportExportDashboard({ colors, data }) {
                       onClick={() => handleImportPreset(selectedGlobalOrigin)}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Global Origin</span>
+                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Global Import to TN</span>
                           {importPresets[importOrigin]?.type === 'global' && <span className="text-[8px] bg-primary text-on-primary px-1 rounded font-bold uppercase">Active</span>}
                         </div>
                         <span className="text-xs font-bold text-on-surface block mt-1">{selectedGlobalOrigin}</span>
@@ -2226,7 +2257,7 @@ function ImportExportDashboard({ colors, data }) {
                       onClick={() => handleImportPreset(selectedDomesticOrigin)}
                       >
                         <div className="flex justify-between items-center">
-                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Domestic State</span>
+                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Domestic Sourcing to TN</span>
                           {importPresets[importOrigin]?.type === 'domestic' && <span className="text-[8px] bg-primary text-on-primary px-1 rounded font-bold uppercase">Active</span>}
                         </div>
                         <span className="text-xs font-bold text-on-surface block mt-1">{formatStateName(selectedDomesticOrigin)}</span>
@@ -2547,7 +2578,7 @@ function ImportExportDashboard({ colors, data }) {
 
                 <div className="grid grid-cols-2 gap-3 mb-4">
                   <div>
-                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT GLOBAL PROFILE</label>
+                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT GLOBAL IMPORT PROFILE TO TN</label>
                     <select
                       value={selectedGlobalOrigin}
                       onChange={(e) => {
@@ -2563,7 +2594,7 @@ function ImportExportDashboard({ colors, data }) {
                     </select>
                   </div>
                   <div>
-                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT DOMESTIC PROFILE</label>
+                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT INDIAN DOMESTIC PROFILE TO TN</label>
                     <select
                       value={selectedDomesticOrigin}
                       onChange={(e) => {
@@ -2585,15 +2616,15 @@ function ImportExportDashboard({ colors, data }) {
                   <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-2">
                     <h4 className="text-[10px] font-mono font-bold text-forest-green uppercase tracking-wider flex items-center gap-1">
                       <span className="material-symbols-outlined text-[12px]">compare</span>
-                      Compare Fiber Specifications & Harvest Cycles
+                      Compare Sourcing Fiber Specifications & Harvest Cycles (Destination: TN)
                     </h4>
                     <div className="overflow-x-auto">
                       <table className="w-full text-[11px] font-mono text-left">
                         <thead>
                           <tr className="border-b border-outline-variant/20 text-[9px] font-bold text-outline">
                             <th className="py-2 pr-2">SPECIFICATION</th>
-                            <th className="py-2 px-2 text-primary">{selectedGlobalOrigin}</th>
-                            <th className="py-2 pl-2 text-forest-green">{formatStateName(selectedDomesticOrigin)}</th>
+                            <th className="py-2 px-2 text-primary">{selectedGlobalOrigin} to TN</th>
+                            <th className="py-2 pl-2 text-forest-green">{formatStateName(selectedDomesticOrigin)} to TN</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-outline-variant/10 text-on-surface">
@@ -2638,7 +2669,7 @@ function ImportExportDashboard({ colors, data }) {
                     <div className="space-y-3 bg-[#E8F5E9]/40 dark:bg-[#1B5E20]/10 p-3.5 rounded-xl border border-forest-green/20">
                       <h4 className="font-bold text-forest-green text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
                         <span className="material-symbols-outlined text-sm">public</span>
-                        {selectedGlobalOrigin} SWOT
+                        {selectedGlobalOrigin} Import to TN SWOT
                       </h4>
                       <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant">
                         <div>
@@ -2660,7 +2691,7 @@ function ImportExportDashboard({ colors, data }) {
                     <div className="space-y-3 bg-[#FFF8E1]/40 dark:bg-[#F57F17]/10 p-3.5 rounded-xl border border-amber-500/20">
                       <h4 className="font-bold text-amber-600 dark:text-amber-400 text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
                         <span className="material-symbols-outlined text-sm">home_pin</span>
-                        {formatStateName(selectedDomesticOrigin)} SWOT
+                        {formatStateName(selectedDomesticOrigin)} Sourcing to TN SWOT
                       </h4>
                       <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant">
                         <div>
@@ -3122,7 +3153,7 @@ function ImportExportDashboard({ colors, data }) {
                       <span className="font-bold text-error">-₹{domesticPackagingKg.toFixed(2)} / Kg</span>
                     </div>
                     <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
-                      <span>Net Ex-Mill Realization (Coimbatore Gate):</span>
+                      <span>Net Ex-Mill Realization (Tamil Nadu Factory Gate):</span>
                       <span>₹{netDomesticRealizationInrKg.toFixed(2)} / Kg</span>
                     </div>
 
@@ -3228,7 +3259,7 @@ function ImportExportDashboard({ colors, data }) {
                           <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
                             <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
                             <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Focus on customized specialty yarns (GOTS organic compact, slub yarns, contamination-free ELS cotton yarns) where Coimbatore mills maintain technical superiority.
+                              Focus on customized specialty yarns (GOTS organic compact, slub yarns, contamination-free ELS cotton yarns) where Tamil Nadu mills maintain technical superiority.
                             </p>
                           </div>
                         </>
@@ -3316,7 +3347,7 @@ function ImportExportDashboard({ colors, data }) {
               </p>
               <div className="space-y-2 text-[10px] font-mono bg-surface-container-low/45 p-3 rounded-lg border border-outline-variant/10">
                 <div className="text-primary font-bold uppercase tracking-wider mb-1">Action Playbook:</div>
-                <div>• <strong>Freight Negotiations</strong>: Consolidate container volumes under Coimbatore associations to negotiate lower ocean freight.</div>
+                <div>• <strong>Freight Negotiations</strong>: Consolidate container volumes under Tamil Nadu trade associations to negotiate lower ocean freight.</div>
                 <div>• <strong>Capital Coverage</strong>: Secure ECGC credit insurance for Bangladesh shipments to protect against dollar shortages.</div>
                 <div>• <strong>Forex Lock-in</strong>: Hedge exchange rate exposures using forward contracts at 83.50+ levels to lock in calculated margins.</div>
               </div>
