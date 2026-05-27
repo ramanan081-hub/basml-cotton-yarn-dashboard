@@ -1604,6 +1604,7 @@ function ImportExportDashboard({ colors, data }) {
   
   // Import States - initialized from live data
   const [importOrigin, setImportOrigin] = useState('USA');
+  const [importChannel, setImportChannel] = useState('global');
   const [selectedGlobalOrigin, setSelectedGlobalOrigin] = useState('USA');
   const [selectedDomesticOrigin, setSelectedDomesticOrigin] = useState('Gujarat (Dom)');
   const [fobCentsLb, setFobCentsLb] = useState(liveIceCotton);
@@ -1922,6 +1923,7 @@ function ImportExportDashboard({ colors, data }) {
   const handleImportPreset = (origin) => {
     setImportOrigin(origin);
     const p = importPresets[origin];
+    setImportChannel(p.type);
     setFobCentsLb(p.fob);
     setOceanFreightContainer(p.freight);
     setImportBcdRate(p.bcd);
@@ -2096,59 +2098,98 @@ function ImportExportDashboard({ colors, data }) {
       </div>
 
       {subTab === 'import' && (
-        <div className="grid grid-cols-12 gap-gutter">
-          {/* Left Column: Cost Calculator */}
-          <div className="col-span-12 lg:col-span-6 space-y-gutter">
-            <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
-              <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
-                <span className="material-symbols-outlined text-xl">calculate</span>
-                Interactive Import Landed Cost Calculator
-              </h3>
-              <div className="flex items-center gap-2 text-[10px] font-mono">
-                <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/20">
-                  <span className="w-1.5 h-1.5 rounded-full bg-forest-green animate-pulse"></span>
-                  Auto-synced from Live Market Data
-                </span>
-                <span className="text-outline">FOB: {liveIceCotton.toFixed(2)}¢ | USD/INR: {liveUsdInr.toFixed(2)} | S-6 Base: ₹{liveShankar6.toLocaleString('en-IN')}</span>
-              </div>
-              
-              <div className="grid grid-cols-2 gap-3">
-                <div className="col-span-2 space-y-3">
-                  <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS SOURCING (FOB USD Basis)</label>
-                    <div className="flex flex-wrap gap-1.5">
-                      {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
-                        <button
-                          key={name}
-                          onClick={() => handleImportPreset(name)}
-                          className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
-                            importOrigin === name 
-                              ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
-                              : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                          }`}
-                        >
-                          {name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                  <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC INDIAN STATES (Mandi INR Basis)</label>
-                    <div className="flex flex-wrap gap-1.5">
-                      {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
-                        <button
-                          key={name}
-                          onClick={() => handleImportPreset(name)}
-                          className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
-                            importOrigin === name 
-                              ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
-                              : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                          }`}
-                        >
-                          {formatStateName(name)}
-                        </button>
-                      ))}
-                    </div>
+        <div className="space-y-gutter animate-fade-in">
+          {/* Import Sourcing Channel Selector */}
+          <div className="flex gap-2 p-1.5 bg-surface-container-high/40 rounded-xl border border-outline-variant/10 w-full max-w-md">
+            <button
+              onClick={() => {
+                setImportChannel('global');
+                handleImportPreset(selectedGlobalOrigin);
+              }}
+              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
+                importChannel === 'global' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">public</span>
+              Global Imports
+            </button>
+            <button
+              onClick={() => {
+                setImportChannel('domestic');
+                handleImportPreset(selectedDomesticOrigin);
+              }}
+              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
+                importChannel === 'domestic' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
+              }`}
+            >
+              <span className="material-symbols-outlined text-sm">home_pin</span>
+              Indian Domestic Sourcing
+            </button>
+          </div>
+
+          <div className="grid grid-cols-12 gap-gutter">
+            {/* Left Column: Cost Calculator */}
+            <div className="col-span-12 lg:col-span-6 space-y-gutter">
+              <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+                <div className="flex justify-between items-start flex-wrap gap-2">
+                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+                    <span className="material-symbols-outlined text-xl">calculate</span>
+                    Interactive Import Landed Cost Calculator
+                  </h3>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
+                    <span className="material-symbols-outlined text-[10px]">factory</span>
+                    Main Factory: Tamil Nadu
+                  </span>
+                </div>
+                <div className="flex items-center gap-2 text-[10px] font-mono">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/20">
+                    <span className="w-1.5 h-1.5 rounded-full bg-forest-green animate-pulse"></span>
+                    Auto-synced from Live Market Data
+                  </span>
+                  <span className="text-outline">FOB: {liveIceCotton.toFixed(2)}¢ | USD/INR: {liveUsdInr.toFixed(2)} | S-6 Base: ₹{liveShankar6.toLocaleString('en-IN')}</span>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-2">
+                    {importChannel === 'global' ? (
+                      <div>
+                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS SOURCING (FOB USD Basis)</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
+                            <button
+                              key={name}
+                              onClick={() => handleImportPreset(name)}
+                              className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                                importOrigin === name 
+                                  ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
+                                  : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                              }`}
+                            >
+                              {name}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC INDIAN STATES (Mandi INR Basis)</label>
+                        <div className="flex flex-wrap gap-1.5">
+                          {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
+                            <button
+                              key={name}
+                              onClick={() => handleImportPreset(name)}
+                              className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                                importOrigin === name 
+                                  ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
+                                  : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                              }`}
+                            >
+                              {formatStateName(name)}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
                   </div>
 
                   {/* Landed Cost Comparison & Arbitrage Gauge */}
@@ -2215,8 +2256,8 @@ function ImportExportDashboard({ colors, data }) {
                             </span>
                             <span className="text-[10px] text-on-surface-variant font-medium">
                               {globalIsCheaper
-                                ? `Landed ${selectedGlobalOrigin} is cheaper than ${formatStateName(selectedDomesticOrigin)} at Coimbatore.`
-                                : `Landed ${formatStateName(selectedDomesticOrigin)} is cheaper than ${selectedGlobalOrigin} at Coimbatore.`}
+                                ? `Landed ${selectedGlobalOrigin} is cheaper than ${formatStateName(selectedDomesticOrigin)} at Tamil Nadu Factory.`
+                                : `Landed ${formatStateName(selectedDomesticOrigin)} is cheaper than ${selectedGlobalOrigin} at Tamil Nadu Factory.`}
                             </span>
                           </div>
                           <span className="font-bold text-xs shrink-0">
@@ -2379,7 +2420,7 @@ function ImportExportDashboard({ colors, data }) {
                   </span>
                 </div>
                 <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
-                  <span>Final Landed Cost (Tamil Nadu Mill Gate):</span>
+                  <span>Final Landed Cost (Tamil Nadu Factory Gate):</span>
                   <span>₹{Math.round(finalLandedInrCandy).toLocaleString('en-IN')} / Candy</span>
                 </div>
                 <div className="flex justify-between items-center text-xs font-mono font-semibold text-outline-variant">
@@ -2393,7 +2434,11 @@ function ImportExportDashboard({ colors, data }) {
                       : 'bg-tertiary/10 text-tertiary border-tertiary/20'
                   }`}>
                     <span className="font-bold">
-                      {isDomesticImport ? 'Interstate Parity (vs Local S-6):' : 'Landed Import Parity (vs Shankar-6):'}
+                      {importOrigin === 'Tamil Nadu (Dom)'
+                        ? 'Local TN Sourcing vs Shankar-6 Benchmark:'
+                        : isDomesticImport
+                          ? 'Interstate Landed Parity vs Gujarat S-6 Spot:'
+                          : 'Landed Import Parity vs Gujarat S-6 Spot:'}
                     </span>
                     <span className="font-bold">
                       {importParityInrCandy <= 0 
@@ -2638,7 +2683,7 @@ function ImportExportDashboard({ colors, data }) {
             </div>
           </div>
         </div>
-      )}
+    )}
 
       {subTab === 'export' && (
         <div className="space-y-gutter">
