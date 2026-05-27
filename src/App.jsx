@@ -1650,6 +1650,9 @@ function ImportExportDashboard({ colors, data }) {
     'Madhya Pradesh (Dom)': { fob: Math.floor(liveShankar6 * 0.96), freight: 4800, bcd: 0, aidc: 0, sws: 0, handling: 1200, type: 'domestic' },
     'Punjab (Dom)': { fob: Math.floor(liveShankar6 * 0.94), freight: 7200, bcd: 0, aidc: 0, sws: 0, handling: 1300, type: 'domestic' },
     'Rajasthan (Dom)': { fob: Math.floor(liveShankar6 * 0.95), freight: 6800, bcd: 0, aidc: 0, sws: 0, handling: 1300, type: 'domestic' },
+    'Haryana (Dom)': { fob: Math.floor(liveShankar6 * 0.94), freight: 7000, bcd: 0, aidc: 0, sws: 0, handling: 1300, type: 'domestic' },
+    'Odisha (Dom)': { fob: Math.floor(liveShankar6 * 0.96), freight: 6000, bcd: 0, aidc: 0, sws: 0, handling: 1200, type: 'domestic' },
+    'Uttar Pradesh (Dom)': { fob: Math.floor(liveShankar6 * 0.93), freight: 6500, bcd: 0, aidc: 0, sws: 0, handling: 1200, type: 'domestic' },
     'Tamil Nadu (Dom)': { fob: Math.floor(liveShankar6 * 1.04), freight: 1200, bcd: 0, aidc: 0, sws: 0, handling: 800, type: 'domestic' },
   };
 
@@ -1837,6 +1840,39 @@ function ImportExportDashboard({ colors, data }) {
       strengths: 'Highly competitive spot pricing, low moisture levels due to dry climate during harvest.',
       weaknesses: 'Dust and sand content require extensive blowroom opening and cleaning.',
       opps: 'Sourcing core material for coarse hosiery yarns (20s-24s carded).'
+    },
+    'Haryana (Dom)': {
+      harvesting: 'Sep – Dec (Northern Belt)',
+      staple: '27 – 28mm (J-34)',
+      mic: '4.0 – 4.7 NCL',
+      strength: '26 – 28 GPT',
+      trash: '4.0%',
+      comberWaste: '16%',
+      strengths: 'Good bulk availability, fast mandi trading cycles, low moisture in late season.',
+      weaknesses: 'High leaf trash, susceptible to contamination from plastic bags.',
+      opps: 'Highly competitive pricing for hosiery knitting yarns.'
+    },
+    'Odisha (Dom)': {
+      harvesting: 'Oct – Feb (Eastern Belt)',
+      staple: '28 – 30mm',
+      mic: '3.8 – 4.4 NCL',
+      strength: '27 – 29 GPT',
+      trash: '3.5%',
+      comberWaste: '16%',
+      strengths: 'Competitive pricing, increasing crop acreage and modern ginning facilities.',
+      weaknesses: 'Logistics transit routes to South India are less established than Central zone.',
+      opps: 'Diversify sourcing to hedge against Central zone monsoon delays.'
+    },
+    'Uttar Pradesh (Dom)': {
+      harvesting: 'Sep – Nov',
+      staple: '26 – 28mm',
+      mic: '4.0 – 4.8 NCL',
+      strength: '25 – 27 GPT',
+      trash: '4.5%',
+      comberWaste: '17%',
+      strengths: 'Very economical base cost.',
+      weaknesses: 'Variable quality, higher short fiber content and trash %.',
+      opps: 'Sourcing core material for coarse open-end and industrial weaving counts.'
     },
     'Tamil Nadu (Dom)': {
       harvesting: 'Feb–Apr & Aug–Oct',
