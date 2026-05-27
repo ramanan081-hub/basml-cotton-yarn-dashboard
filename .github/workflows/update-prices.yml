@@ -1,10 +1,15 @@
-name: Update Market Prices Daily
+name: Update Market Prices (3x Daily)
 
 on:
   schedule:
-    # Runs every day at 6:30 AM IST (1:00 AM UTC)
+    # ── 3 refreshes per day aligned with global cotton market sessions ──────
+    # Session 1: 6:30 AM IST  = 01:00 UTC  → Pre-market / MCX open
     - cron: '0 1 * * *'
-  workflow_dispatch:  # Allow manual trigger from GitHub UI
+    # Session 2: 12:30 PM IST = 07:00 UTC  → London/European session mid-day
+    - cron: '0 7 * * *'
+    # Session 3: 4:30 PM IST  = 11:00 UTC  → ICE New York cotton open
+    - cron: '0 11 * * *'
+  workflow_dispatch:  # Allow manual trigger from GitHub Actions UI anytime
 
 permissions:
   contents: write
@@ -102,7 +107,7 @@ jobs:
               'eurInr': float('$EUR_INR'),
               'lastUpdated': '$TIMESTAMP',
               'source': '$SOURCE',
-              'note': 'Updated daily by GitHub Actions. Direct fetch, no CORS proxy needed.'
+              'note': 'Auto-updated 3x daily (6:30 AM, 12:30 PM, 4:30 PM IST) by GitHub Actions.'
           }
           with open('public/market-prices.json','w') as f:
               json.dump(data, f, indent=2)
