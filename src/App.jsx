@@ -1592,6 +1592,11 @@ function TradingDeskInfoBox({ selectedName, mode, colors }) {
 function ImportExportDashboard({ colors, data }) {
   const [subTab, setSubTab] = useState('import');
   
+  const formatStateName = (name) => {
+    if (name === 'Tamil Nadu (Dom)') return 'Tamil Nadu (Local)';
+    return name.replace(' (Dom)', '');
+  };
+  
   // Auto-populate from live market data
   const liveUsdInr = data?.exchangeRates?.usdInr || 83.50;
   const liveIceCotton = data?.globalCotton?.prices?.types?.[1]?.current || 78.50; // ICE US Cotton No. 2
@@ -2140,7 +2145,7 @@ function ImportExportDashboard({ colors, data }) {
                               : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
                           }`}
                         >
-                          {name.replace(' (Dom)', '')}
+                          {formatStateName(name)}
                         </button>
                       ))}
                     </div>
@@ -2183,7 +2188,7 @@ function ImportExportDashboard({ colors, data }) {
                           <span className="text-[9px] font-mono font-bold text-outline uppercase">Domestic State</span>
                           {importPresets[importOrigin]?.type === 'domestic' && <span className="text-[8px] bg-primary text-on-primary px-1 rounded font-bold uppercase">Active</span>}
                         </div>
-                        <span className="text-xs font-bold text-on-surface block mt-1">{selectedDomesticOrigin.replace(' (Dom)', '')}</span>
+                        <span className="text-xs font-bold text-on-surface block mt-1">{formatStateName(selectedDomesticOrigin)}</span>
                         <div className="text-xs font-mono font-bold text-primary mt-1">₹{Math.round(getLandedCostForPreset(selectedDomesticOrigin).candy).toLocaleString('en-IN')} / Candy</div>
                         <div className="text-[9px] font-mono text-outline-variant">₹{getLandedCostForPreset(selectedDomesticOrigin).kg.toFixed(2)} / Kg Landed</div>
                       </div>
@@ -2210,8 +2215,8 @@ function ImportExportDashboard({ colors, data }) {
                             </span>
                             <span className="text-[10px] text-on-surface-variant font-medium">
                               {globalIsCheaper
-                                ? `Landed ${selectedGlobalOrigin} is cheaper than ${selectedDomesticOrigin.replace(' (Dom)', '')} at Coimbatore.`
-                                : `Landed ${selectedDomesticOrigin.replace(' (Dom)', '')} is cheaper than ${selectedGlobalOrigin} at Coimbatore.`}
+                                ? `Landed ${selectedGlobalOrigin} is cheaper than ${formatStateName(selectedDomesticOrigin)} at Coimbatore.`
+                                : `Landed ${formatStateName(selectedDomesticOrigin)} is cheaper than ${selectedGlobalOrigin} at Coimbatore.`}
                             </span>
                           </div>
                           <span className="font-bold text-xs shrink-0">
@@ -2524,7 +2529,7 @@ function ImportExportDashboard({ colors, data }) {
                       className="w-full bg-surface-container-high border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface animate-fade-in"
                     >
                       {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
-                        <option key={name} value={name}>{name.replace(' (Dom)', '')}</option>
+                        <option key={name} value={name}>{formatStateName(name)}</option>
                       ))}
                     </select>
                   </div>
@@ -2543,7 +2548,7 @@ function ImportExportDashboard({ colors, data }) {
                           <tr className="border-b border-outline-variant/20 text-[9px] font-bold text-outline">
                             <th className="py-2 pr-2">SPECIFICATION</th>
                             <th className="py-2 px-2 text-primary">{selectedGlobalOrigin}</th>
-                            <th className="py-2 pl-2 text-forest-green">{selectedDomesticOrigin.replace(' (Dom)', '')}</th>
+                            <th className="py-2 pl-2 text-forest-green">{formatStateName(selectedDomesticOrigin)}</th>
                           </tr>
                         </thead>
                         <tbody className="divide-y divide-outline-variant/10 text-on-surface">
@@ -2610,7 +2615,7 @@ function ImportExportDashboard({ colors, data }) {
                     <div className="space-y-3 bg-[#FFF8E1]/40 dark:bg-[#F57F17]/10 p-3.5 rounded-xl border border-amber-500/20">
                       <h4 className="font-bold text-amber-600 dark:text-amber-400 text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
                         <span className="material-symbols-outlined text-sm">home_pin</span>
-                        {selectedDomesticOrigin.replace(' (Dom)', '')} SWOT
+                        {formatStateName(selectedDomesticOrigin)} SWOT
                       </h4>
                       <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant">
                         <div>
