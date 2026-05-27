@@ -1,19 +1,57 @@
 // src/api/fetchData.js
-// Real-time data fetching from official CORS-enabled sources
-// Designed to work on GitHub Pages (static hosting — no server-side proxy)
+// Market data fetching strategy for GitHub Pages (static hosting)
+//
+// PRIMARY:  /basml-cotton-yarn-dashboard/market-prices.json
+//           → Updated daily by GitHub Actions (server-side, no CORS)
+//           → Served from same origin — 100% reliable, zero CORS issues
+//
+// FALLBACK: Live APIs (exchange rates work fine; ICE Cotton via proxies may fail)
 
-// Cache storage
+const BASE_PATH = import.meta.env.BASE_URL || '/basml-cotton-yarn-dashboard/';
+const PRICES_JSON_URL = `${BASE_PATH}market-prices.json`.replace('//', '/');
+
+// Cache
 let dataCache = null;
 let lastFetchTime = 0;
 const CACHE_EXPIRY = 5 * 60 * 1000; // 5 minutes
 
 // ─────────────────────────────────────────────────────────────────────────────
-// EXCHANGE RATES  (USD → INR / EUR)
-// Uses open.er-api.com — fully free, CORS-enabled, no key needed
-// Fallback: frankfurter.app — free ECB data, CORS-enabled
+// Step 1: Read today's prices from the GitHub-Actions-maintained JSON file
+// This is served from the same origin → zero CORS issues, always works
+// ─────────────────────────────────────────────────────────────────────────────
+async function fetchFromPriceFile() {
+  try {
+    const res = await fetch(PRICES_JSON_URL + '?t=' + Date.now(), {
+      cache: 'no-cache',
+      signal: AbortSignal.timeout(5000)
+    });
+    if (!res.ok) return null;
+    const json = await res.json();
+    if (
+      json &&
+      typeof json.iceCottonCentsPerLb === 'number' &&
+      typeof json.usdInr === 'number' &&
+      json.iceCottonCentsPerLb > 50 &&
+      json.usdInr > 50
+    ) {
+      console.info(
+        `[BASML] Prices loaded from file — ICE: ${json.iceCottonCentsPerLb}¢/lb, ` +
+        `USD/INR: ₹${json.usdInr}, Source: ${json.source || 'file'}, ` +
+        `Updated: ${json.lastUpdated || 'unknown'}`
+      );
+      return json;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Step 2a: Fetch exchange rates live (CORS-friendly public APIs)
 // ─────────────────────────────────────────────────────────────────────────────
 export async function fetchLiveExchangeRates() {
-  let usdInr = 84.35;   // realistic May 2026 fallback
+  let usdInr = 84.35;
   let eurInr = 90.70;
   let success = false;
 
@@ -28,8 +66,6 @@ export async function fetchLiveExchangeRates() {
       const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
       if (!res.ok) continue;
       const json = await res.json();
-
-      // open.er-api.com / exchangerate-api.com shape: { rates: { INR, EUR } }
       if (json.rates && json.rates.INR) {
         usdInr = parseFloat(json.rates.INR.toFixed(2));
         if (json.rates.EUR) {
@@ -38,116 +74,128 @@ export async function fetchLiveExchangeRates() {
         success = true;
         break;
       }
-      // frankfurter.app shape: { rates: { INR, EUR } }
-      if (json.rates && json.rates.INR) {
-        usdInr = parseFloat(json.rates.INR.toFixed(2));
-        eurInr = json.rates.EUR
-          ? parseFloat((json.rates.INR / json.rates.EUR).toFixed(2))
-          : eurInr;
-        success = true;
-        break;
-      }
     } catch {
       // try next endpoint
     }
   }
-
   return { usdInr, eurInr, success };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// ICE COTTON NO. 2 FUTURES  (CT=F)
-// Yahoo Finance blocks direct browser requests.
-// We try multiple reliable CORS proxies in order.
-// If all fail we use a calibrated fallback (~77 ¢/lb).
+// Step 2b: Try to fetch ICE Cotton live (may fail due to Yahoo CORS blocks)
+// Only used as upgrade if the price file is stale (>24h old)
 // ─────────────────────────────────────────────────────────────────────────────
 const YAHOO_CT_URL = 'https://query1.finance.yahoo.com/v8/finance/chart/CT=F';
 
-function buildProxyUrls(target) {
-  return [
-    // corsproxy.io — most reliable public proxy
-    `https://corsproxy.io/?url=${encodeURIComponent(target)}`,
-    // thingproxy.freeboard.io
-    `https://thingproxy.freeboard.io/fetch/${target}`,
-    // allorigins — slower but usually works
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(target)}`,
-  ];
-}
-
 async function parseYahooChart(res) {
   const json = await res.json();
-  const result = json?.chart?.result?.[0];
-  if (result?.meta?.regularMarketPrice) {
-    return parseFloat(result.meta.regularMarketPrice.toFixed(2));
-  }
-  return null;
+  const price = json?.chart?.result?.[0]?.meta?.regularMarketPrice;
+  return price && price > 50 && price < 200 ? parseFloat(price.toFixed(2)) : null;
 }
 
 export async function fetchLiveICECotton() {
-  let iceCottonPrice = 77.42;   // realistic May 2026 fallback (¢/lb)
+  let iceCottonPrice = 77.42;
   let success = false;
 
-  for (const url of buildProxyUrls(YAHOO_CT_URL)) {
+  const proxies = [
+    `https://corsproxy.io/?url=${encodeURIComponent(YAHOO_CT_URL)}`,
+    `https://thingproxy.freeboard.io/fetch/${YAHOO_CT_URL}`,
+    `https://api.allorigins.win/raw?url=${encodeURIComponent(YAHOO_CT_URL)}`,
+  ];
+
+  for (const url of proxies) {
     try {
       const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
       if (!res.ok) continue;
       const price = await parseYahooChart(res);
-      if (price && price > 50 && price < 200) {   // sanity check
+      if (price) {
         iceCottonPrice = price;
         success = true;
         break;
       }
     } catch {
-      // try next proxy
+      // try next
     }
   }
-
-  // If proxies fail, try direct (works only in non-CORS-restricted environments)
-  if (!success) {
-    try {
-      const res = await fetch(YAHOO_CT_URL, { signal: AbortSignal.timeout(5000) });
-      if (res.ok) {
-        const price = await parseYahooChart(res);
-        if (price && price > 50 && price < 200) {
-          iceCottonPrice = price;
-          success = true;
-        }
-      }
-    } catch {
-      // fall through to fallback value
-    }
-  }
-
-  if (!success) {
-    console.info('ICE Cotton live feed unavailable — using calibrated fallback value');
-  }
-
   return { price: iceCottonPrice, success };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// COMBINED FETCH WITH CACHE
+// Main entry: fetchAllCottonData()
+// Priority:
+//   1. Price file (updated by GitHub Actions daily) — most reliable
+//   2. Live exchange rate API (CORS-friendly, works always)
+//   3. Live ICE Cotton proxies (may fail, used as price upgrade only)
 // ─────────────────────────────────────────────────────────────────────────────
 export async function fetchAllCottonData() {
   if (dataCache && Date.now() - lastFetchTime < CACHE_EXPIRY) {
     return dataCache;
   }
 
-  const [rates, ice] = await Promise.all([
-    fetchLiveExchangeRates(),
-    fetchLiveICECotton(),
-  ]);
+  // Try the price file first
+  const priceFile = await fetchFromPriceFile();
+
+  let iceCottonPrice = 77.42;
+  let usdInr = 84.35;
+  let eurInr = 90.70;
+  let fileSuccess = false;
+  let rateSuccess = false;
+  let iceSuccess = false;
+
+  if (priceFile) {
+    iceCottonPrice = priceFile.iceCottonCentsPerLb;
+    usdInr = priceFile.usdInr;
+    eurInr = priceFile.eurInr;
+    fileSuccess = true;
+
+    // Check if file is fresh (<25 hours old)
+    const fileAge = priceFile.lastUpdated
+      ? Date.now() - new Date(priceFile.lastUpdated).getTime()
+      : Infinity;
+    const isFresh = fileAge < 25 * 60 * 60 * 1000;
+
+    // Still try live exchange rate (it's fast and CORS-friendly)
+    const liveRates = await fetchLiveExchangeRates();
+    if (liveRates.success) {
+      usdInr = liveRates.usdInr;
+      eurInr = liveRates.eurInr;
+      rateSuccess = true;
+    }
+
+    // Only try live ICE proxy if file is stale (save network requests)
+    if (!isFresh) {
+      const liveIce = await fetchLiveICECotton();
+      if (liveIce.success) {
+        iceCottonPrice = liveIce.price;
+        iceSuccess = true;
+      }
+    } else {
+      iceSuccess = true; // treat file price as valid
+    }
+  } else {
+    // File not available — use full live fetch
+    const [rates, ice] = await Promise.all([
+      fetchLiveExchangeRates(),
+      fetchLiveICECotton(),
+    ]);
+    usdInr = rates.usdInr;
+    eurInr = rates.eurInr;
+    iceCottonPrice = ice.price;
+    rateSuccess = rates.success;
+    iceSuccess = ice.success;
+  }
+
+  let status = 'fallback';
+  if (fileSuccess && rateSuccess) status = 'live';
+  else if (fileSuccess || rateSuccess) status = 'partial';
 
   const result = {
-    exchangeRates: rates,
-    iceCotton: ice,
+    exchangeRates: { usdInr, eurInr, success: rateSuccess || fileSuccess },
+    iceCotton: { price: iceCottonPrice, success: iceSuccess || fileSuccess },
     fetchTime: new Date(),
-    status:
-      rates.success && ice.success
-        ? 'live'
-        : rates.success || ice.success
-        ? 'partial'
-        : 'fallback',
+    status,
+    priceSource: priceFile?.source || (iceSuccess ? 'live-proxy' : 'baseline'),
+    priceFileAge: priceFile?.lastUpdated || null,
   };
 
   dataCache = result;
