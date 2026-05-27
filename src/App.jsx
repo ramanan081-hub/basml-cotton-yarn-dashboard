@@ -1606,6 +1606,8 @@ function ImportExportDashboard({ colors, data }) {
   const [importSwsRate, setImportSwsRate] = useState(10); // Social Welfare Surcharge (% of BCD)
   const [usdInrRate, setUsdInrRate] = useState(liveUsdInr);
   const [localHandlingCandy, setLocalHandlingCandy] = useState(2500); // INR per Candy
+  const [importGstRate, setImportGstRate] = useState(5.0); // GST for domestic purchases
+  const [mandiFeeRate, setMandiFeeRate] = useState(1.0); // Mandi Fee for domestic purchases
   
   // Export States
   const [exportChannel, setExportChannel] = useState('global'); // 'global' or 'domestic'
@@ -1628,10 +1630,12 @@ function ImportExportDashboard({ colors, data }) {
 
   // Presets
   const importPresets = {
-    'USA': { fob: liveIceCotton, freight: 2200, bcd: 10, aidc: 0, sws: 10, handling: 2500 },
-    'Brazil': { fob: parseFloat((liveIceCotton * 0.93).toFixed(2)), freight: 2500, bcd: 10, aidc: 0, sws: 10, handling: 2800 },
-    'Egypt': { fob: parseFloat((liveIceCotton * 2.7).toFixed(2)), freight: 1800, bcd: 10, aidc: 0, sws: 10, handling: 3500 },
-    'West Africa': { fob: parseFloat((liveIceCotton * 1.05).toFixed(2)), freight: 2400, bcd: 10, aidc: 0, sws: 10, handling: 3000 },
+    'USA': { fob: liveIceCotton, freight: 2200, bcd: 10, aidc: 0, sws: 10, handling: 2500, type: 'global' },
+    'Brazil': { fob: parseFloat((liveIceCotton * 0.93).toFixed(2)), freight: 2500, bcd: 10, aidc: 0, sws: 10, handling: 2800, type: 'global' },
+    'Egypt': { fob: parseFloat((liveIceCotton * 2.7).toFixed(2)), freight: 1800, bcd: 10, aidc: 0, sws: 10, handling: 3500, type: 'global' },
+    'West Africa': { fob: parseFloat((liveIceCotton * 1.05).toFixed(2)), freight: 2400, bcd: 10, aidc: 0, sws: 10, handling: 3000, type: 'global' },
+    'Gujarat (Dom)': { fob: liveShankar6, freight: 4500, bcd: 0, aidc: 0, sws: 0, handling: 1200, type: 'domestic' },
+    'Maharashtra (Dom)': { fob: Math.floor(liveShankar6 * 0.98), freight: 5500, bcd: 0, aidc: 0, sws: 0, handling: 1200, type: 'domestic' },
   };
 
   const exportGlobalPresets = {
@@ -1669,6 +1673,13 @@ function ImportExportDashboard({ colors, data }) {
     setImportAidcRate(p.aidc);
     setImportSwsRate(p.sws);
     setLocalHandlingCandy(p.handling);
+    if (p.type === 'domestic') {
+      setImportGstRate(5.0);
+      setMandiFeeRate(1.0);
+    } else {
+      setImportGstRate(0.0);
+      setMandiFeeRate(0.0);
+    }
     // Auto-sync exchange rate from live data
     setUsdInrRate(liveUsdInr);
   };
@@ -1699,14 +1710,20 @@ function ImportExportDashboard({ colors, data }) {
   const kgsPerCandy = 355.62;
   const candiesPerContainer = 56.24;
   
-  const fobInrCandy = (fobCentsLb / 100) * lbsPerCandy * usdInrRate;
-  const freightInrCandy = (oceanFreightContainer * usdInrRate) / candiesPerContainer;
+  const isDomesticImport = importPresets[importOrigin]?.type === 'domestic';
+  
+  const fobInrCandy = isDomesticImport ? fobCentsLb : (fobCentsLb / 100) * lbsPerCandy * usdInrRate;
+  const freightInrCandy = isDomesticImport ? oceanFreightContainer : (oceanFreightContainer * usdInrRate) / candiesPerContainer;
   
   // Custom tax structures: BCD + AIDC + SWS (10% of BCD)
-  const bcdInrCandy = fobInrCandy * (importBcdRate / 100);
-  const aidcInrCandy = fobInrCandy * (importAidcRate / 100);
-  const swsInrCandy = bcdInrCandy * (importSwsRate / 100);
-  const totalTaxDutyInrCandy = bcdInrCandy + aidcInrCandy + swsInrCandy;
+  const bcdInrCandy = isDomesticImport ? 0 : fobInrCandy * (importBcdRate / 100);
+  const aidcInrCandy = isDomesticImport ? 0 : fobInrCandy * (importAidcRate / 100);
+  const swsInrCandy = isDomesticImport ? 0 : bcdInrCandy * (importSwsRate / 100);
+  
+  const gstInrCandy = isDomesticImport ? fobInrCandy * (importGstRate / 100) : 0;
+  const mandiFeeInrCandy = isDomesticImport ? fobInrCandy * (mandiFeeRate / 100) : 0;
+  
+  const totalTaxDutyInrCandy = isDomesticImport ? (gstInrCandy + mandiFeeInrCandy) : (bcdInrCandy + aidcInrCandy + swsInrCandy);
   
   const finalLandedInrCandy = fobInrCandy + freightInrCandy + totalTaxDutyInrCandy + localHandlingCandy;
   const finalLandedInrKg = finalLandedInrCandy / kgsPerCandy;
@@ -1796,12 +1813,12 @@ function ImportExportDashboard({ colors, data }) {
               <div className="grid grid-cols-2 gap-3">
                 <div className="col-span-2">
                   <label className="text-[10px] font-mono font-bold text-outline block mb-1">SELECT PRESET ORIGIN</label>
-                  <div className="grid grid-cols-4 gap-2">
+                  <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
                     {Object.keys(importPresets).map(name => (
                       <button
                         key={name}
                         onClick={() => handleImportPreset(name)}
-                        className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold border ${
+                        className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
                           importOrigin === name 
                             ? 'bg-primary text-on-primary border-primary' 
                             : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
@@ -1814,29 +1831,47 @@ function ImportExportDashboard({ colors, data }) {
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">FOB PRICE (US ¢/LB) <span className="text-[8px] text-forest-green font-bold">● LIVE</span></label>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
+                    {isDomesticImport ? 'MANDI SPOT PRICE (INR)' : 'FOB PRICE (US ¢/LB)'}
+                    <span className="text-[8px] text-forest-green font-bold">● LIVE</span>
+                  </label>
                   <input
                     type="number"
-                    step="0.01"
+                    step={isDomesticImport ? '100' : '0.01'}
                     value={fobCentsLb}
                     onChange={(e) => setFobCentsLb(parseFloat(e.target.value) || 0)}
                     className="w-full bg-surface-container-low border border-forest-green/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
                   />
                 </div>
 
-                <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">EXCHANGE RATE (USD/INR) <span className="text-[8px] text-forest-green font-bold">● LIVE</span></label>
-                  <input
-                    type="number"
-                    step="0.05"
-                    value={usdInrRate}
-                    onChange={(e) => setUsdInrRate(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-surface-container-low border border-forest-green/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                  />
-                </div>
+                {isDomesticImport ? (
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC GST (RCM %)</label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={importGstRate}
+                      onChange={(e) => setImportGstRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+                ) : (
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">EXCHANGE RATE (USD/INR) <span className="text-[8px] text-forest-green font-bold">● LIVE</span></label>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={usdInrRate}
+                      onChange={(e) => setUsdInrRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-forest-green/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+                )}
 
                 <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">OCEAN FREIGHT (USD/40FT)</label>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">
+                    {isDomesticImport ? 'INLAND ROAD FREIGHT (INR)' : 'OCEAN FREIGHT (USD)'}
+                  </label>
                   <input
                     type="number"
                     value={oceanFreightContainer}
@@ -1846,7 +1881,7 @@ function ImportExportDashboard({ colors, data }) {
                 </div>
 
                 <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL HANDLING & TRANSPORT (INR/CANDY)</label>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL HANDLING & PORT (INR)</label>
                   <input
                     type="number"
                     value={localHandlingCandy}
@@ -1855,59 +1890,93 @@ function ImportExportDashboard({ colors, data }) {
                   />
                 </div>
 
-                <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
-                  <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Custom Tax & Cess Breakdown</h4>
-                  <div className="grid grid-cols-3 gap-2">
-                    <div>
-                      <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">BASIC DUTY (BCD %)</label>
-                      <input
-                        type="number"
-                        step="0.5"
-                        value={importBcdRate}
-                        onChange={(e) => setImportBcdRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">AGRI CESS (AIDC %)</label>
-                      <input
-                        type="number"
-                        step="0.5"
-                        value={importAidcRate}
-                        onChange={(e) => setImportAidcRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">SWS (% OF BCD)</label>
-                      <input
-                        type="number"
-                        step="1"
-                        value={importSwsRate}
-                        onChange={(e) => setImportSwsRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                      />
+                {isDomesticImport ? (
+                  <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
+                    <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Domestic Taxes & Mandi Cess</h4>
+                    <div className="grid grid-cols-2 gap-2">
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">GST (REVERSE CHARGE %)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={importGstRate}
+                          onChange={(e) => setImportGstRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">MANDI CESS & FEES (%)</label>
+                        <input
+                          type="number"
+                          step="0.1"
+                          value={mandiFeeRate}
+                          onChange={(e) => setMandiFeeRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
                     </div>
                   </div>
-                </div>
+                ) : (
+                  <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
+                    <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Custom Tax & Cess Breakdown</h4>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">BASIC DUTY (BCD %)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={importBcdRate}
+                          onChange={(e) => setImportBcdRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">AGRI CESS (AIDC %)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={importAidcRate}
+                          onChange={(e) => setImportAidcRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">SWS (% OF BCD)</label>
+                        <input
+                          type="number"
+                          step="1"
+                          value={importSwsRate}
+                          onChange={(e) => setImportSwsRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                )}
               </div>
 
               {/* Landed Cost Output */}
               <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
                 <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">FOB Base Cost per Candy:</span>
+                  <span className="text-on-surface-variant">
+                    {isDomesticImport ? 'Domestic Mandi Spot Price:' : 'FOB Base Cost per Candy:'}
+                  </span>
                   <span className="font-bold text-on-surface">₹{Math.round(fobInrCandy).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">Estimated Ocean Freight / Candy:</span>
+                  <span className="text-on-surface-variant">
+                    {isDomesticImport ? 'Inland Road Freight / Candy:' : 'Estimated Ocean Freight / Candy:'}
+                  </span>
                   <span className="font-bold text-on-surface">₹{Math.round(freightInrCandy).toLocaleString('en-IN')}</span>
                 </div>
                 <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">Taxes (BCD + AIDC + SWS):</span>
+                  <span className="text-on-surface-variant">
+                    {isDomesticImport ? 'Taxes & Mandi Cess (GST + Cess):' : 'Taxes (BCD + AIDC + SWS):'}
+                  </span>
                   <span className="font-bold text-on-surface">
                     ₹{Math.round(totalTaxDutyInrCandy).toLocaleString('en-IN')} 
                     <span className="text-[10px] text-outline ml-1">
-                      ({(importBcdRate + importAidcRate + (importBcdRate * importSwsRate / 100)).toFixed(1.5)}% Eff.)
+                      ({isDomesticImport ? `${(importGstRate + mandiFeeRate).toFixed(1)}%` : `${(importBcdRate + importAidcRate + (importBcdRate * importSwsRate / 100)).toFixed(1.5)}% Eff.`})
                     </span>
                   </span>
                 </div>
@@ -1925,7 +1994,9 @@ function ImportExportDashboard({ colors, data }) {
                     ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
                     : 'bg-tertiary/10 text-tertiary border-tertiary/20'
                 }`}>
-                  <span className="font-bold">Landed Import Parity (vs Shankar-6):</span>
+                  <span className="font-bold">
+                    {isDomesticImport ? 'Interstate Parity (vs Local S-6):' : 'Landed Import Parity (vs Shankar-6):'}
+                  </span>
                   <span className="font-bold">
                     {importParityInrCandy <= 0 
                       ? `₹${Math.abs(Math.round(importParityInrCandy)).toLocaleString('en-IN')} Discount (SAVINGS)` 
