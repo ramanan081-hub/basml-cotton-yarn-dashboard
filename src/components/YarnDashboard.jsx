@@ -346,7 +346,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Growth</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {filteredYarns.map((p, i) => (
                     <tr 
                       key={i}
@@ -381,7 +381,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Ending Stocks</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {data.global?.balanceSheet?.map((row, i) => (
                     <tr key={i}>
                       <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
@@ -418,7 +418,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Growth</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {filteredYarns.map((p, i) => (
                     <tr 
                       key={i}
@@ -449,7 +449,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Exports (M Kgs)</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {data.india?.balanceSheet?.map((row, i) => (
                     <tr key={i}>
                       <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
@@ -750,7 +750,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                     <th className="text-center">Yarn Production Trend (MoM / YoY)</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {(data.stateComparison || []).map((row, i) => (
                     <tr key={i}>
                       <td className="font-bold">{row.state}</td>
@@ -906,7 +906,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                   <th>Product Focus / Specialty</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-xs">
                 {filteredMills.map((mill) => (
                   <tr key={mill.id}>
                     <td className="font-bold">{mill.name}</td>

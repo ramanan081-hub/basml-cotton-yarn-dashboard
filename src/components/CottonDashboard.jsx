@@ -285,7 +285,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Growth</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {filteredCottons.filter(c => c.isGlobal).map((p, i) => (
                     <tr 
                       key={i}
@@ -321,7 +321,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Ending Stocks</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {data.globalCotton?.balanceSheet?.historical?.map((row, i) => (
                     <tr key={i}>
                       <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
@@ -363,7 +363,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Growth</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {filteredCottons.filter(c => !c.isGlobal).map((p, i) => (
                     <tr 
                       key={i}
@@ -395,7 +395,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                     <th className="text-right">Ending Stocks</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {data.indianCotton?.balanceSheet?.historical?.map((row, i) => (
                     <tr key={i}>
                       <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
@@ -699,7 +699,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                     <th>Primary Grade Focus / Specialty</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {(data.indianCotton?.stateProduction || []).map((row, i) => (
                     <tr key={i}>
                       <td className="font-bold">{row.state}</td>
@@ -740,7 +740,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                   <th className="text-right">CCI PAT (₹ Cr)</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody className="text-xs">
                 {data.indianCotton.cciOfficialData.historical.map((row, i) => (
                   <tr key={i}>
                     <td className="font-bold">{row.year}</td>
