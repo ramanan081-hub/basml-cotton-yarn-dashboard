@@ -4004,9 +4004,9 @@ function IndiaDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Row 1: Domestic Balance Sheet & Price Trends */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div className="grid grid-cols-12 gap-6">
         {/* Left Column: S&D Chart & Balance Sheet Table */}
-        <div className="space-y-6">
+        <div className="col-span-12 lg:col-span-8 space-y-6">
           {/* Card 1: Domestic Balance Sheet & Supply/Demand Chart */}
           <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
             <h3 className="text-base font-bold text-primary mb-4 flex items-center gap-2">
@@ -4069,7 +4069,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
         </div>
 
         {/* Right Column: Price Trends Line Chart & Next 2-Month Price Movement Estimation */}
-        <div className="space-y-6">
+        <div className="col-span-12 lg:col-span-4 space-y-6 flex flex-col">
           {/* Card 3: Price Monthly Trends Chart */}
           <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
             <h3 className="text-base font-bold text-primary mb-4 flex items-center gap-2">
