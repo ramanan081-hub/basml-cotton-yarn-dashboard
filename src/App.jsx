@@ -1632,13 +1632,14 @@ function ImportExportDashboard({ colors, data }) {
   
   // Global Export States
   const [exportPriceUsdKg, setExportPriceUsdKg] = useState(3.40);
-  const [domesticPriceInrKg, setDomesticPriceInrKg] = useState(272);
+  const [globalExportLocalPriceInrKg, setGlobalExportLocalPriceInrKg] = useState(272);
   const [exportIncentiveRate, setExportIncentiveRate] = useState(3.5); // RoDTEP %
   const [oceanFreightExportKg, setOceanFreightExportKg] = useState(10.0); // INR per Kg
   const [customsClearingExportKg, setCustomsClearingExportKg] = useState(3.5); // INR per Kg
 
   // Domestic Export States
   const [domesticTargetPriceInrKg, setDomesticTargetPriceInrKg] = useState(285.00);
+  const [domesticExportLocalPriceInrKg, setDomesticExportLocalPriceInrKg] = useState(272);
   const [domesticRoadFreightKg, setDomesticRoadFreightKg] = useState(9.50);
   const [domesticBrokerageRate, setDomesticBrokerageRate] = useState(1.0); // %
   const [domesticPackagingKg, setDomesticPackagingKg] = useState(2.0); // INR/Kg
@@ -1910,12 +1911,95 @@ function ImportExportDashboard({ colors, data }) {
     'China': { price: 3.25, domestic: 272, incentive: 3.0, freight: 12.0, clearing: 4.0, yarnSpec: '20s Carded Weaving, 32s PC Blend', mktShare: '15%', importDuty: '3.5% Basic Duty' },
     'Vietnam': { price: 3.30, domestic: 272, incentive: 3.5, freight: 11.5, clearing: 3.8, yarnSpec: '32s & 40s Combed Knit', mktShare: '20%', importDuty: 'Duty-Free (ASEAN-India FTA)' },
     'Portugal': { price: 3.85, domestic: 312, incentive: 4.5, freight: 22.0, clearing: 5.5, yarnSpec: '60s & 80s Combed Compact (ELS/Org)', mktShare: '8%', importDuty: '4.0% EU Common Tariff' },
+    'Turkey': { price: 3.45, domestic: 272, incentive: 3.5, freight: 14.0, clearing: 3.8, yarnSpec: '30s & 40s Combed Knit', mktShare: '12%', importDuty: 'Duty-Free (Customs Union)' },
+    'Germany': { price: 3.90, domestic: 312, incentive: 4.5, freight: 24.0, clearing: 5.8, yarnSpec: '60s & 80s Organic Compact', mktShare: '6%', importDuty: '4.0% EU Common Tariff' },
+    'Egypt': { price: 3.50, domestic: 272, incentive: 3.5, freight: 12.0, clearing: 3.5, yarnSpec: '30s Carded, 40s Combed', mktShare: '5%', importDuty: '5.0% Basic Duty' },
+    'Italy': { price: 3.95, domestic: 312, incentive: 4.5, freight: 23.0, clearing: 5.6, yarnSpec: '80s & 100s Compact (Supima)', mktShare: '7%', importDuty: '4.0% EU Common Tariff' },
   };
 
   const exportDomesticPresets = {
     'Maharashtra': { price: 285.00, domestic: 272, roadFreight: 9.50, brokerage: 1.0, packaging: 2.0, gst: 5.0, yarnSpec: '30s & 40s Combed Warp (Bhiwandi/Ichalkaranji)', mktShare: '25%', taxRegime: '5% IGST (ITC Claimable)' },
     'Gujarat': { price: 298.00, domestic: 272, roadFreight: 11.00, brokerage: 1.0, packaging: 2.0, gst: 5.0, yarnSpec: '60s & 80s Combed Compact, 40s Lycra (Surat/Ahmedabad)', mktShare: '20%', taxRegime: '5% IGST (ITC Claimable)' },
     'West Bengal': { price: 278.00, domestic: 272, roadFreight: 14.50, brokerage: 1.2, packaging: 2.5, gst: 5.0, yarnSpec: '20s Carded Hosiery, 30s Semi-Combed (Kolkata/Howrah)', mktShare: '18%', taxRegime: '5% IGST (ITC Claimable)' },
+    'Karnataka': { price: 280.00, domestic: 272, roadFreight: 5.50, brokerage: 0.8, packaging: 1.8, gst: 5.0, yarnSpec: '30s & 40s Combed (Bangalore/Belgaum)', mktShare: '12%', taxRegime: '5% IGST (ITC Claimable)' },
+    'Madhya Pradesh': { price: 288.00, domestic: 272, roadFreight: 11.50, brokerage: 1.0, packaging: 2.0, gst: 5.0, yarnSpec: '30s & 40s Carded (Indore/Bhopal)', mktShare: '10%', taxRegime: '5% IGST (ITC Claimable)' },
+    'Uttar Pradesh': { price: 292.00, domestic: 272, roadFreight: 15.00, brokerage: 1.2, packaging: 2.2, gst: 5.0, yarnSpec: '20s & 30s Carded Weaving (Kanpur/Meerut)', mktShare: '15%', taxRegime: '5% IGST (ITC Claimable)' },
+  };
+
+  const exportGlobalSwots = {
+    'Bangladesh': {
+      demand: 'Huge demand for 30s Carded and 40s Combed knitting yarn. Bangladesh is the main destination for Tiruppur spinners due to zero import duty under SAFTA and close shipping distances to Chittagong port.',
+      barriers: 'Frequent dollar shortages at Bangladesh banks delay Letter of Credit (LC) settlements, causing payment latency of up to 45-60 days. Extreme price sensitivity.',
+      opps: 'Establish direct supply arrangements with Dhaka-based buying houses representing European retailers. This eliminates agent commissions, improving realizations by ₹4-6/Kg.'
+    },
+    'China': {
+      demand: 'Demands coarser 20s Carded weaving yarns and 32s PC blend yarns for industrial denim and weaving applications. Major volumes but lower pricing brackets.',
+      barriers: 'High competition from low-cost spinners in Vietnam and Uzbekistan who enjoy geographical proximity and trade treaties. Import duty of 3.5% applies to Indian yarn.',
+      opps: 'Leverage government incentives like RoDTEP (approx 3.5%) to offset the 3.5% Chinese import duty, targeting specific weaving clusters in Zhejiang province.'
+    },
+    'Vietnam': {
+      demand: 'Demands 32s and 40s Combed knitting counts. Absorbs yarn for conversion to garments, which are exported duty-free to European Union under the EVFTA treaty.',
+      barriers: 'Strict Uster quality criteria required by Japanese-owned garment mills in Vietnam. Zero tolerance for contamination. Strict testing metrics on arrival.',
+      opps: 'Provide pre-certified Uster laboratory reports with yarn consignments to bypass incoming testing delays, capturing market share from Chinese competitors.'
+    },
+    'Portugal': {
+      demand: 'Premium market demanding 60s and 80s Combed Compact ELS yarns (using Egyptian Giza and US Pima blends). Significant demand for organic (GOTS) and recycled combed counts.',
+      barriers: 'High ocean freight rates to Europe and strict compliance criteria for chemical and labor certifications. Import duties of 4-4.5% apply unless certified organic.',
+      opps: 'Organic and ELS premium compact yarns command an additional ₹30-40/Kg realization premium, fully absorbing the higher shipping costs and yielding double-digit EBITDA.'
+    },
+    'Turkey': {
+      demand: 'Active demand for 30s & 40s Combed knitting yarn for their massive garment exports to the EU. Turkey acts as a major textile bridge.',
+      barriers: 'High inflation and currency volatility in Turkey. Anti-dumping duties or trade safeguards can sometimes be triggered unexpectedly.',
+      opps: 'Leverage customs cooperation. Shipments to Izmir or Istanbul can bypass EU duties, serving as a secondary corridor for European retailers.'
+    },
+    'Germany': {
+      demand: 'Premium demand for 60s and 80s Organic Compact yarns (GOTS certified). High compliance requirements for sustainability and traceability.',
+      barriers: 'Stringent quality standards, chemical restriction tests (REACH compliance), and high freight costs to northern European ports.',
+      opps: 'Organic certified yarns fetch a massive premium of ₹40-50/Kg. Direct contracts with German sustainable fashion brands ensure high margins.'
+    },
+    'Egypt': {
+      demand: 'High interest in coarse to medium counts like 20s Carded and 30s Combed to feed local textile clusters in Alexandria and Cairo.',
+      barriers: 'Competition from local Egyptian Giza long-staple cotton spinners and strict import licensing regulations.',
+      opps: 'Egypt offers a strategic gateway under qualifying industrial zones (QIZ) for duty-free export to the US market.'
+    },
+    'Italy': {
+      demand: 'Super premium demand for 80s & 100s Compact yarns (Supima/Giza blends) for high-end fashion, luxury knitwear, and premium shirting.',
+      barriers: 'Italian weavers require absolute zero-contamination yarn. High logistics cost and long transit times to Genoa/Trieste.',
+      opps: 'Italy\'s luxury fashion sector pays the highest global premium, offering over ₹60/Kg extra realization for top-tier contamination-free yarn.'
+    }
+  };
+
+  const exportDomesticSwots = {
+    'Maharashtra': {
+      demand: 'High-volume demand for 30s Combed Warp and 40s Combed Warp yarn. Major powerloom hubs (Bhiwandi, Ichalkaranji, Malegaon) consume massive volumes for apparel fabrics and home textiles.',
+      barriers: 'High credit cycles of 60 to 90 days required by master weavers. Local Maharashtra spinning mills enjoy state-level power and capital subsidies, increasing cost competitiveness.',
+      opps: 'Setting up dedicated depot sales in Ichalkaranji to offer ready-to-lift spot inventory, which captures premium spot pricing and bypasses local broker commissions (~1%).'
+    },
+    'Gujarat': {
+      demand: 'Demands high-strength 60s and 80s Combed Compact yarns for premium shirting/sheeting in Ahmedabad, and 40s Lycra core-spun yarns for stretch denim clusters in Surat.',
+      barriers: 'Gujarat is a massive cotton-growing and modern spinning state itself. Extreme competition from local corporate spinners. Outside mills face barriers unless quality is exceptional.',
+      opps: 'Focus on customized specialty yarns (GOTS organic compact, slub yarns, contamination-free ELS cotton yarns) where Tamil Nadu mills maintain technical superiority.'
+    },
+    'West Bengal': {
+      demand: 'Strong demand for 20s Carded Hosiery and 30s Semi-Combed yarns for circular knitting hubs in Kolkata (Howrah, Metiabruz) and local handloom segments.',
+      barriers: 'Long transport lead times (5-7 days road transit) and high logistics costs (₹14-16 per Kg). Risk of transit damage due to moisture during monsoon season.',
+      opps: 'Form long-term direct supply agreements with large structured hosiery brands (e.g. Lux, Rupa, Dollar) to ensure continuous off-take and reduce pricing volatility.'
+    },
+    'Karnataka': {
+      demand: 'Steady demand for 30s & 40s Combed yarn for weaving and knitting mills around Bangalore and Belgaum clusters.',
+      barriers: 'Proximity to local South Indian spinners keeps margins competitive. Transport is fast but local agent networks dominate the trade.',
+      opps: 'Low transit times (1-2 days) and lowest domestic freight costs (~₹5.5/Kg) from Tamil Nadu make it an ideal quick-ship safety valve.'
+    },
+    'Madhya Pradesh': {
+      demand: 'Good demand for 30s & 40s Carded yarn in Indore and Bhopal for apparel and home textiles.',
+      barriers: 'Rapidly expanding local spinning mills with heavy state incentives. Competition is stiff on standard carded counts.',
+      opps: 'Direct supply to MP\'s growing composite mills, offering customized yarn packaging to minimize local unpacking damages.'
+    },
+    'Uttar Pradesh': {
+      demand: 'High demand for 20s & 30s Carded weaving yarns in Kanpur and Meerut clusters for bedsheets, denim, and home furnishings.',
+      barriers: 'Very long road transit distance (5-6 days), high freight costs (~₹15/Kg), and complex local mandi taxations/bureaucracy.',
+      opps: 'High weaving capacity in UP lacks local high-quality yarn supply, allowing TN spinners to charge a premium for superior strength yarn.'
+    }
   };
 
   // Auto-sync exchange rate when live data updates
@@ -1955,7 +2039,7 @@ function ImportExportDashboard({ colors, data }) {
     setExportDest(dest);
     const p = exportGlobalPresets[dest];
     setExportPriceUsdKg(p.price);
-    setDomesticPriceInrKg(p.domestic);
+    setGlobalExportLocalPriceInrKg(p.domestic);
     setExportIncentiveRate(p.incentive);
     setOceanFreightExportKg(p.freight);
     setCustomsClearingExportKg(p.clearing);
@@ -1965,7 +2049,7 @@ function ImportExportDashboard({ colors, data }) {
     setExportState(st);
     const p = exportDomesticPresets[st];
     setDomesticTargetPriceInrKg(p.price);
-    setDomesticPriceInrKg(p.domestic);
+    setDomesticExportLocalPriceInrKg(p.domestic);
     setDomesticRoadFreightKg(p.roadFreight);
     setDomesticBrokerageRate(p.brokerage);
     setDomesticPackagingKg(p.packaging);
@@ -2055,13 +2139,16 @@ function ImportExportDashboard({ colors, data }) {
   const grossExportRevenueInrKg = exportPriceUsdKg * usdInrRate;
   const incentiveRevenueInrKg = grossExportRevenueInrKg * (exportIncentiveRate / 100);
   const netExportRealizationInrKg = grossExportRevenueInrKg + incentiveRevenueInrKg - oceanFreightExportKg - customsClearingExportKg;
-  const exportPremiumInrKg = netExportRealizationInrKg - domesticPriceInrKg;
+  const exportPremiumInrKg = netExportRealizationInrKg - globalExportLocalPriceInrKg;
 
   // Domestic Export Calculations
   const domesticBrokerageInrKg = domesticTargetPriceInrKg * (domesticBrokerageRate / 100);
   const netDomesticRealizationInrKg = domesticTargetPriceInrKg - domesticRoadFreightKg - domesticBrokerageInrKg - domesticPackagingKg;
-  const domesticPremiumInrKg = netDomesticRealizationInrKg - domesticPriceInrKg;
+  const domesticPremiumInrKg = netDomesticRealizationInrKg - domesticExportLocalPriceInrKg;
   const gstAmountInrKg = domesticTargetPriceInrKg * (domesticGstRate / 100);
+
+  const globalSwot = exportGlobalSwots[exportDest];
+  const domesticSwot = exportDomesticSwots[exportState];
 
   return (
     <div className="space-y-gutter">
@@ -2792,581 +2879,515 @@ function ImportExportDashboard({ colors, data }) {
 
 
       {subTab === 'export' && (
-        <div className="space-y-gutter">
-          {/* Sourcing Channel Selector */}
-          <div className="flex gap-2 p-1.5 bg-surface-container-high/40 rounded-xl border border-outline-variant/10 w-full max-w-md">
-            <button
-              onClick={() => setExportChannel('global')}
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
-                exportChannel === 'global' ? 'bg-forest-green text-white shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">public</span>
-              Global Exports
-            </button>
-            <button
-              onClick={() => setExportChannel('domestic')}
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
-                exportChannel === 'domestic' ? 'bg-forest-green text-white shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">home_pin</span>
-              Indian Domestic Markets
-            </button>
+        <div className="space-y-gutter animate-fade-in">
+          {/* Active Export Corridors Flow Visualizer */}
+          <div className="card-chart-green p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
+            <div className="flex items-center gap-3">
+              <span className="material-symbols-outlined text-xl text-primary animate-pulse">route</span>
+              <div>
+                <strong className="text-primary block text-xs">Active Export Corridors (Origin: Tamil Nadu Factory Gate)</strong>
+                <span className="text-on-surface-variant font-medium">Both global and domestic logistics corridors are running concurrently to distribute spun yarn.</span>
+              </div>
+            </div>
+            
+            <div className="flex items-center gap-4 flex-wrap justify-center w-full md:w-auto">
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/20 border border-primary/30 text-primary font-bold">
+                <span className="material-symbols-outlined text-sm">factory</span>
+                <span>TN Factory Gate (Origin)</span>
+              </div>
+
+              <div className="flex items-center text-primary">
+                <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
+                <span className="text-[8px] font-bold px-1 text-primary/80 uppercase">Dispatch</span>
+                <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
+              </div>
+
+              {/* Global Corridor */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-sm text-primary">public</span>
+                <span>Global: {exportDest}</span>
+              </div>
+              
+              <div className="text-primary font-bold">&</div>
+
+              {/* Domestic Corridor */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-sm text-forest-green">home_pin</span>
+                <span>Domestic: {exportState}</span>
+              </div>
+            </div>
           </div>
 
-          {exportChannel === 'global' ? (
-            <div className="grid grid-cols-12 gap-gutter">
-              {/* Left Column: Global Export Realization Calculator */}
-              <div className="col-span-12 lg:col-span-6 space-y-gutter">
-                <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+          <div className="grid grid-cols-12 gap-gutter">
+            {/* Left Column: Global Nations Export Desk */}
+            <div className="col-span-12 lg:col-span-6 space-y-gutter">
+              <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+                <div className="flex justify-between items-start flex-wrap gap-2">
                   <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
-                    <span className="material-symbols-outlined text-xl">calculate</span>
-                    Interactive Yarn Global Export Calculator
+                    <span className="material-symbols-outlined text-xl">public</span>
+                    Global Nations Export Desk (FOB Basis)
                   </h3>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="col-span-2">
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">SELECT PRESET DESTINATION</label>
-                      <div className="grid grid-cols-4 gap-2">
-                        {Object.keys(exportGlobalPresets).map(name => (
-                          <button
-                            key={name}
-                            onClick={() => handleExportGlobalPreset(name)}
-                            className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold border ${
-                              exportDest === name 
-                                ? 'bg-primary text-on-primary border-primary' 
-                                : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                            }`}
-                          >
-                            {name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">EXPORT FOB PRICE (USD/KG)</label>
-                      <input
-                        type="number"
-                        step="0.05"
-                        value={exportPriceUsdKg}
-                        onChange={(e) => setExportPriceUsdKg(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC TN SELLING PRICE (INR/KG)</label>
-                      <input
-                        type="number"
-                        value={domesticPriceInrKg}
-                        onChange={(e) => setDomesticPriceInrKg(parseInt(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">GOVT INCENTIVE ROSCTL/RODTEP (%)</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={exportIncentiveRate}
-                        onChange={(e) => setExportIncentiveRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">OCEAN FREIGHT & HANDLING (INR/KG)</label>
-                      <input
-                        type="number"
-                        step="0.5"
-                        value={oceanFreightExportKg}
-                        onChange={(e) => setOceanFreightExportKg(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div className="col-span-2">
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">CUSTOMS CLEARING & PORT CHARGES (INR/KG)</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={customsClearingExportKg}
-                        onChange={(e) => setCustomsClearingExportKg(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Preset Metadata Card */}
-                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20 grid grid-cols-3 gap-2 text-center">
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">PREFERRED YARN</span>
-                      <span className="text-[10px] font-bold text-primary block truncate" title={exportGlobalPresets[exportDest]?.yarnSpec}>
-                        {exportGlobalPresets[exportDest]?.yarnSpec}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">EST. TN MKT SHARE</span>
-                      <span className="text-[10px] font-bold text-primary block">
-                        {exportGlobalPresets[exportDest]?.mktShare}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">DEST. IMPORT TAX</span>
-                      <span className="text-[10px] font-bold text-primary block truncate" title={exportGlobalPresets[exportDest]?.importDuty}>
-                        {exportGlobalPresets[exportDest]?.importDuty}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Export Realization Output */}
-                  <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">FOB Gross Revenue (INR Equiv):</span>
-                      <span className="font-bold text-on-surface">₹{grossExportRevenueInrKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Govt Export Rebate (RoDTEP/RoSCTL):</span>
-                      <span className="font-bold text-forest-green">+₹{incentiveRevenueInrKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Freight & Customs Outflow:</span>
-                      <span className="font-bold text-error">-₹{(oceanFreightExportKg + customsClearingExportKg).toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
-                      <span>Net Export Realization (Ex-Mill Gate):</span>
-                      <span>₹{netExportRealizationInrKg.toFixed(2)} / Kg</span>
-                    </div>
-
-                    <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
-                      exportPremiumInrKg >= 0 
-                        ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
-                        : 'bg-tertiary/10 text-tertiary border-tertiary/20'
-                    }`}>
-                      <span className="font-bold">Export Premium vs Domestic TN Market:</span>
-                      <span className="font-bold">
-                        {exportPremiumInrKg >= 0 
-                          ? `+₹${exportPremiumInrKg.toFixed(2)} / Kg Premium (EXPORT WINS)` 
-                          : `₹${exportPremiumInrKg.toFixed(2)} / Kg Discount (DOMESTIC WINS)`}
-                      </span>
-                    </div>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
+                    <span className="material-symbols-outlined text-[10px]">flight_takeoff</span>
+                    Origin: Tamil Nadu Gate
+                  </span>
+                </div>
+                
+                {/* Global Presets */}
+                <div>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS PRESETS</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Object.keys(exportGlobalPresets).map(name => (
+                      <button
+                        key={name}
+                        onClick={() => handleExportGlobalPreset(name)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          exportDest === name 
+                            ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {name}
+                      </button>
+                    ))}
                   </div>
                 </div>
 
-                {/* Export Strategy Policy */}
-                <div className="card-chart-green rounded-xxl p-5 space-y-3">
-                  <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-lg">flight_takeoff</span>
-                    Export Market Ideology & Expansion Strategy
-                  </h4>
-                  <p className="text-[11px] leading-relaxed text-on-surface-variant">
-                    To maximize mill utilization, Tamil Nadu spinners must diversify beyond the local Tiruppur cluster. When local margins compress because of high Shankar-6 costs, export channels offer price stabilization. Locking in 30% of carded yarn output to Bangladesh and 20% of premium combed compact yarn to Europe (e.g. Portugal) ensures stable cashflow hedging.
-                  </p>
-                  <div className="text-[10px] font-mono bg-surface-container-low/50 p-2.5 rounded-lg border border-outline-variant/15 space-y-1">
-                    <strong className="text-primary uppercase tracking-wider block mb-1">Tactical Actions</strong>
-                    <div>• <strong>Leverage SAFTA</strong>: Bangladesh allows duty-free access. Target 30s combed knit yarn for garment hubs.</div>
-                    <div>• <strong>Focus on Organic Compact</strong>: Portugal offers high premiums for GOTS compact yarn, absorbing high transport costs.</div>
+                {/* Inputs Grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">EXPORT FOB PRICE (USD/KG)</label>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={exportPriceUsdKg}
+                      onChange={(e) => setExportPriceUsdKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
+                      EXCHANGE RATE (USD/INR)
+                      <span className="text-[8px] text-forest-green font-bold">● LIVE</span>
+                    </label>
+                    <input
+                      type="number"
+                      step="0.05"
+                      value={usdInrRate}
+                      onChange={(e) => setUsdInrRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL TN SELLING PRICE (INR/KG)</label>
+                    <input
+                      type="number"
+                      value={globalExportLocalPriceInrKg}
+                      onChange={(e) => setGlobalExportLocalPriceInrKg(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GOVT INCENTIVE ROSCTL/RODTEP (%)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={exportIncentiveRate}
+                      onChange={(e) => setExportIncentiveRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">OCEAN FREIGHT & HANDLING (INR/KG)</label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={oceanFreightExportKg}
+                      onChange={(e) => setOceanFreightExportKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">CUSTOMS CLEARING & PORT CHARGES (INR/KG)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={customsClearingExportKg}
+                      onChange={(e) => setCustomsClearingExportKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+                </div>
+
+                {/* Preset Metadata Card */}
+                <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20 grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">PREFERRED YARN</span>
+                    <span className="text-[10px] font-bold text-primary block truncate" title={exportGlobalPresets[exportDest]?.yarnSpec}>
+                      {exportGlobalPresets[exportDest]?.yarnSpec}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">EST. TN MKT SHARE</span>
+                    <span className="text-[10px] font-bold text-primary block">
+                      {exportGlobalPresets[exportDest]?.mktShare}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">DEST. IMPORT TAX</span>
+                    <span className="text-[10px] font-bold text-primary block truncate" title={exportGlobalPresets[exportDest]?.importDuty}>
+                      {exportGlobalPresets[exportDest]?.importDuty}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Export Realization Output */}
+                <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">FOB Gross Revenue (INR Equiv):</span>
+                    <span className="font-bold text-on-surface">₹{grossExportRevenueInrKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Govt Export Rebate (RoDTEP/RoSCTL):</span>
+                    <span className="font-bold text-forest-green">+₹{incentiveRevenueInrKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Freight & Customs Outflow:</span>
+                    <span className="font-bold text-error">-₹{(oceanFreightExportKg + customsClearingExportKg).toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
+                    <span>Net Export Realization (Ex-Mill Gate):</span>
+                    <span>₹{netExportRealizationInrKg.toFixed(2)} / Kg</span>
+                  </div>
+
+                  <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
+                    exportPremiumInrKg >= 0 
+                      ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
+                      : 'bg-tertiary/10 text-tertiary border-tertiary/20'
+                  }`}>
+                    <span className="font-bold">Export Premium vs Domestic TN Market:</span>
+                    <span className="font-bold">
+                      {exportPremiumInrKg >= 0 
+                        ? `+₹${exportPremiumInrKg.toFixed(2)} / Kg Premium (EXPORT WINS)` 
+                        : `₹${exportPremiumInrKg.toFixed(2)} / Kg Discount (DOMESTIC WINS)`}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              {/* Right Column: Export Destination SWOT & Profiles */}
-              <div className="col-span-12 lg:col-span-6 space-y-gutter">
-                <div className="card-chart-green rounded-xxl p-6 h-full flex flex-col justify-between">
+              {/* Export Strategy Policy */}
+              <div className="card-chart-green rounded-xxl p-5 space-y-3">
+                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-lg">flight_takeoff</span>
+                  Export Market Ideology & Expansion Strategy
+                </h4>
+                <p className="text-[11px] leading-relaxed text-on-surface-variant">
+                  To maximize mill utilization, Tamil Nadu spinners must diversify beyond the local Tiruppur cluster. When local margins compress because of high Shankar-6 costs, export channels offer price stabilization. Locking in 30% of carded yarn output to Bangladesh and 20% of premium combed compact yarn to Europe ensures stable cashflow hedging.
+                </p>
+                <div className="text-[10px] font-mono bg-surface-container-low/50 p-2.5 rounded-lg border border-outline-variant/15 space-y-1">
+                  <strong className="text-primary uppercase tracking-wider block mb-1">Tactical Actions</strong>
+                  <div>• <strong>Leverage Trade Treaties</strong>: Utilize SAFTA for duty-free access to Bangladesh, and ASEAN FTA for Vietnam.</div>
+                  <div>• <strong>Focus on Organic Compact</strong>: European countries like Portugal and Germany offer high premiums for GOTS compact yarn, fully absorbing transport costs.</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Indian Domestic Interstate Export Desk */}
+            <div className="col-span-12 lg:col-span-6 space-y-gutter">
+              <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+                <div className="flex justify-between items-start flex-wrap gap-2">
+                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+                    <span className="material-symbols-outlined text-xl">home_pin</span>
+                    Indian Domestic Interstate Export Desk
+                  </h3>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
+                    <span className="material-symbols-outlined text-[10px]">local_shipping</span>
+                    Origin: Tamil Nadu Gate
+                  </span>
+                </div>
+                
+                {/* Domestic Presets */}
+                <div>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC STATE TARGETS</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Object.keys(exportDomesticPresets).map(name => (
+                      <button
+                        key={name}
+                        onClick={() => handleExportDomesticPreset(name)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          exportState === name 
+                            ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {name}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Inputs Grid */}
+                <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2 mb-4">
-                      <span className="material-symbols-outlined">map</span>
-                      Target Yarn Export Markets SWOT & Demands
-                    </h3>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">TARGET STATE PRICE (INR/KG)</label>
+                    <input
+                      type="number"
+                      value={domesticTargetPriceInrKg}
+                      onChange={(e) => setDomesticTargetPriceInrKg(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
 
-                    <div className="grid grid-cols-4 gap-2 mb-4">
-                      {['Bangladesh', 'China', 'Vietnam', 'Portugal'].map(dest => (
-                        <button
-                          key={dest}
-                          onClick={() => handleExportGlobalPreset(dest)}
-                          className={`py-2 px-3 rounded-lg text-xs font-mono font-semibold transition-colors duration-200 border ${
-                            exportDest === dest
-                              ? 'bg-forest-green text-white border-forest-green'
-                              : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                          }`}
-                        >
-                          {dest}
-                        </button>
-                      ))}
-                    </div>
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL TN SELLING PRICE (INR/KG)</label>
+                    <input
+                      type="number"
+                      value={domesticExportLocalPriceInrKg}
+                      onChange={(e) => setDomesticExportLocalPriceInrKg(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
 
-                    <div className="space-y-4 text-xs font-sans">
-                      {exportDest === 'Bangladesh' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Huge demand for <strong>30s Carded and 40s Combed knitting yarn</strong>. Bangladesh is the main destination for Tiruppur spinners due to zero import duty under SAFTA and close shipping distances to Chittagong port.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Frequent dollar shortages at Bangladesh banks delay Letter of Credit (LC) settlements, causing payment latency of up to 45-60 days. Extreme price sensitivity.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Establish direct supply arrangements with Dhaka-based buying houses representing European retailers. This eliminates agent commissions, improving realizations by ₹4-6/Kg.
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {exportDest === 'China' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Demands coarser <strong>20s Carded weaving yarns</strong> and <strong>32s PC blend yarns</strong> for industrial denim and weaving applications. Major volumes but lower pricing brackets.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              High competition from low-cost spinners in Vietnam and Uzbekistan who enjoy geographical proximity and trade treaties. Import duty of 3.5% applies to Indian yarn.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Leverage government incentives like RoDTEP (approx 3.5%) to offset the 3.5% Chinese import duty, targeting specific weaving clusters in Zhejiang province.
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {exportDest === 'Vietnam' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Demands <strong>32s and 40s Combed knitting counts</strong>. Absorbs yarn for conversion to garments, which are exported duty-free to European Union under the EVFTA treaty.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Strict Uster quality criteria required by Japanese-owned garment mills in Vietnam. Zero tolerance for contamination. Strict testing metrics on arrival.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Provide pre-certified Uster laboratory reports with yarn consignments to bypass incoming testing delays, capturing market share from Chinese competitors.
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {exportDest === 'Portugal' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Premium market demanding <strong>60s and 80s Combed Compact ELS yarns</strong> (using Egyptian Giza and US Pima blends). Significant demand for organic (GOTS) and recycled combed counts.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              High ocean freight rates to Europe and strict compliance criteria for chemical and labor certifications. Import duties of 4-4.5% apply unless certified organic.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Organic and ELS premium compact yarns command an additional **₹30-40/Kg realization premium**, fully absorbing the higher shipping costs and yielding double-digit EBITDA.
-                            </p>
-                          </div>
-                        </>
-                      )}
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">ROAD FREIGHT TO STATE (INR/KG)</label>
+                    <input
+                      type="number"
+                      step="0.10"
+                      value={domesticRoadFreightKg}
+                      onChange={(e) => setDomesticRoadFreightKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">AGENT BROKERAGE / COMM. (%)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={domesticBrokerageRate}
+                      onChange={(e) => setDomesticBrokerageRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">PACKING & CHARGES (INR/KG)</label>
+                    <input
+                      type="number"
+                      step="0.10"
+                      value={domesticPackagingKg}
+                      onChange={(e) => setDomesticPackagingKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GST ON YARN SUPPLY (%)</label>
+                    <input
+                      type="number"
+                      step="0.5"
+                      value={domesticGstRate}
+                      onChange={(e) => setDomesticGstRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+                </div>
+
+                {/* Preset Metadata Card */}
+                <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20 grid grid-cols-3 gap-2 text-center">
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">PREFERRED YARN</span>
+                    <span className="text-[10px] font-bold text-primary block truncate" title={exportDomesticPresets[exportState]?.yarnSpec}>
+                      {exportDomesticPresets[exportState]?.yarnSpec}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">EST. SALES SHARE</span>
+                    <span className="text-[10px] font-bold text-primary block">
+                      {exportDomesticPresets[exportState]?.mktShare}
+                    </span>
+                  </div>
+                  <div>
+                    <span className="text-[9px] font-mono text-outline block">TAX REGIME</span>
+                    <span className="text-[10px] font-bold text-primary block truncate" title={exportDomesticPresets[exportState]?.taxRegime}>
+                      {exportDomesticPresets[exportState]?.taxRegime}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Export Realization Output */}
+                <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Gross Domestic Sale Price:</span>
+                    <span className="font-bold text-on-surface">₹{domesticTargetPriceInrKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Road Freight to State:</span>
+                    <span className="font-bold text-error">-₹{domesticRoadFreightKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Agent Commission ({domesticBrokerageRate}%):</span>
+                    <span className="font-bold text-error">-₹{domesticBrokerageInrKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Packing & Forwarding:</span>
+                    <span className="font-bold text-error">-₹{domesticPackagingKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
+                    <span>Net Ex-Mill Realization (Tamil Nadu Factory Gate):</span>
+                    <span>₹{netDomesticRealizationInrKg.toFixed(2)} / Kg</span>
+                  </div>
+
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2 text-outline">
+                    <span>CGST + SGST / IGST ({domesticGstRate}%):</span>
+                    <span>+₹{gstAmountInrKg.toFixed(2)} / Kg <span className="text-[10px] font-bold text-forest-green">(ITC Offset Neutral)</span></span>
+                  </div>
+
+                  <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
+                    domesticPremiumInrKg >= 0 
+                      ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
+                      : 'bg-tertiary/10 text-tertiary border-tertiary/20'
+                  }`}>
+                    <span className="font-bold">Interstate Premium vs Local TN Market:</span>
+                    <span className="font-bold">
+                      {domesticPremiumInrKg >= 0 
+                        ? `+₹${domesticPremiumInrKg.toFixed(2)} / Kg Premium (INTERSTATE WINS)` 
+                        : `₹${domesticPremiumInrKg.toFixed(2)} / Kg Discount (LOCAL TN WINS)`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Domestic State Strategy Policy */}
+              <div className="card-chart-green rounded-xxl p-5 space-y-3">
+                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-lg">local_shipping</span>
+                  Interstate Domestic Marketing Ideology
+                </h4>
+                <p className="text-[11px] leading-relaxed text-on-surface-variant">
+                  Indian domestic hubs consume over 60% of Tamil Nadu's spun cotton yarn. Diversifying across interstate weaving nodes helps protect spinners against regional Tiruppur/Karur slowdowns. Realizing a premium in Maharashtra or Gujarat depends heavily on optimizing road transport freight and minimizing direct credit delays.
+                </p>
+                <div className="text-[10px] font-mono bg-surface-container-low/50 p-2.5 rounded-lg border border-outline-variant/15 space-y-1">
+                  <strong className="text-primary uppercase tracking-wider block mb-1">Operational Actions</strong>
+                  <div>• <strong>Leverage GST Input Credits</strong>: Utilize the 5% IGST paid on raw cotton to offset output liability on yarn supplies to other states.</div>
+                  <div>• <strong>Logistics Consolidations</strong>: Establish regular bulk truck corridors to Bhiwandi / Ahmedabad to reduce freight costs.</div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Export Analytics Panel */}
+            <div className="col-span-12 space-y-gutter text-left">
+              {/* Export Arbitrage Card */}
+              <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+                <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+                  <span className="material-symbols-outlined text-xl">compare_arrows</span>
+                  Yarn Realization Arbitrage: Global vs Interstate Domestic
+                </h3>
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter items-center">
+                  <div className="md:col-span-2 grid grid-cols-2 gap-4 text-center font-mono bg-surface-container-low/50 p-4 rounded-xl border border-outline-variant/20">
+                    <div>
+                      <span className="text-[10px] text-outline block font-bold">NET GLOBAL EXPORT REALIZATION</span>
+                      <span className="text-lg font-extrabold text-primary">₹{netExportRealizationInrKg.toFixed(2)} / Kg</span>
+                      <span className="text-[9px] text-on-surface-variant block mt-1">({exportDest} Preset)</span>
                     </div>
+                    <div>
+                      <span className="text-[10px] text-outline block font-bold">NET INTERSTATE REALIZATION</span>
+                      <span className="text-lg font-extrabold text-forest-green">₹{netDomesticRealizationInrKg.toFixed(2)} / Kg</span>
+                      <span className="text-[9px] text-on-surface-variant block mt-1">({exportState} Preset)</span>
+                    </div>
+                  </div>
+                  
+                  <div className={`p-4 rounded-xl border flex flex-col justify-center items-center text-center font-mono h-full ${
+                    (netExportRealizationInrKg - netDomesticRealizationInrKg) >= 0
+                      ? 'bg-forest-green/10 text-forest-green border-forest-green/30'
+                      : 'bg-primary/10 text-primary border-primary/30'
+                  }`}>
+                    <span className="text-[10px] font-bold block uppercase tracking-wider">Arbitrage Spread</span>
+                    <span className="text-xl font-black mt-1">
+                      ₹{Math.abs(netExportRealizationInrKg - netDomesticRealizationInrKg).toFixed(2)} / Kg
+                    </span>
+                    <span className="text-[9px] font-bold mt-1">
+                      {(netExportRealizationInrKg - netDomesticRealizationInrKg) >= 0
+                        ? `Global Export is more profitable than ${exportState}`
+                        : `Interstate Sale to ${exportState} is more profitable`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Side-by-Side Target Market SWOT & Demands */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
+                {/* Global SWOT */}
+                <div className="card-chart-green rounded-xxl p-6 border border-primary/20 space-y-4">
+                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+                    <span className="material-symbols-outlined">public</span>
+                    {exportDest} SWOT & Demands
+                  </h3>
+                  <div className="space-y-3 text-xs font-sans text-left">
+                    {globalSwot && (
+                      <>
+                        <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
+                          <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {globalSwot.demand}
+                          </p>
+                        </div>
+                        <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
+                          <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {globalSwot.barriers}
+                          </p>
+                        </div>
+                        <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
+                          <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {globalSwot.opps}
+                          </p>
+                        </div>
+                      </>
+                    )}
+                  </div>
+                </div>
+
+                {/* Domestic SWOT */}
+                <div className="card-chart-green rounded-xxl p-6 border border-primary/20 space-y-4">
+                  <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2">
+                    <span className="material-symbols-outlined">home_pin</span>
+                    {exportState} SWOT & Demands
+                  </h3>
+                  <div className="space-y-3 text-xs font-sans text-left">
+                    {domesticSwot && (
+                      <>
+                        <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
+                          <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {domesticSwot.demand}
+                          </p>
+                        </div>
+                        <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
+                          <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {domesticSwot.barriers}
+                          </p>
+                        </div>
+                        <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
+                          <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
+                          <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
+                            {domesticSwot.opps}
+                          </p>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               </div>
             </div>
-          ) : (
-            <div className="grid grid-cols-12 gap-gutter">
-              {/* Left Column: Domestic Trade Calculator */}
-              <div className="col-span-12 lg:col-span-6 space-y-gutter">
-                <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
-                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
-                    <span className="material-symbols-outlined text-xl">calculate</span>
-                    Interactive Yarn Domestic Sourcing Calculator
-                  </h3>
-                  
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="col-span-2">
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">SELECT PRESET TARGET STATE</label>
-                      <div className="grid grid-cols-3 gap-2">
-                        {Object.keys(exportDomesticPresets).map(name => (
-                          <button
-                            key={name}
-                            onClick={() => handleExportDomesticPreset(name)}
-                            className={`py-1.5 px-2 rounded-lg text-[10px] font-mono font-semibold border ${
-                              exportState === name 
-                                ? 'bg-primary text-on-primary border-primary' 
-                                : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                            }`}
-                          >
-                            {name}
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">TARGET STATE PRICE (INR/KG)</label>
-                      <input
-                        type="number"
-                        value={domesticTargetPriceInrKg}
-                        onChange={(e) => setDomesticTargetPriceInrKg(parseInt(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL TN SELLING PRICE (INR/KG)</label>
-                      <input
-                        type="number"
-                        value={domesticPriceInrKg}
-                        onChange={(e) => setDomesticPriceInrKg(parseInt(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">ROAD FREIGHT TO STATE (INR/KG)</label>
-                      <input
-                        type="number"
-                        step="0.10"
-                        value={domesticRoadFreightKg}
-                        onChange={(e) => setDomesticRoadFreightKg(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">AGENT BROKERAGE / COMM. (%)</label>
-                      <input
-                        type="number"
-                        step="0.1"
-                        value={domesticBrokerageRate}
-                        onChange={(e) => setDomesticBrokerageRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">PACKING & CHARGES (INR/KG)</label>
-                      <input
-                        type="number"
-                        step="0.10"
-                        value={domesticPackagingKg}
-                        onChange={(e) => setDomesticPackagingKg(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-
-                    <div>
-                      <label className="text-[10px] font-mono font-bold text-outline block mb-1">GST ON YARN SUPPLY (%)</label>
-                      <input
-                        type="number"
-                        step="0.5"
-                        value={domesticGstRate}
-                        onChange={(e) => setDomesticGstRate(parseFloat(e.target.value) || 0)}
-                        className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                      />
-                    </div>
-                  </div>
-
-                  {/* Preset Metadata Card */}
-                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20 grid grid-cols-3 gap-2 text-center">
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">PREFERRED YARN</span>
-                      <span className="text-[10px] font-bold text-primary block truncate" title={exportDomesticPresets[exportState]?.yarnSpec}>
-                        {exportDomesticPresets[exportState]?.yarnSpec}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">EST. TN SALES SHARE</span>
-                      <span className="text-[10px] font-bold text-primary block">
-                        {exportDomesticPresets[exportState]?.mktShare}
-                      </span>
-                    </div>
-                    <div>
-                      <span className="text-[9px] font-mono text-outline block">TAX REGIME / REGULATORY</span>
-                      <span className="text-[10px] font-bold text-primary block truncate" title={exportDomesticPresets[exportState]?.taxRegime}>
-                        {exportDomesticPresets[exportState]?.taxRegime}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Export Realization Output */}
-                  <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Gross Domestic Sale Price:</span>
-                      <span className="font-bold text-on-surface">₹{domesticTargetPriceInrKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Road Freight to State:</span>
-                      <span className="font-bold text-error">-₹{domesticRoadFreightKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Agent Commission ({domesticBrokerageRate}%):</span>
-                      <span className="font-bold text-error">-₹{domesticBrokerageInrKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                      <span className="text-on-surface-variant">Packing & Forwarding:</span>
-                      <span className="font-bold text-error">-₹{domesticPackagingKg.toFixed(2)} / Kg</span>
-                    </div>
-                    <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
-                      <span>Net Ex-Mill Realization (Tamil Nadu Factory Gate):</span>
-                      <span>₹{netDomesticRealizationInrKg.toFixed(2)} / Kg</span>
-                    </div>
-
-                    <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2 text-outline">
-                      <span>CGST + SGST / IGST ({domesticGstRate}%):</span>
-                      <span>+₹{gstAmountInrKg.toFixed(2)} / Kg <span className="text-[10px] font-bold text-forest-green">(ITC Offset Neutral)</span></span>
-                    </div>
-
-                    <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
-                      domesticPremiumInrKg >= 0 
-                        ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
-                        : 'bg-tertiary/10 text-tertiary border-tertiary/20'
-                    }`}>
-                      <span className="font-bold">Interstate Premium vs Local TN Market:</span>
-                      <span className="font-bold">
-                        {domesticPremiumInrKg >= 0 
-                          ? `+₹${domesticPremiumInrKg.toFixed(2)} / Kg Premium (INTERSTATE WINS)` 
-                          : `₹${domesticPremiumInrKg.toFixed(2)} / Kg Discount (LOCAL TN WINS)`}
-                      </span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Domestic State Strategy Policy */}
-                <div className="card-chart-green rounded-xxl p-5 space-y-3">
-                  <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-lg">local_shipping</span>
-                    Interstate Domestic Marketing Ideology
-                  </h4>
-                  <p className="text-[11px] leading-relaxed text-on-surface-variant">
-                    Indian domestic hubs consume over 60% of Tamil Nadu's spun cotton yarn. Diversifying across interstate weaving nodes helps protect spinners against regional Tiruppur/Karur slowdowns. Realizing a premium in Maharashtra or Gujarat depends heavily on optimizing road transport freight and minimizing direct credit delays.
-                  </p>
-                  <div className="text-[10px] font-mono bg-surface-container-low/50 p-2.5 rounded-lg border border-outline-variant/15 space-y-1">
-                    <strong className="text-primary uppercase tracking-wider block mb-1">Operational Actions</strong>
-                    <div>• <strong>Leverage GST Input Credits</strong>: Utilize the 5% IGST paid on raw cotton to offset output liability on yarn supplies to other states.</div>
-                    <div>• <strong>Logistics Consolidations</strong>: Establish regular bulk truck corridors to Bhiwandi to reduce freight costs by 15%.</div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Right Column: Domestic SWOT Analysis */}
-              <div className="col-span-12 lg:col-span-6 space-y-gutter">
-                <div className="card-chart-green rounded-xxl p-6 h-full flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2 mb-4">
-                      <span className="material-symbols-outlined">explore</span>
-                      Indian State-Wise Yarn Markets SWOT & Demands
-                    </h3>
-
-                    <div className="grid grid-cols-3 gap-2 mb-4">
-                      {['Maharashtra', 'Gujarat', 'West Bengal'].map(st => (
-                        <button
-                          key={st}
-                          onClick={() => handleExportDomesticPreset(st)}
-                          className={`py-2 px-3 rounded-lg text-xs font-mono font-semibold transition-colors duration-200 border ${
-                            exportState === st
-                              ? 'bg-forest-green text-white border-forest-green'
-                              : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                          }`}
-                        >
-                          {st}
-                        </button>
-                      ))}
-                    </div>
-
-                    <div className="space-y-4 text-xs font-sans">
-                      {exportState === 'Maharashtra' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              High-volume demand for <strong>30s Combed Warp and 40s Combed Warp yarn</strong>. Major powerloom hubs (Bhiwandi, Ichalkaranji, Malegaon) consume massive volumes for apparel fabrics and home textiles.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              High credit cycles of 60 to 90 days required by master weavers. Local Maharashtra spinning mills enjoy state-level power and capital subsidies, increasing cost competitiveness.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Setting up dedicated depot sales in Ichalkaranji to offer ready-to-lift spot inventory, which captures premium spot pricing and bypasses local broker commissions (~1%).
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {exportState === 'Gujarat' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Demands high-strength <strong>60s and 80s Combed Compact yarns</strong> for premium shirting/sheeting in Ahmedabad, and <strong>40s Lycra core-spun yarns</strong> for stretch denim clusters in Surat.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Gujarat is a massive cotton-growing and modern spinning state itself. Extreme competition from local corporate spinners. Outside mills face barriers unless quality is exceptional.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Focus on customized specialty yarns (GOTS organic compact, slub yarns, contamination-free ELS cotton yarns) where Tamil Nadu mills maintain technical superiority.
-                            </p>
-                          </div>
-                        </>
-                      )}
-                      {exportState === 'West Bengal' && (
-                        <>
-                          <div className="bg-[#E8F5E9] dark:bg-[#1B5E20]/20 p-3.5 rounded-xl border border-[#C8E6C9]/30">
-                            <h4 className="font-bold text-forest-green flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">assignment_turned_in</span> MARKET DEMAND & YARN COUNTS</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Strong demand for <strong>20s Carded Hosiery and 30s Semi-Combed yarns</strong> for circular knitting hubs in Kolkata (Howrah, Metiabruz) and local handloom segments.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFEBEE] dark:bg-[#B71C1C]/20 p-3.5 rounded-xl border border-[#FFCDD2]/30">
-                            <h4 className="font-bold text-error flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">warning</span> EXPORT BARRIERS & DISADVANTAGES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Long transport lead times (5-7 days road transit) and high logistics costs (₹14-16 per Kg). Risk of transit damage due to moisture during monsoon season.
-                            </p>
-                          </div>
-                          <div className="bg-[#FFF8E1] dark:bg-[#F57F17]/20 p-3.5 rounded-xl border border-[#FFE082]/30">
-                            <h4 className="font-bold text-primary flex items-center gap-1.5"><span className="material-symbols-outlined text-sm">explore</span> STRATEGIC OPPORTUNITIES</h4>
-                            <p className="text-[11px] leading-relaxed text-on-surface-variant mt-1">
-                              Form long-term direct supply agreements with large structured hosiery brands (e.g. Lux, Rupa, Dollar) to ensure continuous off-take and reduce pricing volatility.
-                            </p>
-                          </div>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
+          </div>
         </div>
       )}
 
