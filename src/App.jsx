@@ -287,7 +287,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
             </div>
             <div className="overflow-x-auto border border-outline-variant/30 rounded-xl">
               <table className="text-xs">
-                <tbody>
+                <tbody className="text-xs">
                   <tr className="border-b border-outline-variant/10">
                     <td className="py-2.5 px-4 text-on-surface-variant">Raw Cotton Cost:</td>
                     <td className="py-2.5 px-4 text-right font-bold text-on-surface">₹{spreadData[selectedCalcCount].rawCotton} / Candy</td>
@@ -4542,7 +4542,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                         ))}
                       </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-xs">
                       <tr>
                         <td className="font-medium text-on-surface-variant">Opening Stock Value</td>
                         {cci.historical.map((h, i) => <td key={i} className="text-right">{formatPrice(h.openingStockCr, true)}</td>)}
@@ -4810,7 +4810,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th>Recommendation</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {cottonDayWisePlan.map((d, i) => (
                       <tr key={i}>
                         <td className="font-bold">{d.day}</td>
@@ -4885,7 +4885,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th className="text-right">Hedging Ratio</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {cottonMonthWisePlan.map((m, i) => (
                       <tr key={i}>
                         <td className="font-bold">{m.month}</td>
@@ -4955,7 +4955,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th className="text-right">National Supply (Lakh Bales)</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {currentCotton.yearWisePlan.map((y, i) => (
                       <tr key={i}>
                         <td className={`font-bold ${y.year.includes('Proj') || y.year.includes('Est') ? 'table-highlight-text font-bold' : 'text-on-surface'}`}>{y.year}</td>
@@ -5060,7 +5060,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th>Recommendation</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {yarnDayWisePlan.map((d, i) => (
                       <tr key={i}>
                         <td className="font-bold">{d.day}</td>
@@ -5136,7 +5136,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th className="text-right">Export Shipments</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {yarnMonthWisePlan.map((m, i) => (
                       <tr key={i}>
                         <td className="font-bold">{m.month}</td>
@@ -5198,7 +5198,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th className="text-right">Avg Spinner Spread (₹/kg)</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {currentYarn.yearWisePlan.map((y, i) => (
                       <tr key={i}>
                         <td className={`font-bold ${y.year.includes('Proj') || y.year.includes('Est') ? 'table-highlight-text' : 'text-on-surface'}`}>{y.year}</td>
@@ -5228,7 +5228,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                       <th>Sector Outlook</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="text-xs">
                     {yarnAnalysis.typeGrowth.map((g, i) => (
                       <tr key={i}>
                         <td className="font-bold text-on-surface">{g.type}</td>
@@ -5314,7 +5314,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                     <th style={{ width: '10%' }}>Impact Level</th>
                   </tr>
                 </thead>
-                <tbody>
+                <tbody className="text-xs">
                   {globalIncidents.map((inc, i) => (
                     <tr key={i}>
                       <td className="font-bold text-on-surface">{inc.incident}</td>
@@ -5761,7 +5761,7 @@ print("National Crop Forecast:", res['national_balance_sheet'])`;
                 <th style={{ width: '23%' }}>Integration Detail & Notes</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody className="text-xs">
               {filteredSources.map((src, idx) => (
                 <tr key={idx} className="hover:bg-primary/5 transition-all">
                   <td className="font-bold text-center">{idx + 1}</td>
