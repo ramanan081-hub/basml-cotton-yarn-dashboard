@@ -391,6 +391,10 @@ import LiveNews from './components/LiveNews';
 import YarnQualityDashboard from './components/YarnQualityDashboard';
 import { useCottonData } from './hooks/useCottonData';
 import { DataTimestamp } from './components/DataTimestamp';
+import VarietyExplorer from './components/VarietyExplorer';
+import SeasonalCalendar from './components/SeasonalCalendar';
+import PriceAnalytics from './components/PriceAnalytics';
+import StateMspTable from './components/StateMspTable';
 
 const formatPrice = (val, isINR = false) => {
   if (val == null) return '';
@@ -5801,36 +5805,76 @@ function AnalysisDashboard({ darkMode, colors }) {
         </div>
         
         {/* Navigation Selector */}
-        <div className="bg-surface-container border border-outline-variant p-1 rounded-xl flex gap-1 self-start md:self-auto">
+        <div className="bg-surface-container border border-outline-variant p-1 rounded-xl flex flex-wrap gap-1 self-start md:self-auto">
           <button 
-            className={`px-4 py-2 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
               subTab === 'cotton' 
                 ? 'bg-primary text-on-primary' 
                 : 'bg-transparent text-on-surface hover:bg-surface-container-high'
             }`}
             onClick={() => setSubTab('cotton')}
           >
-            1. Cotton Futures & Procurement
+            Cotton Plans
           </button>
           <button 
-            className={`px-4 py-2 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
               subTab === 'yarn' 
                 ? 'bg-primary text-on-primary' 
                 : 'bg-transparent text-on-surface hover:bg-surface-container-high'
             }`}
             onClick={() => setSubTab('yarn')}
           >
-            2. Yarn Market & Forecasting
+            Yarn Market
           </button>
           <button 
-            className={`px-4 py-2 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
               subTab === 'macro' 
                 ? 'bg-primary text-on-primary' 
                 : 'bg-transparent text-on-surface hover:bg-surface-container-high'
             }`}
             onClick={() => setSubTab('macro')}
           >
-            3. Global Incidents & Growth Plans
+            Growth Plans
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+              subTab === 'explorer' 
+                ? 'bg-primary text-on-primary' 
+                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
+            }`}
+            onClick={() => setSubTab('explorer')}
+          >
+            Variety Explorer
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+              subTab === 'calendar' 
+                ? 'bg-primary text-on-primary' 
+                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
+            }`}
+            onClick={() => setSubTab('calendar')}
+          >
+            Seasonal Calendar
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+              subTab === 'technical' 
+                ? 'bg-primary text-on-primary' 
+                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
+            }`}
+            onClick={() => setSubTab('technical')}
+          >
+            Technical Analytics
+          </button>
+          <button 
+            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
+              subTab === 'msp' 
+                ? 'bg-primary text-on-primary' 
+                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
+            }`}
+            onClick={() => setSubTab('msp')}
+          >
+            State MSPs
           </button>
         </div>
       </div>
@@ -6453,6 +6497,22 @@ function AnalysisDashboard({ darkMode, colors }) {
             </div>
           </div>
         </div>
+      )}
+
+      {subTab === 'explorer' && (
+        <VarietyExplorer darkMode={darkMode} colors={colors} />
+      )}
+
+      {subTab === 'calendar' && (
+        <SeasonalCalendar darkMode={darkMode} colors={colors} />
+      )}
+
+      {subTab === 'technical' && (
+        <PriceAnalytics darkMode={darkMode} colors={colors} />
+      )}
+
+      {subTab === 'msp' && (
+        <StateMspTable darkMode={darkMode} colors={colors} />
       )}
     </div>
   );
