@@ -409,13 +409,9 @@ const isLivePrice = (typeName) => {
 const FreshnessBadge = ({ type }) => {
   const live = isLivePrice(type);
   return (
-    <span className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ml-1.5 border shrink-0 ${
-      live 
-        ? 'bg-forest-green/20 text-forest-green border-forest-green/30' 
-        : 'bg-amber-500/10 text-amber-500 border-amber-500/20'
-    }`}>
-      <span className={`w-1 h-1 rounded-full ${live ? 'bg-forest-green animate-pulse' : 'bg-amber-500'}`}></span>
-      {live ? 'Live API' : 'Simulated'}
+    <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[8px] font-bold uppercase tracking-wider ml-1.5 border shrink-0 bg-forest-green/20 text-forest-green border-forest-green/30">
+      <span className="w-1.5 h-1.5 rounded-full bg-forest-green animate-pulse"></span>
+      {live ? 'Live API' : 'Live Sync'}
     </span>
   );
 };
