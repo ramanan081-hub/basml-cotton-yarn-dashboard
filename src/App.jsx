@@ -5755,8 +5755,23 @@ function AnalysisDashboard({ darkMode, colors }) {
     });
   };
 
+  const getDynamicMonthWisePlan = (staticPlan) => {
+    if (!staticPlan) return [];
+    const now = new Date();
+    return staticPlan.map((item, idx) => {
+      const d = new Date(now.getFullYear(), now.getMonth() + idx, 1);
+      const monthStr = d.toLocaleDateString('en-GB', {
+        month: 'short',
+        year: 'numeric'
+      });
+      return { ...item, month: monthStr };
+    });
+  };
+
   const cottonDayWisePlan = getDynamicDayWisePlan(currentCotton?.dayWisePlan);
   const yarnDayWisePlan = getDynamicDayWisePlan(currentYarn?.dayWisePlan);
+  const cottonMonthWisePlan = getDynamicMonthWisePlan(currentCotton?.monthWisePlan);
+  const yarnMonthWisePlan = getDynamicMonthWisePlan(currentYarn?.monthWisePlan);
 
   return (
     <div className="space-y-gutter">
@@ -5951,7 +5966,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentCotton.monthWisePlan.map((m, i) => (
+                    {cottonMonthWisePlan.map((m, i) => (
                       <tr key={i}>
                         <td className="font-bold">{m.month}</td>
                         <td className="text-right font-bold">{m.targetBales.toLocaleString()}</td>
@@ -5979,7 +5994,7 @@ function AnalysisDashboard({ darkMode, colors }) {
               </h3>
               <div className="h-[280px] font-mono">
                 <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={currentCotton.monthWisePlan}>
+                  <ComposedChart data={cottonMonthWisePlan}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="month" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Budget (₹ Crore)', angle: -90, position: 'insideLeft', offset: -5 }} />
@@ -6202,7 +6217,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentYarn.monthWisePlan.map((m, i) => (
+                    {yarnMonthWisePlan.map((m, i) => (
                       <tr key={i}>
                         <td className="font-bold">{m.month}</td>
                         <td className="text-right font-bold table-highlight-text">{m.combedCompactDemand} / 100</td>
@@ -6223,7 +6238,7 @@ function AnalysisDashboard({ darkMode, colors }) {
               </h3>
               <div className="h-[280px] font-mono">
                 <ResponsiveContainer width="100%" height="100%">
-                  <LineChart data={currentYarn.monthWisePlan}>
+                  <LineChart data={yarnMonthWisePlan}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="month" fontSize={10} />
                     <YAxis fontSize={10} domain={[0, 100]} />
