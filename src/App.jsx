@@ -1195,7 +1195,7 @@ function App() {
     { id: 'global', label: 'Global Focus', icon: 'globe' },
     { id: 'india', label: 'India Focus', icon: 'map' },
     { id: 'yarn', label: 'Yarn Markets', icon: 'trending_up' },
-    { id: 'impexp', label: 'Import & Export Plan', icon: 'swap_horiz' },
+    { id: 'impexp', label: 'Import & Export', icon: 'swap_horiz' },
     { id: 'news', label: 'Live News', icon: 'feed' },
     { id: 'analysis', label: 'Analysis', icon: 'analytics' },
     { id: 'presentation', label: 'Presentation Deck', icon: 'slideshow' },
