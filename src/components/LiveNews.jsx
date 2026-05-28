@@ -133,16 +133,15 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
 
   const fetchAllNews = async () => {
     setLoading(true);
-    const localList = getRealisticNews();
-    
-    const feeds = [
-      { url: 'https://textiles.einnews.com/rss', category: 'TEXTILES', country: 'Global' },
+    const localList = getRealisticNews();    const feeds = [
+      { url: 'https://www.yarnsandfibers.com/feed/', category: 'YARN', country: 'Global' },
+      { url: 'https://www.textileworld.com/feed/', category: 'TEXTILES', country: 'Global' },
       { url: 'https://textilegence.com/en/feed', category: 'TEXTILES', country: 'Global' },
       { url: 'https://textilelearner.net/feed', category: 'TEXTILES', country: 'Global' }
     ];
     
     let fetchedArticles = [];
-    const fortyEightHoursAgo = Date.now() - 48 * 3600000;
+    const maxAgeTime = Date.now() - 5 * 24 * 3600000; // 5 days ago to catch last 2-5 days of live news
 
     for (const feed of feeds) {
       try {
@@ -153,8 +152,8 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
           const filtered = json.items
             .filter(item => {
               const pubTime = new Date(item.pubDate || item.pubDate || Date.now()).getTime();
-              // Filter to items within last 48 hours
-              return pubTime >= fortyEightHoursAgo;
+              // Filter to items within last 5 days
+              return pubTime >= maxAgeTime;
             })
             .map(item => {
               const text = (item.title + ' ' + (item.description || '')).toLowerCase();
@@ -165,12 +164,8 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
               else if (text.includes('spinning') || text.includes('spindles') || text.includes('mill')) cat = 'SPINNING';
               else if (text.includes('textile') || text.includes('garment') || text.includes('fabric')) cat = 'TEXTILES';
               
-              // Only keep if it is relevant to the 4 categories
-              const isRelevant = text.includes('cotton') || text.includes('yarn') || 
-                                 text.includes('spinning') || text.includes('textile') || 
-                                 text.includes('garment') || text.includes('fabric') ||
-                                 text.includes('kapas') || text.includes('polyester') ||
-                                 text.includes('spindles') || text.includes('mill');
+              // All items in these dedicated industry feeds are relevant
+              const isRelevant = true;
               
               if (!isRelevant) return null;
 

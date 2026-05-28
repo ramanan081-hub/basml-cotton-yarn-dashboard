@@ -1760,6 +1760,12 @@ function ImportExportDashboard({ colors, data }) {
     }
   }, [liveShankar6, selectedDomesticOrigin]);
 
+  useEffect(() => {
+    if (liveUsdInr) {
+      setUsdInrRate(liveUsdInr);
+    }
+  }, [liveUsdInr]);
+
   // Spinning count properties for simulator
   const countParams = {
     '20s Carded': { yieldRate: 0.91, conversion: 45 },
