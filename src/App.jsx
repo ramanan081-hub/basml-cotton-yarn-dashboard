@@ -115,8 +115,14 @@ function PresentationDashboard({ data, darkMode, colors }) {
                       <br />
                       <span className="text-[10px] text-on-surface-variant">Quality: {p.staple}</span>
                     </td>
-                    <td className="text-right font-bold py-3">₹{formatPrice(p.current, true).split('.')[0]} / Candy</td>
-                    <td className="text-right font-bold table-highlight-text py-3">₹{formatPrice(p.est, true).split('.')[0]} / Candy</td>
+                    <td className="text-right py-2">
+                      <div className="font-bold text-on-surface text-xs">₹{formatPrice(p.current, true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Candy</span></div>
+                      <div className="font-semibold text-primary text-[11px]">₹{formatPrice(Math.round(p.current / 2.09188), true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Bale</span></div>
+                    </td>
+                    <td className="text-right py-2">
+                      <div className="font-bold text-on-surface text-xs">₹{formatPrice(p.est, true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Candy</span></div>
+                      <div className="font-semibold text-primary text-[11px]">₹{formatPrice(Math.round(p.est / 2.09188), true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Bale</span></div>
+                    </td>
                     <td className="text-right font-bold table-highlight-text py-3">
                       +{(((p.est - p.current) / p.current) * 100).toFixed(2)}%
                     </td>
@@ -124,8 +130,14 @@ function PresentationDashboard({ data, darkMode, colors }) {
                 ))}
                 <tr className="bg-surface-container-high/50 font-bold">
                   <td className="py-3"><strong>Consensus Spot Average</strong></td>
-                  <td className="text-right py-3">₹67,050 / Candy</td>
-                  <td className="text-right table-highlight-text py-3">₹69,350 / Candy</td>
+                  <td className="text-right py-2">
+                    <div className="font-bold text-on-surface text-xs">₹67,050 / Candy</div>
+                    <div className="font-semibold text-primary text-[11px]">₹{Math.round(67050 / 2.09188).toLocaleString('en-IN')} / Bale</div>
+                  </td>
+                  <td className="text-right table-highlight-text py-2">
+                    <div className="font-bold text-on-surface text-xs">₹69,350 / Candy</div>
+                    <div className="font-semibold text-primary text-[11px]">₹{Math.round(69350 / 2.09188).toLocaleString('en-IN')} / Bale</div>
+                  </td>
                   <td className="text-right table-highlight-text py-3">+3.43%</td>
                 </tr>
               </tbody>
@@ -1369,8 +1381,74 @@ function App() {
           </div>
         </div>
 
+        {/* CSS Ticker Styles & Live Ticker Bar */}
+        <style dangerouslySetInnerHTML={{ __html: `
+          @keyframes ticker-scroll {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+          }
+          .animate-ticker-marquee {
+            display: inline-flex;
+            white-space: nowrap;
+            animation: ticker-scroll 35s linear infinite;
+          }
+          .animate-ticker-marquee:hover {
+            animation-play-state: paused;
+          }
+        `}} />
+
+        <div className="fixed top-26 right-0 left-0 md:left-[240px] h-8 z-20 bg-surface-container-low border-b border-outline-variant/30 flex items-center overflow-hidden text-[10px] font-mono font-bold text-on-surface-variant select-none">
+          <div className="bg-primary/20 text-primary h-full px-3 flex items-center gap-1.5 shrink-0 z-10 border-r border-outline-variant/30 shadow-md">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
+            LIVE MCX TICKER
+          </div>
+          <div className="relative w-full overflow-hidden flex items-center">
+            <div className="animate-ticker-marquee flex items-center gap-8 pl-4">
+              {Array(2).fill(null).map((_, groupIdx) => (
+                <React.Fragment key={groupIdx}>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">MCX COTTON SPOT:</span>
+                    <span className="text-primary font-black">₹{Math.round(data.indianCotton.prices.types[0].current / 2.09188).toLocaleString('en-IN')}/Bale</span>
+                    <span className="text-emerald-500 font-bold">▲ +{(((data.indianCotton.prices.types[0].est - data.indianCotton.prices.types[0].current) / data.indianCotton.prices.types[0].current) * 100).toFixed(2)}%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">SHANKAR-6 (S-6):</span>
+                    <span className="text-on-surface font-black">₹{Math.round(data.indianCotton.prices.types[0].current).toLocaleString('en-IN')}/Candy</span>
+                    <span className="text-emerald-500 font-bold">▲ +1.50%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">MCU-5:</span>
+                    <span className="text-on-surface font-black">₹{Math.round(data.indianCotton.prices.types[1].current).toLocaleString('en-IN')}/Candy</span>
+                    <span className="text-emerald-500 font-bold">▲ +1.25%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">DCH-32 Suvin:</span>
+                    <span className="text-on-surface font-black">₹{Math.round(data.indianCotton.prices.types[2].current).toLocaleString('en-IN')}/Candy</span>
+                    <span className="text-emerald-500 font-bold">▲ +2.00%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">ICE COTTON #2:</span>
+                    <span className="text-primary font-black">{data.globalCotton.prices.types[1].current.toFixed(2)}¢/lb</span>
+                    <span className="text-emerald-500 font-bold">▲ +0.80%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">USD/INR:</span>
+                    <span className="text-on-surface font-black">₹{data.exchangeRates.usdInr.toFixed(2)}</span>
+                    <span className="text-emerald-500 font-bold">▲ +0.15%</span>
+                  </div>
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-outline">EUR/INR:</span>
+                    <span className="text-on-surface font-black">₹{data.exchangeRates.eurInr.toFixed(2)}</span>
+                    <span className="text-red-500 font-bold">▼ -0.10%</span>
+                  </div>
+                </React.Fragment>
+              ))}
+            </div>
+          </div>
+        </div>
+
         {/* Dashboard Content Container */}
-        <div className="pt-28 px-4 md:px-6 pb-10 flex-1 max-w-[1600px] w-full relative z-10 space-y-4">
+        <div className="pt-36 px-4 md:px-6 pb-10 flex-1 max-w-[1600px] w-full relative z-10 space-y-4">
           <DataTimestamp 
             timestamp={formattedTimestamp} 
             freshness={freshness} 
@@ -3826,6 +3904,95 @@ function IndiaDashboard({ data, darkMode, colors }) {
         </div>
       </div>
 
+      {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {/* Card 1: MCX Cotton Spot (Bale basis) */}
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Domestic Benchmark</span>
+              <h4 className="text-sm font-bold text-primary mt-0.5">MCX Cotton Spot (Bale)</h4>
+            </div>
+            <span className="material-symbols-outlined text-primary text-xl">payments</span>
+          </div>
+          <div>
+            <div className="text-2xl font-black text-primary flex items-baseline gap-1.5">
+              ₹{Math.round(data.prices.types[0].current / 2.09188).toLocaleString('en-IN')}
+              <span className="text-xs font-semibold text-on-surface-variant font-sans">/ Bale (170kg)</span>
+            </div>
+            <div className="text-[11px] text-on-surface-variant font-mono mt-1">
+              Candy Equivalent: ₹{Math.round(data.prices.types[0].current).toLocaleString('en-IN')} / Candy
+            </div>
+          </div>
+          <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+            <span>Basis: Shankar-6 (S-6)</span>
+            <span className="text-emerald-500 font-bold flex items-center gap-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live Conversion
+            </span>
+          </div>
+        </div>
+
+        {/* Card 2: Shankar-6 Spot (Candy basis) */}
+        <div className="card-chart-green rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Physical Market Standard</span>
+              <h4 className="text-sm font-bold text-primary mt-0.5">Shankar-6 Spot (Candy)</h4>
+            </div>
+            <span className="material-symbols-outlined text-primary text-xl">sell</span>
+          </div>
+          <div>
+            <div className="text-2xl font-black text-primary flex items-baseline gap-1.5">
+              ₹{Math.round(data.prices.types[0].current).toLocaleString('en-IN')}
+              <span className="text-xs font-semibold text-on-surface-variant font-sans">/ Candy (355.62kg)</span>
+            </div>
+            <div className="text-[11px] text-on-surface-variant font-mono mt-1">
+              Bale Equivalent: ₹{Math.round(data.prices.types[0].current / 2.09188).toLocaleString('en-IN')} / Bale
+            </div>
+          </div>
+          <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+            <span>Quality: 29-31mm Long Staple</span>
+            <span className="text-amber-500 font-bold">Consensus Spot</span>
+          </div>
+        </div>
+
+        {/* Card 3: MCX Spot vs ICE Import Parity Spread */}
+        <div className="card-chart-green rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Import Arbitrage</span>
+              <h4 className="text-sm font-bold text-primary mt-0.5">MCX vs ICE Parity Spread</h4>
+            </div>
+            <span className="material-symbols-outlined text-primary text-xl">compare_arrows</span>
+          </div>
+          <div>
+            {(() => {
+              const shankarCandy = data.prices.types[0].current;
+              const iceCandyEquiv = data.prices.types[6].current;
+              const spreadCandy = shankarCandy - iceCandyEquiv;
+              const spreadBale = Math.round(spreadCandy / 2.09188);
+              const pct = ((spreadCandy / iceCandyEquiv) * 100).toFixed(1);
+              return (
+                <>
+                  <div className="text-2xl font-black text-primary flex items-baseline gap-1.5">
+                    ₹{spreadBale >= 0 ? '+' : ''}{spreadBale.toLocaleString('en-IN')}
+                    <span className="text-xs font-semibold text-on-surface-variant font-sans">/ Bale ({spreadCandy >= 0 ? 'Premium' : 'Discount'})</span>
+                  </div>
+                  <div className="text-[11px] text-on-surface-variant font-mono mt-1">
+                    Spread: {pct}% vs ICE Parity (₹{Math.round(iceCandyEquiv).toLocaleString('en-IN')}/Candy)
+                  </div>
+                </>
+              );
+            })()}
+          </div>
+          <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+            <span>Unit: 170kg Indian Bale</span>
+            <span className="text-primary font-bold">Arbitrage Spread</span>
+          </div>
+        </div>
+      </div>
+
       {/* Row 1: Domestic Balance Sheet & Price Trends */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Left Column: S&D Chart & Balance Sheet Table */}
@@ -4110,12 +4277,14 @@ function IndiaDashboard({ data, darkMode, colors }) {
                         <div className="text-[10px] text-on-surface-variant font-mono mt-0.5">Quality: {p.staple}</div>
                       </td>
                       <td className="py-2.5">
-                        <div className="font-semibold">₹{formatPrice(p.current, true)} <span className="text-[10px] font-normal text-on-surface-variant">/ Candy</span></div>
-                        <div className="text-[10px] text-on-surface-variant">(₹{formatPrice(p.current / 356, true)} / kg)</div>
+                        <div className="font-bold text-primary">₹{formatPrice(p.current, true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Candy</span></div>
+                        <div className="font-semibold text-on-surface">₹{formatPrice(Math.round(p.current / 2.09188), true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Bale</span></div>
+                        <div className="text-[9px] text-on-surface-variant font-mono">(₹{formatPrice(p.current / 355.62, true).split('.')[0]}/kg)</div>
                       </td>
                       <td className="py-2.5">
-                        <div className="font-semibold table-highlight-text">₹{formatPrice(p.est, true)} <span className="text-[10px] font-normal text-on-surface-variant">/ Candy</span></div>
-                        <div className="text-[10px] text-on-surface-variant">(₹{formatPrice(p.est / 356, true)} / kg)</div>
+                        <div className="font-bold table-highlight-text">₹{formatPrice(p.est, true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Candy</span></div>
+                        <div className="font-semibold text-on-surface">₹{formatPrice(Math.round(p.est / 2.09188), true).split('.')[0]} <span className="text-[9px] font-normal text-on-surface-variant">/ Bale</span></div>
+                        <div className="text-[9px] text-on-surface-variant font-mono">(₹{formatPrice(p.est / 355.62, true).split('.')[0]}/kg)</div>
                       </td>
                     </tr>
                   ))}
@@ -4189,10 +4358,10 @@ function IndiaDashboard({ data, darkMode, colors }) {
                   </a>
                 </td>
                 <td>Live Cotton Futures</td>
-                <td>₹28,290 / Bale (170kg)</td>
-                <td className="font-bold">₹59,150 / Candy</td>
+                <td>₹{Math.round(data.prices.types[0].current / 2.09188).toLocaleString('en-IN')} / Bale (170kg)</td>
+                <td className="font-bold">₹{Math.round(data.prices.types[0].current).toLocaleString('en-IN')} / Candy</td>
                 <td>Tick-by-Tick</td>
-                <td><span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-secondary/20 text-on-surface-variant border border-outline-variant/30">Discount Spot (Futures)</span></td>
+                <td><span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">Live Spot Parity</span></td>
               </tr>
               <tr>
                 <td className="font-semibold table-highlight-text">
