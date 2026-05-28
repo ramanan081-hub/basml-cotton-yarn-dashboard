@@ -12,15 +12,59 @@ import {
   Area
 } from 'recharts';
 
-export default function PriceAnalytics({ darkMode, colors }) {
-  const varieties = [
-    { name: 'Shankar-6 (S-6)', base: 65100, trend: 'up' },
-    { name: 'MCU-5', base: 70000, trend: 'down' },
-    { name: 'DCH-32 / Suvin', base: 88000, trend: 'flat' },
-    { name: 'J-34', base: 62700, trend: 'up' }
-  ];
+import { expandedCottonVarieties, expandedYarnVarieties } from '../expandedData';
 
-  const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (S-6)');
+export default function PriceAnalytics({ darkMode, colors }) {
+  // Helper to extract a base price from price string (e.g. "₹68,100-70,000/bale" -> 69050, "₹240-260/kg" -> 250)
+  const parseBasePrice = (priceStr, isYarn) => {
+    if (!priceStr) return isYarn ? 250 : 65000;
+    const cleanStr = priceStr.replace(/[₹\s,]/g, '');
+    const matches = cleanStr.match(/\d+/g);
+    if (matches && matches.length > 0) {
+      if (matches.length >= 2) {
+        const p1 = parseFloat(matches[0]);
+        const p2 = parseFloat(matches[1]);
+        return (p1 + p2) / 2;
+      }
+      return parseFloat(matches[0]);
+    }
+    return isYarn ? 250 : 65000;
+  };
+
+  // Compile all varieties from the expanded databases, filtering out noise section headers
+  const varieties = useMemo(() => {
+    const noiseIds = ['physical_properties', 'market_data', 'production_data', 'quality_standards', 'economics', 'applications', 'sourcing'];
+    
+    const cottons = expandedCottonVarieties
+      .filter(c => !noiseIds.includes(c.id) && c.name)
+      .map(c => {
+        const trend = c.name.length % 3 === 0 ? 'up' : c.name.length % 3 === 1 ? 'down' : 'flat';
+        return {
+          name: `${c.name} (Cotton)`,
+          base: parseBasePrice(c.price, false),
+          trend,
+          isYarn: false,
+          unit: '/bale'
+        };
+      });
+
+    const yarns = expandedYarnVarieties
+      .filter(y => !noiseIds.includes(y.id) && y.name)
+      .map(y => {
+        const trend = y.name.length % 3 === 0 ? 'up' : y.name.length % 3 === 1 ? 'down' : 'flat';
+        return {
+          name: `${y.name} (Yarn)`,
+          base: parseBasePrice(y.price, true),
+          trend,
+          isYarn: true,
+          unit: '/kg'
+        };
+      });
+
+    return [...cottons, ...yarns];
+  }, []);
+
+  const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (Most Popular) (Cotton)');
 
   // Generate 60 days of historical price data ending at base price
   const chartData = useMemo(() => {
@@ -133,6 +177,10 @@ export default function PriceAnalytics({ darkMode, colors }) {
     };
   }, [chartData]);
 
+  const activeVarietyInfo = useMemo(() => {
+    return varieties.find(v => v.name === selectedVariety) || varieties[0];
+  }, [selectedVariety, varieties]);
+
   // Dynamic status coloring helper
   const getStatusColor = (status) => {
     if (status === 'Bullish') return 'text-green-500 bg-green-500/5 border-green-500/25';
@@ -153,11 +201,18 @@ export default function PriceAnalytics({ darkMode, colors }) {
           <select
             value={selectedVariety}
             onChange={(e) => setSelectedVariety(e.target.value)}
-            className="bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-1.5 text-xs text-on-surface font-mono focus:outline-none focus:border-primary"
+            className="bg-surface-container-high border border-outline-variant/30 rounded-lg px-3 py-1.5 text-xs text-on-surface font-mono focus:outline-none focus:border-primary max-w-[200px] md:max-w-[320px]"
           >
-            {varieties.map(v => (
-              <option key={v.name} value={v.name}>{v.name}</option>
-            ))}
+            <optgroup label="Cotton Varieties">
+              {varieties.filter(v => !v.isYarn).map(v => (
+                <option key={v.name} value={v.name}>{v.name.replace(' (Cotton)', '')}</option>
+              ))}
+            </optgroup>
+            <optgroup label="Yarn Varieties">
+              {varieties.filter(v => v.isYarn).map(v => (
+                <option key={v.name} value={v.name}>{v.name.replace(' (Yarn)', '')}</option>
+              ))}
+            </optgroup>
           </select>
         </div>
       </div>
@@ -167,7 +222,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
         {/* Metric 1 */}
         <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Current Price</span>
-          <h4 className="text-base font-extrabold text-on-surface font-headline mt-2">₹{metrics.currentPrice.toLocaleString()}/Candy</h4>
+          <h4 className="text-base font-extrabold text-on-surface font-headline mt-2">₹{metrics.currentPrice.toLocaleString()}{activeVarietyInfo?.unit}</h4>
         </div>
 
         {/* Metric 2 */}
@@ -217,7 +272,14 @@ export default function PriceAnalytics({ darkMode, colors }) {
               <ComposedChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="date" fontSize={9} />
-                <YAxis fontSize={9} domain={['dataMin - 1000', 'dataMax + 1000']} />
+                <YAxis 
+                  fontSize={9} 
+                  domain={
+                    activeVarietyInfo?.isYarn 
+                      ? ['dataMin - 10', 'dataMax + 10'] 
+                      : ['dataMin - 1000', 'dataMax + 1000']
+                  } 
+                />
                 <Tooltip
                   contentStyle={{
                     backgroundColor: 'var(--color-surface-container-high)',

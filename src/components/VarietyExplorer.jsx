@@ -20,8 +20,12 @@ export default function VarietyExplorer({ darkMode, colors }) {
   // Filtering Cotton
   const filteredCotton = useMemo(() => {
     return expandedCottonVarieties.filter(item => {
+      // Exclude noise section header entries from the raw parser
+      const noiseIds = ['physical_properties', 'market_data', 'production_data', 'quality_standards', 'economics', 'applications', 'sourcing'];
+      if (noiseIds.includes(item.id)) return false;
+
       const matchesSearch = item.name.toLowerCase().includes(cottonSearch.toLowerCase()) ||
-        item.origin.toLowerCase().includes(cottonSearch.toLowerCase()) ||
+        (item.origin && item.origin.toLowerCase().includes(cottonSearch.toLowerCase())) ||
         (item.applications && item.applications.some(app => app.toLowerCase().includes(cottonSearch.toLowerCase())));
       
       const matchesGroup = cottonGroup === 'All' || item.group === cottonGroup;
@@ -49,11 +53,14 @@ export default function VarietyExplorer({ darkMode, colors }) {
   // Filtering Yarn
   const filteredYarn = useMemo(() => {
     return expandedYarnVarieties.filter(item => {
+      // Exclude noise entries if any
+      if (item.id === 'quality_standards' || item.id === 'economics' || item.id === 'applications' || item.id === 'sourcing' || item.id === 'physical_properties' || item.id === 'market_data' || item.id === 'production_data') return false;
+
       const matchesSearch = item.name.toLowerCase().includes(yarnSearch.toLowerCase()) ||
         (item.composition && item.composition.toLowerCase().includes(yarnSearch.toLowerCase())) ||
         (item.applications && item.applications.some(app => app.toLowerCase().includes(yarnSearch.toLowerCase())));
 
-      const matchesCat = yarnCategory === 'All' || item.category.toLowerCase().includes(yarnCategory.toLowerCase());
+      const matchesCat = yarnCategory === 'All' || (item.category && item.category.toLowerCase().includes(yarnCategory.toLowerCase()));
 
       return matchesSearch && matchesCat;
     });
