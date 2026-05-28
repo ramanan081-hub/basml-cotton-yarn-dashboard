@@ -447,4 +447,22 @@ tr:hover td {
   border: 1px solid rgba(27, 94, 32, 0.28) !important;
 }
 
+/* Global compact table adjustments to fix alignment and text wrapping */
+main table td {
+  font-size: 11px !important;
+  padding-top: 5px !important;
+  padding-bottom: 5px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+main table th {
+  font-size: 10px !important;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important;
+  padding-left: 8px !important;
+  padding-right: 8px !important;
+}
+
+
 
