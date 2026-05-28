@@ -5724,6 +5724,40 @@ function AnalysisDashboard({ darkMode, colors }) {
   const currentCotton = cottonAnalysis.data[selectedCotton];
   const currentYarn = yarnAnalysis.data[selectedYarn];
 
+  const getDynamicDayWisePlan = (staticPlan) => {
+    if (!staticPlan) return [];
+    const now = new Date();
+    const getFormattedDate = (offsetDays) => {
+      const d = new Date(now);
+      d.setDate(now.getDate() + offsetDays);
+      return d.toLocaleDateString('en-GB', {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric'
+      });
+    };
+
+    return staticPlan.map((item, idx) => {
+      const offset = idx - 2;
+      const dateStr = getFormattedDate(offset);
+      
+      let relativeLabel = `Day ${idx + 1}`;
+      if (offset === -2) relativeLabel = 'T - 2 (Past)';
+      else if (offset === -1) relativeLabel = 'T - 1 (Past)';
+      else if (offset === 0) relativeLabel = 'Today';
+      else if (offset > 0) relativeLabel = `T + ${offset} (Forecast)`;
+
+      return {
+        ...item,
+        day: relativeLabel,
+        date: dateStr
+      };
+    });
+  };
+
+  const cottonDayWisePlan = getDynamicDayWisePlan(currentCotton?.dayWisePlan);
+  const yarnDayWisePlan = getDynamicDayWisePlan(currentYarn?.dayWisePlan);
+
   return (
     <div className="space-y-gutter">
       {/* Stitch Hero Image Banner for Analysis */}
@@ -5842,7 +5876,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentCotton.dayWisePlan.map((d, i) => (
+                    {cottonDayWisePlan.map((d, i) => (
                       <tr key={i}>
                         <td className="font-bold">{d.day}</td>
                         <td>{d.date}</td>
@@ -5874,7 +5908,7 @@ function AnalysisDashboard({ darkMode, colors }) {
               </h3>
               <div className="h-[320px] font-mono">
                 <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={currentCotton.dayWisePlan}>
+                  <ComposedChart data={cottonDayWisePlan}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="date" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Target Bales', angle: -90, position: 'insideLeft', offset: -5 }} />
@@ -6092,7 +6126,7 @@ function AnalysisDashboard({ darkMode, colors }) {
                     </tr>
                   </thead>
                   <tbody>
-                    {currentYarn.dayWisePlan.map((d, i) => (
+                    {yarnDayWisePlan.map((d, i) => (
                       <tr key={i}>
                         <td className="font-bold">{d.day}</td>
                         <td>{d.date}</td>
@@ -6125,7 +6159,7 @@ function AnalysisDashboard({ darkMode, colors }) {
               </h3>
               <div className="h-[320px] font-mono">
                 <ResponsiveContainer width="100%" height="100%">
-                  <ComposedChart data={currentYarn.dayWisePlan}>
+                  <ComposedChart data={yarnDayWisePlan}>
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="date" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Target Qty (Kg)', angle: -90, position: 'insideLeft', offset: -5 }} />
