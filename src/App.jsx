@@ -1602,21 +1602,28 @@ function ImportExportDashboard({ colors, data }) {
   const liveIceCotton = data?.globalCotton?.prices?.types?.[1]?.current || 78.50; // ICE US Cotton No. 2
   const liveShankar6 = data?.indianCotton?.prices?.types?.[0]?.current || 65100;
   
-  // Import States - initialized from live data
-  const [importOrigin, setImportOrigin] = useState('USA');
-  const [importChannel, setImportChannel] = useState('global');
+  // Import States - split into Global and Domestic channels
   const [selectedGlobalOrigin, setSelectedGlobalOrigin] = useState('USA');
   const [selectedDomesticOrigin, setSelectedDomesticOrigin] = useState('Gujarat (Dom)');
-  const [fobCentsLb, setFobCentsLb] = useState(liveIceCotton);
-  const [oceanFreightContainer, setOceanFreightContainer] = useState(2200);
-  const [importBcdRate, setImportBcdRate] = useState(10); // Basic Customs Duty
-  const [importAidcRate, setImportAidcRate] = useState(0); // Agriculture Infrastructure Cess
-  const [importSwsRate, setImportSwsRate] = useState(10); // Social Welfare Surcharge (% of BCD)
+  
+  // Global Sourcing states
+  const [globalFobCentsLb, setGlobalFobCentsLb] = useState(liveIceCotton);
+  const [globalOceanFreight, setGlobalOceanFreight] = useState(2200);
+  const [globalBcdRate, setGlobalBcdRate] = useState(10);
+  const [globalAidcRate, setGlobalAidcRate] = useState(0);
+  const [globalSwsRate, setGlobalSwsRate] = useState(10);
+  const [globalHandlingCandy, setGlobalHandlingCandy] = useState(2500);
   const [usdInrRate, setUsdInrRate] = useState(liveUsdInr);
-  const [localHandlingCandy, setLocalHandlingCandy] = useState(2500); // INR per Candy
-  const [importGstRate, setImportGstRate] = useState(5.0); // GST for domestic purchases
-  const [mandiFeeRate, setMandiFeeRate] = useState(1.0); // Mandi Fee for domestic purchases
-  const [importSimCount, setImportSimCount] = useState('30s Combed'); // Selected count for factory simulation
+
+  // Domestic Sourcing states
+  const [domesticMandiPrice, setDomesticMandiPrice] = useState(liveShankar6);
+  const [domesticInlandFreight, setDomesticInlandFreight] = useState(4500);
+  const [importGstRate, setImportGstRate] = useState(5.0);
+  const [mandiFeeRate, setMandiFeeRate] = useState(1.0);
+  const [domesticHandlingCandy, setDomesticHandlingCandy] = useState(1200);
+
+  const [importSimCount, setImportSimCount] = useState('30s Combed');
+  const [simCottonSource, setSimCottonSource] = useState('global');
   
   // Export States
   const [exportChannel, setExportChannel] = useState('global'); // 'global' or 'domestic'
@@ -1663,12 +1670,16 @@ function ImportExportDashboard({ colors, data }) {
   };
 
   useEffect(() => {
-    if (importPresets[importOrigin]?.type === 'global') {
-      setSelectedGlobalOrigin(importOrigin);
-    } else if (importPresets[importOrigin]?.type === 'domestic') {
-      setSelectedDomesticOrigin(importOrigin);
+    if (liveIceCotton && liveIceCotton !== 78.50 && selectedGlobalOrigin === 'USA') {
+      setGlobalFobCentsLb(liveIceCotton);
     }
-  }, [importOrigin]);
+  }, [liveIceCotton, selectedGlobalOrigin]);
+
+  useEffect(() => {
+    if (liveShankar6 && selectedDomesticOrigin === 'Gujarat (Dom)') {
+      setDomesticMandiPrice(liveShankar6);
+    }
+  }, [liveShankar6, selectedDomesticOrigin]);
 
   // Spinning count properties for simulator
   const countParams = {
@@ -1907,38 +1918,37 @@ function ImportExportDashboard({ colors, data }) {
     'West Bengal': { price: 278.00, domestic: 272, roadFreight: 14.50, brokerage: 1.2, packaging: 2.5, gst: 5.0, yarnSpec: '20s Carded Hosiery, 30s Semi-Combed (Kolkata/Howrah)', mktShare: '18%', taxRegime: '5% IGST (ITC Claimable)' },
   };
 
-  // Auto-sync exchange rate and FOB when live data updates
+  // Auto-sync exchange rate when live data updates
   useEffect(() => {
     if (liveUsdInr && liveUsdInr !== 83.50) {
       setUsdInrRate(liveUsdInr);
     }
   }, [liveUsdInr]);
 
-  useEffect(() => {
-    if (liveIceCotton && liveIceCotton !== 78.50 && importOrigin === 'USA') {
-      setFobCentsLb(liveIceCotton);
-    }
-  }, [liveIceCotton]);
-
-  const handleImportPreset = (origin) => {
-    setImportOrigin(origin);
+  const handleGlobalImportPreset = (origin) => {
+    setSelectedGlobalOrigin(origin);
     const p = importPresets[origin];
-    setImportChannel(p.type);
-    setFobCentsLb(p.fob);
-    setOceanFreightContainer(p.freight);
-    setImportBcdRate(p.bcd);
-    setImportAidcRate(p.aidc);
-    setImportSwsRate(p.sws);
-    setLocalHandlingCandy(p.handling);
-    if (p.type === 'domestic') {
+    if (p) {
+      setGlobalFobCentsLb(p.fob);
+      setGlobalOceanFreight(p.freight);
+      setGlobalBcdRate(p.bcd);
+      setGlobalAidcRate(p.aidc);
+      setGlobalSwsRate(p.sws);
+      setGlobalHandlingCandy(p.handling);
+    }
+    setUsdInrRate(liveUsdInr);
+  };
+
+  const handleDomesticImportPreset = (origin) => {
+    setSelectedDomesticOrigin(origin);
+    const p = importPresets[origin];
+    if (p) {
+      setDomesticMandiPrice(p.fob);
+      setDomesticInlandFreight(p.freight);
       setImportGstRate(5.0);
       setMandiFeeRate(1.0);
-    } else {
-      setImportGstRate(0.0);
-      setMandiFeeRate(0.0);
+      setDomesticHandlingCandy(p.handling);
     }
-    // Auto-sync exchange rate from live data
-    setUsdInrRate(liveUsdInr);
   };
 
   const handleExportGlobalPreset = (dest) => {
@@ -1967,69 +1977,75 @@ function ImportExportDashboard({ colors, data }) {
   const kgsPerCandy = 355.62;
   const candiesPerContainer = 56.24;
 
+  // Global calculations
+  const globalFobInrCandy = (globalFobCentsLb / 100) * lbsPerCandy * usdInrRate;
+  const globalFreightInrCandy = (globalOceanFreight * usdInrRate) / candiesPerContainer;
+  const globalBcdInrCandy = globalFobInrCandy * (globalBcdRate / 100);
+  const globalAidcInrCandy = globalFobInrCandy * (globalAidcRate / 100);
+  const globalSwsInrCandy = globalBcdInrCandy * (globalSwsRate / 100);
+  const globalTotalTaxDutyInrCandy = globalBcdInrCandy + globalAidcInrCandy + globalSwsInrCandy;
+  const globalLandedInrCandy = globalFobInrCandy + globalFreightInrCandy + globalTotalTaxDutyInrCandy + globalHandlingCandy;
+  const globalLandedInrKg = globalLandedInrCandy / kgsPerCandy;
+
+  // Domestic calculations
+  const domesticFobInrCandy = domesticMandiPrice;
+  const domesticFreightInrCandy = domesticInlandFreight;
+  const domesticGstInrCandy = domesticFobInrCandy * (importGstRate / 100);
+  const domesticMandiFeeInrCandy = domesticFobInrCandy * (mandiFeeRate / 100);
+  const domesticTotalTaxDutyInrCandy = domesticGstInrCandy + domesticMandiFeeInrCandy;
+  const domesticLandedInrCandy = domesticFobInrCandy + domesticFreightInrCandy + domesticTotalTaxDutyInrCandy + domesticHandlingCandy;
+  const domesticLandedInrKg = domesticLandedInrCandy / kgsPerCandy;
+
   const getLandedCostForPreset = (name) => {
     const p = importPresets[name];
     if (!p) return { candy: 0, kg: 0 };
     
-    const isDom = p.type === 'domestic';
-    const fob = (importOrigin === name) ? fobCentsLb : p.fob;
-    const freight = (importOrigin === name) ? oceanFreightContainer : p.freight;
-    const handling = (importOrigin === name) ? localHandlingCandy : p.handling;
-    
-    const fobInr = isDom ? fob : (fob / 100) * lbsPerCandy * usdInrRate;
-    const freightInr = isDom ? freight : (freight * usdInrRate) / candiesPerContainer;
-    
-    let taxInr = 0;
-    if (isDom) {
-      const gstRate = (importOrigin === name) ? importGstRate : 5.0;
-      const mandiRate = (importOrigin === name) ? mandiFeeRate : 1.0;
-      taxInr = (fobInr * (gstRate / 100)) + (fobInr * (mandiRate / 100));
-    } else {
-      const bcdRate = (importOrigin === name) ? importBcdRate : p.bcd;
-      const aidcRate = (importOrigin === name) ? importAidcRate : p.aidc;
-      const swsRate = (importOrigin === name) ? importSwsRate : p.sws;
+    if (p.type === 'global') {
+      const fob = (selectedGlobalOrigin === name) ? globalFobCentsLb : p.fob;
+      const freight = (selectedGlobalOrigin === name) ? globalOceanFreight : p.freight;
+      const bcd = (selectedGlobalOrigin === name) ? globalBcdRate : p.bcd;
+      const aidc = (selectedGlobalOrigin === name) ? globalAidcRate : p.aidc;
+      const sws = (selectedGlobalOrigin === name) ? globalSwsRate : p.sws;
+      const handling = (selectedGlobalOrigin === name) ? globalHandlingCandy : p.handling;
       
-      const bcdInr = fobInr * (bcdRate / 100);
-      const aidcInr = fobInr * (aidcRate / 100);
-      const swsInr = bcdInr * (swsRate / 100);
-      taxInr = bcdInr + aidcInr + swsInr;
+      const fobInr = (fob / 100) * lbsPerCandy * usdInrRate;
+      const freightInr = (freight * usdInrRate) / candiesPerContainer;
+      const bcdInr = fobInr * (bcd / 100);
+      const aidcInr = fobInr * (aidc / 100);
+      const swsInr = bcdInr * (sws / 100);
+      const taxInr = bcdInr + aidcInr + swsInr;
+      const landedCandy = fobInr + freightInr + taxInr + handling;
+      return { candy: landedCandy, kg: landedCandy / kgsPerCandy };
+    } else {
+      const fob = (selectedDomesticOrigin === name) ? domesticMandiPrice : p.fob;
+      const freight = (selectedDomesticOrigin === name) ? domesticInlandFreight : p.freight;
+      const gst = (selectedDomesticOrigin === name) ? importGstRate : 5.0;
+      const mandi = (selectedDomesticOrigin === name) ? mandiFeeRate : 1.0;
+      const handling = (selectedDomesticOrigin === name) ? domesticHandlingCandy : p.handling;
+      
+      const fobInr = fob;
+      const freightInr = freight;
+      const gstInr = fobInr * (gst / 100);
+      const mandiInr = fobInr * (mandi / 100);
+      const taxInr = gstInr + mandiInr;
+      const landedCandy = fobInr + freightInr + taxInr + handling;
+      return { candy: landedCandy, kg: landedCandy / kgsPerCandy };
     }
-    
-    const landedCandy = fobInr + freightInr + taxInr + handling;
-    const landedKg = landedCandy / kgsPerCandy;
-    
-    return { candy: landedCandy, kg: landedKg };
   };
-  
-  const isDomesticImport = importPresets[importOrigin]?.type === 'domestic';
-  
-  const fobInrCandy = isDomesticImport ? fobCentsLb : (fobCentsLb / 100) * lbsPerCandy * usdInrRate;
-  const freightInrCandy = isDomesticImport ? oceanFreightContainer : (oceanFreightContainer * usdInrRate) / candiesPerContainer;
-  
-  // Custom tax structures: BCD + AIDC + SWS (10% of BCD)
-  const bcdInrCandy = isDomesticImport ? 0 : fobInrCandy * (importBcdRate / 100);
-  const aidcInrCandy = isDomesticImport ? 0 : fobInrCandy * (importAidcRate / 100);
-  const swsInrCandy = isDomesticImport ? 0 : bcdInrCandy * (importSwsRate / 100);
-  
-  const gstInrCandy = isDomesticImport ? fobInrCandy * (importGstRate / 100) : 0;
-  const mandiFeeInrCandy = isDomesticImport ? fobInrCandy * (mandiFeeRate / 100) : 0;
-  
-  const totalTaxDutyInrCandy = isDomesticImport ? (gstInrCandy + mandiFeeInrCandy) : (bcdInrCandy + aidcInrCandy + swsInrCandy);
-  
-  const finalLandedInrCandy = fobInrCandy + freightInrCandy + totalTaxDutyInrCandy + localHandlingCandy;
-  const finalLandedInrKg = finalLandedInrCandy / kgsPerCandy;
-  
+
   const shankar6Price = liveShankar6;
-  const importParityInrCandy = finalLandedInrCandy - shankar6Price;
+  const globalImportParity = globalLandedInrCandy - shankar6Price;
+  const domesticImportParity = domesticLandedInrCandy - shankar6Price;
 
   const getImportYarnPrice = (countName) => {
     const priceObj = data?.yarns?.india?.prices?.find(p => p.type.includes(countName));
     return priceObj ? priceObj.current : 295;
   };
 
-  const getImportYarnMargin = (countName) => {
+  const getImportYarnMargin = (countName, source = simCottonSource) => {
     const params = countParams[countName];
-    const yarnRawMaterialCost = finalLandedInrKg / params.yieldRate;
+    const landedKg = source === 'global' ? globalLandedInrKg : domesticLandedInrKg;
+    const yarnRawMaterialCost = landedKg / params.yieldRate;
     const totalManufacturingCost = yarnRawMaterialCost + params.conversion;
     const yarnSellingPrice = getImportYarnPrice(countName);
     return yarnSellingPrice - totalManufacturingCost;
@@ -2099,268 +2115,294 @@ function ImportExportDashboard({ colors, data }) {
 
       {subTab === 'import' && (
         <div className="space-y-gutter animate-fade-in">
-          {/* Import Sourcing Channel Selector */}
-          <div className="flex gap-2 p-1.5 bg-surface-container-high/40 rounded-xl border border-outline-variant/10 w-full max-w-md">
-            <button
-              onClick={() => {
-                setImportChannel('global');
-                handleImportPreset(selectedGlobalOrigin);
-              }}
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
-                importChannel === 'global' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">public</span>
-              Global Imports
-            </button>
-            <button
-              onClick={() => {
-                setImportChannel('domestic');
-                handleImportPreset(selectedDomesticOrigin);
-              }}
-              className={`flex-1 py-1.5 px-3 rounded-lg text-xs font-mono font-bold transition-all flex items-center justify-center gap-1.5 ${
-                importChannel === 'domestic' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-              }`}
-            >
-              <span className="material-symbols-outlined text-sm">home_pin</span>
-              Indian Domestic Sourcing
-            </button>
-          </div>
-
           {/* Sourcing Corridor Flow Visualizer */}
           <div className="card-chart-green p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-xl text-primary animate-pulse">route</span>
               <div>
-                <strong className="text-primary block text-xs">Active Sourcing Corridor</strong>
-                <span className="text-on-surface-variant font-medium">All global and interstate logistics corridors terminate at your Tamil Nadu main factory.</span>
+                <strong className="text-primary block text-xs">Active Sourcing Corridors (Destination: Tamil Nadu Factory Gate)</strong>
+                <span className="text-on-surface-variant font-medium">Both global and domestic logistics corridors are running concurrently to feed your main factory.</span>
               </div>
             </div>
             
-            <div className="flex items-center gap-2 flex-wrap justify-center w-full md:w-auto">
+            <div className="flex items-center gap-4 flex-wrap justify-center w-full md:w-auto">
+              {/* Global Corridor */}
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
-                <span className="material-symbols-outlined text-sm">
-                  {importChannel === 'global' ? 'public' : 'home_pin'}
-                </span>
-                <span>{importChannel === 'global' ? `Global Nation: ${importOrigin}` : `Domestic State: ${formatStateName(importOrigin)}`}</span>
+                <span className="material-symbols-outlined text-sm text-primary">public</span>
+                <span>Global: {selectedGlobalOrigin}</span>
+              </div>
+              
+              <div className="text-primary font-bold">+</div>
+
+              {/* Domestic Corridor */}
+              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
+                <span className="material-symbols-outlined text-sm text-forest-green">home_pin</span>
+                <span>Domestic: {formatStateName(selectedDomesticOrigin)}</span>
               </div>
               
               <div className="flex items-center text-primary">
                 <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
-                <span className="text-[8px] font-bold px-1 text-primary/80 uppercase">Landed Gate</span>
+                <span className="text-[8px] font-bold px-1 text-primary/80 uppercase">Gate</span>
                 <span className="material-symbols-outlined text-sm animate-pulse">arrow_right_alt</span>
               </div>
               
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-primary/20 border border-primary/30 text-primary font-bold">
                 <span className="material-symbols-outlined text-sm">factory</span>
-                <span>Tamil Nadu Factory Gate (Main Hub)</span>
+                <span>TN Factory Gate (Main Hub)</span>
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-12 gap-gutter">
-            {/* Left Column: Cost Calculator */}
+            {/* Left Column: Global Sourcing Desk */}
             <div className="col-span-12 lg:col-span-6 space-y-gutter">
               <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
                 <div className="flex justify-between items-start flex-wrap gap-2">
                   <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
-                    <span className="material-symbols-outlined text-xl">calculate</span>
-                    Interactive Import Landed Cost Calculator
+                    <span className="material-symbols-outlined text-xl">public</span>
+                    Global Sourcing Desk (FOB Basis)
                   </h3>
                   <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
                     <span className="material-symbols-outlined text-[10px]">factory</span>
-                    Main Factory: Tamil Nadu
+                    Destination: TN Gate
                   </span>
-                </div>
-                <div className="flex items-center gap-2 text-[10px] font-mono">
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/20">
-                    <span className="w-1.5 h-1.5 rounded-full bg-forest-green animate-pulse"></span>
-                    Auto-synced from Live Market Data
-                  </span>
-                  <span className="text-outline">FOB: {liveIceCotton.toFixed(2)}¢ | USD/INR: {liveUsdInr.toFixed(2)} | S-6 Base: ₹{liveShankar6.toLocaleString('en-IN')}</span>
                 </div>
                 
-                <div className="grid grid-cols-2 gap-3">
-                  <div className="col-span-2">
-                    {importChannel === 'global' ? (
-                      <div>
-                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS IMPORTING TO TAMIL NADU (FOB USD Basis)</label>
-                        <div className="flex flex-wrap gap-1.5">
-                          {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
-                            <button
-                              key={name}
-                              onClick={() => handleImportPreset(name)}
-                              className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
-                                importOrigin === name 
-                                  ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
-                                  : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                              }`}
-                            >
-                              {name}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <div>
-                        <label className="text-[10px] font-mono font-bold text-outline block mb-1">INDIAN DOMESTIC STATES SOURCING TO TAMIL NADU (Mandi INR Basis)</label>
-                        <div className="flex flex-wrap gap-1.5">
-                          {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
-                            <button
-                              key={name}
-                              onClick={() => handleImportPreset(name)}
-                              className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
-                                importOrigin === name 
-                                  ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
-                                  : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                              }`}
-                            >
-                              {formatStateName(name)}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Landed Cost Comparison & Arbitrage Gauge */}
-                  <div className="bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/30 space-y-3 mt-2">
-                    <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
-                      <span className="material-symbols-outlined text-sm">compare_arrows</span>
-                      Landed Cost Sourcing Comparison & Arbitrage Gauge
-                    </h4>
-                    
-                    <div className="grid grid-cols-2 gap-4">
-                      {/* Global Card */}
-                      <div className={`p-3 rounded-lg border transition-all cursor-pointer ${
-                        importPresets[importOrigin]?.type === 'global'
-                          ? 'bg-primary/10 border-primary shadow-sm'
-                          : 'bg-surface-container border-outline-variant/20 hover:bg-surface-container-high'
-                      }`}
-                      onClick={() => handleImportPreset(selectedGlobalOrigin)}
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Global Import to TN</span>
-                          {importPresets[importOrigin]?.type === 'global' && <span className="text-[8px] bg-primary text-on-primary px-1 rounded font-bold uppercase">Active</span>}
-                        </div>
-                        <span className="text-xs font-bold text-on-surface block mt-1">{selectedGlobalOrigin}</span>
-                        <div className="text-xs font-mono font-bold text-primary mt-1">₹{Math.round(getLandedCostForPreset(selectedGlobalOrigin).candy).toLocaleString('en-IN')} / Candy</div>
-                        <div className="text-[9px] font-mono text-outline-variant">₹{getLandedCostForPreset(selectedGlobalOrigin).kg.toFixed(2)} / Kg Landed</div>
-                      </div>
-
-                      {/* Domestic Card */}
-                      <div className={`p-3 rounded-lg border transition-all cursor-pointer ${
-                        importPresets[importOrigin]?.type === 'domestic'
-                          ? 'bg-primary/10 border-primary shadow-sm'
-                          : 'bg-surface-container border-outline-variant/20 hover:bg-surface-container-high'
-                      }`}
-                      onClick={() => handleImportPreset(selectedDomesticOrigin)}
-                      >
-                        <div className="flex justify-between items-center">
-                          <span className="text-[9px] font-mono font-bold text-outline uppercase">Domestic Sourcing to TN</span>
-                          {importPresets[importOrigin]?.type === 'domestic' && <span className="text-[8px] bg-primary text-on-primary px-1 rounded font-bold uppercase">Active</span>}
-                        </div>
-                        <span className="text-xs font-bold text-on-surface block mt-1">{formatStateName(selectedDomesticOrigin)}</span>
-                        <div className="text-xs font-mono font-bold text-primary mt-1">₹{Math.round(getLandedCostForPreset(selectedDomesticOrigin).candy).toLocaleString('en-IN')} / Candy</div>
-                        <div className="text-[9px] font-mono text-outline-variant">₹{getLandedCostForPreset(selectedDomesticOrigin).kg.toFixed(2)} / Kg Landed</div>
-                      </div>
-                    </div>
-
-                    {/* Arbitrage Message */}
-                    {(() => {
-                      const globalL = getLandedCostForPreset(selectedGlobalOrigin);
-                      const domesticL = getLandedCostForPreset(selectedDomesticOrigin);
-                      const diff = Math.abs(globalL.candy - domesticL.candy);
-                      const globalIsCheaper = globalL.candy < domesticL.candy;
-                      
-                      return (
-                        <div className={`p-3 rounded-lg border flex flex-col sm:flex-row sm:justify-between sm:items-center gap-2 font-mono text-xs ${
-                          globalIsCheaper 
-                            ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
-                            : 'bg-tertiary/10 text-tertiary border-tertiary/20'
-                        }`}>
-                          <div>
-                            <span className="font-bold block">
-                              {globalIsCheaper 
-                                ? `Global Sourcing Arbitrage Advantage!` 
-                                : `Domestic Sourcing Parity Advantage!`}
-                            </span>
-                            <span className="text-[10px] text-on-surface-variant font-medium">
-                              {globalIsCheaper
-                                ? `Landed ${selectedGlobalOrigin} is cheaper than ${formatStateName(selectedDomesticOrigin)} at Tamil Nadu Factory.`
-                                : `Landed ${formatStateName(selectedDomesticOrigin)} is cheaper than ${selectedGlobalOrigin} at Tamil Nadu Factory.`}
-                            </span>
-                          </div>
-                          <span className="font-bold text-xs shrink-0">
-                            Savings: ₹{Math.round(diff).toLocaleString('en-IN')} / Candy
-                          </span>
-                        </div>
-                      );
-                    })()}
-                  </div>
-                </div>
-
+                {/* Global Presets */}
                 <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
-                    {isDomesticImport ? 'MANDI SPOT PRICE (INR)' : 'FOB PRICE (US ¢/LB)'}
-                    <span className="text-[8px] text-forest-green font-bold">● LIVE</span>
-                  </label>
-                  <input
-                    type="number"
-                    step={isDomesticImport ? '100' : '0.01'}
-                    value={fobCentsLb}
-                    onChange={(e) => setFobCentsLb(parseFloat(e.target.value) || 0)}
-                    className="w-full bg-surface-container-low border border-forest-green/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                  />
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL NATIONS PRESETS</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
+                      <button
+                        key={name}
+                        onClick={() => handleGlobalImportPreset(name)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          selectedGlobalOrigin === name 
+                            ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold' 
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {name}
+                      </button>
+                    ))}
+                  </div>
                 </div>
 
-                {isDomesticImport ? (
+                {/* Inputs Grid */}
+                <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC GST (RCM %)</label>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
+                      FOB PRICE (US ¢/LB)
+                      {selectedGlobalOrigin === 'USA' && <span className="text-[8px] text-forest-green font-bold">● LIVE</span>}
+                    </label>
                     <input
                       type="number"
-                      step="0.5"
-                      value={importGstRate}
-                      onChange={(e) => setImportGstRate(parseFloat(e.target.value) || 0)}
-                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                      step="0.01"
+                      value={globalFobCentsLb}
+                      onChange={(e) => setGlobalFobCentsLb(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
                     />
                   </div>
-                ) : (
+
                   <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">EXCHANGE RATE (USD/INR) <span className="text-[8px] text-forest-green font-bold">● LIVE</span></label>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
+                      EXCHANGE RATE (USD/INR)
+                      <span className="text-[8px] text-forest-green font-bold">● LIVE</span>
+                    </label>
                     <input
                       type="number"
                       step="0.05"
                       value={usdInrRate}
                       onChange={(e) => setUsdInrRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-primary/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">
+                      OCEAN FREIGHT (USD/CONTAINER)
+                    </label>
+                    <input
+                      type="number"
+                      value={globalOceanFreight}
+                      onChange={(e) => setGlobalOceanFreight(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">
+                      LOCAL HANDLING & PORT (INR)
+                    </label>
+                    <input
+                      type="number"
+                      value={globalHandlingCandy}
+                      onChange={(e) => setGlobalHandlingCandy(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  {/* Taxes breakdown */}
+                  <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
+                    <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Custom Tax & Cess Breakdown</h4>
+                    <div className="grid grid-cols-3 gap-2">
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">BASIC DUTY (BCD %)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={globalBcdRate}
+                          onChange={(e) => setGlobalBcdRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">AGRI CESS (AIDC %)</label>
+                        <input
+                          type="number"
+                          step="0.5"
+                          value={globalAidcRate}
+                          onChange={(e) => setGlobalAidcRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">SWS (% OF BCD)</label>
+                        <input
+                          type="number"
+                          step="1"
+                          value={globalSwsRate}
+                          onChange={(e) => setGlobalSwsRate(parseFloat(e.target.value) || 0)}
+                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Landed Cost Output */}
+                <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">FOB Base Cost per Candy:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(globalFobInrCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Estimated Ocean Freight / Candy:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(globalFreightInrCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Taxes (BCD + AIDC + SWS):</span>
+                    <span className="font-bold text-on-surface">
+                      ₹{Math.round(globalTotalTaxDutyInrCandy).toLocaleString('en-IN')} 
+                      <span className="text-[10px] text-outline ml-1">
+                        ({(globalBcdRate + globalAidcRate + (globalBcdRate * globalSwsRate / 100)).toFixed(1.5)}% Eff.)
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Local Handling & Port / Candy:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(globalHandlingCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
+                    <span>Global Landed Cost:</span>
+                    <span>₹{Math.round(globalLandedInrCandy).toLocaleString('en-IN')} / Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono font-semibold text-outline-variant">
+                    <span>Equiv Landed Price per Kg:</span>
+                    <span className="text-on-surface">₹{globalLandedInrKg.toFixed(2)} / Kg</span>
+                  </div>
+
+                  <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
+                      globalImportParity <= 0 
+                        ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
+                        : 'bg-tertiary/10 text-tertiary border-tertiary/20'
+                    }`}>
+                    <span className="font-bold">Landed Import Parity vs Gujarat S-6 Spot:</span>
+                    <span className="font-bold">
+                      {globalImportParity <= 0 
+                        ? `₹${Math.abs(Math.round(globalImportParity)).toLocaleString('en-IN')} Discount (SAVINGS)` 
+                        : `₹${Math.round(globalImportParity).toLocaleString('en-IN')} Premium (EXPENSIVE)`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Domestic Sourcing Desk */}
+            <div className="col-span-12 lg:col-span-6 space-y-gutter">
+              <div className="card-chart-green rounded-xxl p-6 border border-forest-green/20 space-y-4">
+                <div className="flex justify-between items-start flex-wrap gap-2">
+                  <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2">
+                    <span className="material-symbols-outlined text-xl">home_pin</span>
+                    Indian Domestic Sourcing Desk (Mandi Basis)
+                  </h3>
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/25 text-[9px] font-mono font-bold">
+                    <span className="material-symbols-outlined text-[10px]">factory</span>
+                    Destination: TN Gate
+                  </span>
+                </div>
+                
+                {/* Domestic Presets */}
+                <div>
+                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">DOMESTIC STATES PRESETS</label>
+                  <div className="flex flex-wrap gap-1.5">
+                    {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
+                      <button
+                        key={name}
+                        onClick={() => handleDomesticImportPreset(name)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          selectedDomesticOrigin === name 
+                            ? 'bg-forest-green text-white border-forest-green shadow-sm font-extrabold' 
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {formatStateName(name)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Inputs Grid */}
+                <div className="grid grid-cols-2 gap-3">
+                  <div className="col-span-2">
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1 flex items-center gap-1">
+                      MANDI SPOT PRICE (INR/CANDY)
+                      {selectedDomesticOrigin === 'Gujarat (Dom)' && <span className="text-[8px] text-forest-green font-bold">● LIVE</span>}
+                    </label>
+                    <input
+                      type="number"
+                      step="100"
+                      value={domesticMandiPrice}
+                      onChange={(e) => setDomesticMandiPrice(parseFloat(e.target.value) || 0)}
                       className="w-full bg-surface-container-low border border-forest-green/30 rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
                     />
                   </div>
-                )}
 
-                <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">
-                    {isDomesticImport ? 'INLAND ROAD FREIGHT (INR)' : 'OCEAN FREIGHT (USD)'}
-                  </label>
-                  <input
-                    type="number"
-                    value={oceanFreightContainer}
-                    onChange={(e) => setOceanFreightContainer(parseInt(e.target.value) || 0)}
-                    className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                  />
-                </div>
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">
+                      INLAND ROAD FREIGHT (INR/CANDY)
+                    </label>
+                    <input
+                      type="number"
+                      value={domesticInlandFreight}
+                      onChange={(e) => setDomesticInlandFreight(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
 
-                <div>
-                  <label className="text-[10px] font-mono font-bold text-outline block mb-1">LOCAL HANDLING & PORT (INR)</label>
-                  <input
-                    type="number"
-                    value={localHandlingCandy}
-                    onChange={(e) => setLocalHandlingCandy(parseInt(e.target.value) || 0)}
-                    className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
-                  />
-                </div>
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">
+                      LOCAL HANDLING / OTHER COSTS (INR)
+                    </label>
+                    <input
+                      type="number"
+                      value={domesticHandlingCandy}
+                      onChange={(e) => setDomesticHandlingCandy(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
 
-                {isDomesticImport ? (
+                  {/* Taxes breakdown */}
                   <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
                     <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Domestic Taxes & Mandi Cess</h4>
                     <div className="grid grid-cols-2 gap-2">
@@ -2386,107 +2428,173 @@ function ImportExportDashboard({ colors, data }) {
                       </div>
                     </div>
                   </div>
-                ) : (
-                  <div className="col-span-2 bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/10 space-y-3">
-                    <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Custom Tax & Cess Breakdown</h4>
-                    <div className="grid grid-cols-3 gap-2">
-                      <div>
-                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">BASIC DUTY (BCD %)</label>
-                        <input
-                          type="number"
-                          step="0.5"
-                          value={importBcdRate}
-                          onChange={(e) => setImportBcdRate(parseFloat(e.target.value) || 0)}
-                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">AGRI CESS (AIDC %)</label>
-                        <input
-                          type="number"
-                          step="0.5"
-                          value={importAidcRate}
-                          onChange={(e) => setImportAidcRate(parseFloat(e.target.value) || 0)}
-                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-[9px] font-mono font-bold text-outline-variant block mb-0.5">SWS (% OF BCD)</label>
-                        <input
-                          type="number"
-                          step="1"
-                          value={importSwsRate}
-                          onChange={(e) => setImportSwsRate(parseFloat(e.target.value) || 0)}
-                          className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface"
-                        />
-                      </div>
+                </div>
+
+                {/* Landed Cost Output */}
+                <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Mandi Spot Price:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(domesticFobInrCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Inland Road Freight:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(domesticFreightInrCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Taxes & Cess (GST + Cess):</span>
+                    <span className="font-bold text-on-surface">
+                      ₹{Math.round(domesticTotalTaxDutyInrCandy).toLocaleString('en-IN')} 
+                      <span className="text-[10px] text-outline ml-1">
+                        ({(importGstRate + mandiFeeRate).toFixed(1)}%)
+                      </span>
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Local Handling & Other Costs:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(domesticHandlingCandy).toLocaleString('en-IN')}</span>
+                  </div>
+                  <div className="flex justify-between items-center text-sm font-mono font-bold text-forest-green border-b border-outline-variant pb-2">
+                    <span>Domestic Landed Cost:</span>
+                    <span>₹{Math.round(domesticLandedInrCandy).toLocaleString('en-IN')} / Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono font-semibold text-outline-variant">
+                    <span>Equiv Landed Price per Kg:</span>
+                    <span className="text-on-surface">₹{domesticLandedInrKg.toFixed(2)} / Kg</span>
+                  </div>
+
+                  <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
+                      domesticImportParity <= 0 
+                        ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
+                        : 'bg-tertiary/10 text-tertiary border-tertiary/20'
+                    }`}>
+                    <span className="font-bold">
+                      {selectedDomesticOrigin === 'Tamil Nadu (Dom)'
+                        ? 'Local TN Sourcing vs Shankar-6 Benchmark:'
+                        : 'Interstate Landed Parity vs Gujarat S-6 Spot:'}
+                    </span>
+                    <span className="font-bold">
+                      {domesticImportParity <= 0 
+                        ? `₹${Math.abs(Math.round(domesticImportParity)).toLocaleString('en-IN')} Discount (SAVINGS)` 
+                        : `₹${Math.round(domesticImportParity).toLocaleString('en-IN')} Premium (EXPENSIVE)`}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Bottom Sourcing Analytics Panel */}
+            <div className="col-span-12 space-y-gutter">
+              {/* Sourcing Arbitrage Box */}
+              <div className="bg-surface-container-low p-5 rounded-xxl border border-outline-variant/30 space-y-4">
+                <div className="flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+                  <span className="material-symbols-outlined text-xl text-primary">compare_arrows</span>
+                  <div>
+                    <h3 className="text-base font-headline font-bold text-on-surface">Landed Cost Arbitrage Analytics</h3>
+                    <p className="text-[11px] text-on-surface-variant font-medium">Real-time comparison of imported vs. domestic cotton delivered to your Tamil Nadu mill.</p>
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {/* Global Summary Card */}
+                  <div className="bg-primary/5 p-4 rounded-xl border border-primary/20 space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider">Active Global Corridor</span>
+                      <span className="text-xs font-mono font-bold text-outline-variant">{selectedGlobalOrigin}</span>
+                    </div>
+                    <div className="text-2xl font-mono font-bold text-primary">
+                      ₹{Math.round(globalLandedInrCandy).toLocaleString('en-IN')} <span className="text-xs font-sans font-medium text-on-surface">/ Candy</span>
+                    </div>
+                    <div className="text-xs font-mono text-outline-variant">
+                      ₹{globalLandedInrKg.toFixed(2)} / Kg Landed | Parity: {globalImportParity <= 0 ? '-' : '+'}₹{Math.abs(Math.round(globalImportParity)).toLocaleString('en-IN')}
                     </div>
                   </div>
-                )}
-              </div>
 
-              {/* Landed Cost Output */}
-              <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
-                <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">
-                    {isDomesticImport ? 'Domestic Mandi Spot Price:' : 'FOB Base Cost per Candy:'}
-                  </span>
-                  <span className="font-bold text-on-surface">₹{Math.round(fobInrCandy).toLocaleString('en-IN')}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">
-                    {isDomesticImport ? 'Inland Road Freight / Candy:' : 'Estimated Ocean Freight / Candy:'}
-                  </span>
-                  <span className="font-bold text-on-surface">₹{Math.round(freightInrCandy).toLocaleString('en-IN')}</span>
-                </div>
-                <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                  <span className="text-on-surface-variant">
-                    {isDomesticImport ? 'Taxes & Mandi Cess (GST + Cess):' : 'Taxes (BCD + AIDC + SWS):'}
-                  </span>
-                  <span className="font-bold text-on-surface">
-                    ₹{Math.round(totalTaxDutyInrCandy).toLocaleString('en-IN')} 
-                    <span className="text-[10px] text-outline ml-1">
-                      ({isDomesticImport ? `${(importGstRate + mandiFeeRate).toFixed(1)}%` : `${(importBcdRate + importAidcRate + (importBcdRate * importSwsRate / 100)).toFixed(1.5)}% Eff.`})
-                    </span>
-                  </span>
-                </div>
-                <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
-                  <span>Final Landed Cost (Tamil Nadu Factory Gate):</span>
-                  <span>₹{Math.round(finalLandedInrCandy).toLocaleString('en-IN')} / Candy</span>
-                </div>
-                <div className="flex justify-between items-center text-xs font-mono font-semibold text-outline-variant">
-                  <span>Equiv Landed Price per Kg:</span>
-                  <span className="text-on-surface">₹{finalLandedInrKg.toFixed(2)} / Kg</span>
-                </div>
-
-                <div className={`p-3 rounded-lg border flex justify-between items-center font-mono text-xs ${
-                    importParityInrCandy <= 0 
-                      ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
-                      : 'bg-tertiary/10 text-tertiary border-tertiary/20'
-                  }`}>
-                    <span className="font-bold">
-                      {importOrigin === 'Tamil Nadu (Dom)'
-                        ? 'Local TN Sourcing vs Shankar-6 Benchmark:'
-                        : isDomesticImport
-                          ? 'Interstate Landed Parity vs Gujarat S-6 Spot:'
-                          : 'Landed Import Parity vs Gujarat S-6 Spot:'}
-                    </span>
-                    <span className="font-bold">
-                      {importParityInrCandy <= 0 
-                        ? `₹${Math.abs(Math.round(importParityInrCandy)).toLocaleString('en-IN')} Discount (SAVINGS)` 
-                        : `₹${Math.round(importParityInrCandy).toLocaleString('en-IN')} Premium (EXPENSIVE)`}
-                    </span>
+                  {/* Domestic Summary Card */}
+                  <div className="bg-forest-green/5 p-4 rounded-xl border border-forest-green/20 space-y-2">
+                    <div className="flex justify-between items-center">
+                      <span className="text-[10px] font-mono font-bold text-forest-green uppercase tracking-wider">Active Domestic Corridor</span>
+                      <span className="text-xs font-mono font-bold text-outline-variant">{formatStateName(selectedDomesticOrigin)}</span>
+                    </div>
+                    <div className="text-2xl font-mono font-bold text-forest-green">
+                      ₹{Math.round(domesticLandedInrCandy).toLocaleString('en-IN')} <span className="text-xs font-sans font-medium text-on-surface">/ Candy</span>
+                    </div>
+                    <div className="text-xs font-mono text-outline-variant">
+                      ₹{domesticLandedInrKg.toFixed(2)} / Kg Landed | Parity: {domesticImportParity <= 0 ? '-' : '+'}₹{Math.abs(Math.round(domesticImportParity)).toLocaleString('en-IN')}
+                    </div>
                   </div>
                 </div>
 
+                {/* Arbitrage Spread Message */}
+                {(() => {
+                  const diff = Math.abs(globalLandedInrCandy - domesticLandedInrCandy);
+                  const globalIsCheaper = globalLandedInrCandy < domesticLandedInrCandy;
+                  return (
+                    <div className={`p-4 rounded-xl border flex flex-col sm:flex-row sm:justify-between sm:items-center gap-3 font-mono text-xs ${
+                      globalIsCheaper 
+                        ? 'bg-forest-green/10 text-forest-green border-forest-green/20' 
+                        : 'bg-primary/10 text-primary border-primary/20'
+                    }`}>
+                      <div>
+                        <span className="font-extrabold text-sm block flex items-center gap-1.5">
+                          <span className="material-symbols-outlined text-base">
+                            {globalIsCheaper ? 'check_circle' : 'info'}
+                          </span>
+                          {globalIsCheaper 
+                            ? 'Global Import Sourcing Advantage' 
+                            : 'Indian Domestic Sourcing Advantage'}
+                        </span>
+                        <span className="text-[11px] text-on-surface-variant font-medium block mt-1">
+                          {globalIsCheaper
+                            ? `Importing cotton from ${selectedGlobalOrigin} offers a financial spread advantage compared to sourcing from ${formatStateName(selectedDomesticOrigin)}.`
+                            : `Buying domestic cotton from ${formatStateName(selectedDomesticOrigin)} is more cost-effective than importing from ${selectedGlobalOrigin}.`}
+                        </span>
+                      </div>
+                      <div className="text-right shrink-0">
+                        <span className="text-[10px] text-outline block uppercase tracking-wider">Arbitrage Spread</span>
+                        <span className="font-extrabold text-base">
+                          ₹{Math.round(diff).toLocaleString('en-IN')} / Candy
+                        </span>
+                        <span className="block text-[9.5px] font-semibold text-outline-variant mt-0.5">
+                          (₹{(diff / kgsPerCandy).toFixed(2)} / Kg Difference)
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
                 {/* Connected Yarn Manufacturing Cost Simulator */}
-                <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3">
-                  <h4 className="text-[10px] font-mono font-bold text-primary uppercase tracking-wider flex items-center gap-1.5">
-                    <span className="material-symbols-outlined text-sm">precision_manufacturing</span>
-                    Factory Yarn Manufacturing Cost Simulator
-                  </h4>
+                <div className="bg-surface-container-low p-5 rounded-xxl border border-outline-variant/30 space-y-4">
+                  <div className="flex items-center justify-between gap-2 border-b border-outline-variant/20 pb-3 flex-wrap">
+                    <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-lg">precision_manufacturing</span>
+                      Yarn Cost & Margin Simulator
+                    </h4>
+                    
+                    {/* Active Cotton Source Toggle */}
+                    <div className="flex gap-1 p-1 bg-surface-container rounded-lg border border-outline-variant/20 w-fit shrink-0">
+                      <button
+                        onClick={() => setSimCottonSource('global')}
+                        className={`py-1 px-2.5 rounded-md text-[9px] font-mono font-bold transition-all ${
+                          simCottonSource === 'global' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
+                        }`}
+                      >
+                        Global Cotton ({selectedGlobalOrigin})
+                      </button>
+                      <button
+                        onClick={() => setSimCottonSource('domestic')}
+                        className={`py-1 px-2.5 rounded-md text-[9px] font-mono font-bold transition-all ${
+                          simCottonSource === 'domestic' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
+                        }`}
+                      >
+                        Domestic Cotton ({formatStateName(selectedDomesticOrigin)})
+                      </button>
+                    </div>
+                  </div>
+
                   <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">SELECT YARN COUNT TO SPIN</label>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1.5">SELECT YARN COUNT TO SIMULATE SPINNING</label>
                     <div className="grid grid-cols-3 gap-1.5">
                       {Object.keys(countParams).map(cnt => (
                         <button
@@ -2511,12 +2619,20 @@ function ImportExportDashboard({ colors, data }) {
                       <span className="font-bold text-on-surface">{importSimCount}</span>
                     </div>
                     <div className="flex justify-between items-center text-xs font-mono">
+                      <span className="text-on-surface-variant">Selected Cotton Feed:</span>
+                      <span className="font-bold text-primary uppercase">{simCottonSource} ({simCottonSource === 'global' ? selectedGlobalOrigin : formatStateName(selectedDomesticOrigin)})</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs font-mono">
                       <span className="text-on-surface-variant">Spinning Yield:</span>
                       <span className="font-bold text-on-surface">{(countParams[importSimCount].yieldRate * 100).toFixed(1)}% ({(1 / countParams[importSimCount].yieldRate).toFixed(2)}x RM factor)</span>
                     </div>
                     <div className="flex justify-between items-center text-xs font-mono">
+                      <span className="text-on-surface-variant">Raw Cotton Landed Cost:</span>
+                      <span className="font-bold text-on-surface">₹{(simCottonSource === 'global' ? globalLandedInrKg : domesticLandedInrKg).toFixed(2)} / Kg</span>
+                    </div>
+                    <div className="flex justify-between items-center text-xs font-mono">
                       <span className="text-on-surface-variant">Yarn Raw Material Cost:</span>
-                      <span className="font-bold text-on-surface">₹{Math.round(finalLandedInrKg / countParams[importSimCount].yieldRate)} / Kg</span>
+                      <span className="font-bold text-on-surface">₹{Math.round((simCottonSource === 'global' ? globalLandedInrKg : domesticLandedInrKg) / countParams[importSimCount].yieldRate)} / Kg</span>
                     </div>
                     <div className="flex justify-between items-center text-xs font-mono">
                       <span className="text-on-surface-variant">Spinning Conversion Cost:</span>
@@ -2524,10 +2640,10 @@ function ImportExportDashboard({ colors, data }) {
                     </div>
                     <div className="flex justify-between items-center text-xs font-mono border-t border-dashed border-outline-variant/30 pt-1.5 font-bold">
                       <span className="text-on-surface-variant">Total Yarn Manufacturing Cost:</span>
-                      <span className="text-on-surface">₹{Math.round(finalLandedInrKg / countParams[importSimCount].yieldRate + countParams[importSimCount].conversion)} / Kg</span>
+                      <span className="text-on-surface">₹{Math.round((simCottonSource === 'global' ? globalLandedInrKg : domesticLandedInrKg) / countParams[importSimCount].yieldRate + countParams[importSimCount].conversion)} / Kg</span>
                     </div>
                     <div className="flex justify-between items-center text-xs font-mono">
-                      <span className="text-on-surface-variant">Yarn Market Selling Price:</span>
+                      <span className="text-on-surface-variant">Yarn Market Selling Price (India):</span>
                       <span className="font-bold text-forest-green">₹{getImportYarnPrice(importSimCount)} / Kg</span>
                     </div>
                     
@@ -2548,164 +2664,122 @@ function ImportExportDashboard({ colors, data }) {
                     </div>
                   </div>
                 </div>
-            </div>
 
-            {/* Strategic Sourcing Policy */}
-            <div className="card-chart-green rounded-xxl p-5 space-y-3">
-              <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-lg">policy</span>
-                Strategic Sourcing Guidelines for TN Spinners
-              </h4>
-              <p className="text-[11px] leading-relaxed text-on-surface-variant">
-                Tamil Nadu accounts for over 45% of India's spinning capacity but imports over 85% of its long-staple cotton from other states or overseas. Sourcing globally becomes highly strategic when the **Landed Import Parity** is negative (discount to Shankar-6) or when manufacturing fine combed/compact yarns (40s-80s) which require low-trash, contamination-free fiber.
-              </p>
-              <div className="text-[10px] font-mono bg-surface-container-low/50 p-2.5 rounded-lg border border-outline-variant/15 space-y-1">
-                <strong className="text-primary uppercase tracking-wider block mb-1">Recommended Sourcing Windows</strong>
-                <div>• <strong>US Upland / Brazil Cerrado</strong>: Purchase in Oct - Jan (new crop arrival basis) to lock in low ocean freight rates.</div>
-                <div>• <strong>Egypt Giza / Supima</strong>: Contract forward in Mar-May for high-end luxury counts (60s combed compact).</div>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column: Sourcing Profiles & SWOT */}
-          <div className="col-span-12 lg:col-span-6 space-y-gutter">
-            <div className="card-chart-green rounded-xxl p-6 h-full flex flex-col justify-between">
-              <div>
-                <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2 mb-4">
-                  <span className="material-symbols-outlined">psychology</span>
-                  Sourcing Profile & SWOT Analysis
-                </h3>
-
-                <div className="grid grid-cols-2 gap-3 mb-4">
+                {/* Strategic Sourcing Policy */}
+                <div className="bg-surface-container-low p-5 rounded-xxl border border-outline-variant/30 space-y-3 flex flex-col justify-between">
                   <div>
-                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT GLOBAL IMPORT PROFILE TO TN</label>
-                    <select
-                      value={selectedGlobalOrigin}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setSelectedGlobalOrigin(val);
-                        handleImportPreset(val);
-                      }}
-                      className="w-full bg-surface-container-high border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface animate-fade-in"
-                    >
-                      {Object.keys(importPresets).filter(k => importPresets[k].type === 'global').map(name => (
-                        <option key={name} value={name}>{name}</option>
-                      ))}
-                    </select>
+                    <h4 className="text-sm font-headline font-bold text-forest-green flex items-center gap-1.5 mb-2">
+                      <span className="material-symbols-outlined text-lg">policy</span>
+                      Strategic Sourcing Guidelines for TN Spinners
+                    </h4>
+                    <p className="text-[11px] leading-relaxed text-on-surface-variant mb-4">
+                      Tamil Nadu accounts for over 45% of India's spinning capacity but imports over 85% of its long-staple cotton from other states or overseas. Sourcing globally becomes highly strategic when the **Landed Import Parity** is negative (discount to Shankar-6) or when manufacturing fine combed/compact yarns (40s-80s) which require low-trash, contamination-free fiber.
+                    </p>
                   </div>
-                  <div>
-                    <label className="text-[9px] font-mono font-bold text-outline block mb-1">SELECT INDIAN DOMESTIC PROFILE TO TN</label>
-                    <select
-                      value={selectedDomesticOrigin}
-                      onChange={(e) => {
-                        const val = e.target.value;
-                        setSelectedDomesticOrigin(val);
-                        handleImportPreset(val);
-                      }}
-                      className="w-full bg-surface-container-high border border-outline-variant rounded-lg p-1.5 text-xs font-mono font-bold text-on-surface animate-fade-in"
-                    >
-                      {Object.keys(importPresets).filter(k => importPresets[k].type === 'domestic').map(name => (
-                        <option key={name} value={name}>{formatStateName(name)}</option>
-                      ))}
-                    </select>
+                  <div className="text-[10px] font-mono bg-surface-container-low/50 p-3 rounded-lg border border-outline-variant/15 space-y-1.5">
+                    <strong className="text-primary uppercase tracking-wider block mb-1">Recommended Sourcing Windows</strong>
+                    <div>• <strong>US Upland / Brazil Cerrado</strong>: Purchase in Oct - Jan (new crop arrival basis) to lock in low ocean freight rates.</div>
+                    <div>• <strong>Egypt Giza / Supima</strong>: Contract forward in Mar-May for high-end luxury counts (60s combed compact).</div>
+                    <div>• <strong>Interstate Mandi</strong>: Buy central cotton (Gujarat S-6) in Q1 when arrivals peak and moisture premiums subside.</div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Comparative Specs & SWOT */}
+              <div className="grid grid-cols-12 gap-gutter">
+                {/* Specs Table */}
+                <div className="col-span-12 lg:col-span-6 bg-surface-container-low p-5 rounded-xxl border border-outline-variant/30 space-y-3">
+                  <h4 className="text-sm font-headline font-bold text-forest-green uppercase tracking-wider flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-lg">compare</span>
+                    Compare Sourcing Fiber Specifications
+                  </h4>
+                  <div className="overflow-x-auto">
+                    <table className="w-full text-xs font-mono text-left">
+                      <thead>
+                        <tr className="border-b border-outline-variant/20 text-[10px] font-bold text-outline uppercase">
+                          <th className="py-2 pr-2">SPECIFICATION</th>
+                          <th className="py-2 px-2 text-primary">{selectedGlobalOrigin} (Global)</th>
+                          <th className="py-2 pl-2 text-forest-green">{formatStateName(selectedDomesticOrigin)} (Domestic)</th>
+                        </tr>
+                      </thead>
+                      <tbody className="divide-y divide-outline-variant/10 text-on-surface">
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Harvest Cycle</td>
+                          <td className="py-2.5 px-2 font-semibold text-primary">{originProfiles[selectedGlobalOrigin]?.harvesting}</td>
+                          <td className="py-2.5 pl-2 font-semibold text-forest-green">{originProfiles[selectedDomesticOrigin]?.harvesting}</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Staple Length</td>
+                          <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.staple}</td>
+                          <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.staple}</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Micronaire</td>
+                          <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.mic}</td>
+                          <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.mic}</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Fiber Strength</td>
+                          <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.strength}</td>
+                          <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.strength}</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Trash Content</td>
+                          <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.trash}</td>
+                          <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.trash}</td>
+                        </tr>
+                        <tr>
+                          <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Comber Waste</td>
+                          <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.comberWaste}</td>
+                          <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.comberWaste}</td>
+                        </tr>
+                      </tbody>
+                    </table>
                   </div>
                 </div>
 
-                <div className="space-y-4 text-xs font-sans">
-                  {/* Sowing & Cotton Spec Table */}
-                  <div className="bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-2">
-                    <h4 className="text-[10px] font-mono font-bold text-forest-green uppercase tracking-wider flex items-center gap-1">
-                      <span className="material-symbols-outlined text-[12px]">compare</span>
-                      Compare Sourcing Fiber Specifications & Harvest Cycles (Destination: TN)
+                {/* SWOT Panels */}
+                <div className="col-span-12 lg:col-span-6 grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {/* Global SWOT */}
+                  <div className="space-y-3 bg-[#E8F5E9]/40 dark:bg-[#1B5E20]/10 p-4 rounded-xxl border border-forest-green/20">
+                    <h4 className="font-bold text-forest-green text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
+                      <span className="material-symbols-outlined text-sm">public</span>
+                      {selectedGlobalOrigin} SWOT Profile
                     </h4>
-                    <div className="overflow-x-auto">
-                      <table className="w-full text-[11px] font-mono text-left">
-                        <thead>
-                          <tr className="border-b border-outline-variant/20 text-[9px] font-bold text-outline">
-                            <th className="py-2 pr-2">SPECIFICATION</th>
-                            <th className="py-2 px-2 text-primary">{selectedGlobalOrigin} to TN</th>
-                            <th className="py-2 pl-2 text-forest-green">{formatStateName(selectedDomesticOrigin)} to TN</th>
-                          </tr>
-                        </thead>
-                        <tbody className="divide-y divide-outline-variant/10 text-on-surface">
-                          <tr>
-                            <td className="py-2 pr-2 font-bold text-on-surface-variant">Harvest Cycle</td>
-                            <td className="py-2 px-2 font-semibold text-[9.5px] text-primary">{originProfiles[selectedGlobalOrigin]?.harvesting}</td>
-                            <td className="py-2 pl-2 font-semibold text-[9.5px] text-forest-green">{originProfiles[selectedDomesticOrigin]?.harvesting}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Staple Length</td>
-                            <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.staple}</td>
-                            <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.staple}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Micronaire</td>
-                            <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.mic}</td>
-                            <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.mic}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Fiber Strength</td>
-                            <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.strength}</td>
-                            <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.strength}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Trash Content</td>
-                            <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.trash}</td>
-                            <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.trash}</td>
-                          </tr>
-                          <tr>
-                            <td className="py-2.5 pr-2 font-bold text-on-surface-variant">Comber Waste</td>
-                            <td className="py-2.5 px-2 text-on-surface">{originProfiles[selectedGlobalOrigin]?.comberWaste}</td>
-                            <td className="py-2.5 pl-2 text-on-surface">{originProfiles[selectedDomesticOrigin]?.comberWaste}</td>
-                          </tr>
-                        </tbody>
-                      </table>
+                    <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant font-sans">
+                      <div>
+                        <strong className="text-forest-green block text-[9px] font-mono">STRENGTHS:</strong>
+                        {originProfiles[selectedGlobalOrigin]?.strengths}
+                      </div>
+                      <div>
+                        <strong className="text-error block text-[9px] font-mono">WEAKNESSES:</strong>
+                        {originProfiles[selectedGlobalOrigin]?.weaknesses}
+                      </div>
+                      <div>
+                        <strong className="text-primary block text-[9px] font-mono">OPPORTUNITIES:</strong>
+                        {originProfiles[selectedGlobalOrigin]?.opps}
+                      </div>
                     </div>
                   </div>
 
-                  {/* Comparative SWOT Columns */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    {/* Global SWOT */}
-                    <div className="space-y-3 bg-[#E8F5E9]/40 dark:bg-[#1B5E20]/10 p-3.5 rounded-xl border border-forest-green/20">
-                      <h4 className="font-bold text-forest-green text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
-                        <span className="material-symbols-outlined text-sm">public</span>
-                        {selectedGlobalOrigin} Import to TN SWOT
-                      </h4>
-                      <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant">
-                        <div>
-                          <strong className="text-forest-green block text-[9px]">STRENGTHS:</strong>
-                          {originProfiles[selectedGlobalOrigin]?.strengths}
-                        </div>
-                        <div>
-                          <strong className="text-error block text-[9px]">WEAKNESSES:</strong>
-                          {originProfiles[selectedGlobalOrigin]?.weaknesses}
-                        </div>
-                        <div>
-                          <strong className="text-primary block text-[9px]">OPPORTUNITIES:</strong>
-                          {originProfiles[selectedGlobalOrigin]?.opps}
-                        </div>
+                  {/* Domestic SWOT */}
+                  <div className="space-y-3 bg-[#FFF8E1]/40 dark:bg-[#F57F17]/10 p-4 rounded-xxl border border-amber-500/20">
+                    <h4 className="font-bold text-amber-600 dark:text-amber-400 text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
+                      <span className="material-symbols-outlined text-sm">home_pin</span>
+                      {formatStateName(selectedDomesticOrigin)} SWOT Profile
+                    </h4>
+                    <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant font-sans">
+                      <div>
+                        <strong className="text-forest-green block text-[9px] font-mono">STRENGTHS:</strong>
+                        {originProfiles[selectedDomesticOrigin]?.strengths}
                       </div>
-                    </div>
-
-                    {/* Domestic SWOT */}
-                    <div className="space-y-3 bg-[#FFF8E1]/40 dark:bg-[#F57F17]/10 p-3.5 rounded-xl border border-amber-500/20">
-                      <h4 className="font-bold text-amber-600 dark:text-amber-400 text-[10px] flex items-center gap-1.5 uppercase tracking-wider">
-                        <span className="material-symbols-outlined text-sm">home_pin</span>
-                        {formatStateName(selectedDomesticOrigin)} Sourcing to TN SWOT
-                      </h4>
-                      <div className="space-y-2 text-[10px] leading-relaxed text-on-surface-variant">
-                        <div>
-                          <strong className="text-forest-green block text-[9px]">STRENGTHS:</strong>
-                          {originProfiles[selectedDomesticOrigin]?.strengths}
-                        </div>
-                        <div>
-                          <strong className="text-error block text-[9px]">WEAKNESSES:</strong>
-                          {originProfiles[selectedDomesticOrigin]?.weaknesses}
-                        </div>
-                        <div>
-                          <strong className="text-primary block text-[9px]">OPPORTUNITIES:</strong>
-                          {originProfiles[selectedDomesticOrigin]?.opps}
-                        </div>
+                      <div>
+                        <strong className="text-error block text-[9px] font-mono">WEAKNESSES:</strong>
+                        {originProfiles[selectedDomesticOrigin]?.weaknesses}
+                      </div>
+                      <div>
+                        <strong className="text-primary block text-[9px] font-mono">OPPORTUNITIES:</strong>
+                        {originProfiles[selectedDomesticOrigin]?.opps}
                       </div>
                     </div>
                   </div>
@@ -2714,7 +2788,8 @@ function ImportExportDashboard({ colors, data }) {
             </div>
           </div>
         </div>
-    )}
+      )}
+
 
       {subTab === 'export' && (
         <div className="space-y-gutter">
