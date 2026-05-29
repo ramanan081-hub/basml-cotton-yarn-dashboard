@@ -466,9 +466,6 @@ main table th {
 
 /* Force vertical-only scrolling on desktop, preventing horizontal scrollbars */
 @media (min-width: 1024px) {
-  main .overflow-x-auto {
-    overflow-x: visible !important;
-  }
   main table {
     table-layout: auto !important;
     width: 100% !important;
