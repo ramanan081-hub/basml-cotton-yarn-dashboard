@@ -376,9 +376,10 @@ function PresentationDashboard({ data, darkMode, colors }) {
 import HomeStitch from './HomeStitch';
 import YarnAnalysisStitch from './YarnAnalysisStitch';
 import QualityExpressionStitch from './QualityExpressionStitch';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import { initialData, generateUpdatedData } from './data';
 import { cottonAnalysis, yarnAnalysis, globalIncidents, strategicGrowth } from './analysisData';
+import { expandedCottonVarieties, expandedYarnVarieties } from './expandedData';
 import { 
   BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, ComposedChart,
   XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer, AreaChart, Area
@@ -4598,11 +4599,296 @@ export default App;
 
 function AnalysisDashboard({ darkMode, colors }) {
   const [subTab, setSubTab] = useState('cotton'); // 'cotton', 'yarn', 'macro'
-  const [selectedCotton, setSelectedCotton] = useState('Shankar-6 (S-6)');
-  const [selectedYarn, setSelectedYarn] = useState('30s Combed');
+  const [selectedCotton, setSelectedCotton] = useState('Shankar-6');
+  const [selectedYarn, setSelectedYarn] = useState('Cotton Yarn 30s Carded');
 
-  const currentCotton = cottonAnalysis.data[selectedCotton];
-  const currentYarn = yarnAnalysis.data[selectedYarn];
+  const noiseIds = useMemo(() => ['physical_properties', 'market_data', 'production_data', 'quality_standards', 'economics', 'applications', 'sourcing'], []);
+
+  const allCottonOptions = useMemo(() => {
+    return expandedCottonVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
+  }, [noiseIds]);
+
+  const allYarnOptions = useMemo(() => {
+    return expandedYarnVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
+  }, [noiseIds]);
+
+  const parsePrice = (priceStr) => {
+    if (!priceStr) return 0;
+    const clean = priceStr.replace(/[^0-9.-]/g, '');
+    const parts = clean.split('-');
+    if (parts.length > 0) {
+      const val = parseFloat(parts[0]);
+      if (!isNaN(val)) return val;
+    }
+    return 0;
+  };
+
+  const getDeterministicRandom = (str, seed) => {
+    let hash = seed;
+    for (let i = 0; i < str.length; i++) {
+      hash = (hash << 5) - hash + str.charCodeAt(i);
+      hash |= 0;
+    }
+    return (Math.abs(hash) % 1000) / 1000;
+  };
+
+  const getCottonData = (varietyName) => {
+    const normalized = varietyName.toLowerCase();
+    if (normalized.includes('shankar-6') || normalized === 'shankar 6') {
+      return cottonAnalysis.data['Shankar-6 (S-6)'];
+    }
+    if (normalized.includes('mcu-5') || normalized === 'mcu 5') {
+      return cottonAnalysis.data['MCU-5'];
+    }
+    if (normalized.includes('dch-32') || normalized.includes('suvin')) {
+      return cottonAnalysis.data['DCH-32 / Suvin'];
+    }
+    if (normalized.includes('j-34') || normalized === 'j 34') {
+      return cottonAnalysis.data['J-34'];
+    }
+    if (normalized.includes('pima')) {
+      return cottonAnalysis.data['US Pima'];
+    }
+    if (normalized.includes('ice cotton')) {
+      return cottonAnalysis.data['ICE Cotton No. 2 (INR Equiv)'];
+    }
+    if (cottonAnalysis.data[varietyName]) {
+      return cottonAnalysis.data[varietyName];
+    }
+    return null;
+  };
+
+  const getYarnData = (varietyName) => {
+    const normalized = varietyName.toLowerCase();
+    if (normalized.includes('30s combed')) {
+      return yarnAnalysis.data['30s Combed'];
+    }
+    if (normalized.includes('40s compact')) {
+      return yarnAnalysis.data['40s Compact'];
+    }
+    if (normalized.includes('60s compact')) {
+      return yarnAnalysis.data['60s Compact'];
+    }
+    if (normalized.includes('80s compact') || normalized.includes('80s els')) {
+      return yarnAnalysis.data['80s Compact ELS'];
+    }
+    if (normalized.includes('20s carded')) {
+      return yarnAnalysis.data['20s Carded'];
+    }
+    if (normalized.includes('32s poly-cotton') || normalized.includes('pc 32s') || normalized.includes('32s combed pc')) {
+      return yarnAnalysis.data['32s Poly-Cotton'];
+    }
+    if (yarnAnalysis.data[varietyName]) {
+      return yarnAnalysis.data[varietyName];
+    }
+    return null;
+  };
+
+  const generateDynamicCotton = (variety) => {
+    const basePrice = parsePrice(variety.price) || 65000;
+    const name = variety.name;
+    const staple = variety.staple || 'Medium Staple';
+    const origin = variety.origin || 'Major Producing States';
+    const description = `${name} is an active cotton variety of ${variety.category || 'Standard cotton'}, characterized by its staple length of ${staple}. It is cultivated across ${origin} and is predominantly used for ${variety.applications ? variety.applications.join(', ') : 'commercial spinning applications'}.`;
+
+    const dayWisePlan = Array.from({ length: 7 }, (_, i) => {
+      const seedVal = getDeterministicRandom(name, i);
+      const pctChange = -0.015 + seedVal * 0.03;
+      const priceForecast = Math.round(basePrice * (1 + pctChange));
+      const triggerPct = -0.005 - (getDeterministicRandom(name, i + 10) * 0.01);
+      const triggerLevel = Math.round(priceForecast * (1 + triggerPct));
+      const targetBales = Math.round(500 + getDeterministicRandom(name, i + 20) * 2000);
+      
+      let recommendation = 'Hold';
+      if (pctChange < -0.008) recommendation = 'Aggressive Buy';
+      else if (pctChange < -0.002) recommendation = 'Buy on Dip';
+      else if (pctChange > 0.008) recommendation = 'Wait / Hold';
+      else recommendation = 'Moderate Buy';
+
+      return {
+        day: `Day ${i + 1}`,
+        date: '',
+        targetBales,
+        priceForecast,
+        triggerLevel,
+        recommendation
+      };
+    });
+
+    const monthWisePlan = Array.from({ length: 6 }, (_, i) => {
+      const seedVal = getDeterministicRandom(name, i + 30);
+      const pctChange = -0.03 + seedVal * 0.08;
+      const avgPrice = Math.round(basePrice * (1 + pctChange));
+      const targetBales = Math.round(10000 + getDeterministicRandom(name, i + 40) * 40000);
+      const allocatedBudgetCr = parseFloat(((targetBales * avgPrice) / 10000000).toFixed(2));
+      const hedgingRatio = Math.round(20 + getDeterministicRandom(name, i + 50) * 60);
+
+      return {
+        month: '',
+        targetBales,
+        avgPrice,
+        allocatedBudgetCr,
+        hedgingRatio
+      };
+    });
+
+    const years = ['2022-23', '2023-24', '2024-25', '2025-26 (Est)', '2026-27 (Proj)'];
+    const yearWisePlan = years.map((year, i) => {
+      const seedVal = getDeterministicRandom(name, i + 60);
+      let yearPct = 0;
+      if (i === 0) yearPct = -0.05;
+      else if (i === 1) yearPct = -0.02;
+      else if (i === 2) yearPct = -0.01;
+      else if (i === 3) yearPct = 0.0;
+      else if (i === 4) yearPct = 0.03;
+      
+      const estPrice = Math.round(basePrice * (1 + yearPct + (seedVal - 0.5) * 0.02));
+      const totalPurchaseBales = parseFloat((1.5 + getDeterministicRandom(name, i + 70) * 5).toFixed(2));
+      const productionOutlook = parseFloat((50 + getDeterministicRandom(name, i + 80) * 280).toFixed(2));
+
+      return {
+        year,
+        totalPurchaseBales,
+        estPrice,
+        productionOutlook
+      };
+    });
+
+    const baseFactors = [
+      { factor: 'Monsoon Coverage', weight: 35 },
+      { factor: 'MSP Adjustments', weight: 25 },
+      { factor: 'Mandi Arrival Volumes', weight: 20 },
+      { factor: 'Export & Import Tariffs', weight: 20 }
+    ];
+    const affectingFactors = baseFactors.map((f, i) => {
+      const seedVal = getDeterministicRandom(name, i + 90);
+      const weight = Math.round(f.weight * (0.8 + seedVal * 0.4));
+      return {
+        factor: `${variety.group === 'International Cotton' ? 'Global ' : ''}${f.factor}`,
+        weight
+      };
+    });
+
+    return {
+      staple,
+      origin,
+      description,
+      dayWisePlan,
+      monthWisePlan,
+      yearWisePlan,
+      affectingFactors
+    };
+  };
+
+  const generateDynamicYarn = (variety) => {
+    const basePrice = parsePrice(variety.price) || 250;
+    const name = variety.name;
+    const count = variety.count || name;
+    const description = `${name} is an active count categorized under ${variety.category || 'Spun Yarn'}, with typical applications in ${variety.applications ? variety.applications.join(', ') : 'industrial or apparel textiles'}. It maintains high availability and standard quality metrics.`;
+
+    const dayWisePlan = Array.from({ length: 7 }, (_, i) => {
+      const seedVal = getDeterministicRandom(name, i);
+      const pctChange = -0.02 + seedVal * 0.04;
+      const currentPrice = Math.round(basePrice * (1 + pctChange));
+      const marginSpreadPct = 0.06 + getDeterministicRandom(name, i + 10) * 0.04;
+      const marginSpread = Math.round(currentPrice * marginSpreadPct);
+      const targetQtyKg = Math.round((20000 + getDeterministicRandom(name, i + 20) * 80000));
+      
+      let recommendation = 'Hold';
+      if (pctChange < -0.01) recommendation = 'Aggressive Buy';
+      else if (pctChange < 0) recommendation = 'Pre-buy / Accumulate';
+      else recommendation = 'Wait for Parity';
+
+      return {
+        day: `Day ${i + 1}`,
+        date: '',
+        targetQtyKg,
+        currentPrice,
+        marginSpread,
+        recommendation
+      };
+    });
+
+    const monthWisePlan = Array.from({ length: 6 }, (_, i) => {
+      const seedVal = getDeterministicRandom(name, i + 30);
+      const pctChange = -0.04 + seedVal * 0.08;
+      const avgYarnPriceKg = Math.round(basePrice * (1 + pctChange));
+      const combedCompactDemand = Math.round(60 + getDeterministicRandom(name, i + 40) * 35);
+      const blendedYarnDemand = Math.round(40 + getDeterministicRandom(name, i + 50) * 45);
+      const exportOrdersContainer = Math.round(10 + getDeterministicRandom(name, i + 60) * 90);
+
+      return {
+        month: '',
+        combedCompactDemand,
+        blendedYarnDemand,
+        avgYarnPriceKg,
+        exportOrdersContainer
+      };
+    });
+
+    const years = ['2022-23', '2023-24', '2024-25', '2025-26 (Est)', '2026-27 (Proj)'];
+    const yearWisePlan = years.map((year, i) => {
+      const seedVal = getDeterministicRandom(name, i + 70);
+      let yearPct = 0;
+      if (i === 0) yearPct = -0.06;
+      else if (i === 1) yearPct = -0.03;
+      else if (i === 2) yearPct = -0.01;
+      else if (i === 3) yearPct = 0.0;
+      else if (i === 4) yearPct = 0.04;
+      
+      const price = basePrice * (1 + yearPct);
+      const avgSpreadKg = parseFloat((price * (0.07 + seedVal * 0.03)).toFixed(1));
+      const domesticDemandMkg = Math.round(500 + getDeterministicRandom(name, i + 80) * 1000);
+      const exportDemandMkg = Math.round(300 + getDeterministicRandom(name, i + 90) * 500);
+
+      return {
+        year,
+        domesticDemandMkg,
+        exportDemandMkg,
+        avgSpreadKg
+      };
+    });
+
+    return {
+      count,
+      description,
+      dayWisePlan,
+      monthWisePlan,
+      yearWisePlan
+    };
+  };
+
+  const currentCotton = useMemo(() => {
+    const varietyObj = allCottonOptions.find(v => v.name === selectedCotton) || allCottonOptions.find(v => v.name.includes('Shankar-6')) || allCottonOptions[0];
+    if (!varietyObj) return null;
+    const staticData = getCottonData(varietyObj.name);
+    if (staticData) {
+      return {
+        ...staticData,
+        name: varietyObj.name,
+        group: varietyObj.group,
+        staple: varietyObj.staple || staticData.staple,
+        origin: varietyObj.origin || staticData.origin,
+        price: varietyObj.price
+      };
+    }
+    return generateDynamicCotton(varietyObj);
+  }, [selectedCotton, allCottonOptions]);
+
+  const currentYarn = useMemo(() => {
+    const varietyObj = allYarnOptions.find(v => v.name === selectedYarn) || allYarnOptions.find(v => v.name.includes('30s Carded')) || allYarnOptions[0];
+    if (!varietyObj) return null;
+    const staticData = getYarnData(varietyObj.name);
+    if (staticData) {
+      return {
+        ...staticData,
+        name: varietyObj.name,
+        category: varietyObj.category,
+        price: varietyObj.price
+      };
+    }
+    return generateDynamicYarn(varietyObj);
+  }, [selectedYarn, allYarnOptions]);
 
   const getDynamicDayWisePlan = (staticPlan) => {
     if (!staticPlan) return [];
@@ -4763,19 +5049,18 @@ function AnalysisDashboard({ darkMode, colors }) {
               <div>
                 <span className="text-xs font-mono font-bold text-on-surface-variant block mb-2 tracking-wider">FILTER COTTON VARIETY</span>
                 <div className="flex flex-wrap gap-2">
-                  {cottonAnalysis.types.map((type) => (
-                    <button
-                      key={type}
-                      className={`py-2 px-4 rounded-lg text-xs font-headline font-bold transition-all duration-200 border ${
-                        selectedCotton === type 
-                          ? 'bg-primary text-on-primary border-primary' 
-                          : 'bg-surface border-outline-variant text-on-surface hover:bg-surface-container-high'
-                      }`}
-                      onClick={() => setSelectedCotton(type)}
-                    >
-                      {type}
-                    </button>
-                  ))}
+                  <select
+                    id="cotton-analysis-select"
+                    value={selectedCotton}
+                    onChange={(e) => setSelectedCotton(e.target.value)}
+                    className="w-full md:w-[320px] bg-surface-container border border-outline-variant rounded-xl p-3 text-xs text-on-surface font-headline font-semibold focus:outline-none focus:border-primary transition-all cursor-pointer shadow-sm"
+                  >
+                    {allCottonOptions.map((v) => (
+                      <option key={v.id || v.name} value={v.name} className="bg-surface font-sans text-xs">
+                        {v.name} ({v.group})
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="flex-1 min-w-[280px] lg:pl-6 lg:border-l-2 lg:border-primary">
@@ -5013,19 +5298,18 @@ function AnalysisDashboard({ darkMode, colors }) {
               <div>
                 <span className="text-xs font-mono font-bold text-on-surface-variant block mb-2 tracking-wider">FILTER YARN COUNT TYPE</span>
                 <div className="flex flex-wrap gap-2">
-                  {yarnAnalysis.types.map((type) => (
-                    <button
-                      key={type}
-                      className={`py-2 px-4 rounded-lg text-xs font-headline font-bold transition-all duration-200 border ${
-                        selectedYarn === type 
-                          ? 'bg-primary text-on-primary border-primary' 
-                          : 'bg-surface border-outline-variant text-on-surface hover:bg-surface-container-high'
-                      }`}
-                      onClick={() => setSelectedYarn(type)}
-                    >
-                      {type}
-                    </button>
-                  ))}
+                  <select
+                    id="yarn-analysis-select"
+                    value={selectedYarn}
+                    onChange={(e) => setSelectedYarn(e.target.value)}
+                    className="w-full md:w-[320px] bg-surface-container border border-outline-variant rounded-xl p-3 text-xs text-on-surface font-headline font-semibold focus:outline-none focus:border-primary transition-all cursor-pointer shadow-sm"
+                  >
+                    {allYarnOptions.map((v) => (
+                      <option key={v.id || v.name} value={v.name} className="bg-surface font-sans text-xs">
+                        {v.name} ({v.category})
+                      </option>
+                    ))}
+                  </select>
                 </div>
               </div>
               <div className="flex-1 min-w-[280px] lg:pl-6 lg:border-l-2 lg:border-primary">

@@ -317,95 +317,23 @@ export default function YarnDashboard({ data, darkMode, colors }) {
 
       {/* Grid: Global and India domestic yarn supply demand & pricing */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-        {/* Global Cotton Yarn */}
+        {/* Cotton Yarn Varieties */}
         <div className="card-table-orange rounded-xl p-6 flex flex-col justify-between">
           <div>
             <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-xl">globe</span>
-              Global Yarn Varieties Supply/Demand & Prices
+              <span className="material-symbols-outlined text-xl">grass</span>
+              Cotton Yarn Varieties (Pure Cotton)
             </h3>
             
             <div className="relative mb-4">
               <input
                 type="text"
-                placeholder="Search yarn counts & specifications..."
+                placeholder="Search cotton yarn counts..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-primary text-on-surface"
               />
               <span className="material-symbols-outlined absolute left-2.5 top-2 text-lg text-outline">search</span>
-            </div>
-
-            <div className="overflow-x-auto border border-outline-variant rounded-lg mb-6 max-h-[300px] overflow-y-auto">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Yarn Type & Spec</th>
-                    <th className="text-right">Est. Current (USD)</th>
-                    <th className="text-right">Forecast</th>
-                    <th className="text-right">Growth</th>
-                  </tr>
-                </thead>
-                <tbody className="text-xs">
-                  {filteredYarns.map((p, i) => (
-                    <tr 
-                      key={i}
-                      className={`cursor-pointer transition-colors ${p.name === selectedYarn ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-soft-orange/5'}`}
-                      onClick={() => setSelectedYarn(p.name)}
-                    >
-                      <td className="font-bold table-highlight-text flex items-center gap-1.5 flex-wrap">
-                        {p.name}
-                        <FreshnessBadge />
-                      </td>
-                      <td className="text-right font-bold text-on-surface">
-                        ${(p.base / 85.50).toFixed(2)}/kg
-                      </td>
-                      <td className="text-right font-bold table-highlight-text">
-                        ${(p.est / 85.50).toFixed(2)}/kg
-                      </td>
-                      <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-            
-            <h4 className="text-xs font-mono font-bold text-on-surface-variant mb-2">Global Yarn Balance Sheet (Million Tons)</h4>
-            <div className="overflow-x-auto border border-outline-variant rounded-lg">
-              <table>
-                <thead>
-                  <tr>
-                    <th>Year</th>
-                    <th className="text-right">Prod (M Tons)</th>
-                    <th className="text-right">Demand (M Tons)</th>
-                    <th className="text-right">Ending Stocks</th>
-                  </tr>
-                </thead>
-                <tbody className="text-xs">
-                  {data.global?.balanceSheet?.map((row, i) => (
-                    <tr key={i}>
-                      <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
-                      <td className="text-right">{row.production}</td>
-                      <td className="text-right">{row.demand}</td>
-                      <td className="text-right">{row.inventory}</td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-
-        {/* India Domestic Cotton Yarn */}
-        <div className="card-table-orange rounded-xl p-6 flex flex-col justify-between">
-          <div>
-            <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
-              <span className="material-symbols-outlined text-xl">map</span>
-              India Domestic Yarn Markets
-            </h3>
-            
-            <div className="relative mb-4 opacity-0 pointer-events-none">
-              <input type="text" disabled className="w-full rounded-lg py-2" />
             </div>
 
             <div className="overflow-x-auto border border-outline-variant rounded-lg mb-6 max-h-[300px] overflow-y-auto">
@@ -419,7 +347,82 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                   </tr>
                 </thead>
                 <tbody className="text-xs">
-                  {filteredYarns.map((p, i) => (
+                  {filteredYarns.filter(y => y.category && y.category.startsWith('PURE COTTON YARN')).map((p, i) => (
+                    <tr 
+                      key={i}
+                      className={`cursor-pointer transition-colors ${p.name === selectedYarn ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-soft-orange/5'}`}
+                      onClick={() => setSelectedYarn(p.name)}
+                    >
+                      <td className="font-bold table-highlight-text flex items-center gap-1.5 flex-wrap">
+                        {p.name}
+                        <FreshnessBadge />
+                      </td>
+                      <td className="text-right font-bold text-primary">₹{p.base.toLocaleString()}</td>
+                      <td className="text-right font-semibold text-on-surface">₹{Math.round(p.base * 60).toLocaleString()}</td>
+                      <td className="text-right font-semibold table-highlight-text">{p.growth}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            
+            <h4 className="text-xs font-mono font-bold text-on-surface-variant mb-2">Cotton Yarn Balance Sheet (Million Kgs)</h4>
+            <div className="overflow-x-auto border border-outline-variant rounded-lg">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Year</th>
+                    <th className="text-right">Prod (M Kgs)</th>
+                    <th className="text-right">Demand (M Kgs)</th>
+                    <th className="text-right">Exports (M Kgs)</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs">
+                  {data.india?.balanceSheet?.map((row, i) => (
+                    <tr key={i}>
+                      <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
+                      <td className="text-right">{row.production}</td>
+                      <td className="text-right">{row.demand}</td>
+                      <td className="text-right">{row.exports}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+
+        {/* Non-Cotton & Blended Yarn Varieties */}
+        <div className="card-table-orange rounded-xl p-6 flex flex-col justify-between">
+          <div>
+            <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
+              <span className="material-symbols-outlined text-xl">science</span>
+              Non-Cotton & Blended Yarn Varieties
+            </h3>
+            
+            <div className="relative mb-4">
+              <input
+                type="text"
+                placeholder="Search blended & synthetic yarns..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-surface-container-high border border-outline-variant/30 rounded-lg py-2 pl-9 pr-3 text-sm focus:outline-none focus:border-primary text-on-surface"
+              />
+              <span className="material-symbols-outlined absolute left-2.5 top-2 text-lg text-outline">search</span>
+            </div>
+
+            <div className="overflow-x-auto border border-outline-variant rounded-lg mb-6 max-h-[300px] overflow-y-auto">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Yarn Type & Spec</th>
+                    <th className="text-right">Est. Current (₹/kg)</th>
+                    <th className="text-right">Price per Bag (60kg)</th>
+                    <th className="text-right">Growth</th>
+                  </tr>
+                </thead>
+                <tbody className="text-xs">
+                  {filteredYarns.filter(y => !y.category || !y.category.startsWith('PURE COTTON YARN')).map((p, i) => (
                     <tr 
                       key={i}
                       className={`cursor-pointer transition-colors ${p.name === selectedYarn ? 'bg-primary/10 border-l-4 border-primary' : 'hover:bg-soft-orange/5'}`}
@@ -438,24 +441,24 @@ export default function YarnDashboard({ data, darkMode, colors }) {
               </table>
             </div>
 
-            <h4 className="text-xs font-mono font-bold text-on-surface-variant mb-2">India Yarn Balance Sheet (Million Kgs)</h4>
+            <h4 className="text-xs font-mono font-bold text-on-surface-variant mb-2">Non-Cotton & Blended Yarn Balance Sheet (Million Tons)</h4>
             <div className="overflow-x-auto border border-outline-variant rounded-lg">
               <table>
                 <thead>
                   <tr>
                     <th>Year</th>
-                    <th className="text-right">Prod (M Kgs)</th>
-                    <th className="text-right">Demand (M Kgs)</th>
-                    <th className="text-right">Exports (M Kgs)</th>
+                    <th className="text-right">Prod (M Tons)</th>
+                    <th className="text-right">Demand (M Tons)</th>
+                    <th className="text-right">Ending Stocks</th>
                   </tr>
                 </thead>
                 <tbody className="text-xs">
-                  {data.india?.balanceSheet?.map((row, i) => (
+                  {data.global?.balanceSheet?.map((row, i) => (
                     <tr key={i}>
                       <td className={row.year.includes('Est') ? 'font-bold' : ''}>{row.year}</td>
                       <td className="text-right">{row.production}</td>
                       <td className="text-right">{row.demand}</td>
-                      <td className="text-right">{row.exports}</td>
+                      <td className="text-right">{row.inventory}</td>
                     </tr>
                   ))}
                 </tbody>

@@ -383,6 +383,106 @@ export default function PriceAnalytics({ darkMode, colors }) {
         </div>
 
       </div>
+
+      {/* Future Production & Sourcing Forecast Plan */}
+      <div className="glass-card rounded-xl p-6 border border-outline-variant/20 bg-surface-container-low">
+        <h4 className="text-base font-bold text-primary font-headline mb-4 flex items-center gap-2">
+          <span className="material-symbols-outlined">analytics</span>
+          Future Production & Sourcing Forecast Plan: {selectedVariety.replace(/ \(Cotton\)|\n/g, '').replace(/ \(Yarn\)|\n/g, '')}
+        </h4>
+        
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
+          <div className="bg-surface-container-high/40 p-4 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-mono font-bold text-outline uppercase block">Next 12M Production Outlook</span>
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                {activeVarietyInfo?.isYarn 
+                  ? "Spinning mills project a 4.8% YoY capacity expansion for this count to satisfy rising knitwear export orders. Spindle efficiency remains high at 92.5%."
+                  : "Acreage under cultivation for this staple class is projected to rise by 3.2% in the upcoming crop year, with reservoir levels supporting late crop yields."
+                }
+              </p>
+            </div>
+            <div className="text-xs font-mono font-bold text-primary mt-3 pt-2 border-t border-outline-variant/10">
+              ⚡ Projected Supply: {activeVarietyInfo?.isYarn ? "1.24 Lakh Metric Tons" : "325 Lakh Bales (Consensus)"}
+            </div>
+          </div>
+
+          <div className="bg-surface-container-high/40 p-4 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-mono font-bold text-outline uppercase block">Seasonal Availability Peak</span>
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                {activeVarietyInfo?.isYarn
+                  ? "Availability is highly consistent throughout the year, with pricing peaks aligning with cotton crop arrival phases in Q3/Q4."
+                  : "Arrivals peak strictly between November and February. Spot parity margins are highest during January ginning cycles."
+                }
+              </p>
+            </div>
+            <div className="text-xs font-mono font-bold text-tertiary mt-3 pt-2 border-t border-outline-variant/10">
+              📅 Peak Sourcing Window: {activeVarietyInfo?.isYarn ? "Year-Round (Best Spread Q1)" : "Nov - Feb (First Arrivals)"}
+            </div>
+          </div>
+
+          <div className="bg-surface-container-high/40 p-4 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-mono font-bold text-outline uppercase block">Sourcing Channel Strategy</span>
+              <p className="text-xs text-on-surface-variant mt-2 leading-relaxed">
+                {activeVarietyInfo?.isYarn
+                  ? `Procure directly from key spinning clusters in ${selectedVariety.toLowerCase().includes('poly') || selectedVariety.toLowerCase().includes('viscose') ? 'Erode and Palladam' : 'Coimbatore and Rajapalayam'} utilizing cash discounts.`
+                  : `Acquire via state APMC mandis and direct CCI auction bids, focusing on ${activeVarietyInfo?.name?.includes('Pima') || activeVarietyInfo?.name?.includes('Egypt') ? 'import ports (Nhava Sheva/Tuticorin)' : 'Gujarat, Maharashtra, and Andhra ginner networks'}.`
+                }
+              </p>
+            </div>
+            <div className="text-xs font-mono font-bold text-green-500 mt-3 pt-2 border-t border-outline-variant/10">
+              🚛 Lead Logistics: {activeVarietyInfo?.isYarn ? "3-5 Days Hub Delivery" : "7-12 Days Gin-to-Mill Transit"}
+            </div>
+          </div>
+        </div>
+
+        {/* Forecast Plan Table */}
+        <div className="overflow-x-auto border border-outline-variant rounded-xl">
+          <table className="w-full text-xs font-mono border-collapse">
+            <thead>
+              <tr className="bg-surface-container-low text-on-surface border-b border-outline-variant">
+                <th className="p-3 text-left">Forecast Quarter</th>
+                <th className="p-3 text-right">Target Volume</th>
+                <th className="p-3 text-right">Target Price Range</th>
+                <th className="p-3 text-left">Hedging & Option Strategy</th>
+                <th className="p-3 text-left">Industrial Risk Factor</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-outline-variant/20 text-on-surface-variant">
+              {(() => {
+                const base = activeVarietyInfo?.base || 100;
+                const isY = activeVarietyInfo?.isYarn;
+                
+                const qData = [
+                  { q: "Q1 Forecast (Immediate)", vol: isY ? "45,000 Kg" : "2,500 Bales", pctMin: -0.02, pctMax: 0.01, hedge: "Lock 50% via fixed forward contracts", risk: "Early crop arrival delays" },
+                  { q: "Q2 Forecast (Mid-Term)", vol: isY ? "60,000 Kg" : "3,800 Bales", pctMin: -0.04, pctMax: -0.01, hedge: "Aggressive spot buy on seasonal dips", risk: "Monsoon rainfall distribution" },
+                  { q: "Q3 Forecast (Long-Term)", vol: isY ? "50,000 Kg" : "3,000 Bales", pctMin: 0.01, pctMax: 0.04, hedge: "Utilize call options for price protection", risk: "Festival demand spike" },
+                  { q: "Q4 Forecast (Strategic)", vol: isY ? "75,000 Kg" : "4,500 Bales", pctMin: 0.03, pctMax: 0.07, hedge: "Maintain lean stocks, buy on necessity", risk: "Currency volatility & freight spikes" }
+                ];
+                
+                return qData.map((row, i) => {
+                  const minP = Math.round(base * (1 + row.pctMin));
+                  const maxP = Math.round(base * (1 + row.pctMax));
+                  const pUnit = isY ? "₹/kg" : "₹/bale";
+                  
+                  return (
+                    <tr key={i} className="hover:bg-surface-container-high/30">
+                      <td className="p-3 font-bold text-on-surface">{row.q}</td>
+                      <td className="p-3 text-right font-semibold text-primary">{row.vol}</td>
+                      <td className="p-3 text-right font-extrabold text-on-surface">₹{minP.toLocaleString()} - ₹{maxP.toLocaleString()} {pUnit}</td>
+                      <td className="p-3 text-xs">{row.hedge}</td>
+                      <td className="p-3 text-xs text-error font-medium">{row.risk}</td>
+                    </tr>
+                  );
+                });
+              })()}
+            </tbody>
+          </table>
+        </div>
+      </div>
+
     </div>
   );
 }

@@ -472,6 +472,9 @@ export default function VarietyExplorer({ darkMode, colors }) {
                 </tbody>
               </table>
             </div>
+            <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-outline-variant">
+              <button onClick={() => setShowCompareModal(false)} className="py-2.5 px-5 rounded-xl bg-primary text-on-primary font-headline font-bold text-xs hover:bg-primary-container transition-all">Close Comparison</button>
+            </div>
           </div>
         </div>
       )}

@@ -464,5 +464,20 @@ main table th {
   padding-right: 8px !important;
 }
 
+/* Force vertical-only scrolling on desktop, preventing horizontal scrollbars */
+@media (min-width: 1024px) {
+  main .overflow-x-auto {
+    overflow-x: visible !important;
+  }
+  main table {
+    table-layout: auto !important;
+    width: 100% !important;
+  }
+  main table td, main table th {
+    white-space: normal !important;
+    word-break: break-word !important;
+  }
+}
+
 
 
