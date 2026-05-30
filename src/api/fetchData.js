@@ -110,7 +110,8 @@ export async function fetchLiveExchangeRates() {
 
   for (const url of endpoints) {
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
+      const cacheBustUrl = url + (url.includes('?') ? '&' : '?') + 't=' + Date.now();
+      const res = await fetch(cacheBustUrl, { cache: 'no-cache', signal: AbortSignal.timeout(6000) });
       if (!res.ok) continue;
       const json = await res.json();
       if (json.rates && json.rates.INR) {
@@ -201,12 +202,25 @@ export async function fetchAllCottonData() {
       : Infinity;
     const isFresh = fileAge < 25 * 60 * 60 * 1000;
 
-    // Still try live exchange rate (it's fast and CORS-friendly)
-    const liveRates = await fetchLiveExchangeRates();
-    if (liveRates.success) {
-      usdInr = liveRates.usdInr;
-      eurInr = liveRates.eurInr;
-      rateSuccess = true;
+    // If the price file is fresh, only try to upgrade to live Yahoo exchange rates.
+    // If live Yahoo fetch fails, we preserve the fresh Yahoo rates in the price file.
+    // We only call the fallback APIs (open.er-api) as a last resort if the price file is stale.
+    if (isFresh) {
+      const liveYahoo = await fetchLiveExchangeRatesFromYahoo();
+      if (liveYahoo.success) {
+        usdInr = liveYahoo.usdInr;
+        eurInr = liveYahoo.eurInr;
+        rateSuccess = true;
+      } else {
+        rateSuccess = true; // Preserve fresh rates from the price file
+      }
+    } else {
+      const liveRates = await fetchLiveExchangeRates();
+      if (liveRates.success) {
+        usdInr = liveRates.usdInr;
+        eurInr = liveRates.eurInr;
+        rateSuccess = true;
+      }
     }
 
     // Only try live ICE proxy if file is stale (save network requests)
