@@ -5633,10 +5633,7 @@ export const initialData = {
 export const generateUpdatedData = (currentData) => {
   const updated = JSON.parse(JSON.stringify(currentData));
   
-  if (updated.exchangeRates) {
-    updated.exchangeRates.usdInr = parseFloat((updated.exchangeRates.usdInr + (Math.random() * 0.1 - 0.05)).toFixed(2));
-    updated.exchangeRates.eurInr = parseFloat((updated.exchangeRates.eurInr + (Math.random() * 0.1 - 0.05)).toFixed(2));
-  }
+  // Exchange rates are kept strictly aligned with live API rates without artificial fluctuations.
   
   // Logical price adjustments based on simulated "market flow"
   const cottonBump = Math.floor(Math.random() * 200) - 50; // -50 to +150

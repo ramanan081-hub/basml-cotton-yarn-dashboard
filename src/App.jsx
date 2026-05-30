@@ -1119,7 +1119,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState('global'); 
+  const [activeTab, setActiveTab] = useState('india'); 
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark' || 
