@@ -123,7 +123,9 @@ jobs:
             echo "No price changes to commit"
           else
             git commit -m "chore: auto-update market prices $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git push
+            git fetch origin main
+            git rebase origin/main
+            git push origin HEAD:main
             echo "✅ Prices committed and pushed"
           fi
 
