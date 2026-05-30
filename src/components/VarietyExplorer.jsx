@@ -505,7 +505,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
               </button>
             </div>
 
-            <div className="space-y-4 font-mono text-sm">
+            <div className="space-y-4 font-mono text-sm max-h-[60vh] overflow-y-auto pr-2">
               <div className="flex justify-between py-1.5 border-b border-outline-variant/10">
                 <span className="text-outline">Count:</span>
                 <span className="font-bold text-on-surface">{selectedYarn.count || 'N/A'}</span>
@@ -539,6 +539,15 @@ export default function VarietyExplorer({ darkMode, colors }) {
                   </div>
                 </div>
               )}
+            </div>
+
+            <div className="flex justify-end gap-3 mt-6 pt-4 border-t border-outline-variant">
+              <button
+                onClick={() => setSelectedYarn(null)}
+                className="py-2.5 px-5 rounded-xl bg-primary text-on-primary font-headline font-bold text-xs hover:bg-primary-container transition-all"
+              >
+                Close Details
+              </button>
             </div>
           </div>
         </div>
