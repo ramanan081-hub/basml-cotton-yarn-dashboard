@@ -1,6 +1,8 @@
 name: Update Market Prices (3x Daily)
 
 on:
+  push:
+    branches: ['main']
   schedule:
     # ── 3 refreshes per day aligned with global cotton market sessions ──────
     # Session 1: 6:30 AM IST  = 01:00 UTC  → Pre-market / MCX open
