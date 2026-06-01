@@ -1119,8 +1119,9 @@ function CottonVarietyExplorer({ mode, data, colors }) {
 }
 
 function App() {
-  const [activeTab, setActiveTab] = useState('yarn'); 
+  const [activeTab, setActiveTab] = useState('global'); 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark' || 
