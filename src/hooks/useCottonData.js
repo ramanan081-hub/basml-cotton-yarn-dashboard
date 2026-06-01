@@ -203,16 +203,28 @@ export function useCottonData(refreshInterval = 60 * 1000) {
             trend[6].J34 = Math.floor(types[4].current * 1.093);
           }
 
-          // Also roll the global monthly trend last entry to current month
+          // Also roll the global monthly trend last 6 entries to current calendar months
           if (updated.globalCotton && updated.globalCotton.prices && updated.globalCotton.prices.monthlyTrend) {
             const gTrend = updated.globalCotton.prices.monthlyTrend;
             const _tNow2 = new Date();
             const _tSN2 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-            const lastLabel = `${_tSN2[_tNow2.getMonth()]} ${String(_tNow2.getFullYear()).slice(2)}`;
-            gTrend[gTrend.length - 1].month = lastLabel;
-            gTrend[gTrend.length - 1].AIndex = parseFloat((iceCottonPrice + 10.5).toFixed(2));
-            gTrend[gTrend.length - 1].US = parseFloat(iceCottonPrice.toFixed(2));
-            gTrend[gTrend.length - 1].Brazil = parseFloat((iceCottonPrice - 4.5).toFixed(2));
+
+            for (let i = 0; i < 6; i++) {
+              const d = new Date(_tNow2.getFullYear(), _tNow2.getMonth() - (5 - i), 1);
+              gTrend[6 + i].month = `${_tSN2[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`;
+            }
+
+            gTrend[11].AIndex = parseFloat((iceCottonPrice + 10.5).toFixed(2));
+            gTrend[11].US = parseFloat(iceCottonPrice.toFixed(2));
+            gTrend[11].Brazil = parseFloat((iceCottonPrice - 4.5).toFixed(2));
+
+            // Set older months relative to live current
+            for (let idx = 0; idx < 5; idx++) {
+              const ratio = [1.098, 1.078, 1.055, 1.026, 1.008][idx];
+              gTrend[6 + idx].AIndex = parseFloat((gTrend[11].AIndex * ratio).toFixed(2));
+              gTrend[6 + idx].US = parseFloat((gTrend[11].US * ratio).toFixed(2));
+              gTrend[6 + idx].Brazil = parseFloat((gTrend[11].Brazil * ratio).toFixed(2));
+            }
           }
 
           // Dynamic month names for India forecastNarrative
@@ -317,6 +329,32 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           if (prices[10]) {
             prices[10].current = parseFloat((prices[2].current * 0.62).toFixed(2)); // 40s PV Blend
             prices[10].est = parseFloat((prices[10].current * 1.02).toFixed(2));
+          }
+        }
+
+        // Dynamically update Yarn monthly trends — roll last 6 entries to current calendar months
+        if (updated.yarns && updated.yarns.comparison && updated.yarns.comparison.monthlyTrend) {
+          const yTrend = updated.yarns.comparison.monthlyTrend;
+          const _tNow3 = new Date();
+          const _tSN3 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+          for (let i = 0; i < 6; i++) {
+            const d = new Date(_tNow3.getFullYear(), _tNow3.getMonth() - (5 - i), 1);
+            yTrend[6 + i].month = `${_tSN3[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`;
+          }
+
+          const combed30sSpot = updated.yarns.india.prices[2].current; // 30s Combed
+          
+          yTrend[11].Cotton30s = combed30sSpot;
+          yTrend[11].Polyester30s = updated.yarns.nonCotton?.india?.prices?.[1]?.current || 140; // 30s Polyester
+          yTrend[11].Viscose30s = updated.yarns.nonCotton?.india?.prices?.[2]?.current || 185; // 30s Viscose
+
+          // Old months relative to current
+          for (let idx = 0; idx < 5; idx++) {
+            const ratio = [1.098, 1.078, 1.055, 1.026, 1.008][idx];
+            yTrend[6 + idx].Cotton30s = Math.floor(combed30sSpot * ratio);
+            yTrend[6 + idx].Polyester30s = Math.floor(yTrend[11].Polyester30s * ratio);
+            yTrend[6 + idx].Viscose30s = Math.floor(yTrend[11].Viscose30s * ratio);
           }
         }
 

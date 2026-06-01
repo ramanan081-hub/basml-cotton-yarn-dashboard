@@ -16,7 +16,6 @@ export const initialData = {
     },
     prices: {
       monthlyTrend: [
-        { month: 'Jun 25', AIndex: 90.5, US: 81.2, Brazil: 78.5 },
         { month: 'Jul 25', AIndex: 91.8, US: 82.5, Brazil: 79.1 },
         { month: 'Aug 25', AIndex: 93.2, US: 83.1, Brazil: 79.8 },
         { month: 'Sep 25', AIndex: 94.0, US: 84.5, Brazil: 80.5 },
@@ -27,6 +26,7 @@ export const initialData = {
         { month: 'Feb 26', AIndex: 92.5, US: 82.5, Brazil: 78.5 },
         { month: 'Mar 26', AIndex: 94.0, US: 83.9, Brazil: 79.6 },
         { month: 'Apr 26', AIndex: 90.2, US: 80.1, Brazil: 75.8 },
+        { month: 'May 26', AIndex: 88.5, US: 78.2, Brazil: 73.5 },
         { month: 'Jun 26', AIndex: 87.92, US: 77.42, Brazil: 72.92 }
       ],
       types: [
@@ -68,7 +68,6 @@ export const initialData = {
     },
     prices: {
       monthlyTrend: [
-        { month: 'Jun 25', Shankar6: 62500, MCU5: 65000, J34: 59000 },
         { month: 'Jul 25', Shankar6: 63000, MCU5: 65500, J34: 59500 },
         { month: 'Aug 25', Shankar6: 63500, MCU5: 66200, J34: 60200 },
         { month: 'Sep 25', Shankar6: 64800, MCU5: 67500, J34: 61500 },
@@ -79,6 +78,7 @@ export const initialData = {
         { month: 'Feb 26', Shankar6: 57500, MCU5: 61500, J34: 55200 },
         { month: 'Mar 26', Shankar6: 58000, MCU5: 62000, J34: 55700 },
         { month: 'Apr 26', Shankar6: 58200, MCU5: 62300, J34: 55900 },
+        { month: 'May 26', Shankar6: 58250, MCU5: 62350, J34: 55900 },
         { month: 'Jun 26', Shankar6: 58300, MCU5: 62400, J34: 55900 }
       ],
       types: [
@@ -5560,7 +5560,6 @@ export const initialData = {
     },
     comparison: {
       monthlyTrend: [
-        { month: 'Jun 25', Cotton30s: 285, Polyester30s: 132, Viscose30s: 175 },
         { month: 'Jul 25', Cotton30s: 290, Polyester30s: 133, Viscose30s: 176 },
         { month: 'Aug 25', Cotton30s: 295, Polyester30s: 135, Viscose30s: 180 },
         { month: 'Sep 25', Cotton30s: 300, Polyester30s: 138, Viscose30s: 182 },
@@ -5571,7 +5570,8 @@ export const initialData = {
         { month: 'Feb 26', Cotton30s: 295, Polyester30s: 135, Viscose30s: 180 },
         { month: 'Mar 26', Cotton30s: 298, Polyester30s: 137, Viscose30s: 183 },
         { month: 'Apr 26', Cotton30s: 302, Polyester30s: 138, Viscose30s: 185 },
-        { month: 'May 26', Cotton30s: 302, Polyester30s: 138, Viscose30s: 185 }
+        { month: 'May 26', Cotton30s: 302, Polyester30s: 138, Viscose30s: 185 },
+        { month: 'Jun 26', Cotton30s: 303, Polyester30s: 139, Viscose30s: 186 }
       ]
     }
   },
