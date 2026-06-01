@@ -1466,7 +1466,7 @@ function App() {
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} />}
           {activeTab === 'news' && <LiveNews exchangeRates={data.exchangeRates} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} data={data} />}
           {activeTab === 'presentation' && <PresentationDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'quality' && <YarnQualityDashboard darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'sources' && <DataSourcesDashboard data={data} darkMode={darkMode} colors={themeColors} />}
@@ -4597,7 +4597,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
 
 export default App;
 
-function AnalysisDashboard({ darkMode, colors }) {
+function AnalysisDashboard({ darkMode, colors, data }) {
   const [subTab, setSubTab] = useState('cotton'); // 'cotton', 'yarn', 'macro'
   const [selectedCotton, setSelectedCotton] = useState('Shankar-6');
   const [selectedYarn, setSelectedYarn] = useState('Cotton Yarn 30s Carded');
@@ -4605,12 +4605,107 @@ function AnalysisDashboard({ darkMode, colors }) {
   const noiseIds = useMemo(() => ['physical_properties', 'market_data', 'production_data', 'quality_standards', 'economics', 'applications', 'sourcing'], []);
 
   const allCottonOptions = useMemo(() => {
-    return expandedCottonVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
-  }, [noiseIds]);
+    const staticOptions = expandedCottonVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
+    if (!data) return staticOptions;
+
+    return staticOptions.map(variety => {
+      let livePrice = null;
+      const normalized = variety.name.toLowerCase();
+
+      if (data.indianCotton?.prices?.types) {
+        const indTypes = data.indianCotton.prices.types;
+        if (normalized.includes('shankar-6') || normalized === 'shankar 6') {
+          livePrice = indTypes[0]?.current;
+        } else if (normalized.includes('mcu-5') || normalized === 'mcu 5') {
+          livePrice = indTypes[1]?.current;
+        } else if (normalized.includes('dch-32') || normalized.includes('suvin')) {
+          livePrice = indTypes[2]?.current;
+        } else if (normalized.includes('j-34') || normalized === 'j 34') {
+          livePrice = indTypes[4]?.current;
+        } else if (normalized.includes('v797')) {
+          livePrice = indTypes[5]?.current;
+        } else if (normalized.includes('ice cotton')) {
+          livePrice = indTypes[6]?.current;
+        }
+      }
+
+      if (livePrice) {
+        return {
+          ...variety,
+          price: `₹${livePrice.toLocaleString('en-IN')}/candy`
+        };
+      }
+
+      if (data.globalCotton?.prices?.types) {
+        const globTypes = data.globalCotton.prices.types;
+        if (normalized.includes('pima') || normalized.includes('supima')) {
+          const usdInr = data.exchangeRates?.usdInr || 94.86;
+          const pimaInr = Math.floor((globTypes[4]?.current || 170.52) * 7.84 * usdInr);
+          livePrice = pimaInr;
+        }
+      }
+
+      if (livePrice) {
+        return {
+          ...variety,
+          price: `₹${livePrice.toLocaleString('en-IN')}/candy`
+        };
+      }
+
+      return variety;
+    });
+  }, [noiseIds, data]);
 
   const allYarnOptions = useMemo(() => {
-    return expandedYarnVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
-  }, [noiseIds]);
+    const staticOptions = expandedYarnVarieties.filter(item => !noiseIds.includes(item.id) && item.name);
+    if (!data) return staticOptions;
+
+    return staticOptions.map(variety => {
+      let livePrice = null;
+      const normalized = variety.name.toLowerCase();
+
+      if (data.yarns?.india?.prices) {
+        const indYarns = data.yarns.india.prices;
+        if (normalized.includes('10s') || normalized.includes('16s')) {
+          livePrice = indYarns[0]?.current;
+        } else if (normalized.includes('20s carded')) {
+          livePrice = indYarns[1]?.current;
+        } else if (normalized.includes('30s combed')) {
+          livePrice = indYarns[2]?.current;
+        } else if (normalized.includes('40s compact') || normalized.includes('40s combed')) {
+          livePrice = indYarns[3]?.current;
+        } else if (normalized.includes('60s combed') || normalized.includes('60s compact')) {
+          livePrice = indYarns[4]?.current;
+        } else if (normalized.includes('80s compact') || normalized.includes('80s els')) {
+          livePrice = indYarns[5]?.current;
+        } else if (normalized.includes('100s compact')) {
+          livePrice = indYarns[6]?.current;
+        } else if (normalized.includes('organic cotton 30s') || normalized.includes('30s organic')) {
+          livePrice = indYarns[7]?.current;
+        } else if (normalized.includes('recycled cotton 20s') || normalized.includes('20s recycled')) {
+          livePrice = indYarns[8]?.current;
+        } else if (normalized.includes('ice-linked') || normalized.includes('us yarn') || normalized.includes('ice cotton yarn')) {
+          livePrice = indYarns[9]?.current;
+        } else if (normalized.includes('30s pc') || normalized.includes('32s poly-cotton')) {
+          livePrice = indYarns[10]?.current;
+        } else if (normalized.includes('40s pv')) {
+          livePrice = indYarns[11]?.current;
+        } else if (normalized.includes('30s carded')) {
+          const shankar6Spot = data.indianCotton?.prices?.types?.[0]?.current || 58000;
+          livePrice = Math.floor((shankar6Spot / 356) * 1.15 + 55);
+        }
+      }
+
+      if (livePrice) {
+        return {
+          ...variety,
+          price: `₹${livePrice.toLocaleString('en-IN')}/kg`
+        };
+      }
+
+      return variety;
+    });
+  }, [noiseIds, data]);
 
   const parsePrice = (priceStr) => {
     if (!priceStr) return 0;

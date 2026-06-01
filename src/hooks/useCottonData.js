@@ -74,6 +74,16 @@ export function useCottonData(refreshInterval = 60 * 1000) {
             types[10].current = parseFloat((iceCottonPrice * 1.05).toFixed(2)); // West African (Mali/Benin)
             types[10].est = parseFloat((types[10].current * 1.02).toFixed(2));
           }
+
+          if (!updated.globalCotton.forecastNarrative) {
+            updated.globalCotton.forecastNarrative = {};
+          }
+          const aIndexPrice = parseFloat((iceCottonPrice + 10.5).toFixed(2));
+          updated.globalCotton.forecastNarrative = {
+            mayClose: `May 2026 sees the A-Index firming around ${aIndexPrice} cents/lb, supported by a projected 6.6M bale drop in global YoY production.`,
+            junStart: `June expects continued tightness as the 5.7M bale global production gap becomes more apparent to spinners and mills.`,
+            julAug: `July and August will depend heavily on whether the anticipated global mill-use increase (up to 121.7M bales) materializes against the tightened 71.8M bale global stocks.`
+          };
         }
 
         // Calculate Indian Cotton prices dynamically
@@ -138,6 +148,16 @@ export function useCottonData(refreshInterval = 60 * 1000) {
             trend[6].MCU5 = Math.floor(types[1].current * 0.95);
             trend[6].J34 = Math.floor(types[4].current * 0.95);
           }
+
+          if (!updated.indianCotton.forecastNarrative) {
+            updated.indianCotton.forecastNarrative = {};
+          }
+          const mcu5Spot = types[1].current;
+          updated.indianCotton.forecastNarrative = {
+            mayClose: `May 2026 closing estimates project Shankar-6 reaching ₹${Math.floor(shankar6Spot * 0.995).toLocaleString('en-IN')}/Candy as CCI tightens e-auction lots.`,
+            junStart: `June will start aggressive, likely touching ₹${Math.floor(shankar6Spot * 1.01).toLocaleString('en-IN')}/Candy due to delayed monsoon fears in Gujarat.`,
+            julAug: `July and August are critical. A monsoon deficit could spike prices to ₹${Math.floor(shankar6Spot * 1.04).toLocaleString('en-IN')}+ (MCU-5 approaching ₹${Math.floor(mcu5Spot * 1.05).toLocaleString('en-IN')}). A normal monsoon will stabilize S-6 around ₹${Math.floor(shankar6Spot * 0.99).toLocaleString('en-IN')}.`
+          };
         }
 
         // Dynamically update Indian yarn prices
