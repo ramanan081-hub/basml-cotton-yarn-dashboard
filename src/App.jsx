@@ -1121,6 +1121,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
 function App() {
   const [activeTab, setActiveTab] = useState('yarn'); 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark' || 
       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -1212,19 +1213,28 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-on-surface font-body flex">
       {/* Sidebar Navigation - Desktop */}
-      <aside className="sidebar-desktop hidden lg:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
-        <div className="px-2 mb-8 flex items-center gap-2.5">
-          <img 
-            src={`${import.meta.env.BASE_URL}logo.png`} 
-            alt="BASML Logo" 
-            className="w-10 h-10 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
-          />
-          <div>
-            <h1 className="font-headline text-md font-black tracking-tight text-primary leading-tight">
-              <span className="liquid-glass-text">BASML Analytics</span>
-            </h1>
-            <p className="font-mono text-[9px] text-on-surface-variant uppercase tracking-wider font-bold">Cotton & Yarn</p>
+      <aside className={`sidebar-desktop hidden lg:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50 transition-transform duration-300 ease-in-out ${sidebarCollapsed ? '-translate-x-full' : 'translate-x-0'}`}>
+        <div className="px-2 mb-8 flex items-center justify-between gap-2.5">
+          <div className="flex items-center gap-2.5">
+            <img 
+              src={`${import.meta.env.BASE_URL}logo.png`} 
+              alt="BASML Logo" 
+              className="w-10 h-10 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
+            />
+            <div>
+              <h1 className="font-headline text-md font-black tracking-tight text-primary leading-tight">
+                <span className="liquid-glass-text">BASML Analytics</span>
+              </h1>
+              <p className="font-mono text-[9px] text-on-surface-variant uppercase tracking-wider font-bold">Cotton & Yarn</p>
+            </div>
           </div>
+          <button 
+            onClick={() => setSidebarCollapsed(true)} 
+            className="text-on-surface-variant hover:text-primary p-1 hover:bg-surface-container rounded-md hidden lg:block transition-colors"
+            title="Collapse Sidebar"
+          >
+            <span className="material-symbols-outlined text-lg">menu_open</span>
+          </button>
         </div>
         <nav className="flex-1 space-y-1">
           {navItems.map((item) => (
@@ -1308,12 +1318,23 @@ function App() {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 min-w-0 lg:ml-[240px] min-h-screen flex flex-col bg-background relative z-10">
-        <header className="fixed top-0 right-0 left-0 lg:left-[240px] h-16 z-40 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-4 lg:px-6 border-b border-outline-variant/20">
+      <main className={`flex-1 min-w-0 min-h-screen flex flex-col bg-background relative z-10 transition-all duration-300 ${sidebarCollapsed ? 'lg:ml-0' : 'lg:ml-[240px]'}`}>
+        <header className={`fixed top-0 right-0 left-0 h-16 z-40 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-4 lg:px-6 border-b border-outline-variant/20 transition-all duration-300 ${sidebarCollapsed ? 'lg:left-0' : 'lg:left-[240px]'}`}>
           <div className="flex items-center gap-4">
+            {/* Mobile Menu Open Button */}
             <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-primary p-1 hover:bg-surface-container rounded-md">
               <span className="material-symbols-outlined">menu</span>
             </button>
+            {/* Desktop Menu Open Button (Visible only when sidebar is collapsed) */}
+            {sidebarCollapsed && (
+              <button 
+                onClick={() => setSidebarCollapsed(false)} 
+                className="hidden lg:block text-primary p-1 hover:bg-surface-container rounded-md transition-colors"
+                title="Expand Sidebar"
+              >
+                <span className="material-symbols-outlined">menu</span>
+              </button>
+            )}
             <img 
               src={`${import.meta.env.BASE_URL}logo.png`} 
               alt="BASML Logo" 
