@@ -4861,17 +4861,68 @@ function AnalysisDashboard({ darkMode, colors }) {
     };
   };
 
+  const scaleCottonData = (staticData, livePrice) => {
+    if (!livePrice || isNaN(livePrice) || !staticData) return staticData;
+    const staticBasePrice = staticData.monthWisePlan?.[0]?.avgPrice || 65000;
+    const ratio = livePrice / staticBasePrice;
+
+    const dayWisePlan = staticData.dayWisePlan?.map(item => {
+      const priceForecast = Math.round(item.priceForecast * ratio);
+      const triggerLevel = Math.round(item.triggerLevel * ratio);
+      return { ...item, priceForecast, triggerLevel };
+    });
+
+    const monthWisePlan = staticData.monthWisePlan?.map(item => {
+      const avgPrice = Math.round(item.avgPrice * ratio);
+      const allocatedBudgetCr = parseFloat(((item.targetBales * avgPrice) / 20000000).toFixed(2));
+      return { ...item, avgPrice, allocatedBudgetCr };
+    });
+
+    const yearWisePlan = staticData.yearWisePlan?.map(item => {
+      const estPrice = Math.round(item.estPrice * ratio);
+      return { ...item, estPrice };
+    });
+
+    return { ...staticData, dayWisePlan, monthWisePlan, yearWisePlan };
+  };
+
+  const scaleYarnData = (staticData, livePrice) => {
+    if (!livePrice || isNaN(livePrice) || !staticData) return staticData;
+    const staticBasePrice = staticData.monthWisePlan?.[0]?.avgYarnPriceKg || 250;
+    const ratio = livePrice / staticBasePrice;
+
+    const dayWisePlan = staticData.dayWisePlan?.map(item => {
+      const currentPrice = Math.round(item.currentPrice * ratio);
+      const marginSpread = Math.round(item.marginSpread * ratio);
+      return { ...item, currentPrice, marginSpread };
+    });
+
+    const monthWisePlan = staticData.monthWisePlan?.map(item => {
+      const avgYarnPriceKg = Math.round(item.avgYarnPriceKg * ratio);
+      return { ...item, avgYarnPriceKg };
+    });
+
+    const yearWisePlan = staticData.yearWisePlan?.map(item => {
+      const avgSpreadKg = parseFloat((item.avgSpreadKg * ratio).toFixed(1));
+      return { ...item, avgSpreadKg };
+    });
+
+    return { ...staticData, dayWisePlan, monthWisePlan, yearWisePlan };
+  };
+
   const currentCotton = useMemo(() => {
     const varietyObj = allCottonOptions.find(v => v.name === selectedCotton) || allCottonOptions.find(v => v.name.includes('Shankar-6')) || allCottonOptions[0];
     if (!varietyObj) return null;
     const staticData = getCottonData(varietyObj.name);
     if (staticData) {
+      const livePrice = parsePrice(varietyObj.price);
+      const scaled = scaleCottonData(staticData, livePrice);
       return {
-        ...staticData,
+        ...scaled,
         name: varietyObj.name,
         group: varietyObj.group,
-        staple: varietyObj.staple || staticData.staple,
-        origin: varietyObj.origin || staticData.origin,
+        staple: varietyObj.staple || scaled.staple,
+        origin: varietyObj.origin || scaled.origin,
         price: varietyObj.price
       };
     }
@@ -4883,8 +4934,10 @@ function AnalysisDashboard({ darkMode, colors }) {
     if (!varietyObj) return null;
     const staticData = getYarnData(varietyObj.name);
     if (staticData) {
+      const livePrice = parsePrice(varietyObj.price);
+      const scaled = scaleYarnData(staticData, livePrice);
       return {
-        ...staticData,
+        ...scaled,
         name: varietyObj.name,
         category: varietyObj.category,
         price: varietyObj.price
@@ -4927,13 +4980,40 @@ function AnalysisDashboard({ darkMode, colors }) {
   const getDynamicMonthWisePlan = (staticPlan) => {
     if (!staticPlan) return [];
     const now = new Date();
-    return staticPlan.map((item, idx) => {
+    return Array.from({ length: 6 }, (_, idx) => {
       const d = new Date(now.getFullYear(), now.getMonth() + idx, 1);
-      const monthStr = d.toLocaleDateString('en-GB', {
+      const monthLabel = d.toLocaleDateString('en-GB', {
         month: 'short',
         year: 'numeric'
       });
-      return { ...item, month: monthStr };
+
+      const matchedItem = staticPlan.find(item => {
+        if (!item.month) return false;
+        const staticNorm = item.month.toLowerCase();
+        const labelNorm = monthLabel.toLowerCase();
+        const staticParts = staticNorm.split(' ');
+        const labelParts = labelNorm.split(' ');
+        const monthMatch = staticParts[0].substring(0, 3) === labelParts[0].substring(0, 3);
+        const yearMatch = !staticParts[1] || !labelParts[1] || staticParts[1] === labelParts[1];
+        return monthMatch && yearMatch;
+      });
+
+      if (matchedItem) {
+        return { ...matchedItem, month: monthLabel };
+      } else {
+        const lastItem = staticPlan[staticPlan.length - 1] || {};
+        return {
+          month: monthLabel,
+          targetBales: Math.round((lastItem.targetBales || 20000) * 0.9),
+          avgPrice: lastItem.avgPrice || 60000,
+          allocatedBudgetCr: lastItem.allocatedBudgetCr || 50.0,
+          hedgingRatio: lastItem.hedgingRatio || 30,
+          combedCompactDemand: lastItem.combedCompactDemand || 80,
+          blendedYarnDemand: lastItem.blendedYarnDemand || 60,
+          avgYarnPriceKg: lastItem.avgYarnPriceKg || 250,
+          exportOrdersContainer: lastItem.exportOrdersContainer || 30
+        };
+      }
     });
   };
 
