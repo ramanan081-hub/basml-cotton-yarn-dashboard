@@ -50,54 +50,7 @@ async function fetchFromPriceFile() {
 // ─────────────────────────────────────────────────────────────────────────────
 // Step 2a: Fetch exchange rates live (CORS-friendly public APIs)
 // ─────────────────────────────────────────────────────────────────────────────
-export async function fetchLiveExchangeRatesFromYahoo() {
-  const USD_URL = 'https://query1.finance.yahoo.com/v8/finance/chart/INR=X';
-  const EUR_URL = 'https://query1.finance.yahoo.com/v8/finance/chart/EURINR=X';
-
-  const proxies = [
-    'https://api.allorigins.win/raw?url=',
-    'https://thingproxy.freeboard.io/fetch/',
-    'https://corsproxy.io/?url=',
-  ];
-
-  let usdInr = null;
-  let eurInr = null;
-
-  async function fetchValue(baseUrl) {
-    for (const proxy of proxies) {
-      try {
-        const url = proxy + encodeURIComponent(baseUrl);
-        const res = await fetch(url, { signal: AbortSignal.timeout(6000) });
-        if (!res.ok) continue;
-        const json = await res.json();
-        const price = json?.chart?.result?.[0]?.meta?.regularMarketPrice;
-        if (price && price > 10 && price < 300) {
-          return parseFloat(price.toFixed(2));
-        }
-      } catch (e) {
-        // try next proxy
-      }
-    }
-    return null;
-  }
-
-  usdInr = await fetchValue(USD_URL);
-  eurInr = await fetchValue(EUR_URL);
-
-  if (usdInr && eurInr) {
-    return { usdInr, eurInr, success: true };
-  }
-  return { usdInr: null, eurInr: null, success: false };
-}
-
 export async function fetchLiveExchangeRates() {
-  // 1. Primary: Try Yahoo Finance via proxies (aligns with Google Finance)
-  const yahooRates = await fetchLiveExchangeRatesFromYahoo();
-  if (yahooRates.success) {
-    return yahooRates;
-  }
-
-  // 2. Fallback: Try public exchange rate APIs
   let usdInr = 84.35;
   let eurInr = 90.70;
   let success = false;
@@ -202,18 +155,10 @@ export async function fetchAllCottonData() {
       : Infinity;
     const isFresh = fileAge < 25 * 60 * 60 * 1000;
 
-    // If the price file is fresh, only try to upgrade to live Yahoo exchange rates.
-    // If live Yahoo fetch fails, we preserve the fresh Yahoo rates in the price file.
-    // We only call the fallback APIs (open.er-api) as a last resort if the price file is stale.
+    // If the price file is fresh, we use the Yahoo Finance rates directly from the file.
+    // We only fetch from public APIs (CORS-friendly open.er-api) as a last resort if the file is stale.
     if (isFresh) {
-      const liveYahoo = await fetchLiveExchangeRatesFromYahoo();
-      if (liveYahoo.success) {
-        usdInr = liveYahoo.usdInr;
-        eurInr = liveYahoo.eurInr;
-        rateSuccess = true;
-      } else {
-        rateSuccess = true; // Preserve fresh rates from the price file
-      }
+      rateSuccess = true;
     } else {
       const liveRates = await fetchLiveExchangeRates();
       if (liveRates.success) {
