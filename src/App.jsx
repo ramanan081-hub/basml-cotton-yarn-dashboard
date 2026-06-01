@@ -1209,7 +1209,7 @@ function App() {
   return (
     <div className="min-h-screen bg-background text-on-surface font-body flex">
       {/* Sidebar Navigation - Desktop */}
-      <aside className="sidebar-desktop hidden md:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
+      <aside className="sidebar-desktop hidden lg:flex flex-col h-screen w-[240px] fixed left-0 top-0 glass-card border-r border-white/10 rounded-none py-6 px-4 z-50">
         <div className="px-2 mb-8 flex items-center gap-2.5">
           <img 
             src={`${import.meta.env.BASE_URL}logo.png`} 
@@ -1252,7 +1252,7 @@ function App() {
       </aside>
       {/* Sidebar Navigation - Mobile (Drawer overlay) */}
       {sidebarOpen && (
-        <div className="fixed inset-0 bg-black/50 z-50 md:hidden" onClick={() => setSidebarOpen(false)}>
+        <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setSidebarOpen(false)}>
           <aside className="w-[240px] h-full glass-card border-r border-white/10 rounded-none py-6 px-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center px-2 mb-8">
               <div className="flex items-center gap-2">
@@ -1305,10 +1305,10 @@ function App() {
       )}
 
       {/* Main Content */}
-      <main className="flex-1 min-w-0 md:ml-[240px] min-h-screen flex flex-col bg-background relative z-10">
-        <header className="fixed top-0 right-0 left-0 md:left-[240px] h-16 z-40 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-4 md:px-6 border-b border-outline-variant/20">
+      <main className="flex-1 min-w-0 lg:ml-[240px] min-h-screen flex flex-col bg-background relative z-10">
+        <header className="fixed top-0 right-0 left-0 lg:left-[240px] h-16 z-40 bg-surface/80 backdrop-blur-xl flex items-center justify-between px-4 lg:px-6 border-b border-outline-variant/20">
           <div className="flex items-center gap-4">
-            <button onClick={() => setSidebarOpen(true)} className="md:hidden text-primary p-1 hover:bg-surface-container rounded-md">
+            <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-primary p-1 hover:bg-surface-container rounded-md">
               <span className="material-symbols-outlined">menu</span>
             </button>
             <img 
@@ -1316,7 +1316,7 @@ function App() {
               alt="BASML Logo" 
               className="w-8 h-8 object-contain rounded-lg border border-outline-variant/20 shadow-sm"
             />
-            <span className="font-headline text-base md:text-lg font-bold text-primary tracking-tight">
+            <span className="font-headline text-xs sm:text-base lg:text-lg font-bold text-primary tracking-tight truncate max-w-[140px] sm:max-w-none">
               BASML.COTTON.YARN.ANALYSIS
             </span>
             <span className="hidden sm:inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary-container/20 text-primary border border-primary/20">
@@ -1338,7 +1338,7 @@ function App() {
         </header>
 
         {/* Sticky warning/status banner */}
-        <div className={`fixed top-16 right-0 left-0 md:left-[240px] h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 md:px-6 text-[10px] md:text-xs font-mono transition-colors duration-500 ${
+        <div className={`fixed top-16 right-0 left-0 lg:left-[240px] h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 lg:px-6 text-[10px] md:text-xs font-mono transition-colors duration-500 ${
           syncStatus === 'syncing' 
             ? 'bg-primary/10 text-primary border-primary/20' 
             : syncStatus === 'live'
@@ -1401,7 +1401,7 @@ function App() {
           }
         `}} />
 
-        <div className="fixed top-26 right-0 left-0 md:left-[240px] h-8 z-20 bg-surface-container-low border-b border-outline-variant/30 flex items-center overflow-hidden text-[10px] font-mono font-bold text-on-surface-variant select-none">
+        <div className="fixed top-26 right-0 left-0 lg:left-[240px] h-8 z-20 bg-surface-container-low border-b border-outline-variant/30 flex items-center overflow-hidden text-[10px] font-mono font-bold text-on-surface-variant select-none">
           <div className="bg-primary/20 text-primary h-full px-3 flex items-center gap-1.5 shrink-0 z-10 border-r border-outline-variant/30 shadow-md">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
             LIVE MCX TICKER
@@ -1452,7 +1452,7 @@ function App() {
         </div>
 
         {/* Dashboard Content Container */}
-        <div className="pt-36 px-4 md:px-6 pb-10 flex-1 max-w-[1600px] w-full relative z-10 space-y-4">
+        <div className="pt-36 px-4 lg:px-6 pb-24 lg:pb-12 flex-1 max-w-[1600px] w-full relative z-10 space-y-4">
           <DataTimestamp 
             timestamp={formattedTimestamp} 
             freshness={freshness} 
@@ -1473,7 +1473,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4">
+        <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4 mb-16 lg:mb-0">
           <div>
             <p className="font-mono font-semibold">© 2026 BASML.COTTON.YARN.ANALYSIS</p>
             <p className="opacity-70 mt-0.5">Confidential Industrial Intelligence - Internal Use Only</p>
@@ -1487,7 +1487,7 @@ function App() {
       </main>
 
       {/* Mobile Navigation Bar (Bottom) - Only active on mobile when drawer is closed */}
-      <nav className="md:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-outline-variant flex items-center justify-around px-4 z-50">
+      <nav className="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-outline-variant flex items-center justify-around px-4 z-50">
         <button onClick={() => setActiveTab('global')} className={`flex flex-col items-center gap-1 ${activeTab === 'global' ? 'text-primary' : 'text-on-surface-variant'}`}>
           <span className="material-symbols-outlined">public</span>
           <span className="font-mono text-[9px]">GLOBAL</span>
