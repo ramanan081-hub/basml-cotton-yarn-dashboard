@@ -96,29 +96,28 @@ async function parseYahooChart(res) {
 
 export async function fetchLiveICECotton() {
   let iceCottonPrice = 77.42;
-  let success = false;
 
-  const proxies = [
-    `https://corsproxy.io/?url=${encodeURIComponent(YAHOO_CT_URL)}`,
-    `https://thingproxy.freeboard.io/fetch/${YAHOO_CT_URL}`,
-    `https://api.allorigins.win/raw?url=${encodeURIComponent(YAHOO_CT_URL)}`,
-  ];
-
-  for (const url of proxies) {
+  // In development, we use the local Vite dev proxy to fetch live prices
+  if (import.meta.env.DEV) {
     try {
-      const res = await fetch(url, { signal: AbortSignal.timeout(8000) });
-      if (!res.ok) continue;
-      const price = await parseYahooChart(res);
-      if (price) {
-        iceCottonPrice = price;
-        success = true;
-        break;
+      const res = await fetch('/api-yahoo/v8/finance/chart/CT=F', {
+        signal: AbortSignal.timeout(6000)
+      });
+      if (res.ok) {
+        const price = await parseYahooChart(res);
+        if (price) {
+          return { price, success: true };
+        }
       }
     } catch {
-      // try next
+      // Fail silently in dev
     }
   }
-  return { price: iceCottonPrice, success };
+
+  // In production (GitHub Pages), client-side CORS proxies are extremely unreliable
+  // and pollution of the console with red logs is unacceptable. We skip them completely
+  // and rely on the market-prices.json file updated 3x daily server-side.
+  return { price: iceCottonPrice, success: false };
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
