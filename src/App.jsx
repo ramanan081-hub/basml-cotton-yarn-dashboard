@@ -1135,7 +1135,10 @@ function App() {
     formattedTimestamp,
     syncStatus,
     freshness,
-    refresh
+    refresh,
+    marketOpen,
+    marketStatusLabel,
+    lastCloseFormatted
   } = useCottonData();
 
   useEffect(() => {
@@ -1339,8 +1342,10 @@ function App() {
 
         {/* Sticky warning/status banner */}
         <div className={`fixed top-16 right-0 left-0 lg:left-[240px] h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 lg:px-6 text-[10px] md:text-xs font-mono transition-colors duration-500 ${
-          syncStatus === 'syncing' 
-            ? 'bg-primary/10 text-primary border-primary/20' 
+          !marketOpen
+            ? 'bg-amber-500/10 dark:bg-amber-500/5 text-amber-700 dark:text-amber-400 border-amber-500/20'
+            : syncStatus === 'syncing'
+            ? 'bg-primary/10 text-primary border-primary/20'
             : syncStatus === 'live'
             ? 'bg-emerald-500/10 dark:bg-emerald-500/5 text-emerald-600 dark:text-emerald-500 border-emerald-500/20'
             : syncStatus === 'partial'
@@ -1348,22 +1353,34 @@ function App() {
             : 'bg-red-500/10 dark:bg-red-500/5 text-red-600 dark:text-red-500 border-red-500/20'
         }`}>
           <div className="flex items-center gap-1.5 min-w-0">
-            <span className={`w-1.5 h-1.5 rounded-full animate-pulse shrink-0 ${
-              syncStatus === 'syncing' ? 'bg-primary' : syncStatus === 'live' ? 'bg-emerald-500' : syncStatus === 'partial' ? 'bg-amber-500' : 'bg-red-500'
+            <span className={`w-1.5 h-1.5 rounded-full shrink-0 ${
+              !marketOpen
+                ? 'bg-amber-500'
+                : syncStatus === 'syncing' ? 'bg-primary animate-pulse'
+                : syncStatus === 'live'    ? 'bg-emerald-500 animate-pulse'
+                : syncStatus === 'partial' ? 'bg-amber-500 animate-pulse'
+                : 'bg-red-500'
             }`}></span>
-            {syncStatus === 'syncing' ? (
+            {!marketOpen ? (
+              <span className="truncate">🔒 <strong>MARKET CLOSED:</strong> {marketStatusLabel}. Showing last closing price — no price movements until market reopens.</span>
+            ) : syncStatus === 'syncing' ? (
               <span className="truncate">🔄 <strong>SYSTEM SYNCING:</strong> Pulling real-time exchange rates, futures, and crop databases in the background...</span>
             ) : syncStatus === 'live' ? (
-              <span className="truncate">✅ <strong>LIVE SYNC ACTIVE:</strong> Real-time exchange rate and ICE Cotton Futures loaded via API. Mandi/Yarn spot calculations updated for 2026.</span>
+              <span className="truncate">✅ <strong>LIVE SYNC ACTIVE:</strong> Real-time exchange rate and ICE Cotton Futures loaded via API. Mandi/Yarn spot calculations updated for {new Date().getFullYear()}.</span>
             ) : syncStatus === 'partial' ? (
               <span className="truncate">⚠️ <strong>PARTIAL SYNC:</strong> Exchange rates or ICE futures API loaded. Fallbacks active for missing endpoints. Mandi/Yarn spot is simulated.</span>
             ) : (
-              <span className="truncate">❌ <strong>API OFFLINE:</strong> Live feeds blocked by CORS or network error. Using cached baseline prices (May 2026).</span>
+              <span className="truncate">❌ <strong>API OFFLINE:</strong> Live feeds blocked by CORS or network error. Using cached baseline prices.</span>
             )}
           </div>
           <div className="flex items-center gap-3 shrink-0 ml-4 font-mono">
-            <span className="hidden sm:inline opacity-70">Last Sync: {lastUpdated.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST</span>
-            <button 
+            <span className="hidden sm:inline opacity-70">
+              {marketOpen
+                ? `Last Sync: ${lastUpdated.toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST`
+                : `Last Close: ${lastCloseFormatted}`
+              }
+            </span>
+            <button
               onClick={refresh}
               disabled={syncStatus === 'syncing'}
               className="px-2 py-0.5 bg-primary/10 hover:bg-primary/20 disabled:opacity-50 border border-primary/30 rounded text-[9px] font-bold transition-all flex items-center gap-1 text-primary cursor-pointer"
@@ -1372,15 +1389,21 @@ function App() {
               REFRESH
             </button>
             <span className={`px-1.5 py-0.5 rounded text-[9px] uppercase tracking-wider font-bold ${
-              syncStatus === 'syncing' 
-                ? 'bg-primary/20 text-primary' 
+              !marketOpen
+                ? 'bg-amber-500/20 text-amber-700 dark:text-amber-400'
+                : syncStatus === 'syncing'
+                ? 'bg-primary/20 text-primary'
                 : syncStatus === 'live'
                 ? 'bg-emerald-500/20 text-emerald-700 dark:text-emerald-400'
                 : syncStatus === 'partial'
                 ? 'bg-amber-500/20 text-amber-700 dark:text-amber-400'
                 : 'bg-red-500/20 text-red-700 dark:text-red-400'
             }`}>
-              {syncStatus === 'syncing' ? 'SYNC IN PROGRESS' : syncStatus === 'live' ? 'LIVE SYNCED' : syncStatus === 'partial' ? 'PARTIAL SYNC' : 'CACHED / SIMULATED'}
+              {!marketOpen ? 'MARKET CLOSED'
+                : syncStatus === 'syncing' ? 'SYNC IN PROGRESS'
+                : syncStatus === 'live'    ? 'LIVE SYNCED'
+                : syncStatus === 'partial' ? 'PARTIAL SYNC'
+                : 'CACHED / SIMULATED'}
             </span>
           </div>
         </div>
@@ -3559,6 +3582,15 @@ function GlobalDashboard({ data, darkMode, colors }) {
     return type;
   };
 
+  // Dynamic month labels for forecast section
+  const _fNow = new Date();
+  const _fMN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const _fSN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const gCurMonthLabel = _fMN[_fNow.getMonth()];
+  const gNxtMonthLabel = _fMN[(_fNow.getMonth() + 1) % 12];
+  const gF1Label = _fSN[(_fNow.getMonth() + 2) % 12];
+  const gF2Label = _fSN[(_fNow.getMonth() + 3) % 12];
+
   return (
     <div className="space-y-gutter">
       <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
@@ -3675,15 +3707,15 @@ function GlobalDashboard({ data, darkMode, colors }) {
             </h4>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
-                <span className="text-on-surface-variant block mb-0.5">May 30/31 Close:</span>
+                <span className="text-on-surface-variant block mb-0.5">{gCurMonthLabel} Spot:</span>
                 <span className="font-semibold text-primary">{data.forecastNarrative.mayClose}</span>
               </div>
               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
-                <span className="text-on-surface-variant block mb-0.5">June Start:</span>
+                <span className="text-on-surface-variant block mb-0.5">{gNxtMonthLabel} Outlook:</span>
                 <span className="font-semibold text-primary">{data.forecastNarrative.junStart}</span>
               </div>
               <div className="p-2 bg-surface/50 rounded border border-outline-variant/30">
-                <span className="text-on-surface-variant block mb-0.5">July & Aug Outlook:</span>
+                <span className="text-on-surface-variant block mb-0.5">{gF1Label} & {gF2Label} Outlook:</span>
                 <span className="font-semibold text-primary">{data.forecastNarrative.julAug}</span>
               </div>
             </div>
@@ -3894,6 +3926,17 @@ function IndiaDashboard({ data, darkMode, colors }) {
     return type;
   };
 
+  // Dynamic month labels and live prices for forecast section
+  const _iNow = new Date();
+  const _iMN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+  const _iSN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const iCurMonthLabel = _iMN[_iNow.getMonth()];
+  const iNxtMonthLabel = _iMN[(_iNow.getMonth() + 1) % 12];
+  const iF1Label = _iSN[(_iNow.getMonth() + 2) % 12];
+  const iF2Label = _iSN[(_iNow.getMonth() + 3) % 12];
+  const liveShankar6 = data?.prices?.types?.[0]?.current ?? 58300;
+  const liveMCU5 = data?.prices?.types?.[1]?.current ?? 62400;
+
   const cci = data.cciOfficialData;
   const latestCci = cci ? cci.historical[0] : null;
 
@@ -4082,7 +4125,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                 <LineChart data={data.prices.monthlyTrend} margin={{ top: 10, right: 10, left: 10, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="month" />
-                  <YAxis domain={[56000, 72000]} />
+                  <YAxis domain={[52000, 70000]} />
                   <Tooltip 
                     wrapperStyle={{ zIndex: 1000 }}
                     contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}}
@@ -4105,16 +4148,33 @@ function IndiaDashboard({ data, darkMode, colors }) {
               </h3>
               <div className="space-y-3.5 text-xs text-on-surface-variant font-medium leading-relaxed">
                 <div>
-                  <strong className="text-primary font-bold block mb-0.5">May 30/31 Close:</strong>
-                  May 2026 closing estimates project Shankar-6 reaching <span className="font-semibold text-primary">₹68,500/Candy</span> as CCI tightens e-auction lots.
+                  <strong className="text-primary font-bold block mb-0.5">{iCurMonthLabel} Spot:</strong>
+                  {iCurMonthLabel} spot: Shankar-6 at{' '}
+                  <span className="font-semibold text-primary">
+                    ₹{liveShankar6.toLocaleString('en-IN')}/Candy
+                  </span>{' '}
+                  with CCI e-auction tightening lots.
                 </div>
                 <div className="border-t border-outline-variant/30 pt-3">
-                  <strong className="text-primary font-bold block mb-0.5">June Start:</strong>
-                  June will start aggressive, likely touching <span className="font-semibold text-primary">₹69,000/Candy</span> due to delayed monsoon fears in Gujarat.
+                  <strong className="text-primary font-bold block mb-0.5">{iNxtMonthLabel} Outlook:</strong>
+                  {iNxtMonthLabel} projection: S-6 likely to trade{' '}
+                  <span className="font-semibold text-primary">
+                    ₹{Math.floor(liveShankar6 * 1.01).toLocaleString('en-IN')}–₹{Math.floor(liveShankar6 * 1.025).toLocaleString('en-IN')}/Candy
+                  </span>{' '}
+                  driven by monsoon trajectory & Gujarat arrivals.
                 </div>
                 <div className="border-t border-outline-variant/30 pt-3">
-                  <strong className="text-primary font-bold block mb-0.5">July & Aug Outlook:</strong>
-                  July and August are critical. A monsoon deficit could spike prices to <span className="font-semibold text-primary">₹71,000+</span> (MCU-5 approaching <span className="font-semibold text-primary">₹74,000</span>). A normal monsoon will stabilize S-6 around <span className="font-semibold text-primary">₹67,500</span>.
+                  <strong className="text-primary font-bold block mb-0.5">{iF1Label} & {iF2Label} Outlook:</strong>
+                  {iF1Label} & {iF2Label}: A monsoon deficit could spike to{' '}
+                  <span className="font-semibold text-primary">
+                    ₹{Math.floor(liveShankar6 * 1.04).toLocaleString('en-IN')}+
+                  </span>{' '}(MCU-5 approaching{' '}
+                  <span className="font-semibold text-primary">
+                    ₹{Math.floor(liveMCU5 * 1.05).toLocaleString('en-IN')}
+                  </span>). Normal monsoon stabilizes S-6 at{' '}
+                  <span className="font-semibold text-primary">
+                    ₹{Math.floor(liveShankar6 * 0.99).toLocaleString('en-IN')}
+                  </span>.
                 </div>
               </div>
             </div>

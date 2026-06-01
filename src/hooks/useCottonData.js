@@ -1,9 +1,44 @@
 // src/hooks/useCottonData.js
 // Custom React hook for managing cotton market data, caching and price synchronization
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import { initialData, generateUpdatedData } from '../data';
 import { fetchAllCottonData, clearCache } from '../api/fetchData';
+
+// ---------------------------------------------------------------------------
+// Market Schedule Helper
+// MCX Cotton:  Mon–Fri  09:00 – 23:30 IST
+// ICE Cotton:  Mon–Fri  06:30 – 01:00 IST (next day) → use 07:00 as safe open
+// We use the UNION so updates run whenever ANY relevant market is open.
+// Weekends (Sat/Sun IST) → always closed.
+// ---------------------------------------------------------------------------
+export function isMarketOpen() {
+  // Get current IST time regardless of user's local timezone
+  const now   = new Date();
+  const ist   = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+  const day   = ist.getDay();              // 0 = Sun, 6 = Sat
+  const mins  = ist.getHours() * 60 + ist.getMinutes();
+
+  if (day === 0 || day === 6) return false; // Weekend → closed
+
+  const OPEN  = 7  * 60;      // 07:00 IST  (ICE Cotton electronic opens ~06:30)
+  const CLOSE = 23 * 60 + 55; // 23:55 IST  (MCX closes 23:30; buffer till midnight)
+  return mins >= OPEN && mins <= CLOSE;
+}
+
+// Returns a human-readable string for when market last closed / next opens
+export function getMarketStatusLabel() {
+  const now  = new Date();
+  const ist  = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Kolkata' }));
+  const day  = ist.getDay();
+  const mins = ist.getHours() * 60 + ist.getMinutes();
+  const OPEN = 7 * 60;
+
+  if (day === 6)               return 'Weekend · Opens Mon 07:00 IST';
+  if (day === 0)               return 'Weekend · Opens Mon 07:00 IST';
+  if (mins < OPEN)             return 'Pre-Market · Opens 07:00 IST';
+  return 'Post-Market · Opens tomorrow 07:00 IST';
+}
 
 export function useCottonData(refreshInterval = 60 * 1000) {
   const [data, setData] = useState(() => generateUpdatedData(initialData));
@@ -11,6 +46,8 @@ export function useCottonData(refreshInterval = 60 * 1000) {
   const [error, setError] = useState(null);
   const [lastUpdated, setLastUpdated] = useState(new Date());
   const [syncStatus, setSyncStatus] = useState('syncing');
+  const [marketOpen, setMarketOpen] = useState(isMarketOpen);
+  const lastCloseRef = useRef(null); // stores the last price snapshot when market closed
 
   const getFreshness = () => {
     const ageMinutes = (Date.now() - lastUpdated.getTime()) / (1000 * 60);
@@ -75,14 +112,20 @@ export function useCottonData(refreshInterval = 60 * 1000) {
             types[10].est = parseFloat((types[10].current * 1.02).toFixed(2));
           }
 
-          if (!updated.globalCotton.forecastNarrative) {
-            updated.globalCotton.forecastNarrative = {};
-          }
+          // Dynamic month helpers
+          const _now = new Date();
+          const _MN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+          const _SN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          const _cur = _MN[_now.getMonth()];
+          const _nxt = _MN[(_now.getMonth() + 1) % 12];
+          const _f1  = _SN[(_now.getMonth() + 2) % 12];
+          const _f2  = _SN[(_now.getMonth() + 3) % 12];
+
           const aIndexPrice = parseFloat((iceCottonPrice + 10.5).toFixed(2));
           updated.globalCotton.forecastNarrative = {
-            mayClose: `May 2026 sees the A-Index firming around ${aIndexPrice} cents/lb, supported by a projected 6.6M bale drop in global YoY production.`,
-            junStart: `June expects continued tightness as the 5.7M bale global production gap becomes more apparent to spinners and mills.`,
-            julAug: `July and August will depend heavily on whether the anticipated global mill-use increase (up to 121.7M bales) materializes against the tightened 71.8M bale global stocks.`
+            mayClose: `${_cur} ${_now.getFullYear()}: A-Index at ${aIndexPrice} ¢/lb — supported by a 6.6M bale drop in global YoY production.`,
+            junStart: `${_nxt} expects continued tightness as the global 5.7M bale production gap impacts spinners & mills worldwide.`,
+            julAug: `${_f1} & ${_f2}: Outcome hinges on mill-use growth (121.7M bales est) vs tightened 71.8M bale global ending stocks.`
           };
         }
 
@@ -121,42 +164,71 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           types[6].current = iceInrEquivalent;
           types[6].est = Math.floor(iceInrEquivalent * 1.02);
 
-          // Update monthly trends to end at May 2026 spot
+          // Update monthly trends — roll last 6 entries to current calendar months
           if (updated.indianCotton.prices.monthlyTrend) {
             const trend = updated.indianCotton.prices.monthlyTrend;
+            const _tNow = new Date();
+            const _tSN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+            // Label last 6 entries as rolling: 5 months ago → current month
+            for (let i = 0; i < 6; i++) {
+              const d = new Date(_tNow.getFullYear(), _tNow.getMonth() - (5 - i), 1);
+              trend[6 + i].month = `${_tSN[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`;
+            }
+
+            // Set prices: index 11 = live current month; older months were higher (peak season)
+            // Ratios: Dec25 was ~10% above current, tapering down to Jun26 current
             trend[11].Shankar6 = shankar6Spot;
             trend[11].MCU5 = types[1].current;
             trend[11].J34 = types[4].current;
 
-            trend[10].Shankar6 = Math.floor(shankar6Spot * 0.99);
-            trend[10].MCU5 = Math.floor(types[1].current * 0.99);
-            trend[10].J34 = Math.floor(types[4].current * 0.99);
+            trend[10].Shankar6 = Math.floor(shankar6Spot * 1.008); // 1 month ago
+            trend[10].MCU5 = Math.floor(types[1].current * 1.007);
+            trend[10].J34 = Math.floor(types[4].current * 1.007);
 
-            trend[9].Shankar6 = Math.floor(shankar6Spot * 0.98);
-            trend[9].MCU5 = Math.floor(types[1].current * 0.98);
-            trend[9].J34 = Math.floor(types[4].current * 0.98);
+            trend[9].Shankar6 = Math.floor(shankar6Spot * 1.026);  // 2 months ago
+            trend[9].MCU5 = Math.floor(types[1].current * 1.024);
+            trend[9].J34 = Math.floor(types[4].current * 1.024);
 
-            trend[8].Shankar6 = Math.floor(shankar6Spot * 0.97);
-            trend[8].MCU5 = Math.floor(types[1].current * 0.97);
-            trend[8].J34 = Math.floor(types[4].current * 0.97);
+            trend[8].Shankar6 = Math.floor(shankar6Spot * 1.055);  // 3 months ago
+            trend[8].MCU5 = Math.floor(types[1].current * 1.052);
+            trend[8].J34 = Math.floor(types[4].current * 1.052);
 
-            trend[7].Shankar6 = Math.floor(shankar6Spot * 0.96);
-            trend[7].MCU5 = Math.floor(types[1].current * 0.96);
-            trend[7].J34 = Math.floor(types[4].current * 0.96);
+            trend[7].Shankar6 = Math.floor(shankar6Spot * 1.078);  // 4 months ago
+            trend[7].MCU5 = Math.floor(types[1].current * 1.075);
+            trend[7].J34 = Math.floor(types[4].current * 1.075);
 
-            trend[6].Shankar6 = Math.floor(shankar6Spot * 0.95);
-            trend[6].MCU5 = Math.floor(types[1].current * 0.95);
-            trend[6].J34 = Math.floor(types[4].current * 0.95);
+            trend[6].Shankar6 = Math.floor(shankar6Spot * 1.098);  // 5 months ago (peak season)
+            trend[6].MCU5 = Math.floor(types[1].current * 1.093);
+            trend[6].J34 = Math.floor(types[4].current * 1.093);
           }
 
-          if (!updated.indianCotton.forecastNarrative) {
-            updated.indianCotton.forecastNarrative = {};
+          // Also roll the global monthly trend last entry to current month
+          if (updated.globalCotton && updated.globalCotton.prices && updated.globalCotton.prices.monthlyTrend) {
+            const gTrend = updated.globalCotton.prices.monthlyTrend;
+            const _tNow2 = new Date();
+            const _tSN2 = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+            const lastLabel = `${_tSN2[_tNow2.getMonth()]} ${String(_tNow2.getFullYear()).slice(2)}`;
+            gTrend[gTrend.length - 1].month = lastLabel;
+            gTrend[gTrend.length - 1].AIndex = parseFloat((iceCottonPrice + 10.5).toFixed(2));
+            gTrend[gTrend.length - 1].US = parseFloat(iceCottonPrice.toFixed(2));
+            gTrend[gTrend.length - 1].Brazil = parseFloat((iceCottonPrice - 4.5).toFixed(2));
           }
+
+          // Dynamic month names for India forecastNarrative
+          const _iNow = new Date();
+          const _iMN = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+          const _iSN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          const _iCur = _iMN[_iNow.getMonth()];
+          const _iNxt = _iMN[(_iNow.getMonth() + 1) % 12];
+          const _iF1  = _iSN[(_iNow.getMonth() + 2) % 12];
+          const _iF2  = _iSN[(_iNow.getMonth() + 3) % 12];
+
           const mcu5Spot = types[1].current;
           updated.indianCotton.forecastNarrative = {
-            mayClose: `May 2026 closing estimates project Shankar-6 reaching ₹${Math.floor(shankar6Spot * 0.995).toLocaleString('en-IN')}/Candy as CCI tightens e-auction lots.`,
-            junStart: `June will start aggressive, likely touching ₹${Math.floor(shankar6Spot * 1.01).toLocaleString('en-IN')}/Candy due to delayed monsoon fears in Gujarat.`,
-            julAug: `July and August are critical. A monsoon deficit could spike prices to ₹${Math.floor(shankar6Spot * 1.04).toLocaleString('en-IN')}+ (MCU-5 approaching ₹${Math.floor(mcu5Spot * 1.05).toLocaleString('en-IN')}). A normal monsoon will stabilize S-6 around ₹${Math.floor(shankar6Spot * 0.99).toLocaleString('en-IN')}.`
+            mayClose: `${_iCur} ${_iNow.getFullYear()} spot: Shankar-6 at ₹${shankar6Spot.toLocaleString('en-IN')}/Candy with CCI e-auction tightening lots.`,
+            junStart: `${_iNxt} projection: S-6 likely to trade ₹${Math.floor(shankar6Spot * 1.01).toLocaleString('en-IN')}–₹${Math.floor(shankar6Spot * 1.025).toLocaleString('en-IN')}/Candy driven by monsoon trajectory.`,
+            julAug: `${_iF1} & ${_iF2}: Monsoon deficit → ₹${Math.floor(shankar6Spot * 1.04).toLocaleString('en-IN')}+ (MCU-5 ₹${Math.floor(mcu5Spot * 1.05).toLocaleString('en-IN')}). Normal monsoon stabilizes S-6 at ₹${Math.floor(shankar6Spot * 0.99).toLocaleString('en-IN')}.`
           };
         }
 
@@ -248,11 +320,16 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           }
         }
 
-        // Apply simulated Kapas arrivals daily walk
-        const shankar6Spot = updated.indianCotton.prices.types[0].current;
-        const kapasMandiArrivalSpot = shankar6Spot + Math.floor(Math.random() * 200) - 100;
-        updated.indianCotton.prices.types[0].current = kapasMandiArrivalSpot;
-        updated.indianCotton.prices.types[0].est = kapasMandiArrivalSpot + 900;
+        // ----------------------------------------------------------------
+        // Kapas micro-walk: ONLY when market is open
+        // When closed we keep the frozen last-close snapshot
+        // ----------------------------------------------------------------
+        if (isMarketOpen()) {
+          const shankar6Spot = updated.indianCotton.prices.types[0].current;
+          const kapasMandiArrivalSpot = shankar6Spot + Math.floor(Math.random() * 160) - 80;
+          updated.indianCotton.prices.types[0].current = kapasMandiArrivalSpot;
+          updated.indianCotton.prices.types[0].est = Math.floor(kapasMandiArrivalSpot * 1.015);
+        }
 
         return updated;
       });
@@ -272,20 +349,47 @@ export function useCottonData(refreshInterval = 60 * 1000) {
     await loadData();
   }, [loadData]);
 
+  // ------------------------------------------------------------------
+  // Primary sync interval — always fetches so we capture market re-open
+  // ------------------------------------------------------------------
   useEffect(() => {
     loadData();
     const syncInterval = setInterval(loadData, refreshInterval);
     return () => clearInterval(syncInterval);
   }, [loadData, refreshInterval]);
 
-  // Handle local fluctuations every 30s for line graphs and live animations
+  // ------------------------------------------------------------------
+  // 30-second micro-animation — ONLY when market is open
+  // Also polls isMarketOpen() every 30s to update the marketOpen flag
+  // ------------------------------------------------------------------
   useEffect(() => {
     const interval = setInterval(() => {
-      setData(prevData => generateUpdatedData(prevData));
-      setLastUpdated(new Date());
+      const open = isMarketOpen();
+      setMarketOpen(open);
+
+      if (open) {
+        // Market open: apply live micro-fluctuations
+        setData(prevData => generateUpdatedData(prevData));
+        setLastUpdated(new Date());
+      }
+      // Market closed: do nothing — keep the frozen last-close data
     }, 30 * 1000);
     return () => clearInterval(interval);
   }, []);
+
+  // ------------------------------------------------------------------
+  // When the API fetch completes and market is closed, freeze the
+  // last-close timestamp so the badge shows the correct time
+  // ------------------------------------------------------------------
+  useEffect(() => {
+    if (!marketOpen && syncStatus !== 'syncing') {
+      if (!lastCloseRef.current) {
+        lastCloseRef.current = new Date();
+      }
+    } else {
+      lastCloseRef.current = null; // reset when market reopens
+    }
+  }, [marketOpen, syncStatus]);
 
   const getFormattedTimestamp = () => {
     return lastUpdated.toLocaleString('en-IN', {
@@ -293,6 +397,18 @@ export function useCottonData(refreshInterval = 60 * 1000) {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit'
+    }) + ' IST';
+  };
+
+  const getLastCloseFormatted = () => {
+    const t = lastCloseRef.current || lastUpdated;
+    return t.toLocaleString('en-IN', {
+      timeZone: 'Asia/Kolkata',
+      weekday: 'short',
+      month: 'short',
+      day: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
     }) + ' IST';
   };
 
@@ -304,7 +420,10 @@ export function useCottonData(refreshInterval = 60 * 1000) {
     formattedTimestamp: getFormattedTimestamp(),
     syncStatus,
     freshness: getFreshness(),
-    refresh
+    refresh,
+    marketOpen,
+    marketStatusLabel: marketOpen ? 'Live' : getMarketStatusLabel(),
+    lastCloseFormatted: getLastCloseFormatted()
   };
 }
 

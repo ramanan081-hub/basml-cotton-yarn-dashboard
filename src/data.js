@@ -26,8 +26,8 @@ export const initialData = {
         { month: 'Jan 26', AIndex: 91.2, US: 81.8, Brazil: 77.9 },
         { month: 'Feb 26', AIndex: 92.5, US: 82.5, Brazil: 78.5 },
         { month: 'Mar 26', AIndex: 94.0, US: 83.9, Brazil: 79.6 },
-        { month: 'Apr 26', AIndex: 95.0, US: 84.5, Brazil: 80.0 },
-        { month: 'May 26', AIndex: 87.92, US: 77.42, Brazil: 72.92 }
+        { month: 'Apr 26', AIndex: 90.2, US: 80.1, Brazil: 75.8 },
+        { month: 'Jun 26', AIndex: 87.92, US: 77.42, Brazil: 72.92 }
       ],
       types: [
         { type: 'Cotlook A-Index', current: 87.92, est: 89.20, yoy: '-7.5%', quality: 'Middling 1-1/8"' },
@@ -49,11 +49,11 @@ export const initialData = {
       { holder: 'Traders', value: 20, bales: 14.36, marketValueBillion: 5.74 },
       { holder: 'Farmers', value: 15, bales: 10.77, marketValueBillion: 4.31 }
     ],
-    briefing: "Cotton Inc's May 2026 report highlights a global production gap of 5.7M bales. Global ending stocks are projected to drop to a 6-year low of 71.8M bales. The A-Index rose to 95 cents/lb, and the China CC Index to 121 cents/lb, signaling tighter markets and upward price pressure despite recent futures volatility.",
+    briefing: "ICAC June 2026 report highlights a global production gap of 5.7M bales. Global ending stocks projected to drop to a 6-year low of 71.8M bales. The A-Index trades at 87.9 cents/lb, signaling tighter markets and mild upward price pressure despite recent futures volatility.",
     forecastNarrative: {
-      mayClose: "May 2026 sees the A-Index firming around 95 cents/lb, supported by a projected 6.6M bale drop in global YoY production.",
-      junStart: "June expects continued tightness as the 5.7M bale global production gap becomes more apparent to spinners and mills.",
-      julAug: "July and August will depend heavily on whether the anticipated global mill-use increase (up to 121.7M bales) materializes against the tightened 71.8M bale global stocks."
+      mayClose: "June 2026: A-Index at ~87.9 ¢/lb — supported by a 6.6M bale drop in global YoY production.",
+      junStart: "July expects continued tightness as the global 5.7M bale production gap impacts spinners & mills worldwide.",
+      julAug: "Aug & Sep: Outcome hinges on mill-use growth (121.7M bales est) vs tightened 71.8M bale global ending stocks."
     }
   },
   indianCotton: {
@@ -75,20 +75,20 @@ export const initialData = {
         { month: 'Oct 25', Shankar6: 65500, MCU5: 68200, J34: 62200 },
         { month: 'Nov 25', Shankar6: 66000, MCU5: 68800, J34: 63000 },
         { month: 'Dec 25', Shankar6: 65500, MCU5: 68000, J34: 62500 },
-        { month: 'Jan 26', Shankar6: 66200, MCU5: 68500, J34: 63200 },
-        { month: 'Feb 26', Shankar6: 67000, MCU5: 69500, J34: 64000 },
-        { month: 'Mar 26', Shankar6: 67500, MCU5: 70000, J34: 64800 },
-        { month: 'Apr 26', Shankar6: 68100, MCU5: 70500, J34: 65800 },
-        { month: 'May 26', Shankar6: 68100, MCU5: 70500, J34: 65800 }
+        { month: 'Jan 26', Shankar6: 57000, MCU5: 61000, J34: 54800 },
+        { month: 'Feb 26', Shankar6: 57500, MCU5: 61500, J34: 55200 },
+        { month: 'Mar 26', Shankar6: 58000, MCU5: 62000, J34: 55700 },
+        { month: 'Apr 26', Shankar6: 58200, MCU5: 62300, J34: 55900 },
+        { month: 'Jun 26', Shankar6: 58300, MCU5: 62400, J34: 55900 }
       ],
       types: [
-        { type: 'Shankar-6 (S-6)', current: 65100, est: 66000, staple: '29-31mm (Long Staple)' },
-        { type: 'MCU-5', current: 70000, est: 71000, staple: '31-33mm (ELS)' },
-        { type: 'DCH-32 / Suvin', current: 88000, est: 89000, staple: '33-36mm (ELS)' },
-        { type: 'MECH-1 (Bunny/Brahma)', current: 67000, est: 68000, staple: '28-30mm (Long Staple)' },
-        { type: 'J-34', current: 62700, est: 63500, staple: '25-27mm (Medium-Long)' },
-        { type: 'V797', current: 45000, est: 46000, staple: '22mm (Short Staple)' },
-        { type: 'ICE Cotton No. 2 (INR Equiv)', current: 55260, est: 56240, staple: 'US Upland Futures (Candy Equivalent)' }
+        { type: 'Shankar-6 (S-6)', current: 58300, est: 59175, staple: '29-31mm (Long Staple)' },
+        { type: 'MCU-5', current: 62400, est: 63335, staple: '31-33mm (ELS)' },
+        { type: 'DCH-32 / Suvin', current: 78700, est: 80275, staple: '33-36mm (ELS)' },
+        { type: 'MECH-1 (Bunny/Brahma)', current: 60050, est: 60950, staple: '28-30mm (Long Staple)' },
+        { type: 'J-34', current: 55970, est: 56760, staple: '25-27mm (Medium-Long)' },
+        { type: 'V797', current: 40230, est: 40835, staple: '22mm (Short Staple)' },
+        { type: 'ICE Cotton No. 2 (INR Equiv)', current: 57800, est: 58960, staple: 'US Upland Futures (Candy Equivalent)' }
       ]
     },
     stateProduction: [
@@ -118,9 +118,9 @@ export const initialData = {
     ],
     planning: "Front-load Procurement Strategy: The 'Super El Niño' is forecasted to severely impact the Jun-Aug monsoon across Central India. Expect a 3-5% price hike in premium medium-long staples (MCU-5, S-6) by Q3. Mills operating below 45 days of inventory should increase coverage immediately.",
     forecastNarrative: {
-      mayClose: "May 2026 closing estimates project Shankar-6 reaching ₹68,500/Candy as CCI tightens e-auction lots.",
-      junStart: "June will start aggressive, likely touching ₹69,000/Candy due to delayed monsoon fears in Gujarat.",
-      julAug: "July and August are critical. A monsoon deficit could spike prices to ₹71,000+ (MCU-5 approaching ₹74,000). A normal monsoon will stabilize S-6 around ₹67,500."
+      mayClose: "June 2026 spot: Shankar-6 at ₹58,300/Candy with CCI e-auction tightening lots.",
+      junStart: "July projection: S-6 likely to trade ₹58,883–₹59,758/Candy driven by monsoon trajectory.",
+      julAug: "Aug & Sep: Monsoon deficit → ₹60,632+ (MCU-5 ₹65,520). Normal monsoon stabilizes S-6 at ₹57,717."
     },
     cciVsNonCci: [
       { category: 'Non-CCI (Private Open Market)', value: 65, bales: 28.22, marketValueCr: 9185.5, fill: '#5B4C3A' },
