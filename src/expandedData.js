@@ -480,6 +480,23 @@ export const expandedCottonVarieties = [
     ]
   },
   {
+    "id": "ice_cotton_no_2_equiv",
+    "name": "ICE Cotton No. 2 (INR Equiv)",
+    "group": "International Cotton",
+    "category": "AMERICAN COTTON (USA)",
+    "specs": {
+      "Micronaire": "3.5-4.9",
+      "Strength": "28-30 g/tex"
+    },
+    "price": "₹55,260/bale",
+    "staple": "Futures Contract Candy Equivalent",
+    "origin": "US Upland (New York Board of Trade)",
+    "applications": [
+      "Hedging",
+      "Benchmark"
+    ]
+  },
+  {
     "id": "pima_cotton_usa",
     "name": "Pima Cotton (USA)",
     "group": "International Cotton",
@@ -828,6 +845,46 @@ export const expandedCottonVarieties = [
 ];
 
 export const expandedYarnVarieties = [
+  {
+    "id": "cotton_yarn_30s_carded_static",
+    "name": "Cotton Yarn 30s Carded",
+    "category": "PURE COTTON YARN (R",
+    "subCategory": "COTTON YARN 30s (Basic Carded)",
+    "price": "₹250/kg",
+    "count": "30s"
+  },
+  {
+    "id": "cotton_yarn_40s_compact_static",
+    "name": "Cotton Yarn 40s Compact",
+    "category": "PURE COTTON YARN (R",
+    "subCategory": "COTTON YARN 40s (Premium Compact)",
+    "price": "₹312/kg",
+    "count": "40s"
+  },
+  {
+    "id": "cotton_yarn_60s_compact_static",
+    "name": "Cotton Yarn 60s Compact",
+    "category": "PURE COTTON YARN (R",
+    "subCategory": "COTTON YARN 60s (Superfine Compact)",
+    "price": "₹355/kg",
+    "count": "60s"
+  },
+  {
+    "id": "cotton_yarn_80s_compact_els_static",
+    "name": "Cotton Yarn 80s Compact ELS",
+    "category": "PURE COTTON YARN (R",
+    "subCategory": "COTTON YARN 80s-100s+ (Extra Fine Compact ELS)",
+    "price": "₹510/kg",
+    "count": "80s"
+  },
+  {
+    "id": "cotton_yarn_32s_pc_static",
+    "name": "Cotton-Polyester 32s Poly-Cotton",
+    "category": "COTTON-POLYESTER BLENDS (Most Popular Blend)",
+    "subCategory": "COTTON-POLYESTER BLENDS (32s Poly-Cotton)",
+    "price": "₹195/kg",
+    "count": "32s"
+  },
   {
     "id": "cotton_yarn_10s_carded",
     "name": "Cotton Yarn 10s Carded",

@@ -4675,6 +4675,9 @@ function AnalysisDashboard({ darkMode, colors }) {
     if (normalized.includes('20s carded')) {
       return yarnAnalysis.data['20s Carded'];
     }
+    if (normalized.includes('30s carded')) {
+      return yarnAnalysis.data['30s Carded'];
+    }
     if (normalized.includes('32s poly-cotton') || normalized.includes('pc 32s') || normalized.includes('32s combed pc')) {
       return yarnAnalysis.data['32s Poly-Cotton'];
     }
@@ -4720,7 +4723,7 @@ function AnalysisDashboard({ darkMode, colors }) {
       const pctChange = -0.03 + seedVal * 0.08;
       const avgPrice = Math.round(basePrice * (1 + pctChange));
       const targetBales = Math.round(10000 + getDeterministicRandom(name, i + 40) * 40000);
-      const allocatedBudgetCr = parseFloat(((targetBales * avgPrice) / 10000000).toFixed(2));
+      const allocatedBudgetCr = parseFloat(((targetBales * avgPrice) / 20000000).toFixed(2));
       const hedgingRatio = Math.round(20 + getDeterministicRandom(name, i + 50) * 60);
 
       return {
