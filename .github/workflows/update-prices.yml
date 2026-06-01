@@ -1,8 +1,6 @@
 name: Update Market Prices (3x Daily)
 
 on:
-  push:
-    branches: ['main']
   schedule:
     # ── 3 refreshes per day aligned with global cotton market sessions ──────
     # Session 1: 6:30 AM IST  = 01:00 UTC  → Pre-market / MCX open
@@ -29,6 +27,15 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+
+      - name: Pull latest remote main
+        run: |
+          git config user.name "BASML Price Bot"
+          git config user.email "procurement@basml.com"
+          git fetch origin main
+          git checkout main
+          git reset --hard origin/main
 
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -41,18 +48,15 @@ jobs:
 
       - name: Commit updated prices
         run: |
-          git config user.name "BASML Price Bot"
-          git config user.email "procurement@basml.com"
           git add public/market-prices.json
           if git diff --staged --quiet; then
             echo "No price changes to commit"
           else
             git commit -m "chore: auto-update market prices $(date -u +'%Y-%m-%d %H:%M UTC')"
-            git fetch origin main
-            git rebase origin/main
-            git push origin HEAD:main
+            git push origin main
             echo "✅ Prices committed and pushed"
           fi
+
 
       - name: Install dependencies
         run: npm ci
