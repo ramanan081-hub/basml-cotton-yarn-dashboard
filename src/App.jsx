@@ -1362,7 +1362,9 @@ function App() {
         </header>
 
         {/* Sticky warning/status banner */}
-        <div className={`fixed top-16 right-0 left-0 lg:left-[240px] h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 lg:px-6 text-[10px] md:text-xs font-mono transition-colors duration-500 ${
+        <div className={`fixed top-16 right-0 left-0 h-10 z-30 backdrop-blur-md border-b border-outline-variant/30 flex items-center justify-between px-4 lg:px-6 text-[10px] md:text-xs font-mono transition-all duration-300 ${
+          sidebarCollapsed ? 'lg:left-0' : 'lg:left-[240px]'
+        } ${
           !marketOpen
             ? 'bg-amber-500/10 dark:bg-amber-500/5 text-amber-700 dark:text-amber-400 border-amber-500/20'
             : syncStatus === 'syncing'
@@ -1445,7 +1447,9 @@ function App() {
           }
         `}} />
 
-        <div className="fixed top-26 right-0 left-0 lg:left-[240px] h-8 z-20 bg-surface-container-low border-b border-outline-variant/30 flex items-center overflow-hidden text-[10px] font-mono font-bold text-on-surface-variant select-none">
+        <div className={`fixed top-26 right-0 left-0 h-8 z-20 bg-surface-container-low border-b border-outline-variant/30 flex items-center overflow-hidden text-[10px] font-mono font-bold text-on-surface-variant select-none transition-all duration-300 ${
+          sidebarCollapsed ? 'lg:left-0' : 'lg:left-[240px]'
+        }`}>
           <div className="bg-primary/20 text-primary h-full px-3 flex items-center gap-1.5 shrink-0 z-10 border-r border-outline-variant/30 shadow-md">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
             LIVE MCX TICKER
@@ -1496,7 +1500,7 @@ function App() {
         </div>
 
         {/* Dashboard Content Container */}
-        <div className="pt-36 px-4 lg:px-6 pb-24 lg:pb-12 flex-1 max-w-[1600px] w-full relative z-10 space-y-4">
+        <div className="pt-36 px-4 lg:px-6 pb-24 lg:pb-12 flex-1 max-w-none w-full relative z-10 space-y-4">
           <DataTimestamp 
             timestamp={formattedTimestamp} 
             freshness={freshness} 
