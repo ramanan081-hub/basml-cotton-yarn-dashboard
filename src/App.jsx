@@ -3864,7 +3864,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
                   </div>
                   <div>
                     <p className="font-bold text-sm text-on-surface">Next 2-Month Close Outlook</p>
-                    <p className="text-xs text-outline mt-0.5">May close: {data.forecastNarrative.mayClose}. June open: {data.forecastNarrative.junStart}.</p>
+                    <p className="text-xs text-outline mt-0.5"><strong>{gCurMonthLabel} Spot:</strong> {data.forecastNarrative.mayClose}<br/><strong>{gNxtMonthLabel} Outlook:</strong> {data.forecastNarrative.junStart}</p>
                   </div>
                 </div>
                 

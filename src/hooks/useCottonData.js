@@ -123,9 +123,9 @@ export function useCottonData(refreshInterval = 60 * 1000) {
 
           const aIndexPrice = parseFloat((iceCottonPrice + 10.5).toFixed(2));
           updated.globalCotton.forecastNarrative = {
-            mayClose: `${_cur} ${_now.getFullYear()}: A-Index at ${aIndexPrice} ¢/lb — supported by a 6.6M bale drop in global YoY production.`,
-            junStart: `${_nxt} expects continued tightness as the global 5.7M bale production gap impacts spinners & mills worldwide.`,
-            julAug: `${_f1} & ${_f2}: Outcome hinges on mill-use growth (121.7M bales est) vs tightened 71.8M bale global ending stocks.`
+            mayClose: `A-Index at ${aIndexPrice} ¢/lb — supported by a 6.6M bale drop in global YoY production.`,
+            junStart: `Tightness expected as the global 5.7M bale production gap impacts spinners & mills worldwide.`,
+            julAug: `Outcome hinges on mill-use growth (121.7M bales est) vs tightened 71.8M bale global ending stocks.`
           };
         }
 
@@ -226,9 +226,9 @@ export function useCottonData(refreshInterval = 60 * 1000) {
 
           const mcu5Spot = types[1].current;
           updated.indianCotton.forecastNarrative = {
-            mayClose: `${_iCur} ${_iNow.getFullYear()} spot: Shankar-6 at ₹${shankar6Spot.toLocaleString('en-IN')}/Candy with CCI e-auction tightening lots.`,
-            junStart: `${_iNxt} projection: S-6 likely to trade ₹${Math.floor(shankar6Spot * 1.01).toLocaleString('en-IN')}–₹${Math.floor(shankar6Spot * 1.025).toLocaleString('en-IN')}/Candy driven by monsoon trajectory.`,
-            julAug: `${_iF1} & ${_iF2}: Monsoon deficit → ₹${Math.floor(shankar6Spot * 1.04).toLocaleString('en-IN')}+ (MCU-5 ₹${Math.floor(mcu5Spot * 1.05).toLocaleString('en-IN')}). Normal monsoon stabilizes S-6 at ₹${Math.floor(shankar6Spot * 0.99).toLocaleString('en-IN')}.`
+            mayClose: `Spot: Shankar-6 at ₹${shankar6Spot.toLocaleString('en-IN')}/Candy with CCI e-auction tightening lots.`,
+            junStart: `Projection: S-6 likely to trade ₹${Math.floor(shankar6Spot * 1.01).toLocaleString('en-IN')}–₹${Math.floor(shankar6Spot * 1.025).toLocaleString('en-IN')}/Candy driven by monsoon trajectory.`,
+            julAug: `Monsoon deficit → ₹${Math.floor(shankar6Spot * 1.04).toLocaleString('en-IN')}+ (MCU-5 ₹${Math.floor(mcu5Spot * 1.05).toLocaleString('en-IN')}). Normal monsoon stabilizes S-6 at ₹${Math.floor(shankar6Spot * 0.99).toLocaleString('en-IN')}.`
           };
         }
 
