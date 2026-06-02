@@ -591,16 +591,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="date" fontSize={9} />
                   <YAxis fontSize={9} domain={['dataMin - 10', 'dataMax + 10']} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'var(--color-surface-container-high)',
-                      borderColor: 'var(--color-outline-variant)',
-                      borderRadius: '8px',
-                      color: 'var(--color-on-surface)',
-                      fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace'
-                    }}
-                  />
+                  {/* Tooltip removed */}
                   <Line type="monotone" dataKey="price" stroke={colors.primary} strokeWidth={2.5} name="Spot Price" dot={false} />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -668,21 +659,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                   <XAxis type="number" fontSize={10} />
                   <YAxis dataKey="state" type="category" fontSize={10} width={90} />
-                  <Tooltip
-                    cursor={false}
-                    contentStyle={{
-                      backgroundColor: 'var(--color-surface-container-high)',
-                      borderColor: 'var(--color-outline-variant)',
-                      borderRadius: '8px',
-                      color: 'var(--color-on-surface)',
-                      fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace'
-                    }}
-                    formatter={(value, name, props) => [
-                      `${value} M Kgs (Active Spindles: ${props.payload.activeSpindles})`,
-                      `Dominant Types: ${props.payload.majorFocus}`
-                    ]}
-                  />
+                  {/* Tooltip removed */}
                   <Legend wrapperStyle={{ fontSize: '11px' }} />
                   <Bar dataKey="production" name="Yarn Production (M Kgs)" barSize={16}>
                     {(data.stateMillsProduction || []).map((entry, index) => (
@@ -702,21 +679,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="district" fontSize={10} interval={0} angle={-35} textAnchor="end" height={65} />
                   <YAxis fontSize={10} />
-                  <Tooltip
-                    cursor={false}
-                    contentStyle={{
-                      backgroundColor: 'var(--color-surface-container-high)',
-                      borderColor: 'var(--color-outline-variant)',
-                      borderRadius: '8px',
-                      color: 'var(--color-on-surface)',
-                      fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace'
-                    }}
-                    formatter={(value, name, props) => [
-                      `${value} M Kgs`,
-                      `Dominant Types: ${props.payload.majorFocus}`
-                    ]}
-                  />
+                  {/* Tooltip removed */}
                   <Legend wrapperStyle={{ fontSize: '11px' }} />
                   <Bar dataKey="production" name="Production (M Kgs)" barSize={20}>
                     {(data.tnDistrictYarnProduction || []).map((entry, index) => (

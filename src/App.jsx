@@ -187,17 +187,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="year" fontSize={9} />
                 <YAxis fontSize={9} />
-                <Tooltip
-                  wrapperStyle={{ zIndex: 1000 }}
-                  contentStyle={{
-                    backgroundColor: 'var(--color-surface-container-high)',
-                    borderColor: 'var(--color-outline-variant)',
-                    borderRadius: '8px',
-                    color: 'var(--color-on-surface)',
-                    fontSize: '11px',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                />
+                {/* Tooltip removed */}
                 <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} radius={[2, 2, 0, 0]} />
                 <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} radius={[2, 2, 0, 0]} />
               </BarChart>
@@ -222,17 +212,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                 <XAxis type="number" fontSize={9} />
                 <YAxis dataKey="state" type="category" fontSize={9} width={75} />
-                <Tooltip
-                  wrapperStyle={{ zIndex: 1000 }}
-                  contentStyle={{
-                    backgroundColor: 'var(--color-surface-container-high)',
-                    borderColor: 'var(--color-outline-variant)',
-                    borderRadius: '8px',
-                    color: 'var(--color-on-surface)',
-                    fontSize: '11px',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                />
+                {/* Tooltip removed */}
                 <Bar dataKey="production" name="Production (Lakh Bales)" barSize={24} radius={[0, 2, 2, 0]}>
                    {stateProdData.slice(0, 6).map((entry, index) => (
                      <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
@@ -995,16 +975,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                     <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
                     <YAxis fontSize={9} stroke="var(--color-outline)" domain={['auto', 'auto']} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Area type="monotone" dataKey="price" stroke={colors.primary} strokeWidth={2} fillOpacity={1} fill={`url(#colorPrice-${mode}-${variety.key})`} name={isGlobal ? "Price (US ¢/lb)" : "Price (₹/Candy)"} />
                   </AreaChart>
                 </ResponsiveContainer>
@@ -1014,16 +985,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                     <XAxis dataKey="day" fontSize={9} stroke="var(--color-outline)" />
                     <YAxis fontSize={9} stroke="var(--color-outline)" domain={['auto', 'auto']} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
                     <Line type="monotone" dataKey="Price Path" stroke={colors.primary} strokeWidth={2} dot={{ r: 3 }} name="Projected Price" />
                     <Line type="monotone" dataKey="Buy Target" stroke="#4CAF50" strokeDasharray="4 4" dot={false} strokeWidth={1.5} name="Max Buy Zone" />
@@ -3667,7 +3629,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="year" fontSize={9} />
                   <YAxis fontSize={9} />
-                  <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}} />
+                  {/* Tooltip removed */}
                   <Legend wrapperStyle={{ fontSize: 10 }} />
                   <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} radius={[2, 2, 0, 0]} />
                   <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} radius={[2, 2, 0, 0]} />
@@ -3717,7 +3679,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="month" />
                   <YAxis domain={['auto', 'auto']} tickFormatter={(value) => `${formatPrice(value)}¢`} />
-                  <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value) => `${formatPrice(value)}¢`} />
+                  {/* Tooltip removed */}
                   <Legend />
                   <Line type="monotone" dataKey="AIndex" stroke={colors.tertiary} strokeWidth={3} dot={false} name="A-Index (USD)" />
                   <Line type="monotone" dataKey="US" stroke={colors.primary} strokeWidth={2} dot={false} name="US Upland (USD)" />
@@ -3765,7 +3727,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
                         <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                       ))}
                     </Pie>
-                    <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}} formatter={(value, name, props) => props.payload.bales ? `${value}% (${props.payload.bales} M Bales)` : `${value}%`} />
+                    {/* Tooltip removed */}
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="absolute flex flex-col items-center justify-center pointer-events-none">
@@ -4089,10 +4051,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="year" />
                   <YAxis />
-                  <Tooltip 
-                    wrapperStyle={{ zIndex: 1000 }}
-                    contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}}
-                  />
+                  {/* Tooltip removed */}
                   <Legend />
                   <Bar dataKey="consumption" name="Consumption (Lakh Bales)" fill="#FB8C00" radius={[2, 2, 0, 0]} />
                   <Bar dataKey="production" name="Production (Lakh Bales)" fill="#FFA951" radius={[2, 2, 0, 0]} />
@@ -4152,10 +4111,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="month" />
                   <YAxis domain={[52000, 70000]} />
-                  <Tooltip 
-                    wrapperStyle={{ zIndex: 1000 }}
-                    contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}}
-                  />
+                  {/* Tooltip removed */}
                   <Legend />
                   <Line type="monotone" dataKey="J34" name="J-34 (₹/Candy)" stroke="#FFA951" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
                   <Line type="monotone" dataKey="MCU5" name="MCU-5 (₹/Candy)" stroke="#BF360C" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
@@ -4225,11 +4181,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                 <XAxis type="number" />
                 <YAxis dataKey="state" type="category" width={85} />
-                <Tooltip 
-                  wrapperStyle={{ zIndex: 1000 }}
-                  contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} 
-                  formatter={(value, name, props) => [`${value} Lakh Bales (Yield: ${props.payload.yield} | GOT: ${props.payload.got})`, `Harvest: ${props.payload.harvestPeriod} (${props.payload.quality})`]} 
-                />
+                {/* Tooltip removed */}
                 <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)" radius={[0, 2, 2, 0]}>
                   {data.stateProduction.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
@@ -4260,7 +4212,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                         <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                       ))}
                     </Pie>
-                    <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value, name, props) => props.payload.bales ? `${value}% (${props.payload.bales} Lakh Bales | ₹${props.payload.marketValueCr.toLocaleString()} Cr)` : `${value}%`} />
+                    {/* Tooltip removed */}
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="text-[10px] font-mono text-center text-outline block -mt-4">Buffer Stockholders</div>
@@ -4274,7 +4226,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                         <Cell key={`cci-${index}`} fill={index === 0 ? colors.primary : colors.secondary} />
                       ))}
                     </Pie>
-                    <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value, name, props) => props.payload.bales ? `${value}% (${props.payload.bales} Lakh Bales | ₹${props.payload.marketValueCr.toLocaleString()} Cr)` : `${value}%`} />
+                    {/* Tooltip removed */}
                   </PieChart>
                 </ResponsiveContainer>
                 <div className="text-[10px] font-mono text-center text-outline block -mt-4">CCI Market Penetration</div>
@@ -4309,11 +4261,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="district" interval={0} angle={-35} textAnchor="end" height={60} />
                 <YAxis />
-                <Tooltip 
-                  wrapperStyle={{ zIndex: 1000 }}
-                  contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} 
-                  formatter={(value, name, props) => [`${value} Lakh Bales (GOT: ${props.payload.got} | Active Ginners: ${props.payload.activeGinningMills})`, `Harvest: ${props.payload.harvestType} | Dominant: ${props.payload.dominantVariety}`]} 
-                />
+                {/* Tooltip removed */}
                 <Legend />
                 <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)" radius={[2, 2, 0, 0]}>
                   {data.tnDistricts.map((entry, index) => (
@@ -4593,7 +4541,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
                       <XAxis dataKey="year" height={50} interval={0} angle={-25} textAnchor="end" />
                       <YAxis yAxisId="left" />
                       <YAxis yAxisId="right" orientation="right" />
-                      <Tooltip contentStyle={{ background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px' }} />
+                      {/* Tooltip removed */}
                       <Legend />
                       <Bar yAxisId="left" dataKey="totalPurchaseBales" fill={colors.primary} name="Procurement (Lakh Bales)" barSize={20} radius={[2, 2, 0, 0]} />
                       <Bar yAxisId="left" dataKey="totalSalesBales" fill={colors.primaryContainer} name="Sales Volume (Lakh Bales)" barSize={20} radius={[2, 2, 0, 0]} />
@@ -5410,16 +5358,7 @@ function AnalysisDashboard({ darkMode, colors, data }) {
                     <XAxis dataKey="date" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Target Bales', angle: -90, position: 'insideLeft', offset: -5 }} />
                     <YAxis yAxisId="right" orientation="right" fontSize={10} domain={['auto', 'auto']} tickFormatter={(val) => `₹${val}`} label={{ value: 'Price (₹/Candy)', angle: 90, position: 'insideRight', offset: 10 }} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
                     <Bar yAxisId="left" dataKey="targetBales" fill={colors.primary} name="Target Purchase Quantity (Bales)" barSize={20} radius={[2, 2, 0, 0]} />
                     <Line yAxisId="right" type="monotone" dataKey="priceForecast" stroke={colors.tertiary} strokeWidth={3} name="Price Trend (₹/Candy)" dot={true} />
@@ -5481,16 +5420,7 @@ function AnalysisDashboard({ darkMode, colors, data }) {
                     <XAxis dataKey="month" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Budget (₹ Crore)', angle: -90, position: 'insideLeft', offset: -5 }} />
                     <YAxis yAxisId="right" orientation="right" fontSize={10} domain={[0, 100]} tickFormatter={(val) => `${val}%`} label={{ value: 'Hedging Ratio (%)', angle: 90, position: 'insideRight', offset: 10 }} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
                     <Bar yAxisId="left" dataKey="allocatedBudgetCr" fill={colors.primaryContainer} name="Budget Allocation (₹ Cr)" barSize={20} radius={[2, 2, 0, 0]} />
                     <Line yAxisId="right" type="monotone" dataKey="hedgingRatio" stroke={colors.primary} strokeWidth={3} name="Hedging Ratio (%)" dot={true} />
@@ -5542,17 +5472,7 @@ function AnalysisDashboard({ darkMode, colors, data }) {
                     <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                     <XAxis type="number" fontSize={10} domain={[0, 100]} tickFormatter={(val) => `${val}%`} />
                     <YAxis dataKey="factor" type="category" fontSize={9} width={130} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                      formatter={(value) => [`${value}% Influence`, 'Weight']}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
                     <Bar dataKey="weight" name="Price Sensitivity Weight (%)" barSize={24} radius={[0, 2, 2, 0]}>
                       {currentCotton.affectingFactors.map((entry, index) => (
@@ -5660,16 +5580,7 @@ function AnalysisDashboard({ darkMode, colors, data }) {
                     <XAxis dataKey="date" fontSize={10} />
                     <YAxis yAxisId="left" fontSize={10} label={{ value: 'Target Qty (Kg)', angle: -90, position: 'insideLeft', offset: -5 }} />
                     <YAxis yAxisId="right" orientation="right" fontSize={10} domain={['auto', 'auto']} label={{ value: 'Margin Spread (₹/kg)', angle: 90, position: 'insideRight', offset: 10 }} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
                     <Bar yAxisId="left" dataKey="targetQtyKg" fill={colors.primaryContainer} name="Target Purchase (Kg)" barSize={20} radius={[2, 2, 0, 0]} />
                     <Line yAxisId="right" type="monotone" dataKey="marginSpread" stroke={colors.primary} strokeWidth={3} name="Margin Spread (₹/kg)" dot={true} />
@@ -5723,16 +5634,7 @@ function AnalysisDashboard({ darkMode, colors, data }) {
                     <CartesianGrid strokeDasharray="3 3" vertical={false} />
                     <XAxis dataKey="month" fontSize={10} />
                     <YAxis fontSize={10} domain={[0, 100]} />
-                    <Tooltip
-                      contentStyle={{
-                        backgroundColor: 'var(--color-surface-container-high)',
-                        borderColor: 'var(--color-outline-variant)',
-                        borderRadius: '8px',
-                        color: 'var(--color-on-surface)',
-                        fontSize: '11px',
-                        fontFamily: 'JetBrains Mono, monospace'
-                      }}
-                    />
+                    {/* Tooltip removed */}
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
                     <Line type="monotone" dataKey="combedCompactDemand" stroke={colors.primary} strokeWidth={3} name="Combed/Compact Demand Index" dot={true} />
                     <Line type="monotone" dataKey="blendedYarnDemand" stroke={colors.tertiary} strokeWidth={2} name="Polyester/Viscose Blended Demand Index" dot={true} />

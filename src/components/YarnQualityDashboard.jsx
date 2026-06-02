@@ -490,17 +490,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="dateLabel" label={{ value: 'Test Date', position: 'insideBottom', offset: -5 }} fontSize={9} />
                   <YAxis domain={['auto', 'auto']} fontSize={9} />
-                  <Tooltip
-                    contentStyle={{
-                      backgroundColor: 'var(--color-surface-container-high)',
-                      borderColor: 'var(--color-outline-variant)',
-                      borderRadius: '8px',
-                      color: 'var(--color-on-surface)',
-                      fontSize: '11px',
-                      fontFamily: 'JetBrains Mono, monospace'
-                    }}
-                    formatter={(value) => [`${value} Ne`, 'Measured Count']}
-                  />
+                  {/* Tooltip removed */}
                   <Legend verticalAlign="top" height={36} wrapperStyle={{ fontSize: '11px' }} />
                   
                   {/* Process Control Reference Lines */}
@@ -549,17 +539,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" fontSize={9} />
                 <YAxis fontSize={9} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'var(--color-surface-container-high)',
-                    borderColor: 'var(--color-outline-variant)',
-                    borderRadius: '8px',
-                    color: 'var(--color-on-surface)',
-                    fontSize: '11px',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                  formatter={(value) => [`${value} / km`, 'Occurrences']}
-                />
+                {/* Tooltip removed */}
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
                 <Bar dataKey="actual" fill={colors.primary} name="Actual Mill Quality" barSize={20} radius={[2, 2, 0, 0]} />
                 <Bar dataKey="benchmark" fill={colors.primaryContainer} name="Uster 5% Benchmark" barSize={20} radius={[2, 2, 0, 0]} />
@@ -583,17 +563,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
                 <XAxis dataKey="name" fontSize={9} />
                 <YAxis fontSize={9} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'var(--color-surface-container-high)',
-                    borderColor: 'var(--color-outline-variant)',
-                    borderRadius: '8px',
-                    color: 'var(--color-on-surface)',
-                    fontSize: '11px',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                  formatter={(value) => [`${value} Tons`, 'Production']}
-                />
+                {/* Tooltip removed */}
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
                 <Bar dataKey="volume" fill={colors.primary} name="Daily Spinning Yield (Tons)" barSize={20} radius={[2, 2, 0, 0]}>
                   {data.productionOutput.map((entry, index) => (

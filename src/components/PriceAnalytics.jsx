@@ -322,16 +322,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
                       : ['dataMin - 1000', 'dataMax + 1000']
                   } 
                 />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: 'var(--color-surface-container-high)',
-                    borderColor: 'var(--color-outline-variant)',
-                    borderRadius: '8px',
-                    color: 'var(--color-on-surface)',
-                    fontSize: '11px',
-                    fontFamily: 'JetBrains Mono, monospace'
-                  }}
-                />
+                {/* Tooltip removed */}
                 <Legend wrapperStyle={{ fontSize: '10px' }} />
                 <Line type="monotone" dataKey="price" stroke={colors.primary} strokeWidth={2.5} name="Spot Price" dot={false} />
                 <Line type="monotone" dataKey="ma10" stroke={colors.secondary} strokeWidth={1.5} strokeDasharray="5 5" name="10-day MA" dot={false} />
