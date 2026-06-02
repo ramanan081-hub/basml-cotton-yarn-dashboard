@@ -348,6 +348,18 @@ tr:hover td {
   opacity: 0.3;
 }
 
+/* Disable focus outline on Recharts components and SVG elements when clicked */
+.recharts-wrapper:focus,
+.recharts-wrapper *:focus,
+.recharts-surface:focus,
+.recharts-surface *:focus,
+.recharts-responsive-container:focus,
+svg:focus,
+svg *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
 /* Deep Muted Green for Table Highlights */
 .table-highlight-text {
   color: #1b5e20 !important;
