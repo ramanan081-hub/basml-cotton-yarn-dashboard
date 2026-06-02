@@ -538,7 +538,16 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="date" fontSize={9} />
                   <YAxis fontSize={9} domain={activeVarietyObj.isGlobal ? ['dataMin - 5', 'dataMax + 5'] : ['dataMin - 1000', 'dataMax + 1000']} />
-                  {/* Tooltip removed */}
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                  />
                   <Line type="monotone" dataKey="price" stroke={colors.primary} strokeWidth={2.5} name="Spot Price" dot={false} />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -606,7 +615,21 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" horizontal={false} />
                   <XAxis type="number" fontSize={10} />
                   <YAxis dataKey="state" type="category" fontSize={10} width={90} />
-                  {/* Tooltip removed */}
+                  <Tooltip
+                    cursor={false}
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(value, name, props) => [
+                      `${value} Lakh Bales (Avg Yield: ${props.payload.yield})`,
+                      `Dominant Grade: ${props.payload.quality}`
+                    ]}
+                  />
                   <Legend wrapperStyle={{ fontSize: '11px' }} />
                   <Bar dataKey="production" name="Cotton Production (Lakh Bales)" barSize={16}>
                     {(data.indianCotton?.stateProduction || []).map((entry, index) => (
@@ -626,7 +649,21 @@ export default function CottonDashboard({ data, darkMode, colors }) {
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="district" fontSize={10} interval={0} angle={-35} textAnchor="end" height={65} />
                   <YAxis fontSize={10} />
-                  {/* Tooltip removed */}
+                  <Tooltip
+                    cursor={false}
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(value, name, props) => [
+                      `${value} Lakh Bales`,
+                      `Dominant Variety: ${props.payload.dominantVariety}`
+                    ]}
+                  />
                   <Legend wrapperStyle={{ fontSize: '11px' }} />
                   <Bar dataKey="production" name="Production (Lakh Bales)" barSize={20}>
                     {(data.indianCotton?.tnDistricts || []).map((entry, index) => (
