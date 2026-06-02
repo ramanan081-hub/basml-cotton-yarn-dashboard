@@ -3633,13 +3633,6 @@ function GlobalDashboard({ data, darkMode, colors }) {
             Deep integration of global supply chain logistics, predictive pricing models, and industrial-grade quality assurance metrics.
           </p>
         </div>
-        <div className="absolute right-12 bottom-0 w-64 h-64 z-20 md:block hidden">
-          <img 
-            alt="Yarn Spool Machine" 
-            className="w-full h-full object-contain filter drop-shadow-2xl" 
-            src={`${import.meta.env.BASE_URL}cotton_spinning_spindles.png`}
-          />
-        </div>
       </section>
 
       {/* Main Dashboard Bento Grid */}
