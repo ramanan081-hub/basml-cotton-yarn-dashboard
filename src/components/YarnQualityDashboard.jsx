@@ -306,7 +306,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       {/* Stitch Botanical Cotton Hero */}
       <section className="relative w-full h-[400px] rounded-3xl overflow-hidden glass-card glass-edge mb-8">
         <div className="absolute inset-0 z-0 opacity-80 mix-blend-luminosity">
-          <img alt="Botanical Cotton" className="w-full h-full object-cover" src="/bg-cotton.png" />
+          <img alt="Botanical Cotton" className="w-full h-full object-cover" src={`${import.meta.env.BASE_URL}bg-cotton.png`} />
           <div className="absolute inset-0 bg-gradient-to-t from-surface via-surface/80 to-transparent"></div>
         </div>
 
