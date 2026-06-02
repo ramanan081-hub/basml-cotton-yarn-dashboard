@@ -1,5 +1,5 @@
 // src/expandedData.js
-// Generated dynamically on 28/05/2026
+// Generated dynamically and populated with full specifications on 02/06/2026
 
 export const expandedCottonVarieties = [
   {
@@ -9,7 +9,8 @@ export const expandedCottonVarieties = [
     "category": "SHORT STAPLE VARIETIES (19-21",
     "specs": {
       "Micronaire": "4.5-5.0",
-      "Strength": "6.5 g/tex"
+      "Strength": "6.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹52,000-55,000/bale",
     "staple": "19-21 mm",
@@ -27,7 +28,8 @@ export const expandedCottonVarieties = [
     "category": "SHORT STAPLE VARIETIES (19-21",
     "specs": {
       "Micronaire": "4.8",
-      "Strength": "6.8 g/tex"
+      "Strength": "6.8 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹53,000-56,000/bale",
     "staple": "20 mm",
@@ -44,14 +46,17 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "SHORT STAPLE VARIETIES (19-21",
     "specs": {
-      "Micronaire": "4.5"
+      "Micronaire": "4.5",
+      "Strength": "6.7 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹54,000-57,000/bale",
     "staple": "19 mm",
     "origin": "Karnataka",
     "applications": [
       "Coarse textiles"
-    ]
+    ],
+    "quality": "Fair"
   },
   {
     "id": "brahma",
@@ -59,11 +64,19 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "SHORT STAPLE VARIETIES (19-21",
     "specs": {
-      "Micronaire": "4.6"
+      "Micronaire": "4.6",
+      "Strength": "6.7 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹55,000-58,000/bale",
     "staple": "20 mm",
-    "origin": "Gujarat"
+    "origin": "Gujarat",
+    "quality": "Fair",
+    "applications": [
+      "Coarse yarn",
+      "Workwear",
+      "Industrial fabrics"
+    ]
   },
   {
     "id": "shankar_6",
@@ -92,31 +105,58 @@ export const expandedCottonVarieties = [
     "category": "MEDIUM STAPLE VARIETIES (22-24",
     "specs": {
       "Micronaire": "4.2",
-      "Strength": "7.0 g/tex"
+      "Strength": "7.0 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹67,000-69,000/bale",
     "staple": "24 mm",
-    "origin": "Andhra Pradesh"
+    "origin": "Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "shankar_2",
     "name": "Shankar-2",
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹67,500-69,500/bale",
     "staple": "24 mm",
-    "origin": "Karnataka"
+    "origin": "Karnataka",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "shankar_4",
     "name": "Shankar-4",
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹68,000-70,000/bale",
     "staple": "24 mm",
-    "origin": "All major states"
+    "origin": "All major states",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "shankar_5",
@@ -124,11 +164,19 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
     "specs": {
-      "Micronaire": "4.1"
+      "Micronaire": "4.1",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹68,500-70,500/bale",
     "staple": "24 mm",
-    "origin": "AP, Telangana"
+    "origin": "AP, Telangana",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "shankar_7",
@@ -137,10 +185,18 @@ export const expandedCottonVarieties = [
     "category": "MEDIUM STAPLE VARIETIES (22-24",
     "specs": {
       "Micronaire": "4.0",
-      "Strength": "7.1 g/tex"
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹68,500-70,500/bale",
-    "staple": "24 mm"
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "lra_5166",
@@ -149,12 +205,18 @@ export const expandedCottonVarieties = [
     "category": "MEDIUM STAPLE VARIETIES (22-24",
     "specs": {
       "Micronaire": "4.0",
-      "Strength": "7.3 g/tex"
+      "Strength": "7.3 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹69,000-71,000/bale",
     "staple": "25 mm",
     "origin": "Rajasthan",
-    "quality": "Good"
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "j_34",
@@ -163,41 +225,78 @@ export const expandedCottonVarieties = [
     "category": "MEDIUM STAPLE VARIETIES (22-24",
     "specs": {
       "Micronaire": "4.1",
-      "Strength": "7.0 g/tex"
+      "Strength": "7.0 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹65,800-68,000/bale",
     "staple": "23-24 mm",
-    "origin": "All regions"
+    "origin": "All regions",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "pkv_081",
     "name": "PKV-081",
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹68,500-70,500/bale",
     "staple": "24 mm",
-    "origin": "Maharashtra"
+    "origin": "Maharashtra",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "rch_2",
     "name": "RCH-2",
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹68,000-70,000/bale",
     "staple": "24 mm",
-    "origin": "Rajasthan"
+    "origin": "Rajasthan",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "tchb_213",
     "name": "TCHB-213",
     "group": "Indian Cotton",
     "category": "MEDIUM STAPLE VARIETIES (22-24",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹69,000-71,000/bale",
     "staple": "24 mm",
-    "origin": "Telangana"
+    "origin": "Telangana",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "mcu_5",
@@ -207,7 +306,8 @@ export const expandedCottonVarieties = [
     "specs": {
       "Micronaire": "3.8-4.2",
       "Strength": "7.5 g/tex",
-      "Market Share": "25%"
+      "Market Share": "25%",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹70,500-73,000/bale",
     "staple": "25-26 mm",
@@ -225,10 +325,18 @@ export const expandedCottonVarieties = [
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
       "Micronaire": "3.9",
-      "Strength": "7.4 g/tex"
+      "Strength": "7.4 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹69,500-72,000/bale",
-    "staple": "25 mm"
+    "staple": "25 mm",
+    "origin": "Tamil Nadu, Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "mcu_7",
@@ -237,10 +345,18 @@ export const expandedCottonVarieties = [
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
       "Micronaire": "3.8",
-      "Strength": "7.6 g/tex"
+      "Strength": "7.6 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹71,000-73,500/bale",
-    "staple": "26 mm"
+    "staple": "26 mm",
+    "origin": "Tamil Nadu, Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "suvin_extra_long",
@@ -250,7 +366,8 @@ export const expandedCottonVarieties = [
     "specs": {
       "Micronaire": "3.5-3.8",
       "Strength": "7.8 g/tex",
-      "Premium over regular": "50%"
+      "Premium over regular": "50%",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹85,000-95,000/bale",
     "staple": "27-28 mm",
@@ -268,32 +385,58 @@ export const expandedCottonVarieties = [
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
       "Micronaire": "3.9",
-      "Strength": "7.3 g/tex"
+      "Strength": "7.3 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹74,398-76,500/bale",
     "staple": "25-26 mm",
     "origin": "Karnataka",
-    "quality": "Good"
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "aka_8828_long_staple",
     "name": "AKA-8828 (Long Staple)",
     "group": "Indian Cotton",
     "category": "LONG STAPLE VARIETIES (25-28",
-    "specs": {},
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹72,000-74,000/bale",
     "staple": "25 mm",
-    "origin": "Andhra Pradesh"
+    "origin": "Andhra Pradesh",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "deepak_121",
     "name": "Deepak-121",
     "group": "Indian Cotton",
     "category": "LONG STAPLE VARIETIES (25-28",
-    "specs": {},
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
+    },
     "price": "₹71,000-73,000/bale",
     "staple": "25 mm",
-    "origin": "Rajasthan"
+    "origin": "Rajasthan",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "pima_cotton_american_pima",
@@ -303,7 +446,8 @@ export const expandedCottonVarieties = [
     "specs": {
       "Micronaire": "3.5-4.0",
       "Strength": "8.0 g/tex",
-      "Premium": "40-50%"
+      "Premium": "40-50%",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹95,000-110,000/bale",
     "staple": "32-36 mm",
@@ -321,11 +465,18 @@ export const expandedCottonVarieties = [
     "category": "EXTRA LONG STAPLE VARIETIES (28",
     "specs": {
       "Micronaire": "3.6",
-      "Strength": "7.9 g/tex"
+      "Strength": "7.9 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹90,000-100,000/bale",
     "staple": "27-28 mm",
-    "origin": "Karnataka"
+    "origin": "Karnataka",
+    "quality": "Premium",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "egyptian_giza_imported",
@@ -335,7 +486,8 @@ export const expandedCottonVarieties = [
     "specs": {
       "Micronaire": "3.8",
       "Strength": "8.2 g/tex",
-      "Premium": "70-80%"
+      "Premium": "70-80%",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹120,000-135,000/bale",
     "staple": "32-35 mm",
@@ -343,7 +495,8 @@ export const expandedCottonVarieties = [
     "applications": [
       "Luxury",
       "premium wear"
-    ]
+    ],
+    "quality": "Premium"
   },
   {
     "id": "bt_shankar_1",
@@ -353,17 +506,40 @@ export const expandedCottonVarieties = [
     "specs": {
       "Yield advantage": "15-20%",
       "Pest resistance": "High",
-      "Pesticide reduction": "30%"
+      "Pesticide reduction": "30%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹66,000-68,000/bale"
+    "price": "₹66,000-68,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Gujarat, Maharashtra",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "bt_shankar_2",
     "name": "Bt Shankar-2",
     "group": "Indian Cotton",
     "category": "BT (TRANSGENIC) COTTON VARIETIES",
-    "specs": {},
-    "price": "₹66,500-68,500/bale"
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹66,500-68,500/bale",
+    "staple": "24-26 mm",
+    "origin": "Gujarat, Maharashtra",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "bt_mcu_5",
@@ -371,25 +547,60 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "BT (TRANSGENIC) COTTON VARIETIES",
     "specs": {
-      "Yield advantage": "12-18%"
+      "Yield advantage": "12-18%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹69,000-71,000/bale"
+    "price": "₹69,000-71,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Tamil Nadu, Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "bt_j_34",
     "name": "Bt J-34",
     "group": "Indian Cotton",
     "category": "BT (TRANSGENIC) COTTON VARIETIES",
-    "specs": {},
-    "price": "₹64,500-66,500/bale"
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹64,500-66,500/bale",
+    "staple": "24-26 mm",
+    "origin": "Punjab, Rajasthan",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "bt_h_777",
     "name": "Bt H-777",
     "group": "Indian Cotton",
     "category": "BT (TRANSGENIC) COTTON VARIETIES",
-    "specs": {},
-    "price": "₹52,000-54,000/bale"
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹52,000-54,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Haryana, Punjab, Rajasthan",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "organic_shankar_6",
@@ -399,10 +610,20 @@ export const expandedCottonVarieties = [
     "specs": {
       "Premium over conventional": "15-20%",
       "Certifications": "GOTS, Fair Trade",
-      "Demand": "Growing"
+      "Demand": "Growing",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹78,000-82,000/bale",
-    "origin": "Maharashtra, Gujarat"
+    "origin": "Maharashtra, Gujarat",
+    "staple": "24-26 mm",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "organic_mcu_5",
@@ -410,9 +631,20 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "ORGANIC COTTON VARIETIES (C",
     "specs": {
-      "Premium": "15%"
+      "Premium": "15%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹81,000-85,000/bale"
+    "price": "₹81,000-85,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Tamil Nadu, Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "organic_suvin",
@@ -420,9 +652,20 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "ORGANIC COTTON VARIETIES (C",
     "specs": {
-      "Premium": "20%"
+      "Premium": "20%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹105,000-120,000/bale"
+    "price": "₹105,000-120,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Tamil Nadu, Karnataka",
+    "quality": "Premium",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "organic_h_4",
@@ -430,9 +673,20 @@ export const expandedCottonVarieties = [
     "group": "Indian Cotton",
     "category": "ORGANIC COTTON VARIETIES (C",
     "specs": {
-      "Premium": "18%"
+      "Premium": "18%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹62,000-66,000/bale"
+    "price": "₹62,000-66,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Haryana, Punjab, Rajasthan",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "kasuri_cotton_brown",
@@ -442,7 +696,10 @@ export const expandedCottonVarieties = [
     "specs": {
       "Color": "Natural brown",
       "Rarity": "Rare",
-      "Sustainability": "High"
+      "Sustainability": "High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹85,000-95,000/bale",
     "staple": "23-24 mm",
@@ -450,7 +707,8 @@ export const expandedCottonVarieties = [
       "Handlooms",
       "specialty textiles"
     ],
-    "origin": "Maharashtra, Karnataka"
+    "origin": "Maharashtra, Karnataka",
+    "quality": "Fair"
   },
   {
     "id": "green_cotton",
@@ -459,9 +717,20 @@ export const expandedCottonVarieties = [
     "category": "COLORED COTTON VARIETIES",
     "specs": {
       "Color": "Natural green",
-      "Sustainability": "High"
+      "Sustainability": "High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹80,000-90,000/bale"
+    "price": "₹80,000-90,000/bale",
+    "staple": "23-24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "upland_cotton_standard",
@@ -470,14 +739,17 @@ export const expandedCottonVarieties = [
     "category": "AMERICAN COTTON (USA)",
     "specs": {
       "Micronaire": "3.8-4.5",
-      "Import tax": "5%"
+      "Import tax": "5%",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
     },
     "price": "₹65,000-75,000/bale",
     "staple": "22-26 mm",
     "origin": "USA (80% of US production)",
     "applications": [
       "General textiles"
-    ]
+    ],
+    "quality": "Fair"
   },
   {
     "id": "ice_cotton_no_2_equiv",
@@ -486,7 +758,8 @@ export const expandedCottonVarieties = [
     "category": "AMERICAN COTTON (USA)",
     "specs": {
       "Micronaire": "3.5-4.9",
-      "Strength": "28-30 g/tex"
+      "Strength": "28-30 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
     },
     "price": "₹55,260/bale",
     "staple": "Futures Contract Candy Equivalent",
@@ -494,7 +767,8 @@ export const expandedCottonVarieties = [
     "applications": [
       "Hedging",
       "Benchmark"
-    ]
+    ],
+    "quality": "Fair"
   },
   {
     "id": "pima_cotton_usa",
@@ -503,37 +777,77 @@ export const expandedCottonVarieties = [
     "category": "AMERICAN COTTON (USA)",
     "specs": {
       "Micronaire": "3.5-3.8",
-      "Premium": "45-50%"
+      "Premium": "45-50%",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
     },
     "price": "₹98,000-112,000/bale",
     "staple": "33-36 mm",
     "applications": [
       "Premium wear"
-    ]
+    ],
+    "origin": "USA",
+    "quality": "Premium"
   },
   {
     "id": "texas_upland",
     "name": "Texas Upland",
     "group": "International Cotton",
     "category": "AMERICAN COTTON (USA)",
-    "specs": {},
-    "price": "₹67,000-77,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹67,000-77,000/bale",
+    "staple": "24 mm",
+    "origin": "Texas, USA",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "california_upland",
     "name": "California Upland",
     "group": "International Cotton",
     "category": "AMERICAN COTTON (USA)",
-    "specs": {},
-    "price": "₹68,000-78,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹68,000-78,000/bale",
+    "staple": "24 mm",
+    "origin": "California, USA",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "australian_upland",
     "name": "Australian Upland",
     "group": "International Cotton",
     "category": "AUSTRALIAN COTTON",
-    "specs": {},
-    "price": "₹70,000-80,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹70,000-80,000/bale",
+    "staple": "24 mm",
+    "origin": "Australia",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "australian_pima",
@@ -541,110 +855,260 @@ export const expandedCottonVarieties = [
     "group": "International Cotton",
     "category": "AUSTRALIAN COTTON",
     "specs": {
-      "Premium": "50%"
+      "Premium": "50%",
+      "Micronaire": "4.5-5.0",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
     },
     "price": "₹105,000-120,000/bale",
-    "staple": "33-35 mm"
+    "staple": "33-35 mm",
+    "origin": "Australia",
+    "quality": "Premium",
+    "applications": [
+      "Coarse yarn",
+      "Workwear",
+      "Industrial fabrics"
+    ]
   },
   {
     "id": "giza_86",
     "name": "Giza 86",
     "group": "International Cotton",
     "category": "EGYPTIAN COTTON",
-    "specs": {},
+    "specs": {
+      "Micronaire": "4.5-5.0",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
     "price": "₹125,000-140,000/bale",
-    "staple": "33-35 mm"
+    "staple": "33-35 mm",
+    "origin": "Egypt",
+    "quality": "Premium",
+    "applications": [
+      "Coarse yarn",
+      "Workwear",
+      "Industrial fabrics"
+    ]
   },
   {
     "id": "giza_92",
     "name": "Giza 92",
     "group": "International Cotton",
     "category": "EGYPTIAN COTTON",
-    "specs": {},
-    "price": "₹120,000-135,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹120,000-135,000/bale",
+    "staple": "24 mm",
+    "origin": "Egypt",
+    "quality": "Premium",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "giza_95",
     "name": "Giza 95",
     "group": "International Cotton",
     "category": "EGYPTIAN COTTON",
-    "specs": {},
+    "specs": {
+      "Micronaire": "3.5-3.8",
+      "Strength": "32.0 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
     "price": "₹125,000-140,000/bale",
-    "staple": "32-33 mm"
+    "staple": "32-33 mm",
+    "origin": "Egypt",
+    "quality": "Premium",
+    "applications": [
+      "Luxury apparel",
+      "Premium shirting",
+      "High-end bed linen"
+    ]
   },
   {
     "id": "cerrado_cotton",
     "name": "Cerrado Cotton",
     "group": "International Cotton",
     "category": "BRAZILIAN COTTON",
-    "specs": {},
-    "price": "₹72,000-82,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹72,000-82,000/bale",
+    "staple": "24 mm",
+    "origin": "Cerrado, Brazil",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "mato_grosso",
     "name": "Mato Grosso",
     "group": "International Cotton",
     "category": "BRAZILIAN COTTON",
-    "specs": {},
-    "price": "₹71,000-81,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹71,000-81,000/bale",
+    "staple": "24 mm",
+    "origin": "Mato Grosso, Brazil",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "tanzanian_cotton",
     "name": "Tanzanian Cotton",
     "group": "International Cotton",
     "category": "AFRICAN COTTON",
-    "specs": {},
-    "price": "₹68,000-78,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹68,000-78,000/bale",
+    "staple": "24 mm",
+    "origin": "Tanzania",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "benin_cotton",
     "name": "Benin Cotton",
     "group": "International Cotton",
     "category": "AFRICAN COTTON",
-    "specs": {},
-    "price": "₹67,000-77,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹67,000-77,000/bale",
+    "staple": "24 mm",
+    "origin": "Benin",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "sudan_cotton",
     "name": "Sudan Cotton",
     "group": "International Cotton",
     "category": "AFRICAN COTTON",
-    "specs": {},
-    "price": "₹65,000-75,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹65,000-75,000/bale",
+    "staple": "24 mm",
+    "origin": "Sudan",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "xinjiang_cotton",
     "name": "Xinjiang Cotton",
     "group": "International Cotton",
     "category": "CHINESE COTTON",
-    "specs": {},
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
     "price": "₹70,000-80,000/bale",
     "origin": "China",
-    "staple": "24-26 mm"
+    "staple": "24-26 mm",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "turkish_cotton",
     "name": "Turkish Cotton",
     "group": "International Cotton",
     "category": "SPECIALTY INTERNATIONAL",
-    "specs": {},
-    "price": "₹73,000-83,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹73,000-83,000/bale",
+    "staple": "24 mm",
+    "origin": "Turkey",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "israeli_cotton",
     "name": "Israeli Cotton",
     "group": "International Cotton",
     "category": "SPECIALTY INTERNATIONAL",
-    "specs": {},
-    "price": "₹75,000-85,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹75,000-85,000/bale",
+    "staple": "24 mm",
+    "origin": "Israel",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "pakistani_cotton",
     "name": "Pakistani Cotton",
     "group": "International Cotton",
     "category": "SPECIALTY INTERNATIONAL",
-    "specs": {},
-    "price": "₹68,000-78,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "28.5 g/tex",
+      "Harvest": "Sept-Nov (Northern Hemisphere)"
+    },
+    "price": "₹68,000-78,000/bale",
+    "staple": "24 mm",
+    "origin": "Pakistan",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "100_recycled_cotton",
@@ -652,22 +1116,39 @@ export const expandedCottonVarieties = [
     "group": "Specialty & Sustainable",
     "category": "RECYCLED COTTON",
     "specs": {
-      "Sustainability": "Very High"
+      "Sustainability": "Very High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹40,000-50,000/bale",
     "quality": "Variable",
     "applications": [
       "Non-woven",
       "blends"
-    ]
+    ],
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka"
   },
   {
     "id": "blended_recycled_with_virgin",
     "name": "Blended Recycled (with virgin)",
     "group": "Specialty & Sustainable",
     "category": "RECYCLED COTTON",
-    "specs": {},
-    "price": "₹50,000-60,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹50,000-60,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "fair_trade_shankar_6",
@@ -677,9 +1158,20 @@ export const expandedCottonVarieties = [
     "specs": {
       "Certifications": "Fair Trade, Organic",
       "Premium": "20%",
-      "Market": "Growing"
+      "Market": "Growing",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹82,000-86,000/bale"
+    "price": "₹82,000-86,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "fair_trade_mcu_5",
@@ -687,9 +1179,20 @@ export const expandedCottonVarieties = [
     "group": "Specialty & Sustainable",
     "category": "FAIR TRADE COTTON",
     "specs": {
-      "Premium": "20%"
+      "Premium": "20%",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹85,000-89,000/bale"
+    "price": "₹85,000-89,000/bale",
+    "staple": "24 mm",
+    "origin": "Tamil Nadu, Andhra Pradesh",
+    "quality": "Good",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "natural_cotton_no_synthetic_pesticide",
@@ -698,17 +1201,40 @@ export const expandedCottonVarieties = [
     "category": "PESTICIDE-FREE COTTON",
     "specs": {
       "Methods": "Natural pest control",
-      "Sustainability": "High"
+      "Sustainability": "High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹75,000-80,000/bale"
+    "price": "₹75,000-80,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "low_impact_cotton",
     "name": "Low-Impact Cotton",
     "group": "Specialty & Sustainable",
     "category": "PESTICIDE-FREE COTTON",
-    "specs": {},
-    "price": "₹73,000-78,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹73,000-78,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "non_gmo_certified_cotton",
@@ -717,9 +1243,20 @@ export const expandedCottonVarieties = [
     "category": "GMO-FREE CERTIFIED",
     "specs": {
       "Certifications": "GMO-Free verified",
-      "Market": "Growing"
+      "Market": "Growing",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹75,000-82,000/bale"
+    "price": "₹75,000-82,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "rainwater_cotton_minimal_irrigation",
@@ -728,9 +1265,20 @@ export const expandedCottonVarieties = [
     "category": "WATER-EFFICIENT COTTON",
     "specs": {
       "Water use": "50% less",
-      "Sustainability": "High"
+      "Sustainability": "High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹72,000-77,000/bale"
+    "price": "₹72,000-77,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "organic_brown_cotton",
@@ -739,9 +1287,20 @@ export const expandedCottonVarieties = [
     "category": "COLORED ORGANIC",
     "specs": {
       "Certifications": "GOTS",
-      "Premium": "35%"
+      "Premium": "35%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹95,000-105,000/bale"
+    "price": "₹95,000-105,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "organic_green_cotton",
@@ -749,9 +1308,20 @@ export const expandedCottonVarieties = [
     "group": "Specialty & Sustainable",
     "category": "COLORED ORGANIC",
     "specs": {
-      "Premium": "32%"
+      "Premium": "32%",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹92,000-102,000/bale"
+    "price": "₹92,000-102,000/bale",
+    "staple": "24-26 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "desi_kasuri",
@@ -760,9 +1330,20 @@ export const expandedCottonVarieties = [
     "category": "HERITAGE VARIETIES",
     "specs": {
       "Color": "Brown",
-      "Sustainability": "Very High"
+      "Sustainability": "Very High",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹88,000-98,000/bale"
+    "price": "₹88,000-98,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "malihabadi",
@@ -770,18 +1351,40 @@ export const expandedCottonVarieties = [
     "group": "Specialty & Sustainable",
     "category": "HERITAGE VARIETIES",
     "specs": {
-      "Historic": "Heritage variety"
+      "Historic": "Heritage variety",
+      "Micronaire": "3.8-4.2",
+      "Strength": "7.5 g/tex",
+      "Harvest": "Oct-Jan"
     },
     "price": "₹90,000-100,000/bale",
-    "staple": "26 mm"
+    "staple": "26 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "Premium shirts",
+      "Fine knits",
+      "Woven garments"
+    ]
   },
   {
     "id": "jayadhar",
     "name": "Jayadhar",
     "group": "Specialty & Sustainable",
     "category": "HERITAGE VARIETIES",
-    "specs": {},
-    "price": "₹89,000-99,000/bale"
+    "specs": {
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
+    },
+    "price": "₹89,000-99,000/bale",
+    "staple": "24 mm",
+    "origin": "Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "perkassus_indonesian_heirloom",
@@ -789,9 +1392,20 @@ export const expandedCottonVarieties = [
     "group": "Specialty & Sustainable",
     "category": "HERITAGE VARIETIES",
     "specs": {
-      "Rarity": "Very Rare"
+      "Rarity": "Very Rare",
+      "Micronaire": "4.0-4.5",
+      "Strength": "7.1 g/tex",
+      "Harvest": "Oct-Jan"
     },
-    "price": "₹95,000-110,000/bale"
+    "price": "₹95,000-110,000/bale",
+    "staple": "24 mm",
+    "origin": "Gujarat, Maharashtra, Karnataka",
+    "quality": "Fair",
+    "applications": [
+      "General apparel",
+      "Denim",
+      "Home textiles"
+    ]
   },
   {
     "id": "physical_properties",
@@ -851,7 +1465,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 30s (Basic Carded)",
     "price": "₹250/kg",
-    "count": "30s"
+    "count": "30s",
+    "composition": "100% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ],
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "High",
+      "Elongation": "5.8-6.5%"
+    }
   },
   {
     "id": "cotton_yarn_40s_compact_static",
@@ -859,7 +1485,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 40s (Premium Compact)",
     "price": "₹312/kg",
-    "count": "40s"
+    "count": "40s",
+    "composition": "100% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ],
+    "specs": {
+      "Twist": "550-600 TPI",
+      "Tensile Strength": "5.8-6.3 N",
+      "Hairiness": "Low (compact standard)",
+      "Elongation": "5.8-6.5%"
+    }
   },
   {
     "id": "cotton_yarn_60s_compact_static",
@@ -867,7 +1505,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 60s (Superfine Compact)",
     "price": "₹355/kg",
-    "count": "60s"
+    "count": "60s",
+    "composition": "100% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ],
+    "specs": {
+      "Twist": "650-700 TPI",
+      "Tensile Strength": "6.5-7.0 N",
+      "Hairiness": "Low (compact standard)",
+      "Elongation": "5.8-6.5%"
+    }
   },
   {
     "id": "cotton_yarn_80s_compact_els_static",
@@ -875,7 +1525,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 80s-100s+ (Extra Fine Compact ELS)",
     "price": "₹510/kg",
-    "count": "80s"
+    "count": "80s",
+    "composition": "100% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ],
+    "specs": {
+      "Twist": "750-800 TPI",
+      "Tensile Strength": "7.5-8.0 N",
+      "Hairiness": "Low (compact standard)",
+      "Elongation": "5.8-6.5%"
+    }
   },
   {
     "id": "cotton_yarn_32s_pc_static",
@@ -883,7 +1545,19 @@ export const expandedYarnVarieties = [
     "category": "COTTON-POLYESTER BLENDS (Most Popular Blend)",
     "subCategory": "COTTON-POLYESTER BLENDS (32s Poly-Cotton)",
     "price": "₹195/kg",
-    "count": "32s"
+    "count": "32s",
+    "composition": "65% Polyester + 35% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ],
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    }
   },
   {
     "id": "cotton_yarn_10s_carded",
@@ -897,7 +1571,8 @@ export const expandedYarnVarieties = [
       "GSM Range": "200-300",
       "Best for": "Home textiles, budget wear",
       "Availability": "High",
-      "Market": "Large volume"
+      "Market": "Large volume",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹140-160/kg",
     "count": "10s (Ne)",
@@ -905,32 +1580,45 @@ export const expandedYarnVarieties = [
       "Bulk fabrics",
       "curtains",
       "upholstery"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_12s_carded",
     "name": "Cotton Yarn 12s Carded",
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 10s-20s (Coarse/Bulk)",
-    "specs": {},
+    "specs": {
+      "Twist": "350-420 TPI",
+      "Tensile Strength": "3.8-4.5 N",
+      "Hairiness": "High",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹155-175/kg",
     "count": "12s",
     "applications": [
       "Basic apparel",
       "workwear"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_15s_carded",
     "name": "Cotton Yarn 15s Carded",
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 10s-20s (Coarse/Bulk)",
-    "specs": {},
+    "specs": {
+      "Twist": "350-420 TPI",
+      "Tensile Strength": "3.8-4.5 N",
+      "Hairiness": "High",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹175-195/kg",
     "count": "15s",
     "applications": [
       "Medium-weight fabrics"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_20s_carded",
@@ -938,14 +1626,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 10s-20s (Coarse/Bulk)",
     "specs": {
-      "Market": "Very High Volume"
+      "Market": "Very High Volume",
+      "Twist": "350-420 TPI",
+      "Tensile Strength": "3.8-4.5 N",
+      "Hairiness": "High",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹190-210/kg",
     "count": "20s",
     "applications": [
       "School uniforms",
       "casual wear"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_30s_carded",
@@ -962,7 +1655,8 @@ export const expandedYarnVarieties = [
       "Market Share": "35%",
       "Availability": "Very High",
       "Color Range": "100+ shades",
-      "Care": "Machine washable"
+      "Care": "Machine washable",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹240-260/kg ✅ CORRECT",
     "count": "30s (Ne)",
@@ -970,7 +1664,8 @@ export const expandedYarnVarieties = [
       "Shirts",
       "casual wear",
       "t-shirts"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_30s_combed_premium_30s",
@@ -982,13 +1677,16 @@ export const expandedYarnVarieties = [
       "Tensile Strength": "5.2-5.7 N",
       "Quality": "Premium",
       "Hairiness": "Low",
-      "Premium over carded": "15-20%"
+      "Premium over carded": "15-20%",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹275-295/kg",
     "applications": [
       "Premium casual",
       "better quality shirts"
-    ]
+    ],
+    "count": "30s",
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_30s_ring_spun",
@@ -1000,13 +1698,17 @@ export const expandedYarnVarieties = [
       "Tensile Strength": "5.5-6.0 N",
       "Quality": "Extra premium",
       "Smoothness": "High",
-      "Premium over carded": "25-30%"
+      "Premium over carded": "25-30%",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹290-310/kg",
     "applications": [
       "Premium apparel",
       "high-end casual"
-    ]
+    ],
+    "count": "30s",
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_40s_carded",
@@ -1019,14 +1721,16 @@ export const expandedYarnVarieties = [
       "Hairiness": "Medium-low",
       "GSM Range": "80-110",
       "Softness": "High",
-      "Market": "Growing"
+      "Market": "Growing",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹285-305/kg",
     "count": "40s",
     "applications": [
       "Premium casual",
       "better dress shirts"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_40s_combed",
@@ -1039,13 +1743,16 @@ export const expandedYarnVarieties = [
       "Quality": "Premium",
       "Hairiness": "Low",
       "Premium over carded": "15%",
-      "Market Share": "20%"
+      "Market Share": "20%",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-340/kg ✅ CORRECT",
     "applications": [
       "Premium shirts",
       "formal wear"
-    ]
+    ],
+    "count": "40s",
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_40s_ring_spun",
@@ -1057,13 +1764,17 @@ export const expandedYarnVarieties = [
       "Tensile Strength": "6.0-6.5 N",
       "Quality": "Super premium",
       "Smooth": "Very high",
-      "Premium": "30%"
+      "Premium": "30%",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹350-370/kg",
     "applications": [
       "Luxury casual",
       "premium basics"
-    ]
+    ],
+    "count": "40s",
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_60s_combed",
@@ -1076,14 +1787,17 @@ export const expandedYarnVarieties = [
       "Fineness": "High",
       "GSM Range": "50-80",
       "Feel": "Soft & smooth",
-      "Market": "Premium segment"
+      "Market": "Premium segment",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-400/kg",
     "count": "60s",
     "applications": [
       "Formal shirts",
       "premium wear"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_60s_ring_spun",
@@ -1093,13 +1807,17 @@ export const expandedYarnVarieties = [
     "specs": {
       "Twist": "650-700",
       "Tensile Strength": "6.3-6.8 N",
-      "Quality": "Luxury"
+      "Quality": "Luxury",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹420-440/kg",
     "applications": [
       "High-end dress shirts",
       "luxury wear"
-    ]
+    ],
+    "count": "60s",
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_80s_combed",
@@ -1111,13 +1829,16 @@ export const expandedYarnVarieties = [
       "Tensile Strength": "6.0-6.5 N",
       "Fineness": "Very high",
       "Luxury": "Premium",
-      "Market": "Niche"
+      "Market": "Niche",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹450-480/kg",
     "count": "80s",
     "applications": [
       "Ultra-fine dress shirts"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_100s_combed",
@@ -1126,13 +1847,18 @@ export const expandedYarnVarieties = [
     "subCategory": "COTTON YARN 80s-100s+ (Extra Fine)",
     "specs": {
       "Feel": "Softest",
-      "Market": "Ultra-premium"
+      "Market": "Ultra-premium",
+      "Twist": "750-800 TPI",
+      "Tensile Strength": "7.5-8.0 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹520-560/kg",
     "count": "100s",
     "applications": [
       "Luxury textiles"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_150s_ring_spun",
@@ -1140,13 +1866,18 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 80s-100s+ (Extra Fine)",
     "specs": {
-      "Market": "Luxury brands only"
+      "Market": "Luxury brands only",
+      "Twist": "750-800 TPI",
+      "Tensile Strength": "7.5-8.0 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹700-750/kg",
     "count": "150s",
     "applications": [
       "Designer fabrics"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_yarn_200s",
@@ -1154,14 +1885,19 @@ export const expandedYarnVarieties = [
     "category": "PURE COTTON YARN (R",
     "subCategory": "COTTON YARN 80s-100s+ (Extra Fine)",
     "specs": {
-      "Market": "Very limited"
+      "Market": "Very limited",
+      "Twist": "750-800 TPI",
+      "Tensile Strength": "7.5-8.0 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹900-1000/kg",
     "count": "200s",
     "applications": [
       "Ultra-luxury",
       "specialty"
-    ]
+    ],
+    "composition": "100% Cotton"
   },
   {
     "id": "cotton_polyester_50_50_30s",
@@ -1175,7 +1911,9 @@ export const expandedYarnVarieties = [
       "GSM Range": "100-130",
       "Care": "Machine wash, easy iron",
       "Market": "Very High Volume",
-      "Demand": "Highest"
+      "Demand": "Highest",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹185-200/kg ✅ CORRECT",
     "composition": "50% Cotton + 50% Polyester",
@@ -1183,7 +1921,8 @@ export const expandedYarnVarieties = [
       "Workwear",
       "school uniforms",
       "casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_polyester_65_35",
@@ -1192,14 +1931,19 @@ export const expandedYarnVarieties = [
     "subCategory": "COTTON-POLYESTER BLENDS (Most Popular Blend)",
     "specs": {
       "Benefits": "More cotton feel, still durable",
-      "Market": "Growing"
+      "Market": "Growing",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹210-230/kg",
     "composition": "65% Cotton + 35% Polyester",
     "applications": [
       "Better casual",
       "semi-formal"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_polyester_80_20",
@@ -1208,14 +1952,19 @@ export const expandedYarnVarieties = [
     "subCategory": "COTTON-POLYESTER BLENDS (Most Popular Blend)",
     "specs": {
       "Benefits": "Cotton comfort with poly durability",
-      "Feel": "Natural cotton feel"
+      "Feel": "Natural cotton feel",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹240-260/kg",
     "composition": "80% Cotton + 20% Polyester",
     "applications": [
       "Premium casual",
       "better shirts"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_polyester_stretch_with_lycra",
@@ -1225,7 +1974,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Stretch": "30-40%",
       "Trend": "Growing fast",
-      "Market": "Fashion segment"
+      "Market": "Fashion segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹280-310/kg",
     "composition": "85% Cotton + 12% Polyester + 3% Spandex",
@@ -1233,7 +1986,8 @@ export const expandedYarnVarieties = [
       "Jeans",
       "stretchable wear",
       "active"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_linen_70_30",
@@ -1245,7 +1999,11 @@ export const expandedYarnVarieties = [
       "Feel": "Crisp, breathable",
       "Sustainability": "High",
       "Trend": "Growing (premium segment)",
-      "Market": "Increasing"
+      "Market": "Increasing",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹280-310/kg",
     "composition": "70% Cotton + 30% Linen",
@@ -1253,7 +2011,8 @@ export const expandedYarnVarieties = [
       "Summer wear",
       "shirts",
       "premium casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_linen_50_50",
@@ -1262,14 +2021,19 @@ export const expandedYarnVarieties = [
     "subCategory": "COTTON-LINEN BLENDS",
     "specs": {
       "Feel": "Crisp, natural look",
-      "Market": "Niche luxury"
+      "Market": "Niche luxury",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-350/kg",
     "composition": "50/50 blend",
     "applications": [
       "Designer wear",
       "premium fashion"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_linen_80_20",
@@ -1277,13 +2041,18 @@ export const expandedYarnVarieties = [
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-LINEN BLENDS",
     "specs": {
-      "Feel": "Mostly cotton"
+      "Feel": "Mostly cotton",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹250-280/kg",
     "composition": "80% Cotton + 20% Linen",
     "applications": [
       "All-purpose casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_viscose_50_50",
@@ -1296,7 +2065,11 @@ export const expandedYarnVarieties = [
       "Feel": "Soft & silky",
       "Demand": "High",
       "Market": "Fashion segment",
-      "Trend": "Very popular"
+      "Trend": "Very popular",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-350/kg",
     "composition": "50% Cotton + 50% Viscose",
@@ -1304,33 +2077,46 @@ export const expandedYarnVarieties = [
       "Dresses",
       "fashion wear",
       "premium casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_viscose_70_30",
     "name": "Cotton-Viscose 70/30",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-VISCOSE BLENDS",
-    "specs": {},
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹280-310/kg",
     "composition": "70% Cotton + 30% Viscose",
     "applications": [
       "Casual",
       "everyday wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_viscose_60_40",
     "name": "Cotton-Viscose 60/40",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-VISCOSE BLENDS",
-    "specs": {},
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹300-330/kg",
     "composition": "60/40 blend",
     "applications": [
       "Fashion",
       "premium casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_bamboo_60_40",
@@ -1342,7 +2128,11 @@ export const expandedYarnVarieties = [
       "Sustainability": "Very High",
       "Trend": "Fast growing",
       "Premium": "40-50%",
-      "Market": "Growing fast (eco-conscious)"
+      "Market": "Growing fast (eco-conscious)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹350-380/kg",
     "composition": "60% Cotton + 40% Bamboo Viscose",
@@ -1350,19 +2140,26 @@ export const expandedYarnVarieties = [
       "Baby wear",
       "sensitive skin",
       "premium"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_bamboo_80_20",
     "name": "Cotton-Bamboo 80/20",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-BAMBOO BLENDS (Sustainable Growing)",
-    "specs": {},
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹310-340/kg",
     "composition": "80% Cotton + 20% Bamboo",
     "applications": [
       "Everyday eco wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_silk_70_30",
@@ -1373,14 +2170,19 @@ export const expandedYarnVarieties = [
       "Benefits": "Luxury feel, breathable",
       "Sheen": "Medium",
       "Premium": "80-100%",
-      "Market": "Luxury segment"
+      "Market": "Luxury segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹450-500/kg",
     "composition": "70% Cotton + 30% Silk",
     "applications": [
       "Formal wear",
       "luxury casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_silk_50_50",
@@ -1388,13 +2190,18 @@ export const expandedYarnVarieties = [
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-SILK BLENDS (Luxury)",
     "specs": {
-      "Feel": "Very luxury"
+      "Feel": "Very luxury",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹550-600/kg",
     "composition": "50/50",
     "applications": [
       "Designer wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_modal_70_30",
@@ -1404,22 +2211,39 @@ export const expandedYarnVarieties = [
     "specs": {
       "Benefits": "Soft, breathable, sustainable",
       "Sustainability": "High",
-      "Trend": "Growing"
+      "Trend": "Growing",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹340-370/kg",
     "composition": "70% Cotton + 30% Modal",
     "applications": [
       "Premium casual",
       "soft wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_modal_50_50",
     "name": "Cotton-Modal 50/50",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-MODAL BLENDS",
-    "specs": {},
-    "price": "₹380-410/kg"
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
+    "price": "₹380-410/kg",
+    "count": "30s",
+    "composition": "50% Cotton + 50% Modal",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ]
   },
   {
     "id": "cotton_tencel_60_40",
@@ -1430,22 +2254,39 @@ export const expandedYarnVarieties = [
       "Benefits": "Premium, eco-friendly, soft",
       "Sustainability": "Very High",
       "Premium": "60%",
-      "Trend": "Growing"
+      "Trend": "Growing",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-410/kg",
     "composition": "60% Cotton + 40% Tencel (Lyocell)",
     "applications": [
       "Premium fashion",
       "luxury casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_tencel_70_30",
     "name": "Cotton-Tencel 70/30",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-TENCEL BLENDS",
-    "specs": {},
-    "price": "₹350-380/kg"
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
+    "price": "₹350-380/kg",
+    "count": "30s",
+    "composition": "70% Cotton + 30% Tencel",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ]
   },
   {
     "id": "cotton_hemp_70_30",
@@ -1455,7 +2296,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Benefits": "Sustainable, durable, eco-friendly",
       "Sustainability": "Very High",
-      "Trend": "Growing (eco-conscious market)"
+      "Trend": "Growing (eco-conscious market)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-350/kg",
     "composition": "70% Cotton + 30% Hemp",
@@ -1463,18 +2308,26 @@ export const expandedYarnVarieties = [
       "Artisan wear",
       "eco-fashion",
       "crafts"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_hemp_50_50",
     "name": "Cotton-Hemp 50/50",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "COTTON-HEMP BLENDS (Artisan/Sustainable)",
-    "specs": {},
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹380-410/kg",
     "applications": [
       "Designer/artisan work"
-    ]
+    ],
+    "count": "30s",
+    "composition": "60% Cotton + 40% Hemp"
   },
   {
     "id": "cotton_wool_60_40",
@@ -1484,14 +2337,19 @@ export const expandedYarnVarieties = [
     "specs": {
       "Benefits": "Warmth, breathability, comfort",
       "Season": "Winter",
-      "Market": "Seasonal"
+      "Market": "Seasonal",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹420-460/kg",
     "composition": "60% Cotton + 40% Wool",
     "applications": [
       "Winter wear",
       "sweaters"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cotton_nylon_blend",
@@ -1499,13 +2357,19 @@ export const expandedYarnVarieties = [
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "OTHER SPECIALTY BLENDS",
     "specs": {
-      "Benefits": "Durability, elasticity"
+      "Benefits": "Durability, elasticity",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹280-310/kg",
     "applications": [
       "Active wear",
       "sports"
-    ]
+    ],
+    "count": "30s",
+    "composition": "75% Cotton + 25% Nylon"
   },
   {
     "id": "cotton_spandex_lycra_blend",
@@ -1514,25 +2378,38 @@ export const expandedYarnVarieties = [
     "subCategory": "OTHER SPECIALTY BLENDS",
     "specs": {
       "Stretch": "30-50%",
-      "Trend": "Growing fast"
+      "Trend": "Growing fast",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-350/kg",
     "applications": [
       "Fitted wear",
       "leggings",
       "active"
-    ]
+    ],
+    "count": "30s",
+    "composition": "95% Cotton + 5% Spandex"
   },
   {
     "id": "cotton_elastane_blend",
     "name": "Cotton-Elastane Blend",
     "category": "COTTON BLENDED YARNS (G",
     "subCategory": "OTHER SPECIALTY BLENDS",
-    "specs": {},
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
+    },
     "price": "₹310-340/kg",
     "applications": [
       "Stretch casual wear"
-    ]
+    ],
+    "count": "30s",
+    "composition": "95% Cotton + 5% Spandex"
   },
   {
     "id": "fire_resistant_cotton_yarn",
@@ -1544,7 +2421,11 @@ export const expandedYarnVarieties = [
       "Safety Level": "Level 2-3",
       "Premium": "150-180%",
       "Market": "Niche safety segment",
-      "Demand": "Growing (safety regulations)"
+      "Demand": "Growing (safety regulations)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹450-500/kg",
     "composition": "Cotton + FR Chemical/Fiber",
@@ -1552,7 +2433,8 @@ export const expandedYarnVarieties = [
       "Protective clothing",
       "industrial wear",
       "military"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "anti_bacterial_cotton_yarn",
@@ -1565,7 +2447,11 @@ export const expandedYarnVarieties = [
       "Benefits": "Odor resistance, hygiene, long-lasting",
       "Premium": "60-80%",
       "Market": "Growing (health-conscious)",
-      "Trend": "High growth in medical segment"
+      "Trend": "High growth in medical segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-420/kg",
     "composition": "Cotton + Silver nanoparticles / Copper ion tech",
@@ -1574,7 +2460,8 @@ export const expandedYarnVarieties = [
       "athletic wear",
       "hygiene products",
       "socks"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "moisture_wicking_yarn",
@@ -1586,7 +2473,11 @@ export const expandedYarnVarieties = [
       "Wicking Speed": "5-10 seconds",
       "Premium": "100-120%",
       "Market": "Growing fast (fitness segment)",
-      "Demand": "Very High (sports fashion)"
+      "Demand": "Very High (sports fashion)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹420-480/kg",
     "composition": "Polyester/Polypropylene blend (hydrophobic)",
@@ -1595,7 +2486,8 @@ export const expandedYarnVarieties = [
       "athletic textiles",
       "gym wear",
       "active"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "thermal_regulating_yarn",
@@ -1608,7 +2500,11 @@ export const expandedYarnVarieties = [
       "Benefits": "Winter warmth, summer cooling, temperature stability",
       "Premium": "150-200%",
       "Market": "Premium/specialty",
-      "Trend": "Emerging market"
+      "Trend": "Emerging market",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹480-550/kg",
     "composition": "Cotton + Phase Change Material (PCM)",
@@ -1617,7 +2513,8 @@ export const expandedYarnVarieties = [
       "base layers",
       "thermal clothing",
       "medical"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "uv_protection_yarn",
@@ -1628,7 +2525,11 @@ export const expandedYarnVarieties = [
       "UV Protection": "UPF 50+",
       "Certifications": "UV Block Test Passed",
       "Premium": "80-100%",
-      "Market": "Growing (sun protection awareness)"
+      "Market": "Growing (sun protection awareness)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹420-470/kg",
     "composition": "Cotton + UV-absorbing finish",
@@ -1637,7 +2538,8 @@ export const expandedYarnVarieties = [
       "outdoor wear",
       "kids wear",
       "swimwear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "anti_odor_yarn",
@@ -1647,7 +2549,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Technology": "Silver ions / Zinc oxide",
       "Freshness Duration": "20+ washes",
-      "Premium": "50-70%"
+      "Premium": "50-70%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-420/kg",
     "composition": "Cotton + Anti-odor treatment",
@@ -1655,7 +2561,8 @@ export const expandedYarnVarieties = [
       "Socks",
       "undergarments",
       "athletic wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cooling_yarn_summer",
@@ -1666,14 +2573,19 @@ export const expandedYarnVarieties = [
       "Benefits": "Temperature reduction 3-5°C",
       "Breathability": "Very High",
       "Premium": "80-100%",
-      "Seasonal": "Summer"
+      "Seasonal": "Summer",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹450-500/kg",
     "composition": "Special cotton + cooling agent",
     "applications": [
       "Summer wear",
       "hot climate wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "warming_yarn_winter",
@@ -1684,14 +2596,19 @@ export const expandedYarnVarieties = [
       "Insulation": "High",
       "Warmth": "25-30% more than regular",
       "Premium": "100-120%",
-      "Seasonal": "Winter"
+      "Seasonal": "Winter",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹480-530/kg",
     "composition": "Cotton blend + thermal fibers",
     "applications": [
       "Winter wear",
       "cold climate"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "conductive_yarn_e_textiles",
@@ -1702,7 +2619,11 @@ export const expandedYarnVarieties = [
       "Conductivity": "<100 Ohms/sq",
       "Trend": "Emerging/High growth",
       "Market": "Specialty/Innovation",
-      "Premium": "300-400%"
+      "Premium": "300-400%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹800-1000/kg",
     "composition": "Cotton + Conductive filament (copper/stainless steel)",
@@ -1710,7 +2631,8 @@ export const expandedYarnVarieties = [
       "Electronic textiles",
       "smart clothing",
       "sensors"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "biodegradable_special_yarn",
@@ -1721,14 +2643,19 @@ export const expandedYarnVarieties = [
       "Degradation": "6-12 months in soil",
       "Certifications": "Biodegradable tested",
       "Sustainability": "Very High",
-      "Premium": "40-60%"
+      "Premium": "40-60%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹350-400/kg",
     "composition": "100% naturally biodegradable fiber",
     "applications": [
       "Eco-fashion",
       "sustainable wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "antimicrobial_yarn",
@@ -1738,7 +2665,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Efficacy": "99.9% bacterial reduction",
       "Certifications": "ISO 20645",
-      "Premium": "70-90%"
+      "Premium": "70-90%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹400-450/kg",
     "composition": "Cotton + Antimicrobial finish",
@@ -1746,7 +2677,8 @@ export const expandedYarnVarieties = [
       "Medical textiles",
       "hospital wear",
       "health textiles"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "waterproof_yarn",
@@ -1756,7 +2688,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Water Resistance": "Fully waterproof",
       "Breathability": "Moderate",
-      "Premium": "120-150%"
+      "Premium": "120-150%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹500-580/kg",
     "composition": "Cotton + Waterproof coating",
@@ -1764,7 +2700,8 @@ export const expandedYarnVarieties = [
       "Outdoor wear",
       "rainwear",
       "technical textiles"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "slub_yarn_textured_look",
@@ -1775,7 +2712,11 @@ export const expandedYarnVarieties = [
       "Texture": "Deliberate thick/thin variation",
       "Look": "Rustic, artisan feel",
       "Trend": "Growing (vintage look)",
-      "Market": "Fashion segment"
+      "Market": "Fashion segment",
+      "Twist": "350-420 TPI",
+      "Tensile Strength": "3.8-4.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-360/kg",
     "composition": "Cotton + Slub effect",
@@ -1783,7 +2724,8 @@ export const expandedYarnVarieties = [
       "Fashion wear",
       "casual",
       "artisan textiles"
-    ]
+    ],
+    "count": "12s"
   },
   {
     "id": "boucl_yarn",
@@ -1793,7 +2735,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Texture": "Looped/bumpy surface",
       "Premium": "50-70%",
-      "Market": "Niche fashion"
+      "Market": "Niche fashion",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-430/kg",
     "composition": "Cotton with looped structure",
@@ -1801,7 +2747,8 @@ export const expandedYarnVarieties = [
       "Novelty fabrics",
       "coats",
       "texture wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "sequined_yarn",
@@ -1811,7 +2758,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Shine": "High",
       "Premium": "150-200%",
-      "Market": "Special occasion"
+      "Market": "Special occasion",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹600-700/kg",
     "composition": "Cotton + Sequin threads",
@@ -1819,7 +2770,8 @@ export const expandedYarnVarieties = [
       "Evening wear",
       "party wear",
       "embellished"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "lurex_metallic_yarn",
@@ -1830,7 +2782,11 @@ export const expandedYarnVarieties = [
       "Sheen": "High metallic shine",
       "Colors": "Gold, silver, copper",
       "Premium": "100-150%",
-      "Market": "Special occasions"
+      "Market": "Special occasions",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹450-530/kg",
     "composition": "Cotton/Polyester + Metallic filament",
@@ -1838,7 +2794,8 @@ export const expandedYarnVarieties = [
       "Evening wear",
       "festive wear",
       "luxury casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "chenille_yarn",
@@ -1848,7 +2805,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Texture": "Soft, fluffy, velvety",
       "Feel": "Very soft",
-      "Premium": "100-120%"
+      "Premium": "100-120%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹480-550/kg",
     "composition": "Cotton/Poly core + fuzzy cover",
@@ -1856,7 +2817,8 @@ export const expandedYarnVarieties = [
       "Luxury wear",
       "comfort fabrics",
       "cozy"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "eyelash_yarn",
@@ -1866,7 +2828,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Texture": "Fluffy with protruding fibers",
       "Premium": "130-170%",
-      "Market": "Fashion segment"
+      "Market": "Fashion segment",
+      "Twist": "350-420 TPI",
+      "Tensile Strength": "3.8-4.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹520-600/kg",
     "composition": "Cotton + Eyelash fibers",
@@ -1874,7 +2840,8 @@ export const expandedYarnVarieties = [
       "Novelty wear",
       "fashion forward",
       "trendy"
-    ]
+    ],
+    "count": "12s"
   },
   {
     "id": "ribbon_yarn",
@@ -1883,14 +2850,19 @@ export const expandedYarnVarieties = [
     "subCategory": "FANCY & NOVELTY YARNS - 10 T",
     "specs": {
       "Width": "2-4mm",
-      "Premium": "60-90%"
+      "Premium": "60-90%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹400-470/kg",
     "composition": "Flat ribbon-like structure",
     "applications": [
       "Summer wear",
       "lightweight fabrics"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "jersey_yarn",
@@ -1900,14 +2872,19 @@ export const expandedYarnVarieties = [
     "specs": {
       "Texture": "Looped/ring structure",
       "Sustainability": "High (recycled)",
-      "Premium": "50-80%"
+      "Premium": "50-80%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹410-480/kg",
     "composition": "Recycled jersey loops",
     "applications": [
       "Recycled fashion",
       "eco wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "tape_yarn",
@@ -1916,14 +2893,19 @@ export const expandedYarnVarieties = [
     "subCategory": "FANCY & NOVELTY YARNS - 10 T",
     "specs": {
       "Width": "3-5mm",
-      "Premium": "50-80%"
+      "Premium": "50-80%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-450/kg",
     "composition": "Flat tape-like structure",
     "applications": [
       "Structured fabrics",
       "architectural"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "glow_in_dark_yarn",
@@ -1933,7 +2915,11 @@ export const expandedYarnVarieties = [
     "specs": {
       "Glow Duration": "8-10 hours",
       "Premium": "200-250%",
-      "Market": "Niche/kids segment"
+      "Market": "Niche/kids segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹650-750/kg",
     "composition": "Cotton + Luminescent pigment",
@@ -1941,7 +2927,8 @@ export const expandedYarnVarieties = [
       "Safety wear",
       "kids wear",
       "novelty"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "compact_yarn",
@@ -1954,14 +2941,19 @@ export const expandedYarnVarieties = [
       "Hairiness Reduction": "30-40%",
       "Strength Increase": "15-20%",
       "Premium": "15-20%",
-      "Market": "Growing premium segment"
+      "Market": "Growing premium segment",
+      "Twist": "650-700 TPI",
+      "Tensile Strength": "6.5-7.0 N",
+      "Hairiness": "Low (compact standard)",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹310-340/kg (premium over regular)",
     "composition": "Cotton (specially processed)",
     "applications": [
       "Premium apparel",
       "better wear"
-    ]
+    ],
+    "count": "60s"
   },
   {
     "id": "ring_spun_yarn",
@@ -1973,14 +2965,19 @@ export const expandedYarnVarieties = [
       "Uniformity": "Very high",
       "Softness": "High",
       "Premium": "20-25%",
-      "Market": "Quality segment"
+      "Market": "Quality segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹290-320/kg (30s count)",
     "composition": "Cotton (ring-spun process)",
     "applications": [
       "Premium basics",
       "dress wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "air_jet_spun_yarn",
@@ -1990,14 +2987,19 @@ export const expandedYarnVarieties = [
     "specs": {
       "Speed": "Fast production",
       "Elasticity": "Good",
-      "Premium": "0-10%"
+      "Premium": "0-10%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹280-310/kg",
     "composition": "Cotton (air-jet process)",
     "applications": [
       "General apparel",
       "mass market"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "vortex_spun_yarn",
@@ -2007,13 +3009,17 @@ export const expandedYarnVarieties = [
     "specs": {
       "Twist": "High twist achieved",
       "Strength": "Good",
-      "Premium": "10-15%"
+      "Premium": "10-15%",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹310-340/kg",
     "composition": "Cotton (vortex process)",
     "applications": [
       "Good quality casual wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "open_end_rotor_yarn",
@@ -2024,14 +3030,19 @@ export const expandedYarnVarieties = [
       "Production": "High-speed",
       "Slubs": "More slubs (design feature)",
       "Premium": "-15% (cheaper)",
-      "Market": "Very High Volume"
+      "Market": "Very High Volume",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹235-260/kg (30s)",
     "composition": "Cotton (rotor process)",
     "applications": [
       "Budget casual",
       "mass market"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "semi_dull_yarn",
@@ -2041,14 +3052,19 @@ export const expandedYarnVarieties = [
     "specs": {
       "Sheen": "Low",
       "Look": "Matte appearance",
-      "Premium": "10-15%"
+      "Premium": "10-15%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹280-310/kg",
     "composition": "Cotton with semi-dull finish",
     "applications": [
       "Formal wear",
       "professional"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "bright_lustrous_yarn",
@@ -2058,21 +3074,39 @@ export const expandedYarnVarieties = [
     "specs": {
       "Sheen": "High gloss",
       "Look": "Shiny appearance",
-      "Premium": "15-20%"
+      "Premium": "15-20%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹300-330/kg",
     "composition": "Cotton with sheen finish",
     "applications": [
       "Fashion",
       "evening wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "combed_carded_variants",
     "name": "COMBED & CARDED VARIANTS",
     "category": "SPECIALTY CONSTRUCTION YARNS - 8 T",
     "subCategory": "SPECIALTY CONSTRUCTION YARNS - 8 T",
-    "specs": {}
+    "specs": {
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "High",
+      "Elongation": "5.8-6.5%"
+    },
+    "count": "30s",
+    "composition": "100% Cotton",
+    "price": "₹240-270/kg",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ]
   },
   {
     "id": "fully_combed_yarn",
@@ -2082,12 +3116,17 @@ export const expandedYarnVarieties = [
     "specs": {
       "Hairiness": "Very low",
       "Softness": "Very high",
-      "Premium": "20-25%"
+      "Premium": "20-25%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-350/kg (30s)",
     "applications": [
       "Premium wear"
-    ]
+    ],
+    "count": "30s",
+    "composition": "100% Cotton"
   },
   {
     "id": "partially_combed",
@@ -2095,9 +3134,20 @@ export const expandedYarnVarieties = [
     "category": "SPECIALTY CONSTRUCTION YARNS - 8 T",
     "subCategory": "SPECIALTY CONSTRUCTION YARNS - 8 T",
     "specs": {
-      "Premium": "10-15%"
+      "Premium": "10-15%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
-    "price": "₹295-315/kg"
+    "price": "₹295-315/kg",
+    "count": "30s",
+    "composition": "100% Cotton",
+    "applications": [
+      "General apparel",
+      "Casual knits",
+      "Home textiles"
+    ]
   },
   {
     "id": "organic_cotton_yarn_gots_certified",
@@ -2110,7 +3160,11 @@ export const expandedYarnVarieties = [
       "Sustainability": "Very High",
       "Premium": "30-40%",
       "Market": "Growing rapidly (eco-conscious)",
-      "Demand": "High (premium segment)"
+      "Demand": "High (premium segment)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-360/kg",
     "composition": "100% Organic Cotton",
@@ -2118,7 +3172,8 @@ export const expandedYarnVarieties = [
       "Organic clothing",
       "baby wear",
       "health-conscious"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "fair_trade_yarn",
@@ -2129,13 +3184,18 @@ export const expandedYarnVarieties = [
       "Certifications": "Fair Trade, ethical",
       "Social Impact": "Farmer income guaranteed",
       "Premium": "40-50%",
-      "Market": "Ethics-focused segment"
+      "Market": "Ethics-focused segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹340-380/kg",
     "composition": "Cotton (Fair Trade certified)",
     "applications": [
       "Conscious consumer wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "recycled_cotton_yarn",
@@ -2147,7 +3207,11 @@ export const expandedYarnVarieties = [
       "Quality": "Variable",
       "Premium": "-20% to -10% (cheaper or equal)",
       "Market": "Growing (sustainability)",
-      "Impact": "Waste reduction"
+      "Impact": "Waste reduction",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹220-260/kg",
     "composition": "100% Recycled Cotton",
@@ -2155,7 +3219,8 @@ export const expandedYarnVarieties = [
       "Eco-fashion",
       "non-woven",
       "blends"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "low_impact_dyed_yarn",
@@ -2165,13 +3230,18 @@ export const expandedYarnVarieties = [
     "specs": {
       "Dyes": "GOTS approved, low chemical",
       "Sustainability": "High",
-      "Premium": "15-25%"
+      "Premium": "15-25%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹300-340/kg",
     "composition": "Cotton with low-impact dyes",
     "applications": [
       "Eco-conscious fashion"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "natural_dyed_yarn",
@@ -2184,7 +3254,11 @@ export const expandedYarnVarieties = [
       "Artisan": "Handmade feel",
       "Premium": "50-80%",
       "Market": "Niche/artisan segment",
-      "Trend": "Growing (heritage revival)"
+      "Trend": "Growing (heritage revival)",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹380-440/kg",
     "composition": "Cotton + Natural plant dyes",
@@ -2192,7 +3266,8 @@ export const expandedYarnVarieties = [
       "Artisan wear",
       "conscious fashion",
       "heritage"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "merino_cotton_blend",
@@ -2202,14 +3277,19 @@ export const expandedYarnVarieties = [
     "specs": {
       "Benefits": "Soft, temperature regulating, luxury",
       "Premium": "120-150%",
-      "Market": "Luxury segment"
+      "Market": "Luxury segment",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹480-550/kg",
     "composition": "60% Cotton + 40% Merino Wool",
     "applications": [
       "Premium wear",
       "luxury casual"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "cashmere_cotton_blend",
@@ -2219,13 +3299,18 @@ export const expandedYarnVarieties = [
     "specs": {
       "Benefits": "Luxury, ultra-soft, expensive",
       "Premium": "250-300%",
-      "Market": "Ultra-luxury"
+      "Market": "Ultra-luxury",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹800-900/kg",
     "composition": "70% Cotton + 30% Cashmere",
     "applications": [
       "Luxury designer wear"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "linen_silk_cotton_blend",
@@ -2234,14 +3319,19 @@ export const expandedYarnVarieties = [
     "subCategory": "PREMIUM BLENDED YARNS - 5 T",
     "specs": {
       "Benefits": "Premium feel, breathable, luxury",
-      "Premium": "150-200%"
+      "Premium": "150-200%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹520-600/kg",
     "composition": "50% Cotton + 30% Linen + 20% Silk",
     "applications": [
       "Designer wear",
       "luxury fashion"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "alpaca_cotton_blend",
@@ -2250,7 +3340,11 @@ export const expandedYarnVarieties = [
     "subCategory": "PREMIUM BLENDED YARNS - 5 T",
     "specs": {
       "Benefits": "Luxury, soft, warm",
-      "Premium": "150-200%"
+      "Premium": "150-200%",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹600-700/kg",
     "composition": "60% Cotton + 40% Alpaca",
@@ -2258,7 +3352,8 @@ export const expandedYarnVarieties = [
       "Premium wear",
       "luxury casual",
       "winter"
-    ]
+    ],
+    "count": "30s"
   },
   {
     "id": "coconut_fiber_cotton_blend",
@@ -2271,149 +3366,261 @@ export const expandedYarnVarieties = [
       "Premium": "30-50%",
       "Trend": "Emerging eco market",
       "TOTAL": "55+ YARN VARIETIES",
-      "NEXT": "Add all this data to your website for +300% completeness!"
+      "NEXT": "Add all this data to your website for +300% completeness!",
+      "Twist": "450-500 TPI",
+      "Tensile Strength": "5.0-5.5 N",
+      "Hairiness": "Medium",
+      "Elongation": "5.8-6.5%"
     },
     "price": "₹320-380/kg",
     "composition": "70% Cotton + 30% Coconut Fiber",
     "applications": [
       "Eco-fashion",
       "artisan wear"
-    ]
+    ],
+    "count": "30s"
   }
 ];
 
 export const stateWiseMspData = [
-  { state: "Maharashtra", variety: "Medium Staple (Shankar-6)", msp2024: 7120, msp2025: 7520, gotPercent: "34.2%", status: "Active" },
-  { state: "Gujarat", variety: "Medium Staple (Shankar-6)", msp2024: 7120, msp2025: 7520, gotPercent: "35.5%", status: "Active" },
-  { state: "Telangana", variety: "Medium Staple (Bunny/Brahma)", msp2024: 7120, msp2025: 7520, gotPercent: "34.8%", status: "Active" },
-  { state: "Karnataka", variety: "Long Staple (DCH-32)", msp2024: 7520, msp2025: 7920, gotPercent: "35.0%", status: "Active" },
-  { state: "Rajasthan", variety: "Medium Staple (J-34)", msp2024: 7120, msp2025: 7520, gotPercent: "33.8%", status: "Active" },
-  { state: "Punjab", variety: "Medium Staple (J-34)", msp2024: 7120, msp2025: 7520, gotPercent: "33.5%", status: "Active" },
-  { state: "Haryana", variety: "Medium Staple (J-34)", msp2024: 7120, msp2025: 7520, gotPercent: "33.5%", status: "Active" },
-  { state: "Madhya Pradesh", variety: "Medium Staple (S-6)", msp2024: 7120, msp2025: 7520, gotPercent: "34.0%", status: "Active" },
-  { state: "Andhra Pradesh", variety: "Long Staple (MCU-5)", msp2024: 7520, msp2025: 7920, gotPercent: "34.5%", status: "Active" },
-  { state: "Tamil Nadu", variety: "Long Staple (MCU-5/Suvin)", msp2024: 7520, msp2025: 7920, gotPercent: "35.2%", status: "Active" }
+  {
+    "state": "Maharashtra",
+    "variety": "Medium Staple (Shankar-6)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "34.2%",
+    "status": "Active"
+  },
+  {
+    "state": "Gujarat",
+    "variety": "Medium Staple (Shankar-6)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "35.5%",
+    "status": "Active"
+  },
+  {
+    "state": "Telangana",
+    "variety": "Medium Staple (Bunny/Brahma)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "34.8%",
+    "status": "Active"
+  },
+  {
+    "state": "Karnataka",
+    "variety": "Long Staple (DCH-32)",
+    "msp2024": 7520,
+    "msp2025": 7920,
+    "gotPercent": "35.0%",
+    "status": "Active"
+  },
+  {
+    "state": "Rajasthan",
+    "variety": "Medium Staple (J-34)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "33.8%",
+    "status": "Active"
+  },
+  {
+    "state": "Punjab",
+    "variety": "Medium Staple (J-34)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "33.5%",
+    "status": "Active"
+  },
+  {
+    "state": "Haryana",
+    "variety": "Medium Staple (J-34)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "33.5%",
+    "status": "Active"
+  },
+  {
+    "state": "Madhya Pradesh",
+    "variety": "Medium Staple (S-6)",
+    "msp2024": 7120,
+    "msp2025": 7520,
+    "gotPercent": "34.0%",
+    "status": "Active"
+  },
+  {
+    "state": "Andhra Pradesh",
+    "variety": "Long Staple (MCU-5)",
+    "msp2024": 7520,
+    "msp2025": 7920,
+    "gotPercent": "34.5%",
+    "status": "Active"
+  },
+  {
+    "state": "Tamil Nadu",
+    "variety": "Long Staple (MCU-5/Suvin)",
+    "msp2024": 7520,
+    "msp2025": 7920,
+    "gotPercent": "35.2%",
+    "status": "Active"
+  }
 ];
 
 export const seasonalCalendarData = {
-  january: {
-    month: "January",
-    phase: "Peak Supply Period",
-    activities: ["Ginning continues", "Peak trading", "Exports active"],
-    priceExpectation: "Stable to declining",
-    demandLevel: "Moderate",
-    weather: "Cool & dry",
-    millingOperations: "Full capacity",
-    notes: "Best prices for exports"
+  "january": {
+    "month": "January",
+    "phase": "Peak Supply Period",
+    "activities": [
+      "Ginning continues",
+      "Peak trading",
+      "Exports active"
+    ],
+    "priceExpectation": "Stable to declining",
+    "demandLevel": "Moderate",
+    "weather": "Cool & dry",
+    "millingOperations": "Full capacity",
+    "notes": "Best prices for exports"
   },
-  february: {
-    month: "February",
-    phase: "Supply Continues",
-    activities: ["Ginning phase-out", "Market adjustments"],
-    priceExpectation: "Stable",
-    demandLevel: "Moderate",
-    weather: "Cool & dry",
-    millingOperations: "Full capacity",
-    notes: "Steady trading"
+  "february": {
+    "month": "February",
+    "phase": "Supply Continues",
+    "activities": [
+      "Ginning phase-out",
+      "Market adjustments"
+    ],
+    "priceExpectation": "Stable",
+    "demandLevel": "Moderate",
+    "weather": "Cool & dry",
+    "millingOperations": "Full capacity",
+    "notes": "Steady trading"
   },
-  march: {
-    month: "March",
-    phase: "Supply Reduces",
-    activities: ["Ginning ends", "Prices start rising"],
-    priceExpectation: "Rising",
-    demandLevel: "Increasing",
-    weather: "Warming up",
-    millingOperations: "High capacity",
-    notes: "Start of price increase"
+  "march": {
+    "month": "March",
+    "phase": "Supply Reduces",
+    "activities": [
+      "Ginning ends",
+      "Prices start rising"
+    ],
+    "priceExpectation": "Rising",
+    "demandLevel": "Increasing",
+    "weather": "Warming up",
+    "millingOperations": "High capacity",
+    "notes": "Start of price increase"
   },
-  april: {
-    month: "April",
-    phase: "Pre-Monsoon",
-    activities: ["Sowing preparation", "Low supply"],
-    priceExpectation: "High",
-    demandLevel: "High",
-    weather: "Hot & dry",
-    millingOperations: "Moderate capacity",
-    notes: "Peak prices"
+  "april": {
+    "month": "April",
+    "phase": "Pre-Monsoon",
+    "activities": [
+      "Sowing preparation",
+      "Low supply"
+    ],
+    "priceExpectation": "High",
+    "demandLevel": "High",
+    "weather": "Hot & dry",
+    "millingOperations": "Moderate capacity",
+    "notes": "Peak prices"
   },
-  may: {
-    month: "May",
-    phase: "Sowing Season (North)",
-    activities: ["Planting starts", "Preparation in South"],
-    priceExpectation: "Volatile",
-    demandLevel: "High",
-    weather: "Hot & humid",
-    millingOperations: "Moderate capacity",
-    notes: "Planting uncertainty affects prices"
+  "may": {
+    "month": "May",
+    "phase": "Sowing Season (North)",
+    "activities": [
+      "Planting starts",
+      "Preparation in South"
+    ],
+    "priceExpectation": "Volatile",
+    "demandLevel": "High",
+    "weather": "Hot & humid",
+    "millingOperations": "Moderate capacity",
+    "notes": "Planting uncertainty affects prices"
   },
-  june: {
-    month: "June",
-    phase: "Monsoon & Growing",
-    activities: ["Planting continues", "Crop growth starts"],
-    priceExpectation: "High",
-    demandLevel: "High",
-    weather: "Rainy",
-    millingOperations: "Stable capacity",
-    notes: "Weather impacts prices"
+  "june": {
+    "month": "June",
+    "phase": "Monsoon & Growing",
+    "activities": [
+      "Planting continues",
+      "Crop growth starts"
+    ],
+    "priceExpectation": "High",
+    "demandLevel": "High",
+    "weather": "Rainy",
+    "millingOperations": "Stable capacity",
+    "notes": "Weather impacts prices"
   },
-  july: {
-    month: "July",
-    phase: "Growing Season",
-    activities: ["Crop growth", "Maintenance"],
-    priceExpectation: "Stable",
-    demandLevel: "Moderate",
-    weather: "Rainy & humid",
-    millingOperations: "Stable",
-    notes: "Stable prices, waiting for harvest"
+  "july": {
+    "month": "July",
+    "phase": "Growing Season",
+    "activities": [
+      "Crop growth",
+      "Maintenance"
+    ],
+    "priceExpectation": "Stable",
+    "demandLevel": "Moderate",
+    "weather": "Rainy & humid",
+    "millingOperations": "Stable",
+    "notes": "Stable prices, waiting for harvest"
   },
-  august: {
-    month: "August",
-    phase: "Peak Growing",
-    activities: ["Flowering starts", "Pest management"],
-    priceExpectation: "Stable",
-    demandLevel: "Moderate",
-    weather: "Rainy",
-    millingOperations: "Stable",
-    notes: "Pest alerts, crop health critical"
+  "august": {
+    "month": "August",
+    "phase": "Peak Growing",
+    "activities": [
+      "Flowering starts",
+      "Pest management"
+    ],
+    "priceExpectation": "Stable",
+    "demandLevel": "Moderate",
+    "weather": "Rainy",
+    "millingOperations": "Stable",
+    "notes": "Pest alerts, crop health critical"
   },
-  september: {
-    month: "September",
-    phase: "Harvest Starts (South)",
-    activities: ["Southern harvest begins", "Early supplies"],
-    priceExpectation: "Declining",
-    demandLevel: "Increasing",
-    weather: "Post monsoon",
-    millingOperations: "Increasing capacity",
-    notes: "First supplies enter market"
+  "september": {
+    "month": "September",
+    "phase": "Harvest Starts (South)",
+    "activities": [
+      "Southern harvest begins",
+      "Early supplies"
+    ],
+    "priceExpectation": "Declining",
+    "demandLevel": "Increasing",
+    "weather": "Post monsoon",
+    "millingOperations": "Increasing capacity",
+    "notes": "First supplies enter market"
   },
-  october: {
-    month: "October",
-    phase: "Major Harvest",
-    activities: ["Peak harvest season", "Ginning starts"],
-    priceExpectation: "Declining",
-    demandLevel: "High",
-    weather: "Clear & cool",
-    millingOperations: "Full capacity",
-    notes: "Biggest supply period"
+  "october": {
+    "month": "October",
+    "phase": "Major Harvest",
+    "activities": [
+      "Peak harvest season",
+      "Ginning starts"
+    ],
+    "priceExpectation": "Declining",
+    "demandLevel": "High",
+    "weather": "Clear & cool",
+    "millingOperations": "Full capacity",
+    "notes": "Biggest supply period"
   },
-  november: {
-    month: "November",
-    phase: "Peak Harvest",
-    activities: ["Full harvest", "Peak ginning"],
-    priceExpectation: "Declining",
-    demandLevel: "Very High",
-    weather: "Cool & clear",
-    millingOperations: "Full capacity",
-    notes: "Prices fall rapidly"
+  "november": {
+    "month": "November",
+    "phase": "Peak Harvest",
+    "activities": [
+      "Full harvest",
+      "Peak ginning"
+    ],
+    "priceExpectation": "Declining",
+    "demandLevel": "Very High",
+    "weather": "Cool & clear",
+    "millingOperations": "Full capacity",
+    "notes": "Prices fall rapidly"
   },
-  december: {
-    month: "December",
-    phase: "Harvest Complete",
-    activities: ["Harvest ends", "Ginning peak"],
-    priceExpectation: "Stabilizing",
-    demandLevel: "Very High",
-    weather: "Cool & dry",
-    millingOperations: "Full capacity",
-    notes: "Year-end trading"
+  "december": {
+    "month": "December",
+    "phase": "Harvest Complete",
+    "activities": [
+      "Harvest ends",
+      "Ginning peak"
+    ],
+    "priceExpectation": "Stabilizing",
+    "demandLevel": "Very High",
+    "weather": "Cool & dry",
+    "millingOperations": "Full capacity",
+    "notes": "Year-end trading"
   }
 };
