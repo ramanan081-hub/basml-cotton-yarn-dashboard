@@ -220,13 +220,13 @@ export default function VarietyExplorer({ darkMode, colors }) {
                       <span>Staple Length:</span>
                       <span className="font-bold text-on-surface">{item.staple}</span>
                     </div>
-                    {item.specs.Micronaire && (
+                    {item.specs?.Micronaire && (
                       <div className="flex justify-between">
                         <span>Micronaire:</span>
                         <span className="font-bold text-on-surface">{item.specs.Micronaire}</span>
                       </div>
                     )}
-                    {item.specs.Strength && (
+                    {item.specs?.Strength && (
                       <div className="flex justify-between">
                         <span>Strength:</span>
                         <span className="font-bold text-on-surface">{item.specs.Strength}</span>
@@ -346,13 +346,13 @@ export default function VarietyExplorer({ darkMode, colors }) {
                     <span>Yarn Count:</span>
                     <span className="font-bold text-on-surface">{item.count || 'N/A'}</span>
                   </div>
-                  {item.specs['Twist'] && (
+                  {item.specs?.['Twist'] && (
                     <div className="flex justify-between">
                       <span>Twist:</span>
                       <span className="font-bold text-on-surface">{item.specs['Twist']}</span>
                     </div>
                   )}
-                  {item.specs['Tensile Strength'] && (
+                  {item.specs?.['Tensile Strength'] && (
                     <div className="flex justify-between">
                       <span>Strength:</span>
                       <span className="font-bold text-on-surface">{item.specs['Tensile Strength']}</span>
@@ -428,13 +428,13 @@ export default function VarietyExplorer({ darkMode, colors }) {
                   <tr>
                     <td className="p-4 font-bold bg-surface-container-low/40">Micronaire</td>
                     {compareList.map(c => (
-                      <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs.Micronaire || 'N/A'}</td>
+                      <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs?.Micronaire || 'N/A'}</td>
                     ))}
                   </tr>
                   <tr>
                     <td className="p-4 font-bold bg-surface-container-low/40">Fiber Strength</td>
                     {compareList.map(c => (
-                      <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs.Strength || 'N/A'}</td>
+                      <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs?.Strength || 'N/A'}</td>
                     ))}
                   </tr>
                   <tr>
@@ -464,7 +464,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
                       <tr key={key}>
                         <td className="p-4 font-bold bg-surface-container-low/40">{key}</td>
                         {compareList.map(c => (
-                          <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs[key] || 'N/A'}</td>
+                          <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.specs?.[key] || 'N/A'}</td>
                         ))}
                       </tr>
                     ))
