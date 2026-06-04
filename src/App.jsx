@@ -398,6 +398,7 @@ import VarietyExplorer from './components/VarietyExplorer';
 import SeasonalCalendar from './components/SeasonalCalendar';
 import PriceAnalytics from './components/PriceAnalytics';
 import StateMspTable from './components/StateMspTable';
+import HosieryDesk from './components/HosieryDesk';
 
 const formatPrice = (val, isINR = false) => {
   if (val == null) return '';
@@ -3932,6 +3933,7 @@ function GlobalDashboard({ data, darkMode, colors }) {
 
 function IndiaDashboard({ data, darkMode, colors }) {
   const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (S-6)');
+  const [subTab, setSubTab] = useState('overview');
 
   const getMovementsKey = (type) => {
     if (type.includes('US Upland')) return 'US Upland';
@@ -3975,9 +3977,31 @@ function IndiaDashboard({ data, darkMode, colors }) {
           <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">India Cotton Focus</h2>
           <p className="text-sm text-on-surface-variant mt-1">Domestic raw cotton production, CCI MSP procurements, and district harvest mapping.</p>
         </div>
+        <div className="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/10">
+          <button 
+            onClick={() => setSubTab('overview')} 
+            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
+              subTab === 'overview' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+          >
+            Market Overview
+          </button>
+          <button 
+            onClick={() => setSubTab('hosiery')} 
+            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
+              subTab === 'hosiery' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+          >
+            Hosiery Desk
+          </button>
+        </div>
       </div>
 
-      {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
+      {subTab === 'hosiery' ? (
+        <HosieryDesk data={data} colors={colors} />
+      ) : (
+        <>
+          {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: MCX Cotton Spot (Bale basis) */}
         <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
@@ -4679,7 +4703,9 @@ function IndiaDashboard({ data, darkMode, colors }) {
           </div>
         </div>
       )}
-      <CottonVarietyExplorer mode="india" data={data} colors={colors} />
+          <CottonVarietyExplorer mode="india" data={data} colors={colors} />
+        </>
+      )}
     </div>
   );
 }

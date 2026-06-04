@@ -291,6 +291,57 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           }
         }
 
+        // Dynamically update hosiery vs weaving count matrix and spreads
+        if (updated.yarns && updated.yarns.hosieryWeaving) {
+          const hw = updated.yarns.hosieryWeaving;
+          const shankar6Spot = updated.indianCotton.prices.types[0].current;
+          const baseRaw = shankar6Spot / 356;
+          
+          // Ne 20s
+          hw.counts[0].combedHosiery = Math.floor(baseRaw * 1.15 + 52);
+          hw.counts[0].cardedHosiery = Math.floor(baseRaw * 1.12 + 40);
+          hw.counts[0].combedWeaving = Math.floor(baseRaw * 1.15 + 42);
+          
+          // Ne 24s
+          hw.counts[1].combedHosiery = Math.floor(baseRaw * 1.18 + 55);
+          hw.counts[1].cardedHosiery = Math.floor(baseRaw * 1.15 + 43);
+          hw.counts[1].combedWeaving = Math.floor(baseRaw * 1.18 + 45);
+          
+          // Ne 30s
+          hw.counts[2].combedHosiery = Math.floor(baseRaw * 1.25 + 65);
+          hw.counts[2].cardedHosiery = Math.floor(baseRaw * 1.21 + 50);
+          hw.counts[2].combedWeaving = Math.floor(baseRaw * 1.25 + 55);
+          
+          // Ne 34s
+          hw.counts[3].combedHosiery = Math.floor(baseRaw * 1.28 + 70);
+          hw.counts[3].cardedHosiery = Math.floor(baseRaw * 1.24 + 55);
+          hw.counts[3].combedWeaving = Math.floor(baseRaw * 1.28 + 60);
+          
+          // Ne 40s
+          hw.counts[4].combedHosiery = Math.floor(baseRaw * 1.32 + 80);
+          hw.counts[4].cardedHosiery = Math.floor(baseRaw * 1.28 + 62);
+          hw.counts[4].combedWeaving = Math.floor(baseRaw * 1.32 + 70);
+
+          // Update monthly trends (rolling)
+          const _tNow = new Date();
+          const _tSN = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+          for (let i = 0; i < 6; i++) {
+            const d = new Date(_tNow.getFullYear(), _tNow.getMonth() - (5 - i), 1);
+            hw.monthlyTrend[6 + i].month = `${_tSN[d.getMonth()]} ${String(d.getFullYear()).slice(2)}`;
+          }
+          
+          hw.monthlyTrend[11].hosiery30s = hw.counts[2].combedHosiery;
+          hw.monthlyTrend[11].weaving30s = hw.counts[2].combedWeaving;
+          hw.monthlyTrend[11].spread = hw.monthlyTrend[11].hosiery30s - hw.monthlyTrend[11].weaving30s;
+          
+          for (let idx = 0; idx < 5; idx++) {
+            const ratio = [1.098, 1.078, 1.055, 1.026, 1.008][idx];
+            hw.monthlyTrend[6 + idx].hosiery30s = Math.floor(hw.monthlyTrend[11].hosiery30s * ratio);
+            hw.monthlyTrend[6 + idx].weaving30s = Math.floor(hw.monthlyTrend[11].weaving30s * ratio);
+            hw.monthlyTrend[6 + idx].spread = hw.monthlyTrend[6 + idx].hosiery30s - hw.monthlyTrend[6 + idx].weaving30s;
+          }
+        }
+
         // Dynamically update Global yarn prices
         if (updated.yarns && updated.yarns.global && updated.yarns.global.prices) {
           const prices = updated.yarns.global.prices;

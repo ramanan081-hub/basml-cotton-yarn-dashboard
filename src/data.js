@@ -265,6 +265,29 @@ export const initialData = {
       { month: 'Apr 26', RawCotton: 195, FinishedYarn: 258 },
       { month: 'May 26', RawCotton: 195, FinishedYarn: 260 }
     ],
+    hosieryWeaving: {
+      monthlyTrend: [
+        { month: 'Jul 25', hosiery30s: 260, weaving30s: 250, spread: 10 },
+        { month: 'Aug 25', hosiery30s: 262, weaving30s: 251, spread: 11 },
+        { month: 'Sep 25', hosiery30s: 265, weaving30s: 253, spread: 12 },
+        { month: 'Oct 25', hosiery30s: 268, weaving30s: 256, spread: 12 },
+        { month: 'Nov 25', hosiery30s: 270, weaving30s: 258, spread: 12 },
+        { month: 'Dec 25', hosiery30s: 265, weaving30s: 254, spread: 11 },
+        { month: 'Jan 26', hosiery30s: 250, weaving30s: 241, spread: 9 },
+        { month: 'Feb 26', hosiery30s: 252, weaving30s: 242, spread: 10 },
+        { month: 'Mar 26', hosiery30s: 255, weaving30s: 245, spread: 10 },
+        { month: 'Apr 26', hosiery30s: 257, weaving30s: 247, spread: 10 },
+        { month: 'May 26', hosiery30s: 258, weaving30s: 248, spread: 10 },
+        { month: 'Jun 26', hosiery30s: 250, weaving30s: 240, spread: 10 }
+      ],
+      counts: [
+        { count: 'Ne 20s', combedHosiery: 215, cardedHosiery: 202, combedWeaving: 206 },
+        { count: 'Ne 24s', combedHosiery: 228, cardedHosiery: 215, combedWeaving: 219 },
+        { count: 'Ne 30s', combedHosiery: 250, cardedHosiery: 236, combedWeaving: 240 },
+        { count: 'Ne 34s', combedHosiery: 265, cardedHosiery: 250, combedWeaving: 254 },
+        { count: 'Ne 40s', combedHosiery: 295, cardedHosiery: 278, combedWeaving: 283 }
+      ]
+    },
     planning: "Yarn Margins and Strategy: Spinning mills in the Tirupur/Coimbatore belt are experiencing delayed realization. While raw cotton prices have surged, yarn prices are lagging by 2-3 weeks. Strategy for Garmenters: Lock in 30s and 40s contracts now for the next 45-60 days before mills pass on the full raw material cost burden.",
     stateMillsProduction: [
       { state: 'Tamil Nadu', production: 1850, activeSpindles: '24.5 Million', majorFocus: 'Combed & Compact Cotton Yarns (30s, 40s)' },
