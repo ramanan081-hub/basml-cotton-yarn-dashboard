@@ -79,16 +79,16 @@ export const initialData = {
         { month: 'Mar 26', Shankar6: 58000, MCU5: 62000, J34: 55700 },
         { month: 'Apr 26', Shankar6: 58200, MCU5: 62300, J34: 55900 },
         { month: 'May 26', Shankar6: 58250, MCU5: 62350, J34: 55900 },
-        { month: 'Jun 26', Shankar6: 58300, MCU5: 62400, J34: 55900 }
+        { month: 'Jun 26', Shankar6: 62350, MCU5: 66700, J34: 59850 }
       ],
       types: [
-        { type: 'Shankar-6 (S-6)', current: 58300, est: 59175, staple: '29-31mm (Long Staple)' },
-        { type: 'MCU-5', current: 62400, est: 63335, staple: '31-33mm (ELS)' },
-        { type: 'DCH-32 / Suvin', current: 78700, est: 80275, staple: '33-36mm (ELS)' },
-        { type: 'MECH-1 (Bunny/Brahma)', current: 60050, est: 60950, staple: '28-30mm (Long Staple)' },
-        { type: 'J-34', current: 55970, est: 56760, staple: '25-27mm (Medium-Long)' },
-        { type: 'V797', current: 40230, est: 40835, staple: '22mm (Short Staple)' },
-        { type: 'ICE Cotton No. 2 (INR Equiv)', current: 57800, est: 58960, staple: 'US Upland Futures (Candy Equivalent)' }
+        { type: 'Shankar-6 (S-6)', current: 62350, est: 63285, staple: '29-31mm (Long Staple)' },
+        { type: 'MCU-5', current: 66700, est: 67700, staple: '31-33mm (ELS)' },
+        { type: 'DCH-32 / Suvin', current: 84170, est: 85850, staple: '33-36mm (ELS)' },
+        { type: 'MECH-1 (Bunny/Brahma)', current: 64220, est: 65180, staple: '28-30mm (Long Staple)' },
+        { type: 'J-34', current: 59850, est: 60750, staple: '25-27mm (Medium-Long)' },
+        { type: 'V797', current: 43020, est: 43665, staple: '22mm (Short Staple)' },
+        { type: 'ICE Cotton No. 2 (INR Equiv)', current: 60185, est: 61380, staple: 'US Upland Futures (Candy Equivalent)' }
       ]
     },
     stateProduction: [

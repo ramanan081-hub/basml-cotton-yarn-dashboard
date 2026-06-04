@@ -136,7 +136,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           
           // Shankar-6 Spot - economically model with an MSP-supported domestic floor (~54,500 INR/candy)
           // and a dynamic relationship with import parity under high international rates.
-          const shankar6Spot = Math.max(54500, Math.floor(iceInrEquivalent * 0.965));
+          const shankar6Spot = Math.max(54500, Math.floor(iceInrEquivalent * 1.036));
           types[0].current = shankar6Spot;
           types[0].est = Math.floor(shankar6Spot * 1.015);
 
