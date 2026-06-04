@@ -4020,11 +4020,21 @@ function IndiaDashboard({ data, darkMode, colors }) {
               ₹{Math.round(data.prices.types[0].current).toLocaleString('en-IN')}
               <span className="text-xs font-semibold text-on-surface-variant font-sans">/ Candy (355.62kg)</span>
             </div>
-            <div className="text-[11px] text-on-surface-variant font-mono mt-1">
+            <div className="grid grid-cols-2 gap-2 mt-2 pt-2 border-t border-outline-variant/20 text-[11px] font-mono text-on-surface-variant">
+              <div>
+                <span className="block text-[9px] uppercase tracking-wider opacity-70">Ginner Sell (Ex-Gin)</span>
+                <span className="font-bold text-primary">₹{Math.round(data.prices.types[0].current).toLocaleString('en-IN')}/Cd</span>
+              </div>
+              <div>
+                <span className="block text-[9px] uppercase tracking-wider opacity-70">Landed Mill (Buy)</span>
+                <span className="font-bold text-emerald-500">₹{Math.round(data.prices.types[0].current + 1100).toLocaleString('en-IN')}/Cd</span>
+              </div>
+            </div>
+            <div className="text-[10px] text-on-surface-variant font-mono mt-1 opacity-70">
               Bale Equivalent: ₹{Math.round(data.prices.types[0].current / 2.09188).toLocaleString('en-IN')} / Bale
             </div>
           </div>
-          <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+          <div className="mt-2 pt-2 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
             <span>Quality: 29-31mm Long Staple</span>
             <span className="text-amber-500 font-bold">Consensus Spot</span>
           </div>
