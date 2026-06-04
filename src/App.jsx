@@ -693,8 +693,8 @@ function CottonVarietyExplorer({ mode, data, colors }) {
   const defaultCurrent = variety.dayForecast[0].price;
   const scaleFactor = currentVal / defaultCurrent;
   
-  const scaledDayForecast = variety.dayForecast.map((df, index) => {
-    const ratio = index / 6;
+  const scaledDayForecast = Array.from({ length: 30 }).map((_, index) => {
+    const ratio = index / 29;
     const price = currentVal + (forecastVal - currentVal) * ratio;
     const scaledBuyTarget = variety.buyTarget * scaleFactor;
     const scaledHoldLine = variety.holdLine * scaleFactor;
@@ -948,7 +948,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
           <div className="bg-surface-container-lowest border border-outline-variant/20 rounded-xl p-4">
             <div className="flex justify-between items-center mb-4">
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider">
-                {chartTab === 'history' ? "6-Month Pricing Trend" : "7-Day Buy Zones & Targets"}
+                {chartTab === 'history' ? "6-Month Pricing Trend" : "30-Day Buy Zones & Targets"}
               </h4>
               
               <div className="flex gap-1 p-0.5 bg-surface-container-low rounded-lg border border-outline-variant/10">
@@ -968,7 +968,7 @@ function CottonVarietyExplorer({ mode, data, colors }) {
                     chartTab === 'forecast' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
                   }`}
                 >
-                  7D Buy Zones
+                  30D Buy Zones
                 </button>
                 <button 
                   id={`chart-tab-${mode}-technical`}
