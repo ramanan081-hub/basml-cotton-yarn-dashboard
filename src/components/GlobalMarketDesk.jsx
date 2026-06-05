@@ -45,6 +45,30 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   const priceSpreadInr = cottonInrPerKg - estimatedPsfInr;
   const parityRatio = cottonInrPerKg / estimatedPsfInr;
 
+  // Dynamic Synthetic & Blended Yarn Live Prices (sensitive to crude oil & cotton spot)
+  const polyesterYarnUSD = estimatedPsfUSD + 0.85;
+  const polyesterYarnInr = polyesterYarnUSD * simulatedInr;
+
+  const nylonCaprolactamUSD = (crudeOil * 15 + 450) / 1000;
+  const nylonYarnUSD = nylonCaprolactamUSD + 1.20;
+  const nylonYarnInr = nylonYarnUSD * simulatedInr;
+
+  const acrylicAnUSD = (crudeOil * 11 + 400) / 1000;
+  const acrylicYarnUSD = acrylicAnUSD + 1.10;
+  const acrylicYarnInr = acrylicYarnUSD * simulatedInr;
+
+  const pcYarnInr = (0.65 * estimatedPsfInr) + (0.35 * cottonInrPerKg) + 98;
+  const pcYarnUSD = pcYarnInr / simulatedInr;
+
+  const vsfInr = 150; // Stable domestic Viscose baseline (INR/kg)
+  const pvYarnInr = (0.65 * estimatedPsfInr) + (0.35 * vsfInr) + 87;
+  const pvYarnUSD = pvYarnInr / simulatedInr;
+
+  const spandexPolyurethaneUSD = (crudeOil * 30 + 1300) / 1000;
+  const spandexYarnUSD = spandexPolyurethaneUSD + 1.20;
+  const spandexYarnInr = spandexYarnUSD * simulatedInr;
+
+
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
     { month: 'Jul 25', Brent: 78.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[0]?.AIndex || 91.8, PolyesterPSF: 52.0 },
@@ -369,8 +393,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-primary">1. Polyester Yarn (Spun/Filament)</span>
                   <span className="text-[9px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">100% Synthetic</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-primary mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${polyesterYarnUSD.toFixed(2)}/kg (~₹{Math.round(polyesterYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> PTA (Purified Terephthalic Acid) & MEG (Monoethylene Glycol), processed from Naphtha distillates.
+                  <strong>Oil Feedstock:</strong> PTA & MEG (Naphtha-based) | <strong>Feedstock Cost:</strong> ${estimatedPsfUSD.toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> Sportswear, activewear, wrinkle-resistant shirts, bedsheets.
@@ -383,8 +411,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-tertiary">2. Nylon Yarn (Polyamide)</span>
                   <span className="text-[9px] font-bold bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-full">100% Synthetic</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-tertiary mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${nylonYarnUSD.toFixed(2)}/kg (~₹{Math.round(nylonYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> Caprolactam and Adipic Acid, synthesized from Benzene refinery runs.
+                  <strong>Oil Feedstock:</strong> Caprolactam (Benzene-based) | <strong>Feedstock Cost:</strong> ${nylonCaprolactamUSD.toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> High-stretch swimwear, hosiery, activewear, ropes, industrial carpets.
@@ -397,8 +429,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-amber-500">3. Acrylic Yarn (Wool Mimic)</span>
                   <span className="text-[9px] font-bold bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full">100% Synthetic</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-amber-500 mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${acrylicYarnUSD.toFixed(2)}/kg (~₹{Math.round(acrylicYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> Acrylonitrile polymer, derived from Propylene gas cracking.
+                  <strong>Oil Feedstock:</strong> Acrylonitrile (Propylene-based) | <strong>Feedstock Cost:</strong> ${acrylicAnUSD.toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> Winter sweaters, blankets, socks, hats (Ludhiana spinning hub focus).
@@ -411,8 +447,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-emerald-500">4. Poly-Cotton (PC) Blends</span>
                   <span className="text-[9px] font-bold bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full">Cotton / Oil Blend</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-emerald-500 mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${pcYarnUSD.toFixed(2)}/kg (~₹{Math.round(pcYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> Polyester Staple Fiber (PSF) spun directly with natural cotton fibers.
+                  <strong>Composition:</strong> 65% Polyester / 35% Cotton | <strong>Fiber cost:</strong> ${(pcYarnUSD - 0.90).toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> Industrial workwear, school uniforms, durable corporate shirts.
@@ -425,8 +465,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-primary">5. Poly-Viscose (PV) Blends</span>
                   <span className="text-[9px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Cellulose / Oil Blend</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-primary mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${pvYarnUSD.toFixed(2)}/kg (~₹{Math.round(pvYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> Polyester fiber blended with semi-synthetic wood-pulp Viscose.
+                  <strong>Composition:</strong> 65% Polyester / 35% Viscose | <strong>Fiber cost:</strong> ${(pvYarnUSD - 1.01).toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> Suiting fabrics, formal trousers, school skirts (Bhilwara/Surat hub focus).
@@ -439,8 +483,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-red-500">6. Spandex Yarn (Elastane / Lycra)</span>
                   <span className="text-[9px] font-bold bg-red-500/10 text-red-500 px-2 py-0.5 rounded-full">100% Polyurethane</span>
                 </div>
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-red-500 mb-1">
+                  <span className="material-symbols-outlined text-[12px]">payments</span>
+                  <span>Live Index Price: ${spandexYarnUSD.toFixed(2)}/kg (~₹{Math.round(spandexYarnInr)}/kg)</span>
+                </div>
                 <p className="text-[10px] text-on-surface-variant mb-1">
-                  <strong>Oil Feedstock:</strong> PTMEG and MDI polyurethane copolymers derived from crude intermediates.
+                  <strong>Oil Feedstock:</strong> PTMEG & MDI (Polyurethane-based) | <strong>Precursor Cost:</strong> ${spandexPolyurethaneUSD.toFixed(2)}/kg
                 </p>
                 <p className="text-[9px] text-outline">
                   <strong>Use Cases:</strong> Compression wear, stretch denim, elastic waistbands, athletics.
