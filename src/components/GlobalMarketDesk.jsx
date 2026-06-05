@@ -319,9 +319,21 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
                 </LineChart>
               </ResponsiveContainer>
             </div>
-            <div className="mt-4 pt-3 border-t border-outline-variant/15 text-[10px] text-on-surface-variant font-mono leading-relaxed flex justify-between">
-              <span>Spread Premium: ${(crudeOil * 0.04).toFixed(2)}/bbl</span>
-              <span>Baseline: OPEC+ Production Quotas</span>
+            <div className="mt-4 pt-3 border-t border-outline-variant/15 space-y-2.5 text-[10px] font-mono leading-relaxed">
+              <div className="flex justify-between text-on-surface-variant">
+                <span>Spread Premium: ${(crudeOil * 0.04).toFixed(2)}/bbl</span>
+                <span>Baseline: OPEC+ Production Quotas</span>
+              </div>
+              <div className="p-3 bg-surface-container-low/60 rounded-lg border border-outline-variant/10 text-on-surface-variant space-y-2">
+                <div>
+                  <span className="font-bold text-primary uppercase block">Why Prices Moved Up:</span>
+                  OPEC+ extended its voluntary 2.2M bpd supply cuts through Q2-Q3 2026. This, coupled with Middle East shipping reroutes (Bab al-Mandab/Red Sea detour via Africa) has locked up massive volumes of waterborne crude in transit, raising spot premiums.
+                </div>
+                <div>
+                  <span className="font-bold text-tertiary uppercase block">Next 2-Month (July/August) Outlook:</span>
+                  Brent is projected to trade firm between **$93 - $98/bbl** on peak summer gasoline demand and Northern Hemisphere refinery runs. The start of the Atlantic hurricane season represents a key supply threat. Expect PTA/MEG precursor pricing to stay elevated, supporting firm Polyester PSF rates.
+                </div>
+              </div>
             </div>
           </div>
 
