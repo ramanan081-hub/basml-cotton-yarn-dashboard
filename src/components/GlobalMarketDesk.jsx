@@ -73,7 +73,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
   ];
 
   // Interactive Blending & Substitution Calculator State
-  const [crudeOil, setCrudeOil] = useState(84.50); // USD/bbl
+  const [crudeOil, setCrudeOil] = useState(95.00); // USD/bbl (June 5, 2026 Spot)
   const [cottonSpot, setCottonSpot] = useState(87.92); // cents/lb
   const [simulatedInr, setSimulatedInr] = useState(85.50); // USD/INR Rate
 
