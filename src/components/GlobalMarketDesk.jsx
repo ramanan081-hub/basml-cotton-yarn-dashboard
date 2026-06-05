@@ -30,20 +30,35 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     }
   }, [usdInr]);
 
+  // Feedstock calculations
+  const estimatedPta = Math.round(crudeOil * 8.5 + 40); // USD/Metric Ton
+  const estimatedMeg = Math.round(crudeOil * 5.2 + 70); // USD/Metric Ton
+  // PSF price is strongly correlated with PTA/MEG (PTA represents ~85% of composition)
+  const estimatedPsfUSD = (estimatedPta * 0.86 + estimatedMeg * 0.34) / 1000 * 1.15; // USD/kg
+  const estimatedPsfInr = estimatedPsfUSD * simulatedInr; // INR/kg
+  
+  // Cotton price conversions
+  const cottonUSDPerKg = (cottonSpot * 2.20462) / 100; // USD/kg
+  const cottonInrPerKg = cottonUSDPerKg * simulatedInr; // INR/kg
+
+  // Blending & Substitution metrics
+  const priceSpreadInr = cottonInrPerKg - estimatedPsfInr;
+  const parityRatio = cottonInrPerKg / estimatedPsfInr;
+
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
-    { month: 'Jul 25', Brent: 78.5, CotlookA: 91.8, PolyesterPSF: 52.0 },
-    { month: 'Aug 25', Brent: 82.1, CotlookA: 93.2, PolyesterPSF: 53.5 },
-    { month: 'Sep 25', Brent: 84.8, CotlookA: 94.0, PolyesterPSF: 54.8 },
-    { month: 'Oct 25', Brent: 81.2, CotlookA: 92.5, PolyesterPSF: 52.9 },
-    { month: 'Nov 25', Brent: 79.5, CotlookA: 91.0, PolyesterPSF: 51.5 },
-    { month: 'Dec 25', Brent: 77.0, CotlookA: 89.5, PolyesterPSF: 50.2 },
-    { month: 'Jan 26', Brent: 80.4, CotlookA: 91.2, PolyesterPSF: 52.1 },
-    { month: 'Feb 26', Brent: 82.8, CotlookA: 92.5, PolyesterPSF: 53.4 },
-    { month: 'Mar 26', Brent: 85.2, CotlookA: 94.0, PolyesterPSF: 54.9 },
-    { month: 'Apr 26', Brent: 88.0, CotlookA: 90.2, PolyesterPSF: 56.5 },
-    { month: 'May 26', Brent: 86.5, CotlookA: 88.5, PolyesterPSF: 55.8 },
-    { month: 'Jun 26', Brent: 84.50, CotlookA: 87.92, PolyesterPSF: 54.60 }
+    { month: 'Jul 25', Brent: 78.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[0]?.AIndex || 91.8, PolyesterPSF: 52.0 },
+    { month: 'Aug 25', Brent: 82.1, CotlookA: globalCotton?.prices?.monthlyTrend?.[1]?.AIndex || 93.2, PolyesterPSF: 53.5 },
+    { month: 'Sep 25', Brent: 84.8, CotlookA: globalCotton?.prices?.monthlyTrend?.[2]?.AIndex || 94.0, PolyesterPSF: 54.8 },
+    { month: 'Oct 25', Brent: 81.2, CotlookA: globalCotton?.prices?.monthlyTrend?.[3]?.AIndex || 92.5, PolyesterPSF: 52.9 },
+    { month: 'Nov 25', Brent: 79.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[4]?.AIndex || 91.0, PolyesterPSF: 51.5 },
+    { month: 'Dec 25', Brent: 77.0, CotlookA: globalCotton?.prices?.monthlyTrend?.[5]?.AIndex || 89.5, PolyesterPSF: 50.2 },
+    { month: 'Jan 26', Brent: 80.4, CotlookA: globalCotton?.prices?.monthlyTrend?.[6]?.AIndex || 91.2, PolyesterPSF: 52.1 },
+    { month: 'Feb 26', Brent: 82.8, CotlookA: globalCotton?.prices?.monthlyTrend?.[7]?.AIndex || 92.5, PolyesterPSF: 53.4 },
+    { month: 'Mar 26', Brent: 85.2, CotlookA: globalCotton?.prices?.monthlyTrend?.[8]?.AIndex || 94.0, PolyesterPSF: 54.9 },
+    { month: 'Apr 26', Brent: 88.0, CotlookA: globalCotton?.prices?.monthlyTrend?.[9]?.AIndex || 90.2, PolyesterPSF: 56.5 },
+    { month: 'May 26', Brent: 86.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[10]?.AIndex || 88.5, PolyesterPSF: 55.8 },
+    { month: 'Jun 26', Brent: crudeOil, CotlookA: cottonSpot, PolyesterPSF: parseFloat((estimatedPsfUSD * 100 / 2.20462).toFixed(2)) }
   ];
   // Mock WTI and Brent Crude historical prices (USD/bbl)
   const oilTrendData = [
@@ -103,21 +118,6 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       badgeColor: 'bg-blue-500/10 border-blue-500/30 text-blue-500'
     }
   ];
-
-  // Feedstock calculations
-  const estimatedPta = Math.round(crudeOil * 8.5 + 40); // USD/Metric Ton
-  const estimatedMeg = Math.round(crudeOil * 5.2 + 70); // USD/Metric Ton
-  // PSF price is strongly correlated with PTA/MEG (PTA represents ~85% of composition)
-  const estimatedPsfUSD = (estimatedPta * 0.86 + estimatedMeg * 0.34) / 1000 * 1.15; // USD/kg
-  const estimatedPsfInr = estimatedPsfUSD * simulatedInr; // INR/kg
-  
-  // Cotton price conversions
-  const cottonUSDPerKg = (cottonSpot * 2.20462) / 100; // USD/kg
-  const cottonInrPerKg = cottonUSDPerKg * simulatedInr; // INR/kg
-
-  // Blending & Substitution metrics
-  const priceSpreadInr = cottonInrPerKg - estimatedPsfInr;
-  const parityRatio = cottonInrPerKg / estimatedPsfInr;
 
   // Determine substitution pressure level
   const getSubstitutionAlert = () => {
