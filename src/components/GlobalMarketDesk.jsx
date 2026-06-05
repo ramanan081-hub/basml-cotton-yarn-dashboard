@@ -67,7 +67,29 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   const spandexPolyurethaneUSD = (crudeOil * 30 + 1300) / 1000;
   const spandexYarnUSD = spandexPolyurethaneUSD + 1.20;
   const spandexYarnInr = spandexYarnUSD * simulatedInr;
+  // Dynamic Simulation of Polyester Supply and Cotton Demand based on Crude Oil price
+  // Baseline (when crude = 80): Polyester Supply = 95%, Cotton Demand = 88%
+  // As crude oil rises, PSF supply capacity index declines and cotton demand index rises
+  const crudeDeviation = crudeOil - 80; // Deviation from baseline oil price
+  
+  // Calculate simulated current indices
+  const simulatedPolySupply = Math.max(70, Math.min(100, 95 - (crudeDeviation * 0.4))); // Contracts with high oil
+  const simulatedCottonDemand = Math.max(75, Math.min(100, 88 + (crudeDeviation * 0.3))); // Expands with high oil (substitution)
 
+  const demandSupplyTrendData = [
+    { month: 'Jul 25', Brent: 78.5, PolySupply: 96, CottonDemand: 86 },
+    { month: 'Aug 25', Brent: 82.1, PolySupply: 94, CottonDemand: 87 },
+    { month: 'Sep 25', Brent: 84.8, PolySupply: 92, CottonDemand: 89 },
+    { month: 'Oct 25', Brent: 81.2, PolySupply: 95, CottonDemand: 88 },
+    { month: 'Nov 25', Brent: 79.5, PolySupply: 96, CottonDemand: 87 },
+    { month: 'Dec 25', Brent: 77.0, PolySupply: 98, CottonDemand: 85 },
+    { month: 'Jan 26', Brent: 80.4, PolySupply: 95, CottonDemand: 87 },
+    { month: 'Feb 26', Brent: 82.8, PolySupply: 93, CottonDemand: 88 },
+    { month: 'Mar 26', Brent: 85.2, PolySupply: 91, CottonDemand: 90 },
+    { month: 'Apr 26', Brent: 88.0, PolySupply: 89, CottonDemand: 91 },
+    { month: 'May 26', Brent: 86.5, PolySupply: 90, CottonDemand: 91 },
+    { month: 'Jun 26', Brent: crudeOil, PolySupply: simulatedPolySupply, CottonDemand: simulatedCottonDemand }
+  ];
 
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
@@ -252,42 +274,93 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
       {/* Main Analysis Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Geopolitical & Shipping Risk Table */}
-        <div className="lg:col-span-7 glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
-          <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-primary text-base">emergency_home</span>
-            Geopolitical Risk & Shipping Route Disruptions
-          </h4>
+        {/* Geopolitical & Shipping Risk Table & Supply/Demand Chart */}
+        <div className="lg:col-span-7 space-y-6">
+          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+            <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
+              <span className="material-symbols-outlined text-primary text-base">emergency_home</span>
+              Geopolitical Risk & Shipping Route Disruptions
+            </h4>
 
-          <div className="space-y-4">
-            {geopoliticalConflicts.map((c) => (
-              <div key={c.id} className="p-4 rounded-xl border border-outline-variant/15 bg-surface-container-low/30 hover:bg-surface-container-low/55 transition-colors">
-                <div className="flex justify-between items-center mb-2">
-                  <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-lg">
-                      {c.icon === 'ship' ? 'directions_boat' : c.icon === 'electric_bolt' ? 'flash_on' : c.icon === 'policy' ? 'gavel' : 'dangerous'}
+            <div className="space-y-4">
+              {geopoliticalConflicts.map((c) => (
+                <div key={c.id} className="p-4 rounded-xl border border-outline-variant/15 bg-surface-container-low/30 hover:bg-surface-container-low/55 transition-colors">
+                  <div className="flex justify-between items-center mb-2">
+                    <div className="flex items-center gap-2">
+                      <span className="material-symbols-outlined text-primary text-lg">
+                        {c.icon === 'ship' ? 'directions_boat' : c.icon === 'electric_bolt' ? 'flash_on' : c.icon === 'policy' ? 'gavel' : 'dangerous'}
+                      </span>
+                      <span className="text-xs font-black text-on-surface font-mono">{c.title}</span>
+                    </div>
+                    <span className={`text-[9px] font-mono font-bold border px-2 py-0.5 rounded-full ${c.badgeColor}`}>
+                      {c.status} Impact
                     </span>
-                    <span className="text-xs font-black text-on-surface font-mono">{c.title}</span>
                   </div>
-                  <span className={`text-[9px] font-mono font-bold border px-2 py-0.5 rounded-full ${c.badgeColor}`}>
-                    {c.status} Impact
-                  </span>
-                </div>
-                <p className="text-[11px] text-on-surface-variant font-medium leading-relaxed mb-2">
-                  <strong>Route Bottleneck:</strong> {c.impact}
-                </p>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-outline-variant/10 text-[10px] font-mono">
-                  <div className="space-y-1">
-                    <span className="text-emerald-500 font-bold uppercase text-[9px] block">Cotton Market Affection:</span>
-                    <p className="text-on-surface-variant leading-relaxed">{c.cottonEffect}</p>
-                  </div>
-                  <div className="space-y-1">
-                    <span className="text-tertiary font-bold uppercase text-[9px] block">Polyester & Synthetic Affection:</span>
-                    <p className="text-on-surface-variant leading-relaxed">{c.syntheticEffect}</p>
+                  <p className="text-[11px] text-on-surface-variant font-medium leading-relaxed mb-2">
+                    <strong>Route Bottleneck:</strong> {c.impact}
+                  </p>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-2 border-t border-outline-variant/10 text-[10px] font-mono">
+                    <div className="space-y-1">
+                      <span className="text-emerald-500 font-bold uppercase text-[9px] block">Cotton Market Affection:</span>
+                      <p className="text-on-surface-variant leading-relaxed">{c.cottonEffect}</p>
+                    </div>
+                    <div className="space-y-1">
+                      <span className="text-tertiary font-bold uppercase text-[9px] block">Polyester & Synthetic Affection:</span>
+                      <p className="text-on-surface-variant leading-relaxed">{c.syntheticEffect}</p>
+                    </div>
                   </div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Energy Spike & Substitution Dynamics Chart */}
+          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low text-xs font-mono space-y-4">
+            <div>
+              <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-primary text-base">analytics</span>
+                Oil Price vs. Polyester Supply & Cotton Substitution
+              </h4>
+              <p className="text-[10px] text-on-surface-variant mt-1 leading-relaxed">
+                Rising crude oil prices inflate petrochemical feedstocks, squeezing polyester producer margins and forcing run-rate/supply cuts. As a result, spinning mills substitute polyester for natural cotton, lifting domestic and global cotton demand.
+              </p>
+            </div>
+
+            <div className="h-64 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={demandSupplyTrendData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis yAxisId="left" fontSize={9} stroke="#EC4899" tickFormatter={(v) => `$${v}`} />
+                  <YAxis yAxisId="right" orientation="right" fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `${v}%`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Line yAxisId="left" type="monotone" dataKey="Brent" name="Brent Crude ($/bbl)" stroke="#EC4899" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line yAxisId="right" type="monotone" dataKey="PolySupply" name="Polyester PSF Supply Index" stroke="#3B82F6" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line yAxisId="right" type="monotone" dataKey="CottonDemand" name="Cotton Demand Index (Substitution)" stroke="#10B981" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="p-3 bg-surface-container-low/60 rounded-lg border border-outline-variant/10 text-[10px] text-on-surface-variant space-y-2 leading-relaxed">
+              <div>
+                <span className="font-bold text-primary uppercase block">1. Crude Oil Surge & Polyester Supply Deficit:</span>
+                Spiking crude increases feedstock costs. Polyester margin squeeze forces producers to cut capacity utilization (simulated capacity: <span className="font-bold text-blue-500">{simulatedPolySupply.toFixed(1)}%</span>).
               </div>
-            ))}
+              <div>
+                <span className="font-bold text-emerald-500 uppercase block">2. Cotton Substitution Demand Gain:</span>
+                As polyester fiber rates soar, spinning mills increase cotton blend ratios, pushing natural cotton demand index higher (simulated index: <span className="font-bold text-emerald-500">{simulatedCottonDemand.toFixed(1)}%</span>).
+              </div>
+            </div>
           </div>
         </div>
 
