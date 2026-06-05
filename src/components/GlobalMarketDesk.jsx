@@ -75,6 +75,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
   // Interactive Blending & Substitution Calculator State
   const [crudeOil, setCrudeOil] = useState(84.50); // USD/bbl
   const [cottonSpot, setCottonSpot] = useState(87.92); // cents/lb
+  const [simulatedInr, setSimulatedInr] = useState(85.50); // USD/INR Rate
 
   // Feedstock calculations
   const estimatedPta = Math.round(crudeOil * 8.5 + 40); // USD/Metric Ton
@@ -410,6 +411,180 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
               </div>
               <p className="text-on-surface leading-relaxed text-[11px]">{substitutionAlert.desc}</p>
               <p className="font-bold text-[10px] uppercase opacity-90">{substitutionAlert.recommendation}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* USD/INR Exchange Rate & Domestic Spinning Parity Matrix */}
+      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+        <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
+          <span className="material-symbols-outlined text-primary text-base">currency_exchange</span>
+          USD/INR Currency Transmission & Spinning Mills Impact Desk
+        </h4>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Column 1: Historical Currency Comparison */}
+          <div className="lg:col-span-5 space-y-4">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1">
+              Rupee (INR) Value Trend Comparison
+            </span>
+            
+            <div className="grid grid-cols-3 gap-2">
+              {/* Day-Wise */}
+              <div className="bg-surface-container-low/40 p-3 rounded-lg border border-outline-variant/15 font-mono text-[10px]">
+                <span className="font-bold text-outline uppercase block mb-1">Day-Wise</span>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">Today:</span>
+                    <span className="font-black text-primary">85.50</span>
+                  </div>
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">Yday:</span>
+                    <span className="font-semibold text-on-surface">85.42</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-on-surface-variant">7D Ago:</span>
+                    <span className="font-semibold text-on-surface">85.15</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Month-Wise */}
+              <div className="bg-surface-container-low/40 p-3 rounded-lg border border-outline-variant/15 font-mono text-[10px]">
+                <span className="font-bold text-outline uppercase block mb-1">Month-Wise</span>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">Jun 26:</span>
+                    <span className="font-black text-primary">85.50</span>
+                  </div>
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">May 26:</span>
+                    <span className="font-semibold text-on-surface">84.90</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-on-surface-variant">Apr 26:</span>
+                    <span className="font-semibold text-on-surface">84.45</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Year-Wise */}
+              <div className="bg-surface-container-low/40 p-3 rounded-lg border border-outline-variant/15 font-mono text-[10px]">
+                <span className="font-bold text-outline uppercase block mb-1">Year-Wise</span>
+                <div className="space-y-1.5">
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">FY26 (E):</span>
+                    <span className="font-black text-primary">85.50</span>
+                  </div>
+                  <div className="flex justify-between border-b border-outline-variant/5 pb-1">
+                    <span className="text-on-surface-variant">FY25 (A):</span>
+                    <span className="font-semibold text-on-surface">83.82</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-on-surface-variant">FY24 (A):</span>
+                    <span className="font-semibold text-on-surface">82.79</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="p-3 bg-primary-container/10 border border-primary-container/20 rounded-xl text-[10px] font-mono leading-relaxed text-on-surface-variant">
+              <span className="font-bold text-primary uppercase block mb-1">Currency Summary:</span>
+              The Indian Rupee has depreciated by **2.0% YoY** against the USD. Over a 3-year horizon, the currency moved from 
+              **80.39 to 85.50 (+6.3%)**, restructuring raw material import premiums and enhancing export pricing power.
+            </div>
+          </div>
+
+          {/* Column 2: Spinning Mill Impact Analysis */}
+          <div className="lg:col-span-4 space-y-3 font-mono text-[10px] leading-relaxed">
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1">
+              Indian Cotton & Spinning Industry Impact
+            </span>
+            
+            <div className="space-y-2.5">
+              <div className="flex gap-2 items-start">
+                <span className="material-symbols-outlined text-red-500 text-sm shrink-0">trending_down</span>
+                <div>
+                  <strong className="text-red-500 block">Import Sourcing Squeeze (ELS Cotton):</strong>
+                  Coimbatore/Dindigul mills spinning high counts (80s–120s compact) depend heavily on imported **Egypt Giza** and **US Pima**. A weaker rupee drives landed raw material rates up, severely squeezing processing margins.
+                </div>
+              </div>
+
+              <div className="flex gap-2 items-start">
+                <span className="material-symbols-outlined text-emerald-500 text-sm shrink-0">trending_up</span>
+                <div>
+                  <strong className="text-emerald-500 block">Export Profitability Boost (Yarn & Made-ups):</strong>
+                  Export-oriented mills shipping 30s combed/carded weaving and knitting yarn to Bangladesh, Vietnam, and China experience a direct realization increase on dollar-denominated contracts.
+                </div>
+              </div>
+
+              <div className="flex gap-2 items-start">
+                <span className="material-symbols-outlined text-primary text-sm shrink-0">payments</span>
+                <div>
+                  <strong className="text-primary block">Domestic Floor Support (Shankar-6 Parity):</strong>
+                  Domestic Shankar-6 spots are correlated with ICE futures. As the rupee depreciates, the rupee equivalent parity floor rises, preventing local ginners from lowering prices below key thresholds.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Column 3: Interactive Rupee Sensitivity Simulator */}
+          <div className="lg:col-span-3 flex flex-col justify-between bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/15">
+            <div className="space-y-3">
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1">
+                Landed & Export Sensitivity
+              </span>
+
+              {/* Slider Input */}
+              <div className="flex flex-col gap-1">
+                <label className="text-[10px] font-bold text-on-surface-variant font-sans flex justify-between">
+                  <span>Simulated USD/INR:</span>
+                  <span className="font-mono text-primary font-bold">₹{simulatedInr.toFixed(2)}</span>
+                </label>
+                <input 
+                  type="range"
+                  min="80.00"
+                  max="90.00"
+                  step="0.05"
+                  value={simulatedInr}
+                  onChange={(e) => setSimulatedInr(Number(e.target.value))}
+                  className="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-primary"
+                />
+              </div>
+
+              {/* Live Calculations */}
+              <div className="space-y-2 pt-2 text-[10px] font-mono">
+                <div className="flex justify-between items-center border-b border-outline-variant/10 pb-1.5">
+                  <span className="text-outline">Landed Giza 94 ELS:</span>
+                  <span className="font-bold text-on-surface">
+                    ₹{Math.round(1.6258 * 2.20462 * 356 * simulatedInr).toLocaleString('en-IN')}/Cd
+                  </span>
+                </div>
+                <div className="flex justify-between items-center border-b border-outline-variant/10 pb-1.5">
+                  <span className="text-outline">Shankar-6 Export Parity:</span>
+                  <span className="font-bold text-emerald-500">
+                    ₹{Math.round((cottonSpot / 100) * 2.20462 * 356 * simulatedInr).toLocaleString('en-IN')}/Cd
+                  </span>
+                </div>
+                <div className="flex justify-between items-center">
+                  <span className="text-outline">Rupee Surcharge Overhead:</span>
+                  <span className={`font-bold ${simulatedInr >= 85 ? 'text-red-500' : 'text-emerald-500'}`}>
+                    +₹{Math.round((simulatedInr - 80.00) * 1276).toLocaleString('en-IN')}/Candy
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            {/* Favorable Status Badge */}
+            <div className={`mt-4 p-2.5 rounded-lg border text-[10px] font-mono font-bold text-center ${
+              simulatedInr > 86 ? 'bg-red-500/10 border-red-500/20 text-red-500' : 
+              simulatedInr < 83 ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' :
+              'bg-primary/10 border-primary/20 text-primary'
+            }`}>
+              {simulatedInr > 86 ? '⚠️ CRITICAL IMPORT SQUEEZE' :
+               simulatedInr < 83 ? '✅ OPTIMAL IMPORT / NEUTRAL EXPORT' :
+               '⚖️ EXPORT ADVANTAGE / IMPORT SURCHARGE'}
             </div>
           </div>
         </div>
