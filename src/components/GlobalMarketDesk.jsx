@@ -12,6 +12,11 @@ import {
 } from 'recharts';
 
 export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
+  // Interactive Blending & Substitution Calculator State
+  const [crudeOil, setCrudeOil] = useState(95.00); // USD/bbl (June 5, 2026 Spot)
+  const [cottonSpot, setCottonSpot] = useState(87.92); // cents/lb
+  const [simulatedInr, setSimulatedInr] = useState(85.50); // USD/INR Rate
+
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
     { month: 'Jul 25', Brent: 78.5, CotlookA: 91.8, PolyesterPSF: 52.0 },
@@ -85,11 +90,6 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
       badgeColor: 'bg-blue-500/10 border-blue-500/30 text-blue-500'
     }
   ];
-
-  // Interactive Blending & Substitution Calculator State
-  const [crudeOil, setCrudeOil] = useState(95.00); // USD/bbl (June 5, 2026 Spot)
-  const [cottonSpot, setCottonSpot] = useState(87.92); // cents/lb
-  const [simulatedInr, setSimulatedInr] = useState(85.50); // USD/INR Rate
 
   // Feedstock calculations
   const estimatedPta = Math.round(crudeOil * 8.5 + 40); // USD/Metric Ton
