@@ -1376,7 +1376,7 @@ function App() {
             <span className="material-symbols-outlined text-lg">menu_open</span>
           </button>
         </div>
-        <nav className="flex-1 space-y-1">
+        <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
           {navItems.map((item) => renderNavItem(item, false))}
         </nav>
         {/* Footer Actions */}
@@ -1409,7 +1409,7 @@ function App() {
                 <span className="material-symbols-outlined">close</span>
               </button>
             </div>
-            <nav className="flex-1 space-y-1">
+            <nav className="flex-1 space-y-1 overflow-y-auto pr-1">
               {navItems.map((item) => renderNavItem(item, true))}
             </nav>
             <div className="pt-4 border-t border-outline-variant space-y-1">
