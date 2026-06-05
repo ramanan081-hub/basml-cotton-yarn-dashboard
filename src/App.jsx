@@ -1127,9 +1127,13 @@ function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [globalSubTab, setGlobalSubTab] = useState('overview');
   const [indiaSubTab, setIndiaSubTab] = useState('overview');
+  const [impexpSubTab, setImpexpSubTab] = useState('import');
+  const [analysisSubTab, setAnalysisSubTab] = useState('cotton');
   const [expandedMenus, setExpandedMenus] = useState({
     global: true,
-    india: false
+    india: false,
+    impexp: false,
+    analysis: false
   });
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark' || 
@@ -1228,9 +1232,31 @@ function App() {
     },
     { id: 'cotton', label: 'Cotton Markets', icon: 'grass' },
     { id: 'yarn', label: 'Yarn Markets', icon: 'trending_up' },
-    { id: 'impexp', label: 'Import & Export', icon: 'swap_horiz' },
+    { 
+      id: 'impexp', 
+      label: 'Import & Export', 
+      icon: 'swap_horiz',
+      subItems: [
+        { id: 'import', label: 'Import Strategic Desk' },
+        { id: 'export', label: 'Export Competitiveness' },
+        { id: 'playbook', label: 'Trade Playbook' }
+      ]
+    },
     { id: 'news', label: 'Live News', icon: 'feed' },
-    { id: 'analysis', label: 'Analysis', icon: 'analytics' },
+    { 
+      id: 'analysis', 
+      label: 'Analysis', 
+      icon: 'analytics',
+      subItems: [
+        { id: 'cotton', label: 'Cotton Plans' },
+        { id: 'yarn', label: 'Yarn Market' },
+        { id: 'macro', label: 'Growth Plans' },
+        { id: 'explorer', label: 'Variety Explorer' },
+        { id: 'calendar', label: 'Seasonal Calendar' },
+        { id: 'technical', label: 'Technical Analytics' },
+        { id: 'msp', label: 'State MSPs' }
+      ]
+    },
     { id: 'presentation', label: 'Presentation Deck', icon: 'slideshow' },
     { id: 'quality', label: 'Yarn Quality', icon: 'biotech' },
   ];
@@ -1285,7 +1311,10 @@ function App() {
           <div className="pl-9 space-y-1 border-l border-outline-variant/30 ml-6">
             {item.subItems.map((sub) => {
               const isSubActive = isActive && (
-                item.id === 'global' ? globalSubTab === sub.id : indiaSubTab === sub.id
+                item.id === 'global' ? globalSubTab === sub.id :
+                item.id === 'india' ? indiaSubTab === sub.id :
+                item.id === 'impexp' ? impexpSubTab === sub.id :
+                item.id === 'analysis' ? analysisSubTab === sub.id : false
               );
               return (
                 <button
@@ -1296,6 +1325,10 @@ function App() {
                       setGlobalSubTab(sub.id);
                     } else if (item.id === 'india') {
                       setIndiaSubTab(sub.id);
+                    } else if (item.id === 'impexp') {
+                      setImpexpSubTab(sub.id);
+                    } else if (item.id === 'analysis') {
+                      setAnalysisSubTab(sub.id);
                     }
                     if (isMobile) {
                       setSidebarOpen(false);
@@ -1590,9 +1623,9 @@ function App() {
           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} subTab={indiaSubTab} setSubTab={setIndiaSubTab} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} />}
+          {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} subTab={impexpSubTab} setSubTab={setImpexpSubTab} />}
           {activeTab === 'news' && <LiveNews exchangeRates={data.exchangeRates} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} data={data} />}
+          {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} data={data} subTab={analysisSubTab} setSubTab={setAnalysisSubTab} />}
           {activeTab === 'presentation' && <PresentationDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'quality' && <YarnQualityDashboard darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'sources' && <DataSourcesDashboard data={data} darkMode={darkMode} colors={themeColors} />}
@@ -1797,9 +1830,7 @@ function TradingDeskInfoBox({ selectedName, mode, colors }) {
   );
 }
 
-// Import & Export Strategic Planning Dashboard Component
-function ImportExportDashboard({ colors, data }) {
-  const [subTab, setSubTab] = useState('import');
+function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   
   const formatStateName = (name) => {
     if (name === 'Tamil Nadu (Dom)') return 'Tamil Nadu (Local)';
@@ -4819,8 +4850,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
 
 export default App;
 
-function AnalysisDashboard({ darkMode, colors, data }) {
-  const [subTab, setSubTab] = useState('cotton'); // 'cotton', 'yarn', 'macro'
+function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTab }) {
   const [selectedCotton, setSelectedCotton] = useState('Shankar-6');
   const [selectedYarn, setSelectedYarn] = useState('Cotton Yarn 30s Carded');
 
