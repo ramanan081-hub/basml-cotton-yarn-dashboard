@@ -1125,6 +1125,12 @@ function App() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+  const [globalSubTab, setGlobalSubTab] = useState('overview');
+  const [indiaSubTab, setIndiaSubTab] = useState('overview');
+  const [expandedMenus, setExpandedMenus] = useState({
+    global: true,
+    india: false
+  });
   const [darkMode, setDarkMode] = useState(() => {
     return localStorage.getItem('theme') === 'dark' || 
       (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
@@ -1202,8 +1208,24 @@ function App() {
   };
 
   const navItems = [
-    { id: 'global', label: 'Global Focus', icon: 'globe' },
-    { id: 'india', label: 'India Focus', icon: 'map' },
+    { 
+      id: 'global', 
+      label: 'Global Focus', 
+      icon: 'globe',
+      subItems: [
+        { id: 'overview', label: 'Market Overview' },
+        { id: 'globalMarket', label: 'Global Market Desk' }
+      ]
+    },
+    { 
+      id: 'india', 
+      label: 'India Focus', 
+      icon: 'map',
+      subItems: [
+        { id: 'overview', label: 'Market Overview' },
+        { id: 'hosiery', label: 'Hosiery Desk' }
+      ]
+    },
     { id: 'cotton', label: 'Cotton Markets', icon: 'grass' },
     { id: 'yarn', label: 'Yarn Markets', icon: 'trending_up' },
     { id: 'impexp', label: 'Import & Export', icon: 'swap_horiz' },
@@ -1212,6 +1234,88 @@ function App() {
     { id: 'presentation', label: 'Presentation Deck', icon: 'slideshow' },
     { id: 'quality', label: 'Yarn Quality', icon: 'biotech' },
   ];
+
+  const renderNavItem = (item, isMobile) => {
+    const hasSubItems = !!item.subItems;
+    const isExpanded = !!expandedMenus[item.id];
+    const isActive = activeTab === item.id;
+
+    return (
+      <div key={item.id} className="space-y-1">
+        <div className="flex items-center justify-between w-full rounded-md transition-all duration-150 ease-in-out">
+          <button
+            onClick={() => {
+              setActiveTab(item.id);
+              if (hasSubItems) {
+                setExpandedMenus(prev => ({
+                  ...prev,
+                  [item.id]: !prev[item.id]
+                }));
+              } else if (isMobile) {
+                setSidebarOpen(false);
+              }
+            }}
+            className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm text-left ${
+              isActive
+                ? 'bg-primary text-on-primary font-semibold shadow-sm'
+                : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
+            }`}
+          >
+            <span className="material-symbols-outlined text-lg">{item.icon}</span>
+            <span>{item.label}</span>
+          </button>
+          {hasSubItems && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                setExpandedMenus(prev => ({
+                  ...prev,
+                  [item.id]: !prev[item.id]
+                }));
+              }}
+              className="px-3 py-3 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center font-bold font-mono text-sm"
+              title={isExpanded ? "Collapse" : "Expand"}
+            >
+              {isExpanded ? '−' : '+'}
+            </button>
+          )}
+        </div>
+
+        {hasSubItems && isExpanded && (
+          <div className="pl-9 space-y-1 border-l border-outline-variant/30 ml-6">
+            {item.subItems.map((sub) => {
+              const isSubActive = isActive && (
+                item.id === 'global' ? globalSubTab === sub.id : indiaSubTab === sub.id
+              );
+              return (
+                <button
+                  key={sub.id}
+                  onClick={() => {
+                    setActiveTab(item.id);
+                    if (item.id === 'global') {
+                      setGlobalSubTab(sub.id);
+                    } else if (item.id === 'india') {
+                      setIndiaSubTab(sub.id);
+                    }
+                    if (isMobile) {
+                      setSidebarOpen(false);
+                    }
+                  }}
+                  className={`w-full text-left px-3 py-2 rounded-md text-xs font-medium font-mono transition-all duration-150 ${
+                    isSubActive
+                      ? 'text-primary font-bold bg-primary/10'
+                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60'
+                  }`}
+                >
+                  {sub.label}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-background text-on-surface font-body flex">
@@ -1240,20 +1344,7 @@ function App() {
           </button>
         </div>
         <nav className="flex-1 space-y-1">
-          {navItems.map((item) => (
-            <button
-              key={item.id}
-              onClick={() => setActiveTab(item.id)}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm ${
-                activeTab === item.id
-                  ? 'bg-primary text-on-primary font-semibold shadow-sm'
-                  : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-              }`}
-            >
-              <span className="material-symbols-outlined text-lg">{item.icon}</span>
-              <span>{item.label}</span>
-            </button>
-          ))}
+          {navItems.map((item) => renderNavItem(item, false))}
         </nav>
         {/* Footer Actions */}
         <div className="px-2 pb-2">
@@ -1286,23 +1377,7 @@ function App() {
               </button>
             </div>
             <nav className="flex-1 space-y-1">
-              {navItems.map((item) => (
-                <button
-                  key={item.id}
-                  onClick={() => {
-                    setActiveTab(item.id);
-                    setSidebarOpen(false);
-                  }}
-                  className={`w-full flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm ${
-                    activeTab === item.id
-                      ? 'bg-primary text-on-primary font-semibold'
-                      : 'text-on-surface-variant hover:bg-surface-container-high'
-                  }`}
-                >
-                  <span className="material-symbols-outlined text-lg">{item.icon}</span>
-                  <span>{item.label}</span>
-                </button>
-              ))}
+              {navItems.map((item) => renderNavItem(item, true))}
             </nav>
             <div className="pt-4 border-t border-outline-variant space-y-1">
               <button
@@ -1511,8 +1586,8 @@ function App() {
             loading={loading} 
             error={error} 
           />
-          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} darkMode={darkMode} colors={themeColors} subTab={globalSubTab} setSubTab={setGlobalSubTab} />}
+          {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} subTab={indiaSubTab} setSubTab={setIndiaSubTab} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} />}
@@ -3595,9 +3670,8 @@ function ImportExportDashboard({ colors, data }) {
   );
 }
 
-function GlobalDashboard({ data, yarns, usdInr, darkMode, colors }) {
+function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'overview', setSubTab }) {
   const [selectedVariety, setSelectedVariety] = useState('Cotlook A-Index');
-  const [subTab, setSubTab] = useState('overview');
 
   const getMovementsKey = (type) => {
     if (type.includes('US Upland')) return 'US Upland';
@@ -3965,9 +4039,8 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors }) {
   );
 }
 
-function IndiaDashboard({ data, yarns, darkMode, colors }) {
+function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', setSubTab }) {
   const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (S-6)');
-  const [subTab, setSubTab] = useState('overview');
 
   const getMovementsKey = (type) => {
     if (type.includes('US Upland')) return 'US Upland';
