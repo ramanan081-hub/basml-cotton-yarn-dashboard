@@ -350,27 +350,101 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             </div>
           </div>
 
-          {/* Petrochemical Pipeline Flow */}
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low text-xs font-mono space-y-3">
-            <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2">
-              Oil-to-Polyester Transmission Flow
-            </h4>
-            <div className="flex flex-col gap-2 relative pl-4 before:absolute before:left-1.5 before:top-2 before:bottom-2 before:w-0.5 before:bg-outline-variant/30">
-              <div className="relative before:absolute before:left-[-14px] before:top-1.5 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                <span className="font-bold text-primary">1. Crude Oil (Energy Source)</span>
-                <span className="text-[10px] text-on-surface-variant block">Spikes in Brent oil raise prices of petrochemical feeds.</span>
+          {/* Crude Oil Utilizations in Synthetic & Blended Yarns */}
+          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low text-xs font-mono space-y-4">
+            <div>
+              <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-primary text-base">layers</span>
+                Crude Oil Utilizations in Yarns Directory
+              </h4>
+              <p className="text-[10px] text-on-surface-variant mt-1 leading-relaxed">
+                Synthetic and blended yarns utilize refinery outputs extracted from crude oil cracking and distillations.
+              </p>
+            </div>
+
+            <div className="space-y-3 max-h-[360px] overflow-y-auto pr-1">
+              {/* Polyester */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-primary">1. Polyester Yarn (Spun/Filament)</span>
+                  <span className="text-[9px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">100% Synthetic</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> PTA (Purified Terephthalic Acid) & MEG (Monoethylene Glycol), processed from Naphtha distillates.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> Sportswear, activewear, wrinkle-resistant shirts, bedsheets.
+                </p>
               </div>
-              <div className="relative before:absolute before:left-[-14px] before:top-1.5 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                <span className="font-bold text-on-surface">2. Naphtha & Paraxylene (PX)</span>
-                <span className="text-[10px] text-on-surface-variant block">Refinery outputs processed from crude distillates.</span>
+
+              {/* Nylon */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-tertiary">2. Nylon Yarn (Polyamide)</span>
+                  <span className="text-[9px] font-bold bg-tertiary/10 text-tertiary px-2 py-0.5 rounded-full">100% Synthetic</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> Caprolactam and Adipic Acid, synthesized from Benzene refinery runs.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> High-stretch swimwear, hosiery, activewear, ropes, industrial carpets.
+                </p>
               </div>
-              <div className="relative before:absolute before:left-[-14px] before:top-1.5 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                <span className="font-bold text-tertiary">3. PTA & MEG (Precursors)</span>
-                <span className="text-[10px] text-on-surface-variant block">Constitutes 85% of PSF chemical composition inputs.</span>
+
+              {/* Acrylic */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-amber-500">3. Acrylic Yarn (Wool Mimic)</span>
+                  <span className="text-[9px] font-bold bg-amber-500/10 text-amber-500 px-2 py-0.5 rounded-full">100% Synthetic</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> Acrylonitrile polymer, derived from Propylene gas cracking.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> Winter sweaters, blankets, socks, hats (Ludhiana spinning hub focus).
+                </p>
               </div>
-              <div className="relative before:absolute before:left-[-14px] before:top-1.5 before:w-2 before:h-2 before:rounded-full before:bg-primary">
-                <span className="font-bold text-emerald-500">4. Polyester Staple Fiber (PSF)</span>
-                <span className="text-[10px] text-on-surface-variant block">Extruded synthetic fiber that matches cotton staple lengths.</span>
+
+              {/* PC Blend */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-emerald-500">4. Poly-Cotton (PC) Blends</span>
+                  <span className="text-[9px] font-bold bg-emerald-500/10 text-emerald-500 px-2 py-0.5 rounded-full">Cotton / Oil Blend</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> Polyester Staple Fiber (PSF) spun directly with natural cotton fibers.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> Industrial workwear, school uniforms, durable corporate shirts.
+                </p>
+              </div>
+
+              {/* PV Blend */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-primary">5. Poly-Viscose (PV) Blends</span>
+                  <span className="text-[9px] font-bold bg-primary/10 text-primary px-2 py-0.5 rounded-full">Cellulose / Oil Blend</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> Polyester fiber blended with semi-synthetic wood-pulp Viscose.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> Suiting fabrics, formal trousers, school skirts (Bhilwara/Surat hub focus).
+                </p>
+              </div>
+
+              {/* Spandex */}
+              <div className="p-3 rounded-lg border border-outline-variant/10 bg-surface-container-low/20">
+                <div className="flex justify-between items-center mb-1">
+                  <span className="font-bold text-red-500">6. Spandex Yarn (Elastane / Lycra)</span>
+                  <span className="text-[9px] font-bold bg-red-500/10 text-red-500 px-2 py-0.5 rounded-full">100% Polyurethane</span>
+                </div>
+                <p className="text-[10px] text-on-surface-variant mb-1">
+                  <strong>Oil Feedstock:</strong> PTMEG and MDI polyurethane copolymers derived from crude intermediates.
+                </p>
+                <p className="text-[9px] text-outline">
+                  <strong>Use Cases:</strong> Compression wear, stretch denim, elastic waistbands, athletics.
+                </p>
               </div>
             </div>
           </div>
