@@ -1,5 +1,5 @@
 // src/components/GlobalMarketDesk.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ResponsiveContainer, 
   LineChart, 
@@ -11,11 +11,24 @@ import {
   Legend 
 } from 'recharts';
 
-export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
+export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   // Interactive Blending & Substitution Calculator State
   const [crudeOil, setCrudeOil] = useState(95.00); // USD/bbl (June 5, 2026 Spot)
-  const [cottonSpot, setCottonSpot] = useState(87.92); // cents/lb
-  const [simulatedInr, setSimulatedInr] = useState(85.50); // USD/INR Rate
+  const [cottonSpot, setCottonSpot] = useState(() => globalCotton?.prices?.types?.[0]?.current || 87.92); // cents/lb
+  const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 85.50); // USD/INR Rate
+
+  // Sync state with live props if they change in the parent
+  useEffect(() => {
+    if (globalCotton?.prices?.types?.[0]?.current) {
+      setCottonSpot(globalCotton.prices.types[0].current);
+    }
+  }, [globalCotton?.prices?.types?.[0]?.current]);
+
+  useEffect(() => {
+    if (usdInr) {
+      setSimulatedInr(usdInr);
+    }
+  }, [usdInr]);
 
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
@@ -96,11 +109,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
   const estimatedMeg = Math.round(crudeOil * 5.2 + 70); // USD/Metric Ton
   // PSF price is strongly correlated with PTA/MEG (PTA represents ~85% of composition)
   const estimatedPsfUSD = (estimatedPta * 0.86 + estimatedMeg * 0.34) / 1000 * 1.15; // USD/kg
-  const estimatedPsfInr = estimatedPsfUSD * 85.50; // INR/kg
+  const estimatedPsfInr = estimatedPsfUSD * simulatedInr; // INR/kg
   
   // Cotton price conversions
   const cottonUSDPerKg = (cottonSpot * 2.20462) / 100; // USD/kg
-  const cottonInrPerKg = cottonUSDPerKg * 85.50; // INR/kg
+  const cottonInrPerKg = cottonUSDPerKg * simulatedInr; // INR/kg
 
   // Blending & Substitution metrics
   const priceSpreadInr = cottonInrPerKg - estimatedPsfInr;

@@ -1511,7 +1511,7 @@ function App() {
             loading={loading} 
             error={error} 
           />
-          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
@@ -3595,7 +3595,7 @@ function ImportExportDashboard({ colors, data }) {
   );
 }
 
-function GlobalDashboard({ data, yarns, darkMode, colors }) {
+function GlobalDashboard({ data, yarns, usdInr, darkMode, colors }) {
   const [selectedVariety, setSelectedVariety] = useState('Cotlook A-Index');
   const [subTab, setSubTab] = useState('overview');
 
@@ -3649,7 +3649,7 @@ function GlobalDashboard({ data, yarns, darkMode, colors }) {
       </div>
 
       {subTab === 'globalMarket' ? (
-        <GlobalMarketDesk globalCotton={data} yarns={yarns} colors={colors} />
+        <GlobalMarketDesk globalCotton={data} yarns={yarns} usdInr={usdInr} colors={colors} />
       ) : (
         <>
           <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
