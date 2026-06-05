@@ -27,7 +27,21 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
     { month: 'May 26', Brent: 86.5, CotlookA: 88.5, PolyesterPSF: 55.8 },
     { month: 'Jun 26', Brent: 84.50, CotlookA: 87.92, PolyesterPSF: 54.60 }
   ];
-
+  // Mock WTI and Brent Crude historical prices (USD/bbl)
+  const oilTrendData = [
+    { month: 'Jul 25', Brent: 78.5, WTI: 74.2 },
+    { month: 'Aug 25', Brent: 82.1, WTI: 77.8 },
+    { month: 'Sep 25', Brent: 84.8, WTI: 80.5 },
+    { month: 'Oct 25', Brent: 81.2, WTI: 76.9 },
+    { month: 'Nov 25', Brent: 79.5, WTI: 75.3 },
+    { month: 'Dec 25', Brent: 77.0, WTI: 73.1 },
+    { month: 'Jan 26', Brent: 80.4, WTI: 76.2 },
+    { month: 'Feb 26', Brent: 82.8, WTI: 78.5 },
+    { month: 'Mar 26', Brent: 85.2, WTI: 81.0 },
+    { month: 'Apr 26', Brent: 88.0, WTI: 83.6 },
+    { month: 'May 26', Brent: 86.5, WTI: 82.1 },
+    { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil * 0.96 } // Dynamically updates with simulated price slider
+  ];
   // Geopolitical conflict events list
   const geopoliticalConflicts = [
     {
@@ -273,6 +287,41 @@ export function GlobalMarketDesk({ globalCotton, yarns, colors }) {
             </div>
             <div className="mt-4 pt-3 border-t border-outline-variant/15 text-[10px] text-on-surface-variant font-mono leading-relaxed">
               <p><strong>Note:</strong> Correlation factor is high (**~0.82**) between Crude Oil and Polyester PSF. Spikes in crude translate to PSF cost increases within 14 days, reducing cotton-polyester price spreads.</p>
+            </div>
+          </div>
+
+          {/* Crude Oil Price Benchmark Trend (Brent vs. WTI) */}
+          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+            <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
+              <span>Crude Oil Price Trend (Brent vs. WTI)</span>
+              <span className="text-[9px] text-primary font-bold">USD/Barrel</span>
+            </h4>
+            <div className="h-56 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={oilTrendData} margin={{ top: 5, right: 5, left: -25, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis domain={['auto', 'auto']} fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `$${v}`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(v) => [`$${v.toFixed(2)}`, '']}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Line type="monotone" dataKey="Brent" name="Brent Crude" stroke="#EC4899" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line type="monotone" dataKey="WTI" name="WTI Crude" stroke="#F59E0B" strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+            <div className="mt-4 pt-3 border-t border-outline-variant/15 text-[10px] text-on-surface-variant font-mono leading-relaxed flex justify-between">
+              <span>Spread Premium: ${(crudeOil * 0.04).toFixed(2)}/bbl</span>
+              <span>Baseline: OPEC+ Production Quotas</span>
             </div>
           </div>
 
