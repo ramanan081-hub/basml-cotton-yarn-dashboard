@@ -2415,36 +2415,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
         </div>
       </section>
 
-      {/* Nav Tabs */}
-      <div className="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/10 w-fit">
-        <button
-          onClick={() => setSubTab('import')}
-          className={`py-2 px-4 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-2 ${
-            subTab === 'import' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">download</span>
-          Cotton Import Plan
-        </button>
-        <button
-          onClick={() => setSubTab('export')}
-          className={`py-2 px-4 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-2 ${
-            subTab === 'export' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">upload</span>
-          Yarn Export Plan
-        </button>
-        <button
-          onClick={() => setSubTab('playbook')}
-          className={`py-2 px-4 rounded-lg text-xs font-mono font-bold transition-all flex items-center gap-2 ${
-            subTab === 'playbook' ? 'bg-primary text-on-primary shadow-sm' : 'text-on-surface-variant hover:bg-surface-container-high'
-          }`}
-        >
-          <span className="material-symbols-outlined text-sm">menu_book</span>
-          Strategic Playbook
-        </button>
-      </div>
+      {/* Tab Header subTab buttons removed as they are integrated in the sidebar */}
 
       {subTab === 'import' && (
         <div className="space-y-gutter animate-fade-in">
@@ -3733,24 +3704,6 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
           <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">Global Cotton & Market Focus</h2>
           <p className="text-sm text-on-surface-variant mt-1">International supply sheets, price indices, energy correlations, and geopolitical impact maps.</p>
         </div>
-        <div className="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/10">
-          <button 
-            onClick={() => setSubTab('overview')} 
-            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
-              subTab === 'overview' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
-            }`}
-          >
-            Market Overview
-          </button>
-          <button 
-            onClick={() => setSubTab('globalMarket')} 
-            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
-              subTab === 'globalMarket' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
-            }`}
-          >
-            Global Market Desk
-          </button>
-        </div>
       </div>
 
       {subTab === 'globalMarket' ? (
@@ -4114,24 +4067,6 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         <div>
           <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">India Cotton Focus</h2>
           <p className="text-sm text-on-surface-variant mt-1">Domestic raw cotton production, CCI MSP procurements, and district harvest mapping.</p>
-        </div>
-        <div className="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/10">
-          <button 
-            onClick={() => setSubTab('overview')} 
-            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
-              subTab === 'overview' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
-            }`}
-          >
-            Market Overview
-          </button>
-          <button 
-            onClick={() => setSubTab('hosiery')} 
-            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
-              subTab === 'hosiery' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
-            }`}
-          >
-            Hosiery Desk
-          </button>
         </div>
       </div>
 
@@ -5407,80 +5342,6 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
             Strategic Market Analysis & Forecasting
           </h2>
           <p className="font-mono text-xs text-on-surface-variant mt-1">Cross-market commodity analytics, hedging models, and infrastructure plans</p>
-        </div>
-        
-        {/* Navigation Selector */}
-        <div className="bg-surface-container border border-outline-variant p-1 rounded-xl flex flex-wrap gap-1 self-start md:self-auto">
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'cotton' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('cotton')}
-          >
-            Cotton Plans
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'yarn' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('yarn')}
-          >
-            Yarn Market
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'macro' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('macro')}
-          >
-            Growth Plans
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'explorer' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('explorer')}
-          >
-            Variety Explorer
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'calendar' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('calendar')}
-          >
-            Seasonal Calendar
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'technical' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('technical')}
-          >
-            Technical Analytics
-          </button>
-          <button 
-            className={`px-3 py-1.5 rounded-lg text-xs font-semibold font-headline transition-colors duration-200 ${
-              subTab === 'msp' 
-                ? 'bg-primary text-on-primary' 
-                : 'bg-transparent text-on-surface hover:bg-surface-container-high'
-            }`}
-            onClick={() => setSubTab('msp')}
-          >
-            State MSPs
-          </button>
         </div>
       </div>
 
