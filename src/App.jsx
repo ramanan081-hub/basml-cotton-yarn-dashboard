@@ -399,6 +399,7 @@ import SeasonalCalendar from './components/SeasonalCalendar';
 import PriceAnalytics from './components/PriceAnalytics';
 import StateMspTable from './components/StateMspTable';
 import HosieryDesk from './components/HosieryDesk';
+import GlobalMarketDesk from './components/GlobalMarketDesk';
 
 const formatPrice = (val, isINR = false) => {
   if (val == null) return '';
@@ -1510,8 +1511,8 @@ function App() {
             loading={loading} 
             error={error} 
           />
-          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} />}
@@ -3594,8 +3595,9 @@ function ImportExportDashboard({ colors, data }) {
   );
 }
 
-function GlobalDashboard({ data, darkMode, colors }) {
+function GlobalDashboard({ data, yarns, darkMode, colors }) {
   const [selectedVariety, setSelectedVariety] = useState('Cotlook A-Index');
+  const [subTab, setSubTab] = useState('overview');
 
   const getMovementsKey = (type) => {
     if (type.includes('US Upland')) return 'US Upland';
@@ -3620,7 +3622,37 @@ function GlobalDashboard({ data, darkMode, colors }) {
 
   return (
     <div className="space-y-gutter">
-      <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
+      {/* Tab Header / Welcome bar */}
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-outline-variant">
+        <div>
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">Global Cotton & Market Focus</h2>
+          <p className="text-sm text-on-surface-variant mt-1">International supply sheets, price indices, energy correlations, and geopolitical impact maps.</p>
+        </div>
+        <div className="flex gap-2 p-1 bg-surface-container-low rounded-xl border border-outline-variant/10">
+          <button 
+            onClick={() => setSubTab('overview')} 
+            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
+              subTab === 'overview' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+          >
+            Market Overview
+          </button>
+          <button 
+            onClick={() => setSubTab('globalMarket')} 
+            className={`py-1.5 px-4 rounded-lg text-xs font-mono font-bold transition-all ${
+              subTab === 'globalMarket' ? 'bg-primary text-on-primary shadow-xs' : 'text-on-surface-variant hover:bg-surface-container-high'
+            }`}
+          >
+            Global Market Desk
+          </button>
+        </div>
+      </div>
+
+      {subTab === 'globalMarket' ? (
+        <GlobalMarketDesk globalCotton={data} yarns={yarns} colors={colors} />
+      ) : (
+        <>
+          <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
         <div className="absolute inset-0 bg-gradient-to-r from-primary-container/90 via-primary-container/70 to-transparent z-0"></div>
         <div className="relative z-10 text-left space-y-4 max-w-xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider">
@@ -3927,11 +3959,13 @@ function GlobalDashboard({ data, darkMode, colors }) {
         </div>
       </div>
       <CottonVarietyExplorer mode="global" data={data} colors={colors} />
+        </>
+      )}
     </div>
   );
 }
 
-function IndiaDashboard({ data, darkMode, colors }) {
+function IndiaDashboard({ data, yarns, darkMode, colors }) {
   const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (S-6)');
   const [subTab, setSubTab] = useState('overview');
 
@@ -3998,7 +4032,7 @@ function IndiaDashboard({ data, darkMode, colors }) {
       </div>
 
       {subTab === 'hosiery' ? (
-        <HosieryDesk data={data} colors={colors} />
+        <HosieryDesk data={data} yarns={yarns} colors={colors} />
       ) : (
         <>
           {/* Prominent Benchmarks & Arbitrage Metrics Panel */}

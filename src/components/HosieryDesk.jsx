@@ -11,14 +11,14 @@ import {
   Legend 
 } from 'recharts';
 
-export function HosieryDesk({ data, colors }) {
-  const hw = data.yarns?.hosieryWeaving || {
+export function HosieryDesk({ data, yarns, colors }) {
+  const hw = yarns?.hosieryWeaving || {
     monthlyTrend: [],
     counts: []
   };
 
   // State for interactive calculator
-  const shankar6Spot = data.indianCotton?.prices?.types?.[0]?.current || 62350;
+  const shankar6Spot = data?.prices?.types?.[0]?.current || 62350;
   const [cottonPrice, setCottonPrice] = useState(shankar6Spot);
   const [yarnCount, setYarnCount] = useState('30s');
   const [yarnType, setYarnType] = useState('combed_hosiery');
