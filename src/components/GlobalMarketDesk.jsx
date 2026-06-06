@@ -1314,7 +1314,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar yAxisId="left" dataKey="FreightCostUSD" name="Container Freight Cost (USD)" fill={colors.chartPalette[0]} radius={[3, 3, 0, 0]} opacity={0.8} barSize={16} />
+                  <Bar yAxisId="left" dataKey="FreightCostUSD" name="Container Freight Cost (USD)" fill={colors.chartPalette[0]} opacity={0.8} barSize={16} />
                   <Line yAxisId="right" type="monotone" dataKey="TransitDays" name="Average Transit Delay (Days)" stroke={colors.chartPalette[2]} strokeWidth={2} dot={{ r: 3 }} />
                 </ComposedChart>
               </ResponsiveContainer>
@@ -1430,8 +1430,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     ]}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar dataKey="ForexHoldings" name="Forex Oil Cover Reserves (₹k Cr)" fill={colors.chartPalette[0]} radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
-                  <Bar dataKey="PurchaseValue" name="Crude Purchase Value (₹k Cr)" fill={colors.chartPalette[2]} radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
+                  <Bar dataKey="ForexHoldings" name="Forex Oil Cover Reserves (₹k Cr)" fill={colors.chartPalette[0]} opacity={0.85} barSize={14} />
+                  <Bar dataKey="PurchaseValue" name="Crude Purchase Value (₹k Cr)" fill={colors.chartPalette[2]} opacity={0.85} barSize={14} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -1556,10 +1556,10 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar dataKey="CottonSupply" name="Cotton Supply Index" fill={colors.chartPalette[0]} radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="CottonDemand" name="Cotton Demand Index" fill={colors.chartPalette[1]} radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="PolySupply" name="Polyester Supply Index" fill={colors.chartPalette[2]} radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="PolyDemand" name="Polyester Demand Index" fill={colors.chartPalette[3]} radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="CottonSupply" name="Cotton Supply Index" fill={colors.chartPalette[0]} barSize={4} />
+                  <Bar dataKey="CottonDemand" name="Cotton Demand Index" fill={colors.chartPalette[1]} barSize={4} />
+                  <Bar dataKey="PolySupply" name="Polyester Supply Index" fill={colors.chartPalette[2]} barSize={4} />
+                  <Bar dataKey="PolyDemand" name="Polyester Demand Index" fill={colors.chartPalette[3]} barSize={4} />
                 </BarChart>
               </ResponsiveContainer>
             </div>

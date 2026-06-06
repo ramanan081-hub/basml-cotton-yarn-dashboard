@@ -198,8 +198,8 @@ function PresentationDashboard({ data, darkMode, colors }) {
                     fontFamily: 'JetBrains Mono, monospace'
                   }}
                 />
-                <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} radius={[2, 2, 0, 0]} />
-                <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} />
+                <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -233,7 +233,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
                     fontFamily: 'JetBrains Mono, monospace'
                   }}
                 />
-                <Bar dataKey="production" name="Production (Lakh Bales)" barSize={24} radius={[0, 2, 2, 0]}>
+                <Bar dataKey="production" name="Production (Lakh Bales)" barSize={24}>
                    {stateProdData.slice(0, 6).map((entry, index) => (
                      <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                    ))}
@@ -3761,8 +3761,8 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
                   <YAxis fontSize={9} />
                   <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}} />
                   <Legend wrapperStyle={{ fontSize: 10 }} />
-                  <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="supply" fill={colors.primary} name="Supply" barSize={28} />
+                  <Bar dataKey="demand" fill={colors.primaryContainer} name="Demand" barSize={28} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -4202,8 +4202,8 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                     contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}}
                   />
                   <Legend />
-                  <Bar dataKey="consumption" name="Consumption (Lakh Bales)" fill="#FB8C00" radius={[2, 2, 0, 0]} />
-                  <Bar dataKey="production" name="Production (Lakh Bales)" fill="#FFA951" radius={[2, 2, 0, 0]} />
+                  <Bar dataKey="consumption" name="Consumption (Lakh Bales)" fill="#FB8C00" />
+                  <Bar dataKey="production" name="Production (Lakh Bales)" fill="#FFA951" />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -4338,7 +4338,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                   contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} 
                   formatter={(value, name, props) => [`${value} Lakh Bales (Yield: ${props.payload.yield} | GOT: ${props.payload.got})`, `Harvest: ${props.payload.harvestPeriod} (${props.payload.quality})`]} 
                 />
-                <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)" radius={[0, 2, 2, 0]}>
+                <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)">
                   {data.stateProduction.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                   ))}
@@ -4423,7 +4423,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                   formatter={(value, name, props) => [`${value} Lakh Bales (GOT: ${props.payload.got} | Active Ginners: ${props.payload.activeGinningMills})`, `Harvest: ${props.payload.harvestType} | Dominant: ${props.payload.dominantVariety}`]} 
                 />
                 <Legend />
-                <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)" radius={[2, 2, 0, 0]}>
+                <Bar dataKey="production" name="Raw Cotton Harvest (Lakh Bales)">
                   {data.tnDistricts.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                   ))}
@@ -4703,8 +4703,8 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                       <YAxis yAxisId="right" orientation="right" />
                       <Tooltip contentStyle={{ background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px' }} />
                       <Legend />
-                      <Bar yAxisId="left" dataKey="totalPurchaseBales" fill={colors.primary} name="Procurement (Lakh Bales)" barSize={20} radius={[2, 2, 0, 0]} />
-                      <Bar yAxisId="left" dataKey="totalSalesBales" fill={colors.primaryContainer} name="Sales Volume (Lakh Bales)" barSize={20} radius={[2, 2, 0, 0]} />
+                      <Bar yAxisId="left" dataKey="totalPurchaseBales" fill={colors.primary} name="Procurement (Lakh Bales)" barSize={20} />
+                      <Bar yAxisId="left" dataKey="totalSalesBales" fill={colors.primaryContainer} name="Sales Volume (Lakh Bales)" barSize={20} />
                       <Line yAxisId="right" type="monotone" dataKey="turnoverCr" stroke={colors.tertiary} strokeWidth={3} name="Turnover Value (₹ Cr)" dot={true} />
                     </ComposedChart>
                   </ResponsiveContainer>
@@ -5456,7 +5456,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
                       }}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
-                    <Bar yAxisId="left" dataKey="targetBales" fill={colors.primary} name="Target Purchase Quantity (Bales)" barSize={20} radius={[2, 2, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="targetBales" fill={colors.primary} name="Target Purchase Quantity (Bales)" barSize={20} />
                     <Line yAxisId="right" type="monotone" dataKey="priceForecast" stroke={colors.tertiary} strokeWidth={3} name="Price Trend (₹/Candy)" dot={true} />
                   </ComposedChart>
                 </ResponsiveContainer>
@@ -5527,7 +5527,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
                       }}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
-                    <Bar yAxisId="left" dataKey="allocatedBudgetCr" fill={colors.primaryContainer} name="Budget Allocation (₹ Cr)" barSize={20} radius={[2, 2, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="allocatedBudgetCr" fill={colors.primaryContainer} name="Budget Allocation (₹ Cr)" barSize={20} />
                     <Line yAxisId="right" type="monotone" dataKey="hedgingRatio" stroke={colors.primary} strokeWidth={3} name="Hedging Ratio (%)" dot={true} />
                   </ComposedChart>
                 </ResponsiveContainer>
@@ -5589,7 +5589,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
                       formatter={(value) => [`${value}% Influence`, 'Weight']}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
-                    <Bar dataKey="weight" name="Price Sensitivity Weight (%)" barSize={24} radius={[0, 2, 2, 0]}>
+                    <Bar dataKey="weight" name="Price Sensitivity Weight (%)" barSize={24}>
                       {currentCotton.affectingFactors.map((entry, index) => (
                         <Cell key={`cell-${index}`} fill={colors.chartPalette[index % colors.chartPalette.length]} />
                       ))}
@@ -5706,7 +5706,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
                       }}
                     />
                     <Legend wrapperStyle={{ fontSize: '11px' }} />
-                    <Bar yAxisId="left" dataKey="targetQtyKg" fill={colors.primaryContainer} name="Target Purchase (Kg)" barSize={20} radius={[2, 2, 0, 0]} />
+                    <Bar yAxisId="left" dataKey="targetQtyKg" fill={colors.primaryContainer} name="Target Purchase (Kg)" barSize={20} />
                     <Line yAxisId="right" type="monotone" dataKey="marginSpread" stroke={colors.primary} strokeWidth={3} name="Margin Spread (₹/kg)" dot={true} />
                   </ComposedChart>
                 </ResponsiveContainer>

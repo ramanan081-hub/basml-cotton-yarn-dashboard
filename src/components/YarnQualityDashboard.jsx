@@ -561,8 +561,8 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
                   formatter={(value) => [`${value} / km`, 'Occurrences']}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
-                <Bar dataKey="actual" fill={colors.primary} name="Actual Mill Quality" barSize={20} radius={[2, 2, 0, 0]} />
-                <Bar dataKey="benchmark" fill={colors.primaryContainer} name="Uster 5% Benchmark" barSize={20} radius={[2, 2, 0, 0]} />
+                <Bar dataKey="actual" fill={colors.primary} name="Actual Mill Quality" barSize={20} />
+                <Bar dataKey="benchmark" fill={colors.primaryContainer} name="Uster 5% Benchmark" barSize={20} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -595,7 +595,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
                   formatter={(value) => [`${value} Tons`, 'Production']}
                 />
                 <Legend wrapperStyle={{ fontSize: '11px' }} />
-                <Bar dataKey="volume" fill={colors.primary} name="Daily Spinning Yield (Tons)" barSize={20} radius={[2, 2, 0, 0]}>
+                <Bar dataKey="volume" fill={colors.primary} name="Daily Spinning Yield (Tons)" barSize={20}>
                   {data.productionOutput.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={index % 2 === 0 ? colors.primary : colors.primaryContainer} />
                   ))}
