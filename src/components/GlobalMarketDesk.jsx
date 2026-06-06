@@ -4,6 +4,8 @@ import {
   ResponsiveContainer, 
   LineChart, 
   Line, 
+  BarChart,
+  Bar,
   CartesianGrid, 
   XAxis, 
   YAxis, 
@@ -101,6 +103,20 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Apr 26', Brent: 138.21, PolySupply: 68, CottonDemand: 99 }, // YTD High April 7 ($138.21)
     { month: 'May 26', Brent: 100.43, PolySupply: 86, CottonDemand: 92 }, // May average ($100.43)
     { month: 'Jun 26', Brent: crudeOil, PolySupply: simulatedPolySupply, CottonDemand: simulatedCottonDemand }
+  ];
+  const inrPurchaseValueData = [
+    { month: 'Jul 25', BrentUSD: 78.50, usdInr: 83.12, LandedCostINR: Math.round(78.50 * 83.12) },
+    { month: 'Aug 25', BrentUSD: 82.10, usdInr: 83.45, LandedCostINR: Math.round(82.10 * 83.45) },
+    { month: 'Sep 25', BrentUSD: 84.80, usdInr: 83.82, LandedCostINR: Math.round(84.80 * 83.82) },
+    { month: 'Oct 25', BrentUSD: 81.20, usdInr: 84.05, LandedCostINR: Math.round(81.20 * 84.05) },
+    { month: 'Nov 25', BrentUSD: 79.50, usdInr: 84.20, LandedCostINR: Math.round(79.50 * 84.20) },
+    { month: 'Dec 25', BrentUSD: 77.00, usdInr: 84.32, LandedCostINR: Math.round(77.00 * 84.32) },
+    { month: 'Jan 26', BrentUSD: 63.65, usdInr: 85.50, LandedCostINR: Math.round(63.65 * 85.50) },
+    { month: 'Feb 26', BrentUSD: 75.80, usdInr: 88.50, LandedCostINR: Math.round(75.80 * 88.50) },
+    { month: 'Mar 26', BrentUSD: 118.50, usdInr: 92.50, LandedCostINR: Math.round(118.50 * 92.50) },
+    { month: 'Apr 26', BrentUSD: 138.21, usdInr: 95.12, LandedCostINR: Math.round(138.21 * 95.12) },
+    { month: 'May 26', BrentUSD: 100.43, usdInr: 94.80, LandedCostINR: Math.round(100.43 * 94.80) },
+    { month: 'Jun 26', BrentUSD: crudeOil, usdInr: simulatedInr, LandedCostINR: Math.round(crudeOil * simulatedInr) }
   ];
 
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
@@ -1025,6 +1041,44 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                '⚖️ EXPORT ADVANTAGE / IMPORT SURCHARGE'}
             </div>
           </div>
+        </div>
+      </div>
+
+      {/* Monthly Rupee Sourcing Cost Bar Chart */}
+      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+        <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
+          <span>Monthly Rupee Sourcing Cost of Crude Oil (INR/Barrel)</span>
+          <span className="text-[9px] text-primary font-bold">Landed Cost Trend</span>
+        </h4>
+        <p className="text-[10px] text-on-surface-variant mb-4 leading-relaxed">
+          This chart visualizes the combined impact of global Brent crude prices and the USD/INR exchange rate on India's actual monthly landed purchasing cost in Rupees. The historic April peak reached **₹13,147/barrel** on the ₹95.12/USD exchange rate.
+        </p>
+        <div className="h-64 min-w-0">
+          <ResponsiveContainer width="100%" height="100%">
+            <BarChart data={inrPurchaseValueData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
+              <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+              <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+              <YAxis fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `₹${v}`} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: 'var(--color-surface-container-high)',
+                  borderColor: 'var(--color-outline-variant)',
+                  borderRadius: '8px',
+                  color: 'var(--color-on-surface)',
+                  fontSize: '11px',
+                  fontFamily: 'JetBrains Mono, monospace'
+                }}
+                formatter={(v, name) => [
+                  name === 'LandedCostINR' ? `₹${v.toLocaleString('en-IN')}/bbl` : 
+                  name === 'BrentUSD' ? `$${v.toFixed(2)}/bbl` : `₹${v.toFixed(2)}/$`,
+                  name === 'LandedCostINR' ? 'Landed Cost in Rupees' : 
+                  name === 'BrentUSD' ? 'Brent Crude Price (USD)' : 'Exchange Rate (USD/INR)'
+                ]}
+              />
+              <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+              <Bar dataKey="LandedCostINR" name="Landed Cost in Rupees" fill="#3B82F6" radius={[4, 4, 0, 0]} opacity={0.85} />
+            </BarChart>
+          </ResponsiveContainer>
         </div>
       </div>
     </div>
