@@ -4353,14 +4353,13 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
           <div>
             <h3 className="text-base font-bold text-primary mb-2 flex items-center gap-2">
               <span className="material-symbols-outlined text-lg">pie_chart</span>
-              Stock Distribution & Sectoral Usage Shares
+              Stock Holding & Inventory Distribution
             </h3>
             <div className="text-xs text-on-surface-variant bg-surface-container-low border border-outline-variant/30 p-3 rounded-md mb-4">
-              <strong>Total Domestic Flow:</strong> 314 Lakh Bales | <strong>Est. Ending Stocks:</strong> 43.41 Lakh Bales | <strong>Est. Market Valuation:</strong> ₹14,130 Crore
+              <strong>Total Ending Stocks (2025-26 Est):</strong> 43.41 Lakh Bales | <strong>Est. Market Valuation:</strong> ₹14,130 Crore (@ ₹32,550 / Bale)
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[260px] items-center">
-              {/* Chart 1: Stockholders */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 min-h-[300px] items-center">
               <div className="h-48 md:h-full relative">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -4375,7 +4374,6 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                 <div className="text-[10px] font-mono text-center text-outline block -mt-4">Buffer Stockholders</div>
               </div>
               
-              {/* Chart 2: CCI Penetration */}
               <div className="h-48 md:h-full relative">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -4390,41 +4388,12 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                 <div className="text-[10px] font-mono text-center text-outline block -mt-4">CCI Market Penetration</div>
               </div>
 
-              {/* Chart 3: Sectoral Usage */}
-              <div className="h-48 md:h-full relative">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie data={data.consumptionShares} cx="50%" cy="45%" innerRadius={35} outerRadius={60} paddingAngle={2} dataKey="value" nameKey="category" label={({ name, value }) => `${name.split(' ')[0]}: ${value}%`}>
-                      {data.consumptionShares.map((entry, index) => (
-                        <Cell key={`usage-${index}`} fill={colors.chartPalette[(index + 3) % colors.chartPalette.length]} />
-                      ))}
-                    </Pie>
-                    <Tooltip wrapperStyle={{ zIndex: 1000 }} contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '4px'}} formatter={(value, name, props) => props.payload.bales ? `${value}% (${props.payload.bales} Lakh Bales | ₹${props.payload.marketValueCr.toLocaleString()} Cr)` : `${value}%`} />
-                  </PieChart>
-                </ResponsiveContainer>
-                <div className="text-[10px] font-mono text-center text-outline block -mt-4">Sectoral Usage Breakdown</div>
-              </div>
-            </div>
-
-            {/* Reconciliation & Usage Details Footnote */}
-            <div className="mt-6 pt-4 border-t border-outline-variant/20 grid grid-cols-1 md:grid-cols-3 gap-4 text-left text-[10px] font-mono text-on-surface-variant">
-              <div className="bg-surface-container-low/50 border border-outline-variant/20 rounded-xl p-4 space-y-1">
-                <strong className="text-primary block text-[11px] uppercase tracking-wider mb-1">Stockholders Allocation</strong>
-                <div>• <strong>Mills (48%)</strong>: 20.84 Lakh Bales for private spinning run-rates.</div>
-                <div>• <strong>CCI / Govt (22%)</strong>: 9.55 Lakh Bales active buffer storage.</div>
-                <div>• <strong>Traders (22%) & Farmers (8%)</strong>: 13.02 Lakh Bales open-market supply.</div>
-              </div>
-              <div className="bg-surface-container-low/50 border border-outline-variant/20 rounded-xl p-4 space-y-1">
-                <strong className="text-primary block text-[11px] uppercase tracking-wider mb-1">CCI Market Footprint</strong>
-                <div>• <strong>CCI MSP Purchase (35%)</strong>: 15.19 Lakh Bales price-support buffer.</div>
-                <div>• <strong>Private Open Market (65%)</strong>: 28.22 Lakh Bales direct commercial sales.</div>
-                <div>• <strong>Godown Holding</strong>: 5.64 Lakh Bales private stock awaiting lifting.</div>
-              </div>
-              <div className="bg-surface-container-low/50 border border-outline-variant/20 rounded-xl p-4 space-y-1">
-                <strong className="text-primary block text-[11px] uppercase tracking-wider mb-1">Sectoral Consumption</strong>
-                <div>• <strong>Mills Usage (72%)</strong>: 226.08 Lakh Bales transformed to yarn.</div>
-                <div>• <strong>Exports & Industrial (15%)</strong>: 47.10 Lakh Bales overseas & non-apparel.</div>
-                <div>• <strong>CCI Reserves (8%) & Public Retail (5%)</strong>: 40.82 Lakh Bales.</div>
+              {/* Stock reconciliation details */}
+              <div className="bg-surface-container-low/50 border border-outline-variant/20 rounded-xl p-4 space-y-2 text-[10px] font-mono text-on-surface-variant md:col-span-1 col-span-1">
+                <strong className="text-primary block text-[11px] uppercase tracking-wider">Inventory Reconciliation</strong>
+                <div>• <strong>9.55 Lakh Bales (22%)</strong>: represents active uncommitted physical buffer stock owned by CCI.</div>
+                <div>• <strong>15.19 Lakh Bales (35%)</strong>: represents total seasonal procurement footprint of CCI (MSP & buffer).</div>
+                <div>• <strong>5.64 Lakh Bales Diff</strong>: Private mill-owned/e-auctioned stock awaiting lifting, physically held in Govt godowns.</div>
               </div>
             </div>
           </div>
