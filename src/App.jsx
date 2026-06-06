@@ -1187,7 +1187,7 @@ function App() {
     primary: '#FB8C00',
     primaryContainer: '#E65100',
     secondary: '#FFA951',
-    tertiary: '#BF360C',
+    tertiary: '#E65100',
     outline: '#938f99',
     outlineVariant: '#49454f',
     text: '#e6e1e9',
@@ -1195,12 +1195,12 @@ function App() {
     surface: '#141218',
     surfaceContainerLow: '#1d1b22',
     surfaceContainerHigh: '#2b2930',
-    chartPalette: ['#BF360C', '#E65100', '#F57C00', '#FB8C00', '#FFA951', '#FDC591', '#FBE9E7']
+    chartPalette: ['#E65100', '#EF6C00', '#F57C00', '#FB8C00', '#FFA951', '#FDC591', '#FBE9E7']
   } : {
     primary: '#E65100',
     primaryContainer: '#FB8C00',
     secondary: '#FFA951',
-    tertiary: '#BF360C',
+    tertiary: '#EF6C00',
     outline: '#7a7582',
     outlineVariant: '#cbc4d2',
     text: '#1d1b20',
@@ -1208,7 +1208,7 @@ function App() {
     surface: '#fdf7ff',
     surfaceContainerLow: '#f8f2fa',
     surfaceContainerHigh: '#ece6ee',
-    chartPalette: ['#BF360C', '#E65100', '#F57C00', '#FB8C00', '#FFA951', '#FDC591', '#FBE9E7']
+    chartPalette: ['#E65100', '#EF6C00', '#F57C00', '#FB8C00', '#FFA951', '#FDC591', '#FBE9E7']
   };
 
   const navItems = [
@@ -4266,7 +4266,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                   />
                   <Legend />
                   <Line type="monotone" dataKey="J34" name="J-34 (₹/Candy)" stroke="#FFA951" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
-                  <Line type="monotone" dataKey="MCU5" name="MCU-5 (₹/Candy)" stroke="#BF360C" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
+                  <Line type="monotone" dataKey="MCU5" name="MCU-5 (₹/Candy)" stroke={colors.chartPalette[0]} strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
                   <Line type="monotone" dataKey="Shankar6" name="Shankar-6 (₹/Candy)" stroke="#F57C00" strokeWidth={2} dot={{ r: 3 }} activeDot={{ r: 5 }} />
                 </LineChart>
               </ResponsiveContainer>
