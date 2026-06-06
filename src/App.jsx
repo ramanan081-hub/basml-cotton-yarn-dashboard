@@ -1289,38 +1289,31 @@ function App() {
 
     return (
       <div key={item.id} className="space-y-1">
-        <div className="flex items-center justify-between w-full rounded-md transition-all duration-150 ease-in-out">
-          <button
-            onClick={() => {
-              setActiveTab(item.id);
-              if (hasSubItems) {
-                toggleMenuAccordion(item.id);
-              } else if (isMobile) {
-                setSidebarOpen(false);
-              }
-            }}
-            className={`flex-1 flex items-center gap-3 px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm text-left ${
-              isActive
-                ? 'bg-primary text-on-primary font-semibold shadow-sm'
-                : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
-            }`}
-          >
+        <button
+          onClick={() => {
+            setActiveTab(item.id);
+            if (hasSubItems) {
+              toggleMenuAccordion(item.id);
+            } else if (isMobile) {
+              setSidebarOpen(false);
+            }
+          }}
+          className={`w-full flex items-center justify-between px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm text-left ${
+            isActive
+              ? 'bg-primary text-on-primary font-semibold shadow-sm'
+              : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
+          }`}
+        >
+          <div className="flex items-center gap-3">
             <span className="material-symbols-outlined text-lg">{item.icon}</span>
             <span>{item.label}</span>
-          </button>
+          </div>
           {hasSubItems && (
-            <button
-              onClick={(e) => {
-                e.stopPropagation();
-                toggleMenuAccordion(item.id);
-              }}
-              className="px-3 py-3 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center font-bold font-mono text-sm"
-              title={isExpanded ? "Collapse" : "Expand"}
-            >
+            <span className="font-bold font-mono text-sm pr-1">
               {isExpanded ? '−' : '+'}
-            </button>
+            </span>
           )}
-        </div>
+        </button>
 
         {hasSubItems && isExpanded && (
           <div className="pl-9 space-y-1 border-l border-outline-variant/30 ml-6">
