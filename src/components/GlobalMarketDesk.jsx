@@ -6,6 +6,9 @@ import {
   Line, 
   BarChart,
   Bar,
+  PieChart,
+  Pie,
+  Cell,
   CartesianGrid, 
   XAxis, 
   YAxis, 
@@ -149,6 +152,35 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'May 26', Brent: 100.43, WTI: 95.20 }, // May Average Brent $100.43
     { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil === 94.98 ? 92.16 : crudeOil * 0.96 } // June 1 Brent: $94.98, WTI: $92.16
   ];
+
+  // India monthly Oil Purchasing value vs Forex holdings dataset
+  const monthlyOilPurchasingReserves = [
+    { month: 'Jul 25', PurchaseValue: 81.56, ForexHoldings: 250.0 },
+    { month: 'Aug 25', PurchaseValue: 85.64, ForexHoldings: 248.5 },
+    { month: 'Sep 25', PurchaseValue: 88.85, ForexHoldings: 245.0 },
+    { month: 'Oct 25', PurchaseValue: 85.31, ForexHoldings: 247.2 },
+    { month: 'Nov 25', PurchaseValue: 83.67, ForexHoldings: 252.0 },
+    { month: 'Dec 25', PurchaseValue: 81.16, ForexHoldings: 255.0 },
+    { month: 'Jan 26', PurchaseValue: 68.03, ForexHoldings: 262.5 },
+    { month: 'Feb 26', PurchaseValue: 83.85, ForexHoldings: 258.0 },
+    { month: 'Mar 26', PurchaseValue: 137.02, ForexHoldings: 235.0 },
+    { month: 'Apr 26', PurchaseValue: 164.29, ForexHoldings: 220.0 },
+    { month: 'May 26', PurchaseValue: 119.01, ForexHoldings: 245.0 },
+    { 
+      month: 'Jun 26', 
+      PurchaseValue: parseFloat((125 * crudeOil * simulatedInr / 10000).toFixed(2)), 
+      ForexHoldings: parseFloat((245.0 + (96.83 - simulatedInr) * 15).toFixed(2)) 
+    }
+  ];
+
+  // Crude Oil usage share breakdown dataset
+  const crudeOilUsageShares = [
+    { name: 'Public Usage (LPG/Transport)', value: 50, color: '#3B82F6' },
+    { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: '#8B5CF6' },
+    { name: 'Government Usage (Defense/Reserves)', value: 15, color: '#F59E0B' },
+    { name: 'Other Usage (Aviation/Agri)', value: 10, color: '#EC4899' }
+  ];
+
   // Geopolitical conflict events list
   const geopoliticalConflicts = [
     {
@@ -1044,41 +1076,118 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
       </div>
 
-      {/* Monthly Rupee Sourcing Cost Bar Chart */}
+      {/* Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk */}
       <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
-        <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
-          <span>Monthly Rupee Sourcing Cost of Crude Oil (INR/Barrel)</span>
-          <span className="text-[9px] text-primary font-bold">Landed Cost Trend</span>
+        <h4 className="text-sm font-bold text-tertiary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+          <span className="material-symbols-outlined text-tertiary">analytics</span>
+          Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk
         </h4>
-        <p className="text-[10px] text-on-surface-variant mb-4 leading-relaxed">
-          This chart visualizes the combined impact of global Brent crude prices and the USD/INR exchange rate on India's actual monthly landed purchasing cost in Rupees. The historic April peak reached **₹13,147/barrel** on the ₹95.12/USD exchange rate.
-        </p>
-        <div className="h-64 min-w-0">
-          <ResponsiveContainer width="100%" height="100%">
-            <BarChart data={inrPurchaseValueData} margin={{ top: 10, right: 5, left: -15, bottom: 0 }}>
-              <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
-              <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
-              <YAxis fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `₹${v}`} />
-              <Tooltip
-                contentStyle={{
-                  backgroundColor: 'var(--color-surface-container-high)',
-                  borderColor: 'var(--color-outline-variant)',
-                  borderRadius: '8px',
-                  color: 'var(--color-on-surface)',
-                  fontSize: '11px',
-                  fontFamily: 'JetBrains Mono, monospace'
-                }}
-                formatter={(v, name) => [
-                  name === 'LandedCostINR' ? `₹${v.toLocaleString('en-IN')}/bbl` : 
-                  name === 'BrentUSD' ? `$${v.toFixed(2)}/bbl` : `₹${v.toFixed(2)}/$`,
-                  name === 'LandedCostINR' ? 'Landed Cost in Rupees' : 
-                  name === 'BrentUSD' ? 'Brent Crude Price (USD)' : 'Exchange Rate (USD/INR)'
-                ]}
-              />
-              <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-              <Bar dataKey="LandedCostINR" name="Landed Cost in Rupees" fill="#3B82F6" radius={[4, 4, 0, 0]} opacity={0.85} />
-            </BarChart>
-          </ResponsiveContainer>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Grouped Bar Chart: Forex Allocations & Sourcing Purchase Value */}
+          <div className="lg:col-span-7 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                Monthly Indian Forex Reserves Oil Cover vs. Import Purchase Value
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                India imports ~125M barrels of crude monthly. This chart compares the RBI's foreign currency reserves earmarked as an oil liquidity cover vs. the actual monthly purchase expenditure in Rupees. The April spike cost India **₹164.3 Thousand Crores** on the peak Rupee drop.
+              </p>
+            </div>
+            
+            <div className="h-64 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={monthlyOilPurchasingReserves} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `₹${v}k Cr`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(value, name) => [
+                      `₹${value.toLocaleString('en-IN')} Thousand Crores`,
+                      name === 'PurchaseValue' ? 'Crude Import Purchase Value' : 'RBI Forex Oil Cover Reserves'
+                    ]}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Bar dataKey="ForexHoldings" name="Forex Oil Cover Reserves (₹k Cr)" fill="#8B5CF6" radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
+                  <Bar dataKey="PurchaseValue" name="Crude Purchase Value (₹k Cr)" fill="#F59E0B" radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Pie Chart: Crude Oil Sectoral Usage Share */}
+          <div className="lg:col-span-5 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant/15 pt-6 lg:pt-0 lg:pl-6">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                India Strategic Crude Oil Sectoral Consumption Shares
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                National crude usage distribution mapping where processed petroleum products (diesel, petrol, petrochemical intermediates like PTA/MEG) are consumed.
+              </p>
+            </div>
+
+            <div className="h-48 relative flex items-center justify-center">
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie
+                    data={crudeOilUsageShares}
+                    cx="50%"
+                    cy="45%"
+                    innerRadius={40}
+                    outerRadius={65}
+                    paddingAngle={3}
+                    dataKey="value"
+                    nameKey="name"
+                    label={({ name, value }) => `${name.split(' ')[0]}: ${value}%`}
+                  >
+                    {crudeOilUsageShares.map((entry, index) => (
+                      <Cell key={`cell-${index}`} fill={entry.color} />
+                    ))}
+                  </Pie>
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(value) => [`${value}% of National Import Volume`]}
+                  />
+                </PieChart>
+              </ResponsiveContainer>
+            </div>
+
+            <div className="space-y-2 mt-2">
+              <div className="grid grid-cols-2 gap-2 text-[9px] leading-normal text-on-surface-variant">
+                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                  <span className="font-bold text-blue-500 block">Public (50%)</span>
+                  Transportation fuel (diesel/petrol) & household LPG cooking gas.
+                </div>
+                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                  <span className="font-bold text-purple-500 block">Mills & Ind. (25%)</span>
+                  Petrochemical precursors (PTA/MEG) for polyester fiber & plastics.
+                </div>
+                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                  <span className="font-bold text-amber-500 block">Government (15%)</span>
+                  Defense logistics, strategic salt-cavern reserves, and railways.
+                </div>
+                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                  <span className="font-bold text-pink-500 block">Other Usage (10%)</span>
+                  Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
