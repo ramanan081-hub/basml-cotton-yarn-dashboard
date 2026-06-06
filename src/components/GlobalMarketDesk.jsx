@@ -15,7 +15,14 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   // Interactive Blending & Substitution Calculator State
   const [crudeOil, setCrudeOil] = useState(94.98); // USD/bbl (June 1, 2026 Spot)
   const [cottonSpot, setCottonSpot] = useState(() => globalCotton?.prices?.types?.[0]?.current || 87.92); // cents/lb
-  const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 95.00); // USD/INR Rate
+  const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 96.83); // USD/INR Rate
+
+  // Procurement Settings State
+  const [crudeWaitThreshold, setCrudeWaitThreshold] = useState(100);
+  const [crudeBuyThreshold, setCrudeBuyThreshold] = useState(85);
+  const [inrHedgeThreshold, setInrHedgeThreshold] = useState(97.00);
+  const [cottonBuyReference, setCottonBuyReference] = useState(88.50);
+  const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
 
   // Sync state with live props if they change in the parent
   useEffect(() => {
@@ -33,9 +40,14 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   // Feedstock calculations
   const estimatedPta = Math.round(crudeOil * 8.5 + 40); // USD/Metric Ton
   const estimatedMeg = Math.round(crudeOil * 5.2 + 70); // USD/Metric Ton
-  // PSF price is strongly correlated with PTA/MEG (PTA represents ~85% of composition)
-  const estimatedPsfUSD = (estimatedPta * 0.86 + estimatedMeg * 0.34) / 1000 * 1.15; // USD/kg
-  const estimatedPsfInr = estimatedPsfUSD * simulatedInr; // INR/kg
+  
+  // Converts USD/Ton to INR/Kg
+  const ptaInrPerKg = (estimatedPta / 1000) * simulatedInr;
+  const megInrPerKg = (estimatedMeg / 1000) * simulatedInr;
+  
+  // PSF cost = (PTA * 0.855) + (MEG * 0.335) + 20
+  const estimatedPsfInr = (ptaInrPerKg * 0.855) + (megInrPerKg * 0.335) + 20; // INR/kg
+  const estimatedPsfUSD = estimatedPsfInr / simulatedInr; // USD/kg
   
   // Cotton price conversions
   const cottonUSDPerKg = (cottonSpot * 2.20462) / 100; // USD/kg
@@ -586,26 +598,90 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
       </div>
 
-      {/* Dynamic Oil Factor Arbitrage & Blending Calculator */}
+      {/* Spinning Mill Procurement & Risk Control Desk */}
       <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
-        <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
-          <span className="material-symbols-outlined text-primary text-base">calculate</span>
-          Interactive Blending & Substitution Predictor
-        </h4>
+        <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
+          <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider flex items-center gap-1.5">
+            <span className="material-symbols-outlined text-primary text-base">domain</span>
+            Spinning Mill Procurement & Risk Control Desk
+          </h4>
+          <button 
+            onClick={() => setIsSettingsExpanded(!isSettingsExpanded)}
+            className="flex items-center gap-1 text-[10px] font-mono font-bold px-2.5 py-1 rounded-lg border border-outline-variant/20 bg-surface-container-low hover:bg-surface-container-high text-primary transition-colors"
+          >
+            <span className="material-symbols-outlined text-xs">settings</span>
+            <span>{isSettingsExpanded ? 'Hide Settings' : 'Adjust Settings'}</span>
+          </button>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {/* Inputs */}
-          <div className="md:col-span-5 space-y-4">
+        {/* Adjustable Settings Panel */}
+        {isSettingsExpanded && (
+          <div className="mb-6 p-4 rounded-xl border border-primary/20 bg-primary/5 grid grid-cols-1 md:grid-cols-4 gap-4 animate-fade-in font-mono text-[10px]">
+            <div className="flex flex-col gap-1.5">
+              <label className="font-bold text-on-surface-variant">Crude Wait Threshold (USD):</label>
+              <div className="flex gap-2 items-center">
+                <input 
+                  type="number" 
+                  value={crudeWaitThreshold} 
+                  onChange={(e) => setCrudeWaitThreshold(Number(e.target.value))}
+                  className="w-full bg-surface-container-high border border-outline-variant/20 rounded px-2 py-1 text-on-surface font-bold text-center"
+                />
+                <span className="text-outline">$</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="font-bold text-on-surface-variant">Crude Buy Threshold (USD):</label>
+              <div className="flex gap-2 items-center">
+                <input 
+                  type="number" 
+                  value={crudeBuyThreshold} 
+                  onChange={(e) => setCrudeBuyThreshold(Number(e.target.value))}
+                  className="w-full bg-surface-container-high border border-outline-variant/20 rounded px-2 py-1 text-on-surface font-bold text-center"
+                />
+                <span className="text-outline">$</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="font-bold text-on-surface-variant">INR Hedge Threshold (₹/$):</label>
+              <div className="flex gap-2 items-center">
+                <input 
+                  type="number" 
+                  step="0.1"
+                  value={inrHedgeThreshold} 
+                  onChange={(e) => setInrHedgeThreshold(Number(e.target.value))}
+                  className="w-full bg-surface-container-high border border-outline-variant/20 rounded px-2 py-1 text-on-surface font-bold text-center"
+                />
+                <span className="text-outline">₹</span>
+              </div>
+            </div>
+            <div className="flex flex-col gap-1.5">
+              <label className="font-bold text-on-surface-variant">Cotton Buy Ref (Cotlook A ¢):</label>
+              <div className="flex gap-2 items-center">
+                <input 
+                  type="number" 
+                  value={cottonBuyReference} 
+                  onChange={(e) => setCottonBuyReference(Number(e.target.value))}
+                  className="w-full bg-surface-container-high border border-outline-variant/20 rounded px-2 py-1 text-on-surface font-bold text-center"
+                />
+                <span className="text-outline">¢</span>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Module 1: Polyester Cost Calculator & Interactive Sliders */}
+          <div className="lg:col-span-4 space-y-4">
             <div className="bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/15 space-y-3">
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block">
-                Arbitrage & Market Simulation
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1.5">
+                Module 1: Polyester Cost Calculator
               </span>
               
-              {/* Crude Oil Input */}
+              {/* Sliders */}
               <div className="flex flex-col gap-1">
                 <label className="text-[10px] font-bold text-on-surface-variant font-sans flex justify-between">
-                  <span>Simulated Crude Oil (USD/Barrel):</span>
-                  <span className="font-mono text-primary font-bold">${crudeOil}</span>
+                  <span>Simulated Crude Oil:</span>
+                  <span className="font-mono text-primary font-bold">${crudeOil.toFixed(2)}/bbl</span>
                 </label>
                 <input 
                   type="range"
@@ -618,11 +694,10 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 />
               </div>
 
-              {/* Cotton Price Input */}
               <div className="flex flex-col gap-1">
                 <label className="text-[10px] font-bold text-on-surface-variant font-sans flex justify-between">
-                  <span>Simulated Cotlook A-Index (Cents/Lb):</span>
-                  <span className="font-mono text-emerald-500 font-bold">{cottonSpot}¢</span>
+                  <span>Simulated Cotton Spot:</span>
+                  <span className="font-mono text-emerald-500 font-bold">{cottonSpot.toFixed(2)}¢/lb</span>
                 </label>
                 <input 
                   type="range"
@@ -634,67 +709,134 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   className="w-full h-1 bg-surface-container-high rounded-lg appearance-none cursor-pointer accent-emerald-500"
                 />
               </div>
+
+              {/* Feedstock Formula Display */}
+              <div className="pt-2 border-t border-outline-variant/10 font-mono text-[9px] text-on-surface-variant space-y-1.5">
+                <div className="flex justify-between">
+                  <span>Derived PTA:</span>
+                  <span className="font-bold">${estimatedPta}/MT (~₹{ptaInrPerKg.toFixed(1)}/kg)</span>
+                </div>
+                <div className="flex justify-between">
+                  <span>Derived MEG:</span>
+                  <span className="font-bold">${estimatedMeg}/MT (~₹{megInrPerKg.toFixed(1)}/kg)</span>
+                </div>
+                <div className="p-2 bg-surface-container-high/30 rounded border border-outline-variant/5 text-[8.5px] leading-relaxed text-outline">
+                  <strong>PSF Cost Formula:</strong><br />
+                  (PTA ₹{ptaInrPerKg.toFixed(1)} × 0.855) + (MEG ₹{megInrPerKg.toFixed(1)} × 0.335) + ₹20
+                </div>
+              </div>
             </div>
           </div>
 
-          {/* Results Summary */}
-          <div className="md:col-span-7 flex flex-col justify-between">
-            <div className="grid grid-cols-3 gap-3">
-              {/* PSF cost */}
-              <div className="bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
-                <div>
-                  <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-outline block">Est. Polyester PSF Rate</span>
-                  <span className="text-lg font-black text-tertiary font-mono block mt-1">
-                    ₹{estimatedPsfInr.toFixed(1)}/Kg
-                  </span>
-                </div>
-                <span className="text-[9px] text-on-surface-variant font-mono mt-2 block">
-                  ~${estimatedPsfUSD.toFixed(2)}/Kg (Incl. PTA + MEG Feedstock)
+          {/* Module 2: INR Impact Tracker (Side-by-Side) */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/15 space-y-3 h-full flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1.5 mb-2">
+                  Module 2: INR Impact Tracker
                 </span>
-              </div>
+                <p className="text-[9px] text-on-surface-variant leading-relaxed mb-3">
+                  Priced in USD but bought in INR. When the Indian Rupee weakens, raw material landed costs swell.
+                </p>
 
-              {/* Cotton Cost */}
-              <div className="bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
-                <div>
-                  <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-outline block">Est. Cotton Spot Rate</span>
-                  <span className="text-lg font-black text-emerald-500 font-mono block mt-1">
-                    ₹{cottonInrPerKg.toFixed(1)}/Kg
-                  </span>
-                </div>
-                <span className="text-[9px] text-on-surface-variant font-mono mt-2 block">
-                  Converts {cottonSpot}¢/lb with USD/INR {simulatedInr.toFixed(2)}
-                </span>
-              </div>
+                <div className="grid grid-cols-2 gap-2 text-center">
+                  {/* USD Column */}
+                  <div className="bg-surface-container-high/30 p-2.5 rounded-lg border border-outline-variant/10">
+                    <span className="text-[8px] font-bold text-outline uppercase block">PSF Cost (USD)</span>
+                    <span className="text-base font-black text-on-surface font-mono block mt-1">
+                      ${estimatedPsfUSD.toFixed(3)}/kg
+                    </span>
+                    <span className="text-[8px] text-outline font-mono block mt-0.5">Global Benchmark</span>
+                  </div>
 
-              {/* Spreads */}
-              <div className={`p-3.5 rounded-xl border flex flex-col justify-between ${
-                parityRatio > 1.25 ? 'bg-red-500/10 border-red-500/30' : 'bg-emerald-500/10 border-emerald-500/30'
-              }`}>
-                <div>
-                  <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-outline block">Cotton-to-Polyester Spread</span>
-                  <span className={`text-lg font-black font-mono block mt-1 ${
-                    parityRatio > 1.25 ? 'text-error' : 'text-emerald-500'
+                  {/* INR Column */}
+                  <div className={`p-2.5 rounded-lg border transition-colors ${
+                    simulatedInr >= 96.00 ? 'bg-red-500/10 border-red-500/30' : 'bg-emerald-500/10 border-emerald-500/30'
                   }`}>
-                    ₹{priceSpreadInr.toFixed(0)}/Kg
-                  </span>
+                    <span className="text-[8px] font-bold text-outline uppercase block">PSF Cost (INR)</span>
+                    <span className={`text-base font-black font-mono block mt-1 ${
+                      simulatedInr >= 96.00 ? 'text-error' : 'text-emerald-500'
+                    }`}>
+                      ₹{estimatedPsfInr.toFixed(1)}/kg
+                    </span>
+                    <span className={`text-[8px] font-mono font-bold block mt-0.5 ${
+                      simulatedInr >= 96.00 ? 'text-error' : 'text-emerald-500'
+                    }`}>
+                      {simulatedInr >= 96.00 ? '⚠️ WEAK RUPEE' : '✅ STRONG RUPEE'}
+                    </span>
+                  </div>
                 </div>
-                <span className={`text-[9px] font-mono mt-2 block ${
-                  parityRatio > 1.25 ? 'text-error font-bold' : 'text-emerald-500 font-bold'
-                }`}>
-                  Ratio Parity: {parityRatio.toFixed(2)}x
-                </span>
               </div>
-            </div>
 
-            {/* Substitution Alert Box */}
-            <div className={`border rounded-xl p-4 mt-4 text-xs font-mono space-y-1.5 ${substitutionAlert.color}`}>
-              <div className="flex items-center gap-1.5 font-bold uppercase tracking-wider">
-                <span className="material-symbols-outlined text-base">warning</span>
-                <span>{substitutionAlert.level}</span>
+              <div className="text-[9px] text-on-surface-variant font-mono mt-2 leading-relaxed">
+                <strong>Landed Parity Spread:</strong> Cotton ₹{cottonInrPerKg.toFixed(1)}/kg vs. Polyester PSF ₹{estimatedPsfInr.toFixed(1)}/kg. Spread is <strong>₹{priceSpreadInr.toFixed(0)}/kg</strong>.
               </div>
-              <p className="text-on-surface leading-relaxed text-[11px]">{substitutionAlert.desc}</p>
-              <p className="font-bold text-[10px] uppercase opacity-90">{substitutionAlert.recommendation}</p>
             </div>
+          </div>
+
+          {/* Module 3: Purchase Signal Engine */}
+          <div className="lg:col-span-4 space-y-4">
+            <div className="bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/15 space-y-3 font-mono text-[10px] h-full flex flex-col justify-between">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-primary block border-b border-outline-variant/10 pb-1.5 mb-2">
+                  Module 3: Purchase Signal Engine
+                </span>
+                
+                <div className="space-y-2.5">
+                  {/* PSF Signal */}
+                  <div className="flex justify-between items-center border-b border-outline-variant/5 pb-1.5">
+                    <span className="text-on-surface-variant">Polyester PSF Signal:</span>
+                    {crudeOil >= crudeWaitThreshold ? (
+                      <span className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded text-[9px] font-bold">WAIT / HOLD</span>
+                    ) : crudeOil <= crudeBuyThreshold ? (
+                      <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 px-2 py-0.5 rounded text-[9px] font-bold">BUY / ACCUMULATE</span>
+                    ) : (
+                      <span className="bg-amber-500/10 text-amber-500 border border-amber-500/30 px-2 py-0.5 rounded text-[9px] font-bold">NEUTRAL / ACCUMULATING</span>
+                    )}
+                  </div>
+
+                  {/* INR Hedging Signal */}
+                  <div className="flex justify-between items-center border-b border-outline-variant/5 pb-1.5">
+                    <span className="text-on-surface-variant">INR Currency Squeeze:</span>
+                    {simulatedInr >= inrHedgeThreshold ? (
+                      <span className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded text-[9px] font-bold">HEDGE REQUIRED</span>
+                    ) : (
+                      <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 px-2 py-0.5 rounded text-[9px] font-bold">UNHEDGED / SAFE</span>
+                    )}
+                  </div>
+
+                  {/* Cotton Spot Signal */}
+                  <div className="flex justify-between items-center">
+                    <span className="text-on-surface-variant">Raw Cotton Signal:</span>
+                    {cottonSpot < cottonBuyReference ? (
+                      <span className="bg-emerald-500/10 text-emerald-500 border border-emerald-500/30 px-2 py-0.5 rounded text-[9px] font-bold">BUY / ACCUMULATE</span>
+                    ) : (
+                      <span className="bg-red-500/10 text-red-500 border border-red-500/30 px-2 py-0.5 rounded text-[9px] font-bold">WAIT / HOLD</span>
+                    )}
+                  </div>
+                </div>
+              </div>
+
+              {/* Purchase Signal Engine Rule Text */}
+              <div className="p-2.5 bg-surface-container-high/30 rounded border border-outline-variant/5 text-[8.5px] leading-relaxed text-outline mt-2">
+                <strong>Algorithmic Rules:</strong><br />
+                • PSF Buy if Crude ≤ ${crudeBuyThreshold} (5-Day Rule)<br />
+                • INR Hedge if Rate ≥ ₹{inrHedgeThreshold.toFixed(2)}<br />
+                • Cotton Buy if spot &lt; {cottonBuyReference.toFixed(1)}¢ (May Avg)
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Industrial Highlights Panel */}
+        <div className="mt-5 p-4 rounded-xl border border-outline-variant/10 bg-surface-container-low/60 font-mono text-[9.5px] leading-relaxed text-on-surface-variant grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <span className="font-bold text-emerald-500 uppercase block mb-1">South India Yarn Market Update:</span>
+            Despite the removal of the 11% cotton import duty, South India's cotton yarn market remains steady. Spinning mills are holding yarn prices while buyers wait to see the full impact of duty-free arrivals. This indicates a key window to buy cotton before festive demands drive prices higher.
+          </div>
+          <div>
+            <span className="font-bold text-primary uppercase block mb-1">Polyester Producer Price Adjustments:</span>
+            Indian polyester producers have already cut prices and reversed price hikes after crude retreated. However, due to lingering Middle East supply risks, the PSF <strong>BUY</strong> signal triggers only when crude holds below <strong>${crudeBuyThreshold} for 5+ consecutive days</strong> to avoid headfakes.
           </div>
         </div>
       </div>
@@ -720,15 +862,15 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Today:</span>
-                    <span className="font-black text-primary">95.00</span>
+                    <span className="font-black text-primary">96.83</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Yday:</span>
-                    <span className="font-semibold text-on-surface">94.88</span>
+                    <span className="font-semibold text-on-surface">96.72</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">7D Ago:</span>
-                    <span className="font-semibold text-on-surface">94.45</span>
+                    <span className="font-semibold text-on-surface">95.50</span>
                   </div>
                 </div>
               </div>
@@ -739,11 +881,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Jun 26:</span>
-                    <span className="font-black text-primary">95.00</span>
+                    <span className="font-black text-primary">96.83</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">May 26:</span>
-                    <span className="font-semibold text-on-surface">94.80</span>
+                    <span className="font-semibold text-on-surface">95.12</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">Apr 26:</span>
@@ -758,7 +900,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">FY26 (E):</span>
-                    <span className="font-black text-primary">95.00</span>
+                    <span className="font-black text-primary">96.83</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">FY25 (A):</span>
@@ -774,8 +916,13 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
             <div className="p-3 bg-primary-container/10 border border-primary-container/20 rounded-xl text-[10px] font-mono leading-relaxed text-on-surface-variant">
               <span className="font-bold text-primary uppercase block mb-1">Currency Summary:</span>
-              The Indian Rupee has depreciated by **11.1% YoY** against the USD. Over a 12-month horizon, the currency moved from 
-              **85.50 to 95.00 (+11.1%)**, restructuring raw material import premiums and enhancing export pricing power.
+              The Indian Rupee has depreciated by **13.2% YoY** against the USD. Over a 12-month horizon, the currency moved from 
+              **85.50 to 96.83 (+13.2%)**, restructuring raw material import premiums and enhancing export pricing power.
+            </div>
+
+            <div className="p-3 bg-emerald-500/5 border border-emerald-500/20 rounded-xl text-[10px] font-mono leading-relaxed text-on-surface-variant mt-3">
+              <span className="font-bold text-emerald-500 uppercase block mb-1">RBI Capital Defense Package:</span>
+              To protect the Rupee without raising rates (held at 5.25%), the government eliminated withholding taxes on bonds, allowed unlimited access to 15/30/40-year securities, and doubled NRI equity investment limits to target **$30B to $50B** in foreign capital inflows.
             </div>
           </div>
 
@@ -807,6 +954,14 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div>
                   <strong className="text-primary block">Domestic Floor Support (Shankar-6 Parity):</strong>
                   Domestic Shankar-6 spots are correlated with ICE futures. As the rupee depreciates, the rupee equivalent parity floor rises, preventing local ginners from lowering prices below key thresholds.
+                </div>
+              </div>
+
+              <div className="flex gap-2 items-start border-t border-outline-variant/10 pt-2.5">
+                <span className="material-symbols-outlined text-amber-500 text-sm shrink-0">thunderstorm</span>
+                <div>
+                  <strong className="text-amber-500 block">Monsoon Deficit Crop Risk (August Peak):</strong>
+                  IMD/Skymet projects a below-normal monsoon at 92% of LPA with 35% El Niño deficit risk, severely hitting Northern cotton states (Punjab/Haryana/Rajasthan). High transport diesel rates (Petrol &gt; ₹102/L, commercial LPG &gt; ₹3,000) add a **+₹450/candy** freight surcharge on shipments.
                 </div>
               </div>
             </div>

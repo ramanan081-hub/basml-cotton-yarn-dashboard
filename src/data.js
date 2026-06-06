@@ -1,7 +1,7 @@
 // src/data.js
 export const initialData = {
   exchangeRates: {
-    usdInr: 95.00,
+    usdInr: 96.83,
     eurInr: 90.62
   },
   globalCotton: {
