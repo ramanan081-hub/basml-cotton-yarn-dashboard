@@ -126,6 +126,12 @@ export const initialData = {
       { category: 'Non-CCI (Private Open Market)', value: 65, bales: 28.22, marketValueCr: 9185.5, fill: '#5B4C3A' },
       { category: 'CCI Procurement', value: 35, bales: 15.19, marketValueCr: 4944.5, fill: '#8A7356' }
     ],
+    consumptionShares: [
+      { category: 'Mills Usage', value: 72, bales: 226.08, marketValueCr: 73589.0 },
+      { category: 'Other Usage (Exports/Ind.)', value: 15, bales: 47.10, marketValueCr: 15331.0 },
+      { category: 'Government Reserves (CCI)', value: 8, bales: 25.12, marketValueCr: 8177.0 },
+      { category: 'Public & Direct Retail', value: 5, bales: 15.70, marketValueCr: 5110.0 }
+    ],
     cciOfficialData: {
       summary: "Official financial and operational metrics extracted from the Cotton Corporation of India (CCI) Annual Reports & Ten Year Financial Results portal.",
       historical: [
