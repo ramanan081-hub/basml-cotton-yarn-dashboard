@@ -17,7 +17,7 @@ import {
   Legend 
 } from 'recharts';
 
-export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
+export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode }) {
   // Interactive Blending & Substitution Calculator State
   const [crudeOil, setCrudeOil] = useState(94.98); // USD/bbl (June 1, 2026 Spot)
   const [cottonSpot, setCottonSpot] = useState(() => globalCotton?.prices?.types?.[0]?.current || 87.92); // cents/lb
@@ -483,7 +483,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       {/* Top Benchmarks Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Brent Crude */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Brent Crude Oil</span>
             <span className="material-symbols-outlined text-primary text-xs">oil_barrel</span>
@@ -493,7 +493,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* PTA Feedstock */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>PTA (Feedstock)</span>
             <span className="material-symbols-outlined text-outline text-xs">science</span>
@@ -503,7 +503,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* MEG Feedstock */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>MEG (Feedstock)</span>
             <span className="material-symbols-outlined text-outline text-xs">biotech</span>
@@ -513,7 +513,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* PSF Global */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Polyester PSF</span>
             <span className="material-symbols-outlined text-tertiary text-xs">precision_manufacturing</span>
@@ -523,7 +523,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* Cotlook A-Index */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Cotlook A-Index</span>
             <span className="material-symbols-outlined text-emerald-500 text-xs">eco</span>
@@ -533,7 +533,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* Parity Index */}
-        <div className="glass-card border border-outline-variant/30 rounded-xl p-4 bg-surface-container-low">
+        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Cotton/PSF Ratio</span>
             <span className="material-symbols-outlined text-amber-500 text-xs">compare_arrows</span>
@@ -547,7 +547,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Geopolitical & Shipping Risk Table & Supply/Demand Chart */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
               <span className="material-symbols-outlined text-primary text-base">emergency_home</span>
               Geopolitical Risk & Shipping Route Disruptions
@@ -586,7 +586,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
           </div>
 
           {/* Energy Spike & Substitution Dynamics Chart */}
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low text-xs font-mono space-y-4">
+          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
             <div>
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-primary text-base">analytics</span>
@@ -638,7 +638,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         {/* Chart Card */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           {/* Historical Correlation Chart */}
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
               <span>Oil vs. Cotton vs. Polyester Correlation</span>
               <span className="text-[9px] text-emerald-500 font-bold">12M Trend</span>
@@ -672,7 +672,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
           </div>
 
           {/* Crude Oil Price Benchmark Trend (Brent vs. WTI) */}
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
               <span>Crude Oil Price Trend (Brent vs. WTI)</span>
               <span className="text-[9px] text-primary font-bold">USD/Barrel</span>
@@ -723,7 +723,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
           </div>
 
           {/* Crude Oil Utilizations in Synthetic & Blended Yarns */}
-          <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low text-xs font-mono space-y-4">
+          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
             <div>
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-primary text-base">layers</span>
@@ -848,7 +848,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       </div>
 
       {/* Spinning Mill Procurement & Risk Control Desk */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+      <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
         <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
           <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider flex items-center gap-1.5">
             <span className="material-symbols-outlined text-primary text-base">domain</span>
@@ -1091,7 +1091,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       </div>
 
       {/* USD/INR Exchange Rate & Domestic Spinning Parity Matrix */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+      <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
         <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
           <span className="material-symbols-outlined text-primary text-base">currency_exchange</span>
           USD/INR Currency Transmission & Spinning Mills Impact Desk
@@ -1278,7 +1278,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       </div>
 
       {/* Global Maritime Freight & Logistics Desk */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
         <h4 className="text-sm font-bold text-primary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-primary">directions_boat</span>
           Global Maritime Freight Index (FBX) & Sourcing Logistics Desk
@@ -1332,7 +1332,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
               </p>
             </div>
 
-            <div className="overflow-x-auto border border-outline-variant/20 rounded-lg">
+            <div className="overflow-x-auto border border-outline-variant/20 rounded-lg" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
               <table className="w-full text-[10px] text-left">
                 <thead>
                   <tr className="bg-surface-container-low text-[9px] text-outline font-bold border-b border-outline-variant/20">
@@ -1376,11 +1376,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
-              <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+              <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9' }}>
                 <strong className="text-primary block mb-1">Strategic Logistics Recommendation:</strong>
                 Indian spinning mills exporting yarn should transition 30% of long-haul European shipments to <strong>Breakbulk Carriers</strong> to bypass container locks. For cotton imports (Egypt/US Pima), secure freight contracts 45 days in advance with fixed bunker fuel adjustments to hedge against crude spikes.
               </div>
-              <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+              <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9' }}>
                 <strong className="text-amber-500 block mb-1">Next 2-Month Logistics & Freight Forecast Plan:</strong>
                 • <strong>July 26 (Est):</strong> Freight rates to ease to <strong>${Math.round(3600 + (crudeOil - 80) * 20).toLocaleString()}/container</strong> (landed ₹{((Math.round(3600 + (crudeOil - 80) * 20) * simulatedInr) / 100000).toFixed(2)}L) with average transit times dropping to <strong>{Math.round(26 + (crudeOil > 100 ? 4 : 0))} days</strong> as rerouting networks optimize.<br />
                 • <strong>August 26 (FC):</strong> Surcharge relief targets rates of <strong>${Math.round(3100 + (crudeOil - 80) * 15).toLocaleString()}/container</strong> (landed ₹{((Math.round(3100 + (crudeOil - 80) * 15) * simulatedInr) / 100000).toFixed(2)}L) and lead times approaching <strong>{Math.round(22 + (crudeOil > 100 ? 3 : 0))} days</strong>.
@@ -1391,7 +1391,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       </div>
 
       {/* Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
         <h4 className="text-sm font-bold text-tertiary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-tertiary">analytics</span>
           Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk
@@ -1483,45 +1483,44 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
             <div className="space-y-2 mt-2">
               <div className="grid grid-cols-2 gap-2 text-[9px] leading-normal text-on-surface-variant">
-                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[0] }}>Public (50%)</span>
                   Transportation fuel (diesel/petrol) & household LPG cooking gas.
                 </div>
-                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[1] }}>Mills & Ind. (25%)</span>
                   Petrochemical precursors (PTA/MEG) for polyester fiber & plastics.
                 </div>
-                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[2] }}>Government (15%)</span>
-                  Defense logistics, strategic salt-cavern reserves, and railways.
-                </div>
-                <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[3] }}>Other Usage (10%)</span>
                   Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
                 </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
 
-        {/* Forecast Plan & Analysis Process Details */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5 pt-4 border-t border-outline-variant/15">
-          <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
-            <strong className="text-primary block mb-1">Macro Analysis & RBI Reserve Coverage Strategy:</strong>
-            • <strong>Double-Shock Vulnerability:</strong> India's oil import bill is highly sensitive to Brent crude spikes and Rupee depreciation. When Brent was at $138.21/bbl and USD/INR hit 95.12 in April, India's purchase cost peaked at <strong>₹164.29k Crore</strong>, forcing RBI to draw down oil cover reserves to <strong>₹220k Crore</strong> to defend the currency.<br />
-            • <strong>Defensive Hedging:</strong> As global oil prices ease, RBI is shoring up reserves (rebuilding cover to <strong>₹{parseFloat((250.0 + (96.83 - simulatedInr) * 12).toFixed(1))}k Cr</strong> in July and <strong>₹{parseFloat((255.0 + (96.83 - simulatedInr) * 10).toFixed(1))}k Cr</strong> in August) by buying dollars to prevent excessive Rupee appreciation and build a sovereign buffer against future energy crises.
-          </div>
-          <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
-            <strong className="text-amber-500 block mb-1">Next 2-Month Forex & Crude Purchasing Forecast Plan:</strong>
-            • <strong>July 26 (Est):</strong> Crude purchases are projected to decline to <strong>₹{parseFloat((125 * Math.max(75, crudeOil - 7.5) * Math.max(80, simulatedInr - 1.5) / 10000).toFixed(1))}k Crore</strong> (reflecting Brent crude easing to ~${Math.max(75, Math.round(crudeOil - 7.5))} and USD/INR stabilizing at ₹{Math.max(80, (simulatedInr - 1.5).toFixed(2))}). This relieves balance of payments pressure.<br />
-            • <strong>August 26 (FC):</strong> Further savings projected with import purchases dropping to <strong>₹{parseFloat((125 * Math.max(70, crudeOil - 11.5) * Math.max(80, simulatedInr - 2.8) / 10000).toFixed(1))}k Crore</strong> (Brent at ~${Math.max(70, Math.round(crudeOil - 11.5))}, USD/INR at ₹{Math.max(80, (simulatedInr - 2.8).toFixed(2))}).<br />
-            • <strong>Spinning Mill Action Plan:</strong> Capitalize on lower synthetic fiber costs (polyester PSF drop expected to track crude down) to lock in raw material inventory. Maintain 40% hedging on USD/INR exposures as Rupee finds local support.
+      {/* Forecast Plan & Analysis Process Details */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5 pt-4 border-t border-outline-variant/15">
+        <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9' }}>
+          <strong className="text-primary block mb-1">Macro Analysis & RBI Reserve Coverage Strategy:</strong>
+          • <strong>Double-Shock Vulnerability:</strong> India's oil import bill is highly sensitive to Brent crude spikes and Rupee depreciation. When Brent was at $138.21/bbl and USD/INR hit 95.12 in April, India's purchase cost peaked at <strong>₹164.29k Crore</strong>, forcing RBI to draw down oil cover reserves to <strong>₹220k Crore</strong> to defend the currency.<br />
+          • <strong>Defensive Hedging:</strong> As global oil prices ease, RBI is shoring up reserves (rebuilding cover to <strong>₹{parseFloat((250.0 + (96.83 - simulatedInr) * 12).toFixed(1))}k Cr</strong> in July and <strong>₹{parseFloat((255.0 + (96.83 - simulatedInr) * 10).toFixed(1))}k Cr</strong> in August) by buying dollars to prevent excessive Rupee appreciation and build a sovereign buffer against future energy crises.
+        </div>
+        <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9' }}>
+          <strong className="text-amber-500 block mb-1">Next 2-Month Forex & Crude Purchasing Forecast Plan:</strong>
+          • <strong>July 26 (Est):</strong> Crude purchases are projected to decline to <strong>₹{parseFloat((125 * Math.max(75, crudeOil - 7.5) * Math.max(80, simulatedInr - 1.5) / 10000).toFixed(1))}k Crore</strong> (reflecting Brent crude easing to ~${Math.max(75, Math.round(crudeOil - 7.5))} and USD/INR stabilizing at ₹{Math.max(80, (simulatedInr - 1.5).toFixed(2))}). This relieves balance of payments pressure.<br />
+          • <strong>August 26 (FC):</strong> Further savings projected with import purchases dropping to <strong>₹{parseFloat((125 * Math.max(70, crudeOil - 11.5) * Math.max(80, simulatedInr - 2.8) / 10000).toFixed(1))}k Crore</strong> (Brent at ~${Math.max(70, Math.round(crudeOil - 11.5))}, USD/INR at ₹{Math.max(80, (simulatedInr - 2.8).toFixed(2))}).<br />
+          • <strong>Spinning Mill Action Plan:</strong> Capitalize on lower synthetic fiber costs (polyester PSF drop expected to track crude down) to lock in raw material inventory. Maintain 40% hedging on USD/INR exposures as Rupee finds local support.
         </div>
       </div>
     </div>
 
       {/* Cotton & Polyester Supply-Demand and Price Interlocks Desk */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
         <h4 className="text-sm font-bold text-emerald-500 mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-emerald-500">compare_arrows</span>
           Cotton & Polyester Supply-Demand and Price Interlocks Desk
@@ -1603,7 +1602,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
         </div>
 
         {/* Dynamic Arbitrage Commentary with USD & INR Values */}
-        <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-5">
+        <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
           <strong className="text-emerald-500 block mb-1">Strategic Interlock Analysis:</strong>
           • <strong>Pricing Arbitrage Gap (June 26):</strong> The current spot gap is <strong>₹{(cottonInrPerKg - estimatedPsfInr).toFixed(1)}/Kg</strong> (${(cottonUSDPerKg - estimatedPsfUSD).toFixed(2)}/Kg) (Cotton at ₹{cottonInrPerKg.toFixed(1)}/Kg [${cottonUSDPerKg.toFixed(2)}/Kg] vs Polyester at ₹{estimatedPsfInr.toFixed(1)}/Kg [${estimatedPsfUSD.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonInrPerKg / estimatedPsfInr).toFixed(2)}x</strong>.<br />
           • <strong>July 26 Projection:</strong> Sourcing gap is estimated to contract to <strong>₹{(cottonSpotJulINR - psfInrJul).toFixed(1)}/Kg</strong> (${(cottonSpotJulUSD - psfUsdJul).toFixed(2)}/Kg) (Cotton ₹{cottonSpotJulINR.toFixed(1)}/Kg [${cottonSpotJulUSD.toFixed(2)}/Kg], Polyester ₹{psfInrJul.toFixed(1)}/Kg [${psfUsdJul.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonSpotJulINR / psfInrJul).toFixed(2)}x</strong>.<br />

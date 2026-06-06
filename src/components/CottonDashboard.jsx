@@ -66,12 +66,12 @@ function TradingDeskInfoBox({ selectedName, colors }) {
   }));
 
   return (
-    <div className="card-chart-green rounded-xxl p-5 flex flex-col md:flex-row justify-between gap-6 border border-forest-green/20 relative overflow-hidden mb-6">
-      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-forest-green/5 to-transparent rounded-bl-full pointer-events-none" />
+    <div className="card-table-orange rounded-xxl p-5 flex flex-col md:flex-row justify-between gap-6 border border-soft-orange/20 relative overflow-hidden mb-6">
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-soft-orange/5 to-transparent rounded-bl-full pointer-events-none" />
       <div className="flex-1 space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-forest-green text-lg animate-pulse">campaign</span>
-          <span className="text-[10px] font-mono font-bold text-forest-green uppercase tracking-wider">Trading Desk Live Highlight Info Box</span>
+          <span className="material-symbols-outlined text-soft-orange text-lg animate-pulse">campaign</span>
+          <span className="text-[10px] font-mono font-bold text-soft-orange uppercase tracking-wider">Trading Desk Live Highlight Info Box</span>
         </div>
         <h4 className="text-base font-headline font-bold text-on-surface">
           Active Variety Focus: <span className="text-primary font-extrabold">{selectedName}</span>
@@ -484,7 +484,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
           </div>
 
           {/* Right Column: Pricing Movement Drivers & Factors */}
-          <div className="card-chart-green rounded-lg p-5 flex flex-col justify-between">
+          <div className="card-table-orange rounded-lg p-5 flex flex-col justify-between">
             <div>
               <h4 className="text-sm font-headline font-bold text-primary mb-3 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-lg">bolt</span>
@@ -525,7 +525,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Spot Price Line Chart Desk */}
-      <div className="card-table-orange rounded-xl p-6">
+      <div className="card-chart-green rounded-xl p-6">
         <TradingDeskInfoBox selectedName={selectedVariety} colors={colors} />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">

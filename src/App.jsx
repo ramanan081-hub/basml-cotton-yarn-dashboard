@@ -1782,12 +1782,12 @@ function TradingDeskInfoBox({ selectedName, mode, colors }) {
   }));
 
   return (
-    <div className="card-chart-green rounded-xxl p-card-padding flex flex-col md:flex-row justify-between gap-6 border border-forest-green/20 relative overflow-hidden mb-gutter">
-      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-forest-green/5 to-transparent rounded-bl-full pointer-events-none" />
+    <div className="card-table-orange rounded-xxl p-card-padding flex flex-col md:flex-row justify-between gap-6 border border-soft-orange/20 relative overflow-hidden mb-gutter">
+      <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-soft-orange/5 to-transparent rounded-bl-full pointer-events-none" />
       <div className="flex-1 space-y-2.5">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-forest-green text-lg animate-pulse">campaign</span>
-          <span className="text-[10px] font-mono font-bold text-forest-green uppercase tracking-wider">Trading Desk Live Highlight Info Box</span>
+          <span className="material-symbols-outlined text-soft-orange text-lg animate-pulse">campaign</span>
+          <span className="text-[10px] font-mono font-bold text-soft-orange uppercase tracking-wider">Trading Desk Live Highlight Info Box</span>
         </div>
         <h4 className="text-base font-headline font-bold text-on-surface">
           Active Variety Focus: <span className="text-primary font-extrabold">{selectedName}</span>
@@ -2428,7 +2428,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
       {subTab === 'import' && (
         <div className="space-y-gutter animate-fade-in">
           {/* Sourcing Corridor Flow Visualizer */}
-          <div className="card-chart-green p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
+          <div className="card-table-orange p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-xl text-primary animate-pulse">route</span>
               <div>
@@ -2642,13 +2642,13 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
             {/* Right Column: Domestic Sourcing Desk */}
             <div className="col-span-12 lg:col-span-6 space-y-gutter">
-              <div className="card-chart-green rounded-xxl p-6 border border-forest-green/20 space-y-4">
+              <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
                 <div className="flex justify-between items-start flex-wrap gap-2">
-                  <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2">
+                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
                     <span className="material-symbols-outlined text-xl">home_pin</span>
                     Indian Domestic Sourcing Desk (Mandi Basis)
                   </h3>
-                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/25 text-[9px] font-mono font-bold">
+                  <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
                     <span className="material-symbols-outlined text-[10px]">factory</span>
                     Destination: TN Gate
                   </span>
@@ -3106,7 +3106,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
       {subTab === 'export' && (
         <div className="space-y-gutter animate-fade-in">
           {/* Active Export Corridors Flow Visualizer */}
-          <div className="card-chart-green p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
+          <div className="card-table-orange p-4 rounded-xxl border border-primary/20 bg-gradient-to-r from-primary-container/10 via-transparent to-transparent flex flex-col md:flex-row items-center justify-between gap-4 font-mono text-[10px] animate-fade-in">
             <div className="flex items-center gap-3">
               <span className="material-symbols-outlined text-xl text-primary animate-pulse">route</span>
               <div>
@@ -3306,7 +3306,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               </div>
 
               {/* Export Strategy Policy */}
-              <div className="card-chart-green rounded-xxl p-5 space-y-3">
+              <div className="card-table-orange rounded-xxl p-5 space-y-3">
                 <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-lg">flight_takeoff</span>
                   Export Market Ideology & Expansion Strategy
@@ -3489,7 +3489,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               </div>
 
               {/* Domestic State Strategy Policy */}
-              <div className="card-chart-green rounded-xxl p-5 space-y-3">
+              <div className="card-table-orange rounded-xxl p-5 space-y-3">
                 <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
                   <span className="material-symbols-outlined text-lg">local_shipping</span>
                   Interstate Domestic Marketing Ideology
@@ -3548,7 +3548,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               {/* Side-by-Side Target Market SWOT & Demands */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
                 {/* Global SWOT */}
-                <div className="card-chart-green rounded-xxl p-6 border border-primary/20 space-y-4">
+                <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
                   <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
                     <span className="material-symbols-outlined">public</span>
                     {exportDest} SWOT & Demands
@@ -3580,8 +3580,8 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                 </div>
 
                 {/* Domestic SWOT */}
-                <div className="card-chart-green rounded-xxl p-6 border border-primary/20 space-y-4">
-                  <h3 className="text-base font-headline font-bold text-forest-green flex items-center gap-2">
+                <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+                  <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
                     <span className="material-symbols-outlined">home_pin</span>
                     {exportState} SWOT & Demands
                   </h3>
@@ -3619,9 +3619,9 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
       {subTab === 'playbook' && (
         <div className="grid grid-cols-12 gap-gutter">
           {/* Card 1: Import Sourcing Arbitrage */}
-          <div className="col-span-12 md:col-span-4 card-chart-green rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
+          <div className="col-span-12 md:col-span-4 card-table-orange rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-forest-green font-headline font-bold">
+              <div className="flex items-center gap-2 text-primary font-headline font-bold">
                 <span className="material-symbols-outlined">shuffle</span>
                 Raw Cotton Sourcing Arbitrage
               </div>
@@ -3638,9 +3638,9 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
           </div>
 
           {/* Card 2: Yarn Export Count-Mix Optimization */}
-          <div className="col-span-12 md:col-span-4 card-chart-green rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
+          <div className="col-span-12 md:col-span-4 card-table-orange rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-forest-green font-headline font-bold">
+              <div className="flex items-center gap-2 text-primary font-headline font-bold">
                 <span className="material-symbols-outlined">tune</span>
                 Yarn Export Count-Mix Strategy
               </div>
@@ -3657,9 +3657,9 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
           </div>
 
           {/* Card 3: Logistics & Working Capital Hedging */}
-          <div className="col-span-12 md:col-span-4 card-chart-green rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
+          <div className="col-span-12 md:col-span-4 card-table-orange rounded-xxl p-6 border border-primary/10 flex flex-col justify-between">
             <div className="space-y-4">
-              <div className="flex items-center gap-2 text-forest-green font-headline font-bold">
+              <div className="flex items-center gap-2 text-primary font-headline font-bold">
                 <span className="material-symbols-outlined">currency_exchange</span>
                 Logistics & Capital Hedging
               </div>
@@ -3715,7 +3715,7 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
       </div>
 
       {subTab === 'globalMarket' ? (
-        <GlobalMarketDesk globalCotton={data} yarns={yarns} usdInr={usdInr} colors={colors} />
+        <GlobalMarketDesk globalCotton={data} yarns={yarns} usdInr={usdInr} colors={colors} darkMode={darkMode} />
       ) : (
         <>
           <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>
@@ -3739,7 +3739,7 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
         {/* Left Column: Charts and tables */}
         <div className="col-span-12 lg:col-span-8 space-y-gutter">
           {/* Card 1: Balance Sheet */}
-          <div className="card-table-orange rounded-xxl neumorphic-raised p-card-padding">
+          <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
             <div className="flex justify-between items-center mb-6">
               <div>
                 <h3 className="font-headline text-lg font-bold text-primary flex items-center gap-2">
@@ -3767,7 +3767,7 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
               </ResponsiveContainer>
             </div>
             
-            <div className="overflow-x-auto mt-6 border border-outline-variant/30 rounded-xl bg-surface-container-lowest">
+            <div className="overflow-x-auto mt-6 border rounded-xl card-table-orange shadow-xs">
               <table className="min-w-full">
                 <thead>
                   <tr className="bg-surface-container-low">
@@ -3960,17 +3960,17 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
 
         {/* Card 5: Global Strategic Overview */}
         <div className="col-span-12 lg:col-span-5">
-          <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding h-full flex flex-col justify-between">
+          <div className="card-table-orange rounded-xxl neumorphic-raised p-card-padding h-full flex flex-col justify-between">
             <div>
               <div className="flex justify-between items-start mb-6">
                 <div>
-                  <h3 className="font-headline text-lg font-bold text-forest-green flex items-center gap-2">
+                  <h3 className="font-headline text-lg font-bold text-primary flex items-center gap-2">
                     <span className="material-symbols-outlined">psychology</span>
                     Global Strategic Overview
                   </h3>
                   <p className="text-xs text-outline font-medium">Predictive risk assessment engine</p>
                 </div>
-                <span className="bg-forest-green/20 text-forest-green text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
+                <span className="bg-soft-orange/20 text-soft-orange text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wider">
                   Active
                 </span>
               </div>
@@ -4079,7 +4079,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
       </div>
 
       {subTab === 'hosiery' ? (
-        <HosieryDesk data={data} yarns={yarns} colors={colors} />
+        <HosieryDesk data={data} yarns={yarns} colors={colors} darkMode={darkMode} />
       ) : (
         <>
           {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
@@ -4112,7 +4112,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         </div>
 
         {/* Card 2: Shankar-6 Spot (Candy basis) */}
-        <div className="card-chart-green rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
           <div className="flex justify-between items-start mb-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Physical Market Standard</span>
@@ -4146,7 +4146,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         </div>
 
         {/* Card 3: MCX Spot vs ICE Import Parity Spread */}
-        <div className="card-chart-green rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
           <div className="flex justify-between items-start mb-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Import Arbitrage</span>

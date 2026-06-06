@@ -11,7 +11,7 @@ import {
   Legend 
 } from 'recharts';
 
-export function HosieryDesk({ data, yarns, colors }) {
+export function HosieryDesk({ data, yarns, colors, darkMode }) {
   const hw = yarns?.hosieryWeaving || {
     monthlyTrend: [],
     counts: []
@@ -91,7 +91,7 @@ export function HosieryDesk({ data, yarns, colors }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Count Matrix Card */}
-        <div className="lg:col-span-7 glass-card border border-outline-variant/30 rounded-xxl p-5 shadow-xs bg-surface-container-low flex flex-col justify-between">
+        <div className="lg:col-span-7 glass-card border rounded-xxl p-5 shadow-xs flex flex-col justify-between transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
           <div>
             <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider">
@@ -146,7 +146,7 @@ export function HosieryDesk({ data, yarns, colors }) {
         </div>
 
         {/* Spread Line Chart Card */}
-        <div className="lg:col-span-5 glass-card border border-outline-variant/30 rounded-xxl p-5 shadow-xs bg-surface-container-low">
+        <div className="lg:col-span-5 glass-card border rounded-xxl p-5 shadow-xs transition-colors" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
           <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider">
               30s Combed: Hosiery vs. Weaving Spread Trend
@@ -183,7 +183,7 @@ export function HosieryDesk({ data, yarns, colors }) {
       </div>
 
       {/* Sourcing Cost Arbitrage Calculator */}
-      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low">
+      <div className="glass-card border rounded-xxl p-5 transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
         <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
           <span className="material-symbols-outlined text-primary text-base">calculate</span>
           Sourcing Cost & Margin Arbitrage Calculator (Coimbatore / Tiruppur Hub)
@@ -192,7 +192,7 @@ export function HosieryDesk({ data, yarns, colors }) {
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
           {/* Inputs */}
           <div className="md:col-span-5 space-y-4">
-            <div className="bg-surface-container-low/40 p-4 rounded-xl border border-outline-variant/15 space-y-3">
+            <div className="p-4 rounded-xl border space-y-3 transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.3)' : '#FFFDFB', borderColor: darkMode ? 'rgba(251, 140, 0, 0.15)' : 'rgba(251, 140, 0, 0.1)' }}>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-primary block">
                 Procurement Settings
               </span>
@@ -272,7 +272,7 @@ export function HosieryDesk({ data, yarns, colors }) {
           <div className="md:col-span-7 flex flex-col justify-between">
             <div className="grid grid-cols-3 gap-3">
               {/* Cost Card 1 */}
-              <div className="bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
+              <div className="p-3.5 rounded-xl border flex flex-col justify-between transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9', borderColor: darkMode ? 'rgba(251, 140, 0, 0.15)' : 'rgba(251, 140, 0, 0.1)' }}>
                 <div>
                   <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-outline block">Raw Fiber Cost</span>
                   <span className="text-lg font-black text-primary font-mono block mt-1">
@@ -285,7 +285,7 @@ export function HosieryDesk({ data, yarns, colors }) {
               </div>
 
               {/* Cost Card 2 */}
-              <div className="bg-surface-container-low/40 p-3.5 rounded-xl border border-outline-variant/15 flex flex-col justify-between">
+              <div className="p-3.5 rounded-xl border flex flex-col justify-between transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.4)' : '#FFFDF9', borderColor: darkMode ? 'rgba(251, 140, 0, 0.15)' : 'rgba(251, 140, 0, 0.1)' }}>
                 <div>
                   <span className="text-[8px] font-mono font-bold uppercase tracking-wider text-outline block">Est. Spinning Cost</span>
                   <span className="text-lg font-black text-primary font-mono block mt-1">
@@ -318,7 +318,7 @@ export function HosieryDesk({ data, yarns, colors }) {
             </div>
 
             {/* Technical Parameters Info Box */}
-            <div className="bg-surface-container-low/30 border border-outline-variant/10 rounded-xl p-4 mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono">
+            <div className="border border-outline-variant/10 rounded-xl p-4 mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 text-xs font-mono transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.2)' : '#FFFDF7' }}>
               <div className="space-y-1">
                 <span className="text-[9px] font-bold uppercase tracking-wider text-primary block">Engineered Twist Rate</span>
                 <p className="text-on-surface font-black">{twistLabel}</p>
