@@ -298,9 +298,9 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   // Crude Oil usage share breakdown dataset
   const crudeOilUsageShares = [
     { name: 'Public Usage (LPG/Transport)', value: 50, color: colors.chartPalette[0] },
-    { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: colors.chartPalette[2] },
-    { name: 'Government Usage (Defense/Reserves)', value: 15, color: colors.chartPalette[4] },
-    { name: 'Other Usage (Aviation/Agri)', value: 10, color: colors.chartPalette[6] }
+    { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: colors.chartPalette[1] },
+    { name: 'Government Usage (Defense/Reserves)', value: 15, color: colors.chartPalette[2] },
+    { name: 'Other Usage (Aviation/Agri)', value: 10, color: colors.chartPalette[3] }
   ];
 
   // Maritime Freight Index and transit days dataset (including 2-month forecast)
@@ -1488,15 +1488,15 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   Transportation fuel (diesel/petrol) & household LPG cooking gas.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold block" style={{ color: colors.chartPalette[2] }}>Mills & Ind. (25%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[1] }}>Mills & Ind. (25%)</span>
                   Petrochemical precursors (PTA/MEG) for polyester fiber & plastics.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold block" style={{ color: colors.chartPalette[4] }}>Government (15%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[2] }}>Government (15%)</span>
                   Defense logistics, strategic salt-cavern reserves, and railways.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold block" style={{ color: colors.chartPalette[6] }}>Other Usage (10%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[3] }}>Other Usage (10%)</span>
                   Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
                 </div>
             </div>
