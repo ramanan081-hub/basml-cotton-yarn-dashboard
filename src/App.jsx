@@ -1261,6 +1261,27 @@ function App() {
     { id: 'quality', label: 'Yarn Quality', icon: 'biotech' },
   ];
 
+  const toggleMenuAccordion = (menuId) => {
+    setExpandedMenus(prev => {
+      const isCurrentlyExpanded = !!prev[menuId];
+      if (!isCurrentlyExpanded) {
+        return {
+          global: menuId === 'global',
+          india: menuId === 'india',
+          impexp: menuId === 'impexp',
+          analysis: menuId === 'analysis'
+        };
+      } else {
+        return {
+          global: false,
+          india: false,
+          impexp: false,
+          analysis: false
+        };
+      }
+    });
+  };
+
   const renderNavItem = (item, isMobile) => {
     const hasSubItems = !!item.subItems;
     const isExpanded = !!expandedMenus[item.id];
@@ -1273,10 +1294,7 @@ function App() {
             onClick={() => {
               setActiveTab(item.id);
               if (hasSubItems) {
-                setExpandedMenus(prev => ({
-                  ...prev,
-                  [item.id]: !prev[item.id]
-                }));
+                toggleMenuAccordion(item.id);
               } else if (isMobile) {
                 setSidebarOpen(false);
               }
@@ -1294,10 +1312,7 @@ function App() {
             <button
               onClick={(e) => {
                 e.stopPropagation();
-                setExpandedMenus(prev => ({
-                  ...prev,
-                  [item.id]: !prev[item.id]
-                }));
+                toggleMenuAccordion(item.id);
               }}
               className="px-3 py-3 text-on-surface-variant hover:text-primary transition-colors flex items-center justify-center font-bold font-mono text-sm"
               title={isExpanded ? "Collapse" : "Expand"}
