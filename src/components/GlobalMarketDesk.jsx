@@ -9,6 +9,7 @@ import {
   PieChart,
   Pie,
   Cell,
+  ComposedChart,
   CartesianGrid, 
   XAxis, 
   YAxis, 
@@ -179,6 +180,75 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: '#8B5CF6' },
     { name: 'Government Usage (Defense/Reserves)', value: 15, color: '#F59E0B' },
     { name: 'Other Usage (Aviation/Agri)', value: 10, color: '#EC4899' }
+  ];
+
+  // Maritime Freight Index and transit days dataset
+  const maritimeFreightData = [
+    { month: 'Jul 25', FreightCostUSD: 1850, TransitDays: 19 },
+    { month: 'Aug 25', FreightCostUSD: 1900, TransitDays: 19 },
+    { month: 'Sep 25', FreightCostUSD: 2100, TransitDays: 20 },
+    { month: 'Oct 25', FreightCostUSD: 2050, TransitDays: 20 },
+    { month: 'Nov 25', FreightCostUSD: 2200, TransitDays: 21 },
+    { month: 'Dec 25', FreightCostUSD: 2400, TransitDays: 22 },
+    { month: 'Jan 26', FreightCostUSD: 3100, TransitDays: 25 }, 
+    { month: 'Feb 26', FreightCostUSD: 4800, TransitDays: 32 }, 
+    { month: 'Mar 26', FreightCostUSD: 5900, TransitDays: 36 }, 
+    { month: 'Apr 26', FreightCostUSD: 6200, TransitDays: 38 }, 
+    { month: 'May 26', FreightCostUSD: 5400, TransitDays: 34 }, 
+    { 
+      month: 'Jun 26', 
+      FreightCostUSD: Math.round(4200 + (crudeOil - 80) * 25), 
+      TransitDays: Math.round(30 + (crudeOil > 100 ? 5 : 0)) 
+    }
+  ];
+
+  // Global shipping corridors matrix
+  const shippingRoutes = [
+    { 
+      route: 'Mundra to Rotterdam (Europe)', 
+      baseDays: 18, 
+      detourDays: 32, 
+      baseFreight: 2200, 
+      surcharge: Math.round(1500 + (crudeOil - 80) * 10), 
+      status: 'Delayed (Cape detours)',
+      congestion: 'High (Rotterdam backlogs)'
+    },
+    { 
+      route: 'Mundra to Ambarli (Turkey)', 
+      baseDays: 14, 
+      detourDays: 26, 
+      baseFreight: 1900, 
+      surcharge: Math.round(1200 + (crudeOil - 80) * 8), 
+      status: 'Delayed',
+      congestion: 'Medium'
+    },
+    { 
+      route: 'Chennai to Chittagong (Bangladesh)', 
+      baseDays: 4, 
+      detourDays: 4, 
+      baseFreight: 650, 
+      surcharge: Math.round(150 + (crudeOil - 80) * 2), 
+      status: 'Normal Transit',
+      congestion: 'High (Chittagong port locks)'
+    },
+    { 
+      route: 'Chennai to Shanghai (China)', 
+      baseDays: 12, 
+      detourDays: 12, 
+      baseFreight: 1100, 
+      surcharge: Math.round(250 + (crudeOil - 80) * 3), 
+      status: 'Normal Transit',
+      congestion: 'Low'
+    },
+    { 
+      route: 'Mundra to New York (US East Coast)', 
+      baseDays: 22, 
+      detourDays: 35, 
+      baseFreight: 3400, 
+      surcharge: Math.round(1800 + (crudeOil - 80) * 15), 
+      status: 'Delayed (Cape detours)',
+      congestion: 'High (NY/NJ terminal wait)'
+    }
   ];
 
   // Geopolitical conflict events list
@@ -1071,6 +1141,111 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
               {simulatedInr > 96.50 ? '⚠️ CRITICAL IMPORT SQUEEZE' :
                simulatedInr < 93.50 ? '✅ OPTIMAL IMPORT / NEUTRAL EXPORT' :
                '⚖️ EXPORT ADVANTAGE / IMPORT SURCHARGE'}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Global Maritime Freight & Logistics Desk */}
+      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+        <h4 className="text-sm font-bold text-primary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+          <span className="material-symbols-outlined text-primary">directions_boat</span>
+          Global Maritime Freight Index (FBX) & Sourcing Logistics Desk
+        </h4>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Left: Composed Chart */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                12-Month Global Container Freight Index (FBX) vs. Transit Lead Times
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                Red Sea transit blockades detour ships via the Cape of Good Hope, spiking container rates and adding 10-15 days to shipping latency. Bunker fuel surcharges adjust dynamically to WTI/Brent crude price shifts.
+              </p>
+            </div>
+
+            <div className="h-64 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <ComposedChart data={maritimeFreightData} margin={{ top: 10, right: -15, left: -20, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis yAxisId="left" fontSize={9} stroke="#3B82F6" tickFormatter={(v) => `$${v}`} />
+                  <YAxis yAxisId="right" orientation="right" fontSize={9} stroke="#F59E0B" tickFormatter={(v) => `${v}d`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Bar yAxisId="left" dataKey="FreightCostUSD" name="Container Freight Cost (USD)" fill="#3B82F6" radius={[3, 3, 0, 0]} opacity={0.8} barSize={16} />
+                  <Line yAxisId="right" type="monotone" dataKey="TransitDays" name="Average Transit Delay (Days)" stroke="#F59E0B" strokeWidth={2} dot={{ r: 3 }} />
+                </ComposedChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          {/* Right: Shipping Corridors Table */}
+          <div className="lg:col-span-6 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant/15 pt-6 lg:pt-0 lg:pl-6">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                Global Shipping Corridors & Landed Freight Parity Matrix
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                Real-time freight rates and transit delays per 40ft container from key Indian shipping portals, mapped with active fuel and war surcharges.
+              </p>
+            </div>
+
+            <div className="overflow-x-auto border border-outline-variant/20 rounded-lg">
+              <table className="w-full text-[10px] text-left">
+                <thead>
+                  <tr className="bg-surface-container-low text-[9px] text-outline font-bold border-b border-outline-variant/20">
+                    <th className="p-2">Shipping Route</th>
+                    <th className="p-2 text-center">Transit Days</th>
+                    <th className="p-2 text-right">Base Freight</th>
+                    <th className="p-2 text-right">War/Fuel Surcharge</th>
+                    <th className="p-2 text-right">Landed Cost</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant/10 text-on-surface">
+                  {shippingRoutes.map((r, idx) => {
+                    const totalUSD = r.baseFreight + r.surcharge;
+                    const landedLakhs = (totalUSD * simulatedInr) / 100000;
+                    return (
+                      <tr key={idx} className="hover:bg-primary/5 transition-colors">
+                        <td className="p-2 font-bold">
+                          {r.route}
+                          <span className={`block text-[8px] font-semibold mt-0.5 ${r.status.includes('Normal') ? 'text-emerald-500' : 'text-amber-500'}`}>
+                            {r.status} | Congestion: {r.congestion}
+                          </span>
+                        </td>
+                        <td className="p-2 text-center font-semibold font-mono">
+                          {r.baseDays !== r.detourDays ? (
+                            <span>
+                              <span className="line-through text-outline mr-1">{r.baseDays}d</span>
+                              <span className="text-red-500 font-bold">{r.detourDays}d</span>
+                            </span>
+                          ) : (
+                            <span className="text-emerald-500">{r.baseDays}d</span>
+                          )}
+                        </td>
+                        <td className="p-2 text-right font-mono text-on-surface-variant">${r.baseFreight.toLocaleString()}</td>
+                        <td className="p-2 text-right font-mono text-amber-500 font-bold">+${r.surcharge.toLocaleString()}</td>
+                        <td className="p-2 text-right font-mono font-black text-primary">₹{landedLakhs.toFixed(2)}L</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+
+            <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-4">
+              <strong>Strategic Logistics Recommendation:</strong> Indian spinning mills exporting yarn should transition 30% of long-haul European shipments to <strong>Breakbulk Carriers</strong> to bypass container locks. For cotton imports (Egypt/US Pima), secure freight contracts 45 days in advance with fixed bunker fuel adjustments to hedge against crude spikes.
             </div>
           </div>
         </div>
