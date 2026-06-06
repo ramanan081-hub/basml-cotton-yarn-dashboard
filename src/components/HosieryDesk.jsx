@@ -139,7 +139,7 @@ export function HosieryDesk({ data, yarns, colors }) {
               <span>Combed Hosiery utilizes ELS-blended fiber mix.</span>
             </div>
             <div className="flex items-center gap-1">
-              <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+              <span className="w-2 h-2 rounded-full" style={{ backgroundColor: colors.chartPalette[4] }}></span>
               <span>Premium Spread tracks knitting twist processing margins.</span>
             </div>
           </div>
@@ -174,8 +174,8 @@ export function HosieryDesk({ data, yarns, colors }) {
                 />
                 <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
                 <Line type="monotone" dataKey="hosiery30s" name="Hosiery 30s" stroke={colors.primary} strokeWidth={2} dot={false} />
-                <Line type="monotone" dataKey="weaving30s" name="Weaving 30s" stroke="#2563EB" strokeWidth={1.5} dot={false} />
-                <Line type="monotone" dataKey="spread" name="Spread Premium" stroke="#10B981" strokeWidth={2} dot={false} />
+                <Line type="monotone" dataKey="weaving30s" name="Weaving 30s" stroke={colors.chartPalette[2]} strokeWidth={1.5} dot={false} />
+                <Line type="monotone" dataKey="spread" name="Spread Premium" stroke={colors.chartPalette[4]} strokeWidth={2} dot={false} />
               </LineChart>
             </ResponsiveContainer>
           </div>

@@ -297,10 +297,10 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
   // Crude Oil usage share breakdown dataset
   const crudeOilUsageShares = [
-    { name: 'Public Usage (LPG/Transport)', value: 50, color: '#3B82F6' },
-    { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: '#8B5CF6' },
-    { name: 'Government Usage (Defense/Reserves)', value: 15, color: '#F59E0B' },
-    { name: 'Other Usage (Aviation/Agri)', value: 10, color: '#EC4899' }
+    { name: 'Public Usage (LPG/Transport)', value: 50, color: colors.chartPalette[0] },
+    { name: 'Mills & Industrial (Synthetics/PSF)', value: 25, color: colors.chartPalette[2] },
+    { name: 'Government Usage (Defense/Reserves)', value: 15, color: colors.chartPalette[4] },
+    { name: 'Other Usage (Aviation/Agri)', value: 10, color: colors.chartPalette[6] }
   ];
 
   // Maritime Freight Index and transit days dataset (including 2-month forecast)
@@ -602,7 +602,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <LineChart data={demandSupplyTrendData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                   <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
-                  <YAxis yAxisId="left" fontSize={9} stroke="#EC4899" tickFormatter={(v) => `$${v}`} />
+                  <YAxis yAxisId="left" fontSize={9} stroke={colors.chartPalette[0]} tickFormatter={(v) => `$${v}`} />
                   <YAxis yAxisId="right" orientation="right" fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `${v}%`} />
                   <Tooltip
                     contentStyle={{
@@ -615,9 +615,9 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Line yAxisId="left" type="monotone" dataKey="Brent" name="Brent Crude ($/bbl)" stroke="#EC4899" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
-                  <Line yAxisId="right" type="monotone" dataKey="PolySupply" name="Polyester PSF Supply Index" stroke="#3B82F6" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
-                  <Line yAxisId="right" type="monotone" dataKey="CottonDemand" name="Cotton Demand Index (Substitution)" stroke="#10B981" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line yAxisId="left" type="monotone" dataKey="Brent" name="Brent Crude ($/bbl)" stroke={colors.chartPalette[0]} strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line yAxisId="right" type="monotone" dataKey="PolySupply" name="Polyester PSF Supply Index" stroke={colors.chartPalette[2]} strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line yAxisId="right" type="monotone" dataKey="CottonDemand" name="Cotton Demand Index (Substitution)" stroke={colors.chartPalette[4]} strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -625,11 +625,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             <div className="p-3 bg-surface-container-low/60 rounded-lg border border-outline-variant/10 text-[10px] text-on-surface-variant space-y-2 leading-relaxed">
               <div>
                 <span className="font-bold text-primary uppercase block">1. Crude Oil Surge & Polyester Supply Deficit:</span>
-                Spiking crude increases feedstock costs. Polyester margin squeeze forces producers to cut capacity utilization (simulated capacity: <span className="font-bold text-blue-500">{simulatedPolySupply.toFixed(1)}%</span>).
+                Spiking crude increases feedstock costs. Polyester margin squeeze forces producers to cut capacity utilization (simulated capacity: <span className="font-bold" style={{ color: colors.chartPalette[2] }}>{simulatedPolySupply.toFixed(1)}%</span>).
               </div>
               <div>
                 <span className="font-bold text-emerald-500 uppercase block">2. Cotton Substitution Demand Gain:</span>
-                As polyester fiber rates soar, spinning mills increase cotton blend ratios, pushing natural cotton demand index higher (simulated index: <span className="font-bold text-emerald-500">{simulatedCottonDemand.toFixed(1)}%</span>).
+                As polyester fiber rates soar, spinning mills increase cotton blend ratios, pushing natural cotton demand index higher (simulated index: <span className="font-bold" style={{ color: colors.chartPalette[4] }}>{simulatedCottonDemand.toFixed(1)}%</span>).
               </div>
             </div>
           </div>
@@ -660,9 +660,9 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Line type="monotone" dataKey="Brent" name="Brent Crude ($/bbl)" stroke="#EC4899" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="CotlookA" name="Cotlook A (¢/lb)" stroke="#10B981" strokeWidth={2} dot={false} />
-                  <Line type="monotone" dataKey="PolyesterPSF" name="Polyester PSF (¢/lb equiv)" stroke="#8B5CF6" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="Brent" name="Brent Crude ($/bbl)" stroke={colors.chartPalette[0]} strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="CotlookA" name="Cotlook A (¢/lb)" stroke={colors.chartPalette[4]} strokeWidth={2} dot={false} />
+                  <Line type="monotone" dataKey="PolyesterPSF" name="Polyester PSF (¢/lb equiv)" stroke={colors.chartPalette[2]} strokeWidth={1.5} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -695,8 +695,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     formatter={(v) => [`$${v.toFixed(2)}`, '']}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Line type="monotone" dataKey="Brent" name="Brent Crude" stroke="#EC4899" strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
-                  <Line type="monotone" dataKey="WTI" name="WTI Crude" stroke="#F59E0B" strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line type="monotone" dataKey="Brent" name="Brent Crude" stroke={colors.chartPalette[0]} strokeWidth={2.5} dot={{ r: 2 }} activeDot={{ r: 4 }} />
+                  <Line type="monotone" dataKey="WTI" name="WTI Crude" stroke={colors.chartPalette[2]} strokeWidth={2} dot={{ r: 2 }} activeDot={{ r: 4 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
@@ -1301,8 +1301,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <ComposedChart data={maritimeFreightData} margin={{ top: 10, right: -15, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                   <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
-                  <YAxis yAxisId="left" fontSize={9} stroke="#3B82F6" tickFormatter={(v) => `$${v}`} />
-                  <YAxis yAxisId="right" orientation="right" fontSize={9} stroke="#F59E0B" tickFormatter={(v) => `${v}d`} />
+                  <YAxis yAxisId="left" fontSize={9} stroke={colors.chartPalette[0]} tickFormatter={(v) => `$${v}`} />
+                  <YAxis yAxisId="right" orientation="right" fontSize={9} stroke={colors.chartPalette[2]} tickFormatter={(v) => `${v}d`} />
                   <Tooltip
                     contentStyle={{
                       backgroundColor: 'var(--color-surface-container-high)',
@@ -1314,8 +1314,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar yAxisId="left" dataKey="FreightCostUSD" name="Container Freight Cost (USD)" fill="#3B82F6" radius={[3, 3, 0, 0]} opacity={0.8} barSize={16} />
-                  <Line yAxisId="right" type="monotone" dataKey="TransitDays" name="Average Transit Delay (Days)" stroke="#F59E0B" strokeWidth={2} dot={{ r: 3 }} />
+                  <Bar yAxisId="left" dataKey="FreightCostUSD" name="Container Freight Cost (USD)" fill={colors.chartPalette[0]} radius={[3, 3, 0, 0]} opacity={0.8} barSize={16} />
+                  <Line yAxisId="right" type="monotone" dataKey="TransitDays" name="Average Transit Delay (Days)" stroke={colors.chartPalette[2]} strokeWidth={2} dot={{ r: 3 }} />
                 </ComposedChart>
               </ResponsiveContainer>
             </div>
@@ -1430,8 +1430,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     ]}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar dataKey="ForexHoldings" name="Forex Oil Cover Reserves (₹k Cr)" fill="#8B5CF6" radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
-                  <Bar dataKey="PurchaseValue" name="Crude Purchase Value (₹k Cr)" fill="#F59E0B" radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
+                  <Bar dataKey="ForexHoldings" name="Forex Oil Cover Reserves (₹k Cr)" fill={colors.chartPalette[0]} radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
+                  <Bar dataKey="PurchaseValue" name="Crude Purchase Value (₹k Cr)" fill={colors.chartPalette[2]} radius={[4, 4, 0, 0]} opacity={0.85} barSize={14} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -1484,19 +1484,19 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             <div className="space-y-2 mt-2">
               <div className="grid grid-cols-2 gap-2 text-[9px] leading-normal text-on-surface-variant">
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold text-blue-500 block">Public (50%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[0] }}>Public (50%)</span>
                   Transportation fuel (diesel/petrol) & household LPG cooking gas.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold text-purple-500 block">Mills & Ind. (25%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[2] }}>Mills & Ind. (25%)</span>
                   Petrochemical precursors (PTA/MEG) for polyester fiber & plastics.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold text-amber-500 block">Government (15%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[4] }}>Government (15%)</span>
                   Defense logistics, strategic salt-cavern reserves, and railways.
                 </div>
                 <div className="bg-surface-container-low/50 border border-outline-variant/10 rounded-lg p-2">
-                  <span className="font-bold text-pink-500 block">Other Usage (10%)</span>
+                  <span className="font-bold block" style={{ color: colors.chartPalette[6] }}>Other Usage (10%)</span>
                   Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
                 </div>
             </div>
@@ -1556,10 +1556,10 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Bar dataKey="CottonSupply" name="Cotton Supply Index" fill="#10B981" radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="CottonDemand" name="Cotton Demand Index" fill="#34D399" radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="PolySupply" name="Polyester Supply Index" fill="#8B5CF6" radius={[2, 2, 0, 0]} barSize={4} />
-                  <Bar dataKey="PolyDemand" name="Polyester Demand Index" fill="#A78BFA" radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="CottonSupply" name="Cotton Supply Index" fill={colors.chartPalette[0]} radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="CottonDemand" name="Cotton Demand Index" fill={colors.chartPalette[1]} radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="PolySupply" name="Polyester Supply Index" fill={colors.chartPalette[2]} radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="PolyDemand" name="Polyester Demand Index" fill={colors.chartPalette[3]} radius={[2, 2, 0, 0]} barSize={4} />
                 </BarChart>
               </ResponsiveContainer>
             </div>
@@ -1594,8 +1594,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     formatter={(v) => [`₹${v}/Kg`, '']}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Line type="monotone" dataKey="CottonPrice" name="Shankar-6 Landed (₹/Kg)" stroke="#10B981" strokeWidth={2.5} dot={{ r: 2 }} />
-                  <Line type="monotone" dataKey="PolyPrice" name="Polyester PSF Landed (₹/Kg)" stroke="#8B5CF6" strokeWidth={2.5} dot={{ r: 2 }} />
+                  <Line type="monotone" dataKey="CottonPrice" name="Shankar-6 Landed (₹/Kg)" stroke={colors.chartPalette[0]} strokeWidth={2.5} dot={{ r: 2 }} />
+                  <Line type="monotone" dataKey="PolyPrice" name="Polyester PSF Landed (₹/Kg)" stroke={colors.chartPalette[2]} strokeWidth={2.5} dot={{ r: 2 }} />
                 </LineChart>
               </ResponsiveContainer>
             </div>
