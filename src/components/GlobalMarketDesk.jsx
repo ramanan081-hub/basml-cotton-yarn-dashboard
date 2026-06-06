@@ -171,6 +171,16 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       month: 'Jun 26', 
       PurchaseValue: parseFloat((125 * crudeOil * simulatedInr / 10000).toFixed(2)), 
       ForexHoldings: parseFloat((245.0 + (96.83 - simulatedInr) * 15).toFixed(2)) 
+    },
+    { 
+      month: 'Jul 26 (Est)', 
+      PurchaseValue: parseFloat((125 * Math.max(75, crudeOil - 7.5) * Math.max(80, simulatedInr - 1.5) / 10000).toFixed(2)), 
+      ForexHoldings: parseFloat((250.0 + (96.83 - simulatedInr) * 12).toFixed(2)) 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      PurchaseValue: parseFloat((125 * Math.max(70, crudeOil - 11.5) * Math.max(80, simulatedInr - 2.8) / 10000).toFixed(2)), 
+      ForexHoldings: parseFloat((255.0 + (96.83 - simulatedInr) * 10).toFixed(2)) 
     }
   ];
 
@@ -182,7 +192,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { name: 'Other Usage (Aviation/Agri)', value: 10, color: '#EC4899' }
   ];
 
-  // Maritime Freight Index and transit days dataset
+  // Maritime Freight Index and transit days dataset (including 2-month forecast)
   const maritimeFreightData = [
     { month: 'Jul 25', FreightCostUSD: 1850, TransitDays: 19 },
     { month: 'Aug 25', FreightCostUSD: 1900, TransitDays: 19 },
@@ -199,6 +209,16 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       month: 'Jun 26', 
       FreightCostUSD: Math.round(4200 + (crudeOil - 80) * 25), 
       TransitDays: Math.round(30 + (crudeOil > 100 ? 5 : 0)) 
+    },
+    { 
+      month: 'Jul 26 (Est)', 
+      FreightCostUSD: Math.round(3600 + (crudeOil - 80) * 20), 
+      TransitDays: Math.round(26 + (crudeOil > 100 ? 4 : 0)) 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      FreightCostUSD: Math.round(3100 + (crudeOil - 80) * 15), 
+      TransitDays: Math.round(22 + (crudeOil > 100 ? 3 : 0)) 
     }
   ];
 
@@ -1244,8 +1264,16 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
               </table>
             </div>
 
-            <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-4">
-              <strong>Strategic Logistics Recommendation:</strong> Indian spinning mills exporting yarn should transition 30% of long-haul European shipments to <strong>Breakbulk Carriers</strong> to bypass container locks. For cotton imports (Egypt/US Pima), secure freight contracts 45 days in advance with fixed bunker fuel adjustments to hedge against crude spikes.
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-4">
+              <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+                <strong className="text-primary block mb-1">Strategic Logistics Recommendation:</strong>
+                Indian spinning mills exporting yarn should transition 30% of long-haul European shipments to <strong>Breakbulk Carriers</strong> to bypass container locks. For cotton imports (Egypt/US Pima), secure freight contracts 45 days in advance with fixed bunker fuel adjustments to hedge against crude spikes.
+              </div>
+              <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+                <strong className="text-amber-500 block mb-1">Next 2-Month Logistics & Freight Forecast Plan:</strong>
+                • <strong>July 26 (Est):</strong> Freight rates to ease to <strong>${Math.round(3600 + (crudeOil - 80) * 20).toLocaleString()}/container</strong> (landed ₹{((Math.round(3600 + (crudeOil - 80) * 20) * simulatedInr) / 100000).toFixed(2)}L) with average transit times dropping to <strong>{Math.round(26 + (crudeOil > 100 ? 4 : 0))} days</strong> as rerouting networks optimize.<br />
+                • <strong>August 26 (FC):</strong> Surcharge relief targets rates of <strong>${Math.round(3100 + (crudeOil - 80) * 15).toLocaleString()}/container</strong> (landed ₹{((Math.round(3100 + (crudeOil - 80) * 15) * simulatedInr) / 100000).toFixed(2)}L) and lead times approaching <strong>{Math.round(22 + (crudeOil > 100 ? 3 : 0))} days</strong>.
+              </div>
             </div>
           </div>
         </div>
@@ -1360,8 +1388,23 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   <span className="font-bold text-pink-500 block">Other Usage (10%)</span>
                   Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
                 </div>
-              </div>
             </div>
+          </div>
+        </div>
+      </div>
+
+        {/* Forecast Plan & Analysis Process Details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-5 pt-4 border-t border-outline-variant/15">
+          <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+            <strong className="text-primary block mb-1">Macro Analysis & RBI Reserve Coverage Strategy:</strong>
+            • <strong>Double-Shock Vulnerability:</strong> India's oil import bill is highly sensitive to Brent crude spikes and Rupee depreciation. When Brent was at $138.21/bbl and USD/INR hit 95.12 in April, India's purchase cost peaked at <strong>₹164.29k Crore</strong>, forcing RBI to draw down oil cover reserves to <strong>₹220k Crore</strong> to defend the currency.<br />
+            • <strong>Defensive Hedging:</strong> As global oil prices ease, RBI is shoring up reserves (rebuilding cover to <strong>₹{parseFloat((250.0 + (96.83 - simulatedInr) * 12).toFixed(1))}k Cr</strong> in July and <strong>₹{parseFloat((255.0 + (96.83 - simulatedInr) * 10).toFixed(1))}k Cr</strong> in August) by buying dollars to prevent excessive Rupee appreciation and build a sovereign buffer against future energy crises.
+          </div>
+          <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant">
+            <strong className="text-amber-500 block mb-1">Next 2-Month Forex & Crude Purchasing Forecast Plan:</strong>
+            • <strong>July 26 (Est):</strong> Crude purchases are projected to decline to <strong>₹{parseFloat((125 * Math.max(75, crudeOil - 7.5) * Math.max(80, simulatedInr - 1.5) / 10000).toFixed(1))}k Crore</strong> (reflecting Brent crude easing to ~${Math.max(75, Math.round(crudeOil - 7.5))} and USD/INR stabilizing at ₹{Math.max(80, (simulatedInr - 1.5).toFixed(2))}). This relieves balance of payments pressure.<br />
+            • <strong>August 26 (FC):</strong> Further savings projected with import purchases dropping to <strong>₹{parseFloat((125 * Math.max(70, crudeOil - 11.5) * Math.max(80, simulatedInr - 2.8) / 10000).toFixed(1))}k Crore</strong> (Brent at ~${Math.max(70, Math.round(crudeOil - 11.5))}, USD/INR at ₹{Math.max(80, (simulatedInr - 2.8).toFixed(2))}).<br />
+            • <strong>Spinning Mill Action Plan:</strong> Capitalize on lower synthetic fiber costs (polyester PSF drop expected to track crude down) to lock in raw material inventory. Maintain 40% hedging on USD/INR exposures as Rupee finds local support.
           </div>
         </div>
       </div>
