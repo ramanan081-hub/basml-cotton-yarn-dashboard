@@ -1541,7 +1541,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             
             <div className="h-64 min-w-0">
               <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={cottonPolySupplyDemandData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
+                <BarChart data={cottonPolySupplyDemandData} margin={{ top: 10, right: 5, left: -20, bottom: 0 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
                   <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
                   <YAxis domain={[50, 110]} fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `${v}%`} />
@@ -1556,11 +1556,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                     }}
                   />
                   <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
-                  <Line type="monotone" dataKey="CottonSupply" name="Cotton Supply Index" stroke="#10B981" strokeWidth={1.5} dot={false} />
-                  <Line type="monotone" dataKey="CottonDemand" name="Cotton Demand Index" stroke="#34D399" strokeDasharray="5 5" strokeWidth={1.5} dot={false} />
-                  <Line type="monotone" dataKey="PolySupply" name="Polyester Supply Index" stroke="#8B5CF6" strokeWidth={1.5} dot={false} />
-                  <Line type="monotone" dataKey="PolyDemand" name="Polyester Demand Index" stroke="#A78BFA" strokeDasharray="5 5" strokeWidth={1.5} dot={false} />
-                </LineChart>
+                  <Bar dataKey="CottonSupply" name="Cotton Supply Index" fill="#10B981" radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="CottonDemand" name="Cotton Demand Index" fill="#34D399" radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="PolySupply" name="Polyester Supply Index" fill="#8B5CF6" radius={[2, 2, 0, 0]} barSize={4} />
+                  <Bar dataKey="PolyDemand" name="Polyester Demand Index" fill="#A78BFA" radius={[2, 2, 0, 0]} barSize={4} />
+                </BarChart>
               </ResponsiveContainer>
             </div>
           </div>
