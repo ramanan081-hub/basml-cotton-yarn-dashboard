@@ -123,6 +123,21 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Jun 26', BrentUSD: crudeOil, usdInr: simulatedInr, LandedCostINR: Math.round(crudeOil * simulatedInr) }
   ];
 
+  // Dynamic July and August forecasts for oil, currency, cotton, and PSF
+  const brentJul = Math.max(75, crudeOil - 7.5);
+  const inrJul = Math.max(80, simulatedInr - 1.5);
+  const ptaJul = brentJul * 8.5 + 40;
+  const megJul = brentJul * 5.2 + 70;
+  const psfInrJul = ((ptaJul / 1000) * inrJul * 0.855) + ((megJul / 1000) * inrJul * 0.335) + 20;
+  const psfCentsJul = parseFloat(((psfInrJul / inrJul) * 100 / 2.20462).toFixed(2));
+
+  const brentAug = Math.max(70, crudeOil - 11.5);
+  const inrAug = Math.max(80, simulatedInr - 2.8);
+  const ptaAug = brentAug * 8.5 + 40;
+  const megAug = brentAug * 5.2 + 70;
+  const psfInrAug = ((ptaAug / 1000) * inrAug * 0.855) + ((megAug / 1000) * inrAug * 0.335) + 20;
+  const psfCentsAug = parseFloat(((psfInrAug / inrAug) * 100 / 2.20462).toFixed(2));
+
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
     { month: 'Jul 25', Brent: 78.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[0]?.AIndex || 91.8, PolyesterPSF: 52.0 },
@@ -136,7 +151,19 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Mar 26', Brent: 118.50, CotlookA: globalCotton?.prices?.monthlyTrend?.[8]?.AIndex || 94.0, PolyesterPSF: 74.2 },
     { month: 'Apr 26', Brent: 138.21, CotlookA: globalCotton?.prices?.monthlyTrend?.[9]?.AIndex || 98.5, PolyesterPSF: 88.6 },
     { month: 'May 26', Brent: 100.43, CotlookA: globalCotton?.prices?.monthlyTrend?.[10]?.AIndex || 90.8, PolyesterPSF: 65.4 },
-    { month: 'Jun 26', Brent: crudeOil, CotlookA: cottonSpot, PolyesterPSF: parseFloat((estimatedPsfUSD * 100 / 2.20462).toFixed(2)) }
+    { month: 'Jun 26', Brent: crudeOil, CotlookA: cottonSpot, PolyesterPSF: parseFloat((estimatedPsfUSD * 100 / 2.20462).toFixed(2)) },
+    { 
+      month: 'Jul 26 (Est)', 
+      Brent: brentJul, 
+      CotlookA: parseFloat(Math.max(78, cottonSpot - 3.2).toFixed(2)), 
+      PolyesterPSF: psfCentsJul 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      Brent: brentAug, 
+      CotlookA: parseFloat(Math.max(75, cottonSpot - 5.5).toFixed(2)), 
+      PolyesterPSF: psfCentsAug 
+    }
   ];
   // Mock WTI and Brent Crude historical prices (USD/bbl)
   const oilTrendData = [
@@ -151,7 +178,17 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Mar 26', Brent: 118.50, WTI: 102.40 },
     { month: 'Apr 26', Brent: 138.21, WTI: 114.58 }, // YTD High Apr 7 Brent $138.21, WTI $114.58
     { month: 'May 26', Brent: 100.43, WTI: 95.20 }, // May Average Brent $100.43
-    { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil === 94.98 ? 92.16 : crudeOil * 0.96 } // June 1 Brent: $94.98, WTI: $92.16
+    { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil === 94.98 ? 92.16 : crudeOil * 0.96 }, // June 1 Brent: $94.98, WTI: $92.16
+    { 
+      month: 'Jul 26 (Est)', 
+      Brent: brentJul, 
+      WTI: parseFloat(Math.max(71.5, brentJul * 0.96).toFixed(2)) 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      Brent: brentAug, 
+      WTI: parseFloat(Math.max(66.5, brentAug * 0.96).toFixed(2)) 
+    }
   ];
 
   // India monthly Oil Purchasing value vs Forex holdings dataset
