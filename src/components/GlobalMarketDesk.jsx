@@ -13,9 +13,9 @@ import {
 
 export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   // Interactive Blending & Substitution Calculator State
-  const [crudeOil, setCrudeOil] = useState(95.00); // USD/bbl (June 5, 2026 Spot)
+  const [crudeOil, setCrudeOil] = useState(94.98); // USD/bbl (June 1, 2026 Spot)
   const [cottonSpot, setCottonSpot] = useState(() => globalCotton?.prices?.types?.[0]?.current || 87.92); // cents/lb
-  const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 85.50); // USD/INR Rate
+  const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 95.00); // USD/INR Rate
 
   // Sync state with live props if they change in the parent
   useEffect(() => {
@@ -83,11 +83,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Oct 25', Brent: 81.2, PolySupply: 95, CottonDemand: 88 },
     { month: 'Nov 25', Brent: 79.5, PolySupply: 96, CottonDemand: 87 },
     { month: 'Dec 25', Brent: 77.0, PolySupply: 98, CottonDemand: 85 },
-    { month: 'Jan 26', Brent: 80.4, PolySupply: 95, CottonDemand: 87 },
-    { month: 'Feb 26', Brent: 82.8, PolySupply: 93, CottonDemand: 88 },
-    { month: 'Mar 26', Brent: 85.2, PolySupply: 91, CottonDemand: 90 },
-    { month: 'Apr 26', Brent: 88.0, PolySupply: 89, CottonDemand: 91 },
-    { month: 'May 26', Brent: 86.5, PolySupply: 90, CottonDemand: 91 },
+    { month: 'Jan 26', Brent: 63.65, PolySupply: 98, CottonDemand: 82 }, // January average (Brent spot low $61.08 on Jan 7)
+    { month: 'Feb 26', Brent: 75.80, PolySupply: 94, CottonDemand: 85 }, // Late February Khamenei dies (Feb 28)
+    { month: 'Mar 26', Brent: 118.50, PolySupply: 75, CottonDemand: 95 }, // Strait blockade starts, capacity down to 5%
+    { month: 'Apr 26', Brent: 138.21, PolySupply: 68, CottonDemand: 99 }, // YTD High April 7 ($138.21)
+    { month: 'May 26', Brent: 100.43, PolySupply: 86, CottonDemand: 92 }, // May average ($100.43)
     { month: 'Jun 26', Brent: crudeOil, PolySupply: simulatedPolySupply, CottonDemand: simulatedCottonDemand }
   ];
 
@@ -99,11 +99,11 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Oct 25', Brent: 81.2, CotlookA: globalCotton?.prices?.monthlyTrend?.[3]?.AIndex || 92.5, PolyesterPSF: 52.9 },
     { month: 'Nov 25', Brent: 79.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[4]?.AIndex || 91.0, PolyesterPSF: 51.5 },
     { month: 'Dec 25', Brent: 77.0, CotlookA: globalCotton?.prices?.monthlyTrend?.[5]?.AIndex || 89.5, PolyesterPSF: 50.2 },
-    { month: 'Jan 26', Brent: 80.4, CotlookA: globalCotton?.prices?.monthlyTrend?.[6]?.AIndex || 91.2, PolyesterPSF: 52.1 },
-    { month: 'Feb 26', Brent: 82.8, CotlookA: globalCotton?.prices?.monthlyTrend?.[7]?.AIndex || 92.5, PolyesterPSF: 53.4 },
-    { month: 'Mar 26', Brent: 85.2, CotlookA: globalCotton?.prices?.monthlyTrend?.[8]?.AIndex || 94.0, PolyesterPSF: 54.9 },
-    { month: 'Apr 26', Brent: 88.0, CotlookA: globalCotton?.prices?.monthlyTrend?.[9]?.AIndex || 90.2, PolyesterPSF: 56.5 },
-    { month: 'May 26', Brent: 86.5, CotlookA: globalCotton?.prices?.monthlyTrend?.[10]?.AIndex || 88.5, PolyesterPSF: 55.8 },
+    { month: 'Jan 26', Brent: 63.65, CotlookA: globalCotton?.prices?.monthlyTrend?.[6]?.AIndex || 85.0, PolyesterPSF: 43.5 },
+    { month: 'Feb 26', Brent: 75.80, CotlookA: globalCotton?.prices?.monthlyTrend?.[7]?.AIndex || 88.5, PolyesterPSF: 49.8 },
+    { month: 'Mar 26', Brent: 118.50, CotlookA: globalCotton?.prices?.monthlyTrend?.[8]?.AIndex || 94.0, PolyesterPSF: 74.2 },
+    { month: 'Apr 26', Brent: 138.21, CotlookA: globalCotton?.prices?.monthlyTrend?.[9]?.AIndex || 98.5, PolyesterPSF: 88.6 },
+    { month: 'May 26', Brent: 100.43, CotlookA: globalCotton?.prices?.monthlyTrend?.[10]?.AIndex || 90.8, PolyesterPSF: 65.4 },
     { month: 'Jun 26', Brent: crudeOil, CotlookA: cottonSpot, PolyesterPSF: parseFloat((estimatedPsfUSD * 100 / 2.20462).toFixed(2)) }
   ];
   // Mock WTI and Brent Crude historical prices (USD/bbl)
@@ -114,12 +114,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
     { month: 'Oct 25', Brent: 81.2, WTI: 76.9 },
     { month: 'Nov 25', Brent: 79.5, WTI: 75.3 },
     { month: 'Dec 25', Brent: 77.0, WTI: 73.1 },
-    { month: 'Jan 26', Brent: 80.4, WTI: 76.2 },
-    { month: 'Feb 26', Brent: 82.8, WTI: 78.5 },
-    { month: 'Mar 26', Brent: 85.2, WTI: 81.0 },
-    { month: 'Apr 26', Brent: 88.0, WTI: 83.6 },
-    { month: 'May 26', Brent: 86.5, WTI: 82.1 },
-    { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil * 0.96 } // Dynamically updates with simulated price slider
+    { month: 'Jan 26', Brent: 63.65, WTI: 56.01 }, // Jan Average Brent: 63.65, WTI Spot: 56.01
+    { month: 'Feb 26', Brent: 75.80, WTI: 70.20 },
+    { month: 'Mar 26', Brent: 118.50, WTI: 102.40 },
+    { month: 'Apr 26', Brent: 138.21, WTI: 114.58 }, // YTD High Apr 7 Brent $138.21, WTI $114.58
+    { month: 'May 26', Brent: 100.43, WTI: 95.20 }, // May Average Brent $100.43
+    { month: 'Jun 26', Brent: crudeOil, WTI: crudeOil === 94.98 ? 92.16 : crudeOil * 0.96 } // June 1 Brent: $94.98, WTI: $92.16
   ];
   // Geopolitical conflict events list
   const geopoliticalConflicts = [
@@ -132,6 +132,26 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       cottonEffect: 'Indian yarn and raw cotton exports to Europe and Turkey face +₹350/candy freight surcharges. Container shortages are bottlenecking Mundra and Chennai ports.',
       syntheticEffect: 'Spikes spot chemical raw material costs for polyester exports from China and South Korea to Western hubs.',
       badgeColor: 'bg-red-500/10 border-red-500/30 text-red-500'
+    },
+    {
+      id: 'middle-east',
+      title: 'Iran Conflict & Hormuz Blockade',
+      status: 'Critical',
+      icon: 'explosion',
+      impact: 'Supreme Leader Ayatollah Khamenei’s death (Feb 28, 2026) sparked US/Israel/Iran conflict, closing Strait of Hormuz (flows fell to 5% capacity). Cleared minefields delay transit restoration.',
+      cottonEffect: 'Drives USD/INR up (Rupee drop), making imported cotton expensive. Boosts natural cotton demand as spinners substitute away from high-priced synthetics.',
+      syntheticEffect: 'Spiked Brent to $138.21/bbl (April peak). Feedstocks PTA/MEG soared, forcing 14.4M b/d regional shut-ins and squeezing synthetic fiber margins.',
+      badgeColor: 'bg-red-500/10 border-red-500/30 text-red-500'
+    },
+    {
+      id: 'opec-fracture',
+      title: 'OPEC Fracture: UAE Strategic Exit',
+      status: 'High (Structural)',
+      icon: 'policy',
+      impact: 'The UAE officially withdrew from OPEC on May 1, 2026, to monetize its 4.3M b/d (target 5M b/d by 2027) capacity, bypassing Saudi-led quotas.',
+      cottonEffect: 'Once shipping routes normalize, a surge of non-aligned UAE supply is expected to drop 2027 Brent to $70–$79, lowering synthetic fiber costs and reversing substitution pressure.',
+      syntheticEffect: 'Ends cohesive cartel production management, introducing a highly competitive market-share battle that will lower long-term polyester precursor costs.',
+      badgeColor: 'bg-blue-500/10 border-blue-500/30 text-blue-500'
     },
     {
       id: 'europe-energy',
@@ -152,16 +172,6 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       cottonEffect: 'Creates a bifurcated market: cotton products from Xinjiang trade at a heavy discount inside China (approx ₹10,000/candy discount), while international varieties (US, Brazil, India DCH) command premium prices for certified export order flows.',
       syntheticEffect: 'Minimal direct chemical impact, but prompts blending substitution adjustments in Chinese textile mills seeking domestic polyester products to mix with non- Xinjiang cotton.',
       badgeColor: 'bg-primary/10 border-primary/30 text-primary'
-    },
-    {
-      id: 'middle-east',
-      title: 'Middle East Regional Escalation',
-      status: 'Moderate',
-      icon: 'explosion',
-      impact: 'Threats to critical oil shipping checkpoints, including the Strait of Hormuz.',
-      cottonEffect: 'Indirectly affects cotton through rising fuel/freight surcharges and global safe-haven USD currency strength, making import cotton more expensive for developing markets.',
-      syntheticEffect: 'Direct threat to petrochemical supply chains. Immediately drives crude oil prices upwards, causing PTA and MEG feedstock spot rates to rally.',
-      badgeColor: 'bg-blue-500/10 border-blue-500/30 text-blue-500'
     }
   ];
 
@@ -436,12 +446,16 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
               </div>
               <div className="p-3 bg-surface-container-low/60 rounded-lg border border-outline-variant/10 text-on-surface-variant space-y-2">
                 <div>
-                  <span className="font-bold text-primary uppercase block">Why Prices Moved Up:</span>
-                  OPEC+ extended its voluntary 2.2M bpd supply cuts through Q2-Q3 2026. This, coupled with Middle East shipping reroutes (Bab al-Mandab/Red Sea detour via Africa) has locked up massive volumes of waterborne crude in transit, raising spot premiums.
+                  <span className="font-bold text-primary uppercase block">Geopolitical War Shock (Jan-April):</span>
+                  Ayatollah Khamenei’s death on Feb 28 triggered naval conflict and Strait of Hormuz blockade. Brent peaked at **$138.21/bbl** and WTI at **$114.58/bbl** on April 7, draining 246M bbl of inventories.
                 </div>
                 <div>
-                  <span className="font-bold text-tertiary uppercase block">Next 2-Month (July/August) Outlook:</span>
-                  Brent is projected to trade firm between **$93 - $98/bbl** on peak summer gasoline demand and Northern Hemisphere refinery runs. The start of the Atlantic hurricane season represents a key supply threat. Expect PTA/MEG precursor pricing to stay elevated, supporting firm Polyester PSF rates.
+                  <span className="font-bold text-emerald-500 uppercase block">Next 2-Month (July/August) Drop Forecast:</span>
+                  Gravity is pulling prices down as Hormuz clears. Brent is forecast to average **$84–$87 in July** (ending near $83.91, -6% drop) and **$84–$89 in August**. Saudi Arabia is cutting July selling prices and China crude demand is weak (imports down to 333k b/d). Downside target is **$89/b average in Q4 2026** and **$79/b in 2027**.
+                </div>
+                <div>
+                  <span className="font-bold text-tertiary uppercase block">NSE Watchlist & India Trading Angle:</span>
+                  Lower crude is a net positive for India’s oil marketing companies (**BPCL, HPCL, IOC**) and aviation (**Indigo, SpiceJet**) on better refining/fuel margins. Upstream explorer **ONGC** will face revenue contraction as global price premiums fade.
                 </div>
               </div>
             </div>
@@ -648,7 +662,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                   </span>
                 </div>
                 <span className="text-[9px] text-on-surface-variant font-mono mt-2 block">
-                  Converts {cottonSpot}¢/lb with USD/INR 85.50
+                  Converts {cottonSpot}¢/lb with USD/INR {simulatedInr.toFixed(2)}
                 </span>
               </div>
 
@@ -706,15 +720,15 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Today:</span>
-                    <span className="font-black text-primary">85.50</span>
+                    <span className="font-black text-primary">95.00</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Yday:</span>
-                    <span className="font-semibold text-on-surface">85.42</span>
+                    <span className="font-semibold text-on-surface">94.88</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">7D Ago:</span>
-                    <span className="font-semibold text-on-surface">85.15</span>
+                    <span className="font-semibold text-on-surface">94.45</span>
                   </div>
                 </div>
               </div>
@@ -725,15 +739,15 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">Jun 26:</span>
-                    <span className="font-black text-primary">85.50</span>
+                    <span className="font-black text-primary">95.00</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">May 26:</span>
-                    <span className="font-semibold text-on-surface">84.90</span>
+                    <span className="font-semibold text-on-surface">94.80</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">Apr 26:</span>
-                    <span className="font-semibold text-on-surface">84.45</span>
+                    <span className="font-semibold text-on-surface">92.50</span>
                   </div>
                 </div>
               </div>
@@ -744,15 +758,15 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 <div className="space-y-1.5">
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">FY26 (E):</span>
-                    <span className="font-black text-primary">85.50</span>
+                    <span className="font-black text-primary">95.00</span>
                   </div>
                   <div className="flex justify-between border-b border-outline-variant/5 pb-1">
                     <span className="text-on-surface-variant">FY25 (A):</span>
-                    <span className="font-semibold text-on-surface">83.82</span>
+                    <span className="font-semibold text-on-surface">85.50</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-on-surface-variant">FY24 (A):</span>
-                    <span className="font-semibold text-on-surface">82.79</span>
+                    <span className="font-semibold text-on-surface">83.12</span>
                   </div>
                 </div>
               </div>
@@ -760,8 +774,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
             <div className="p-3 bg-primary-container/10 border border-primary-container/20 rounded-xl text-[10px] font-mono leading-relaxed text-on-surface-variant">
               <span className="font-bold text-primary uppercase block mb-1">Currency Summary:</span>
-              The Indian Rupee has depreciated by **2.0% YoY** against the USD. Over a 3-year horizon, the currency moved from 
-              **80.39 to 85.50 (+6.3%)**, restructuring raw material import premiums and enhancing export pricing power.
+              The Indian Rupee has depreciated by **11.1% YoY** against the USD. Over a 12-month horizon, the currency moved from 
+              **85.50 to 95.00 (+11.1%)**, restructuring raw material import premiums and enhancing export pricing power.
             </div>
           </div>
 
@@ -813,8 +827,8 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
                 </label>
                 <input 
                   type="range"
-                  min="80.00"
-                  max="90.00"
+                  min="90.00"
+                  max="100.00"
                   step="0.05"
                   value={simulatedInr}
                   onChange={(e) => setSimulatedInr(Number(e.target.value))}
@@ -847,12 +861,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
 
             {/* Favorable Status Badge */}
             <div className={`mt-4 p-2.5 rounded-lg border text-[10px] font-mono font-bold text-center ${
-              simulatedInr > 86 ? 'bg-red-500/10 border-red-500/20 text-red-500' : 
-              simulatedInr < 83 ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' :
+              simulatedInr > 96.50 ? 'bg-red-500/10 border-red-500/20 text-red-500' : 
+              simulatedInr < 93.50 ? 'bg-emerald-500/10 border-emerald-500/20 text-emerald-500' :
               'bg-primary/10 border-primary/20 text-primary'
             }`}>
-              {simulatedInr > 86 ? '⚠️ CRITICAL IMPORT SQUEEZE' :
-               simulatedInr < 83 ? '✅ OPTIMAL IMPORT / NEUTRAL EXPORT' :
+              {simulatedInr > 96.50 ? '⚠️ CRITICAL IMPORT SQUEEZE' :
+               simulatedInr < 93.50 ? '✅ OPTIMAL IMPORT / NEUTRAL EXPORT' :
                '⚖️ EXPORT ADVANTAGE / IMPORT SURCHARGE'}
             </div>
           </div>
