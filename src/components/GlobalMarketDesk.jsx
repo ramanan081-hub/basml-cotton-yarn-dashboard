@@ -129,14 +129,22 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
   const ptaJul = brentJul * 8.5 + 40;
   const megJul = brentJul * 5.2 + 70;
   const psfInrJul = ((ptaJul / 1000) * inrJul * 0.855) + ((megJul / 1000) * inrJul * 0.335) + 20;
+  const psfUsdJul = psfInrJul / inrJul;
   const psfCentsJul = parseFloat(((psfInrJul / inrJul) * 100 / 2.20462).toFixed(2));
+
+  const cottonSpotJulUSD = Math.max(78, cottonSpot - 3.2) * 2.20462 / 100;
+  const cottonSpotJulINR = cottonSpotJulUSD * inrJul;
 
   const brentAug = Math.max(70, crudeOil - 11.5);
   const inrAug = Math.max(80, simulatedInr - 2.8);
   const ptaAug = brentAug * 8.5 + 40;
   const megAug = brentAug * 5.2 + 70;
   const psfInrAug = ((ptaAug / 1000) * inrAug * 0.855) + ((megAug / 1000) * inrAug * 0.335) + 20;
+  const psfUsdAug = psfInrAug / inrAug;
   const psfCentsAug = parseFloat(((psfInrAug / inrAug) * 100 / 2.20462).toFixed(2));
+
+  const cottonSpotAugUSD = Math.max(75, cottonSpot - 5.5) * 2.20462 / 100;
+  const cottonSpotAugINR = cottonSpotAugUSD * inrAug;
 
   // Mock historical correlation data for Brent, Cotlook A, and Polyester PSF (cents/lb equivalent)
   const correlationData = [
@@ -188,6 +196,72 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
       month: 'Aug 26 (FC)', 
       Brent: brentAug, 
       WTI: parseFloat(Math.max(66.5, brentAug * 0.96).toFixed(2)) 
+    }
+  ];
+
+  // Cotton vs. Polyester Supply & Demand Indices
+  const cottonPolySupplyDemandData = [
+    { month: 'Jul 25', CottonSupply: 86, CottonDemand: 82, PolySupply: 94, PolyDemand: 88 },
+    { month: 'Aug 25', CottonSupply: 88, CottonDemand: 84, PolySupply: 93, PolyDemand: 89 },
+    { month: 'Sep 25', CottonSupply: 85, CottonDemand: 86, PolySupply: 91, PolyDemand: 90 },
+    { month: 'Oct 25', CottonSupply: 89, CottonDemand: 85, PolySupply: 94, PolyDemand: 88 },
+    { month: 'Nov 25', CottonSupply: 92, CottonDemand: 84, PolySupply: 95, PolyDemand: 87 },
+    { month: 'Dec 25', CottonSupply: 94, CottonDemand: 83, PolySupply: 97, PolyDemand: 85 },
+    { month: 'Jan 26', CottonSupply: 96, CottonDemand: 80, PolySupply: 97, PolyDemand: 82 },
+    { month: 'Feb 26', CottonSupply: 90, CottonDemand: 83, PolySupply: 93, PolyDemand: 84 },
+    { month: 'Mar 26', CottonSupply: 82, CottonDemand: 91, PolySupply: 78, PolyDemand: 80 },
+    { month: 'Apr 26', CottonSupply: 78, CottonDemand: 95, PolySupply: 70, PolyDemand: 76 },
+    { month: 'May 26', CottonSupply: 84, CottonDemand: 89, PolySupply: 82, PolyDemand: 84 },
+    { 
+      month: 'Jun 26', 
+      CottonSupply: Math.round(Math.max(75, Math.min(100, 85 + (cottonSpot - 87.92) * 0.2))), 
+      CottonDemand: Math.round(Math.max(75, Math.min(100, 88 + (crudeOil - 94.98) * 0.3 - (cottonSpot - 87.92) * 0.4))), 
+      PolySupply: Math.round(simulatedPolySupply), 
+      PolyDemand: Math.round(Math.max(70, Math.min(100, 85 - (crudeOil - 94.98) * 0.25 + (cottonSpot - 87.92) * 0.3))) 
+    },
+    { 
+      month: 'Jul 26 (Est)', 
+      CottonSupply: Math.round(Math.max(75, Math.min(100, 83 + (cottonSpot - 87.92) * 0.18))), 
+      CottonDemand: Math.round(Math.max(75, Math.min(100, 85 + (brentJul - 94.98) * 0.28 - (Math.max(78, cottonSpot - 3.2) - 87.92) * 0.38))), 
+      PolySupply: Math.round(95 - (brentJul - 80) * 0.4), 
+      PolyDemand: Math.round(Math.max(70, Math.min(100, 87 - (brentJul - 94.98) * 0.22 + (Math.max(78, cottonSpot - 3.2) - 87.92) * 0.28))) 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      CottonSupply: Math.round(Math.max(75, Math.min(100, 81 + (cottonSpot - 87.92) * 0.15))), 
+      CottonDemand: Math.round(Math.max(75, Math.min(100, 83 + (brentAug - 94.98) * 0.25 - (Math.max(75, cottonSpot - 5.5) - 87.92) * 0.35))), 
+      PolySupply: Math.round(95 - (brentAug - 80) * 0.4), 
+      PolyDemand: Math.round(Math.max(70, Math.min(100, 88 - (brentAug - 94.98) * 0.2 + (Math.max(75, cottonSpot - 5.5) - 87.92) * 0.25))) 
+    }
+  ];
+
+  // Cotton vs. Polyester Price Movement in ₹/Kg Landed Equivalent
+  const cottonPolyPriceMovementData = [
+    { month: 'Jul 25', CottonPrice: 170.2, PolyPrice: 98.5 },
+    { month: 'Aug 25', CottonPrice: 172.5, PolyPrice: 99.8 },
+    { month: 'Sep 25', CottonPrice: 175.4, PolyPrice: 101.2 },
+    { month: 'Oct 25', CottonPrice: 171.1, PolyPrice: 98.4 },
+    { month: 'Nov 25', CottonPrice: 169.3, PolyPrice: 96.8 },
+    { month: 'Dec 25', CottonPrice: 165.8, PolyPrice: 94.2 },
+    { month: 'Jan 26', CottonPrice: 158.4, PolyPrice: 86.5 },
+    { month: 'Feb 26', CottonPrice: 168.2, PolyPrice: 96.5 },
+    { month: 'Mar 26', CottonPrice: 185.6, PolyPrice: 132.4 },
+    { month: 'Apr 26', CottonPrice: 198.8, PolyPrice: 158.2 },
+    { month: 'May 26', CottonPrice: 182.4, PolyPrice: 128.5 },
+    { 
+      month: 'Jun 26', 
+      CottonPrice: parseFloat(cottonInrPerKg.toFixed(1)), 
+      PolyPrice: parseFloat(estimatedPsfInr.toFixed(1)) 
+    },
+    { 
+      month: 'Jul 26 (Est)', 
+      CottonPrice: parseFloat(cottonSpotJulINR.toFixed(1)), 
+      PolyPrice: parseFloat(psfInrJul.toFixed(1)) 
+    },
+    { 
+      month: 'Aug 26 (FC)', 
+      CottonPrice: parseFloat(cottonSpotAugINR.toFixed(1)), 
+      PolyPrice: parseFloat(psfInrAug.toFixed(1)) 
     }
   ];
 
@@ -1442,7 +1516,98 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors }) {
             • <strong>July 26 (Est):</strong> Crude purchases are projected to decline to <strong>₹{parseFloat((125 * Math.max(75, crudeOil - 7.5) * Math.max(80, simulatedInr - 1.5) / 10000).toFixed(1))}k Crore</strong> (reflecting Brent crude easing to ~${Math.max(75, Math.round(crudeOil - 7.5))} and USD/INR stabilizing at ₹{Math.max(80, (simulatedInr - 1.5).toFixed(2))}). This relieves balance of payments pressure.<br />
             • <strong>August 26 (FC):</strong> Further savings projected with import purchases dropping to <strong>₹{parseFloat((125 * Math.max(70, crudeOil - 11.5) * Math.max(80, simulatedInr - 2.8) / 10000).toFixed(1))}k Crore</strong> (Brent at ~${Math.max(70, Math.round(crudeOil - 11.5))}, USD/INR at ₹{Math.max(80, (simulatedInr - 2.8).toFixed(2))}).<br />
             • <strong>Spinning Mill Action Plan:</strong> Capitalize on lower synthetic fiber costs (polyester PSF drop expected to track crude down) to lock in raw material inventory. Maintain 40% hedging on USD/INR exposures as Rupee finds local support.
+        </div>
+      </div>
+    </div>
+
+      {/* Cotton & Polyester Supply-Demand and Price Interlocks Desk */}
+      <div className="glass-card border border-outline-variant/30 rounded-xxl p-5 bg-surface-container-low font-mono text-xs mt-6">
+        <h4 className="text-sm font-bold text-emerald-500 mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
+          <span className="material-symbols-outlined text-emerald-500">compare_arrows</span>
+          Cotton & Polyester Supply-Demand and Price Interlocks Desk
+        </h4>
+        
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          {/* Chart 1: Supply & Demand Index Comparison */}
+          <div className="lg:col-span-6 flex flex-col justify-between">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                Cotton & Polyester Supply-Demand Index Trends (Jul 25 - Aug 26)
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                Indices trace relative market availability and consumer affinity. High Brent crude reduces polyester supply, shifting weavers toward cotton demand, while cotton pricing spikes cap cotton demand, shunting spinners back to polyester blends.
+              </p>
+            </div>
+            
+            <div className="h-64 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={cottonPolySupplyDemandData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis domain={[50, 110]} fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `${v}%`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Line type="monotone" dataKey="CottonSupply" name="Cotton Supply Index" stroke="#10B981" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="CottonDemand" name="Cotton Demand Index" stroke="#34D399" strokeDasharray="5 5" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="PolySupply" name="Polyester Supply Index" stroke="#8B5CF6" strokeWidth={1.5} dot={false} />
+                  <Line type="monotone" dataKey="PolyDemand" name="Polyester Demand Index" stroke="#A78BFA" strokeDasharray="5 5" strokeWidth={1.5} dot={false} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
           </div>
+
+          {/* Chart 2: Price Movement Comparison */}
+          <div className="lg:col-span-6 flex flex-col justify-between border-t lg:border-t-0 lg:border-l border-outline-variant/15 pt-6 lg:pt-0 lg:pl-6">
+            <div>
+              <span className="text-[10px] font-bold text-outline uppercase tracking-wider block mb-1">
+                Cotton vs. Polyester Price Movement Matrix (₹/Kg Landed Equivalent)
+              </span>
+              <p className="text-[10px] text-on-surface-variant leading-relaxed mb-4">
+                Compares yarn feedstock price developments in Rupee terms, illustrating arbitrage gaps. Spikes in Brent crude drive the Polyester cost curve up, compressing the cotton-polyester price premium.
+              </p>
+            </div>
+
+            <div className="h-64 min-w-0">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={cottonPolyPriceMovementData} margin={{ top: 10, right: 5, left: -25, bottom: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} opacity={0.1} />
+                  <XAxis dataKey="month" fontSize={9} stroke="var(--color-outline)" />
+                  <YAxis domain={['auto', 'auto']} fontSize={9} stroke="var(--color-outline)" tickFormatter={(v) => `₹${v}`} />
+                  <Tooltip
+                    contentStyle={{
+                      backgroundColor: 'var(--color-surface-container-high)',
+                      borderColor: 'var(--color-outline-variant)',
+                      borderRadius: '8px',
+                      color: 'var(--color-on-surface)',
+                      fontSize: '11px',
+                      fontFamily: 'JetBrains Mono, monospace'
+                    }}
+                    formatter={(v) => [`₹${v}/Kg`, '']}
+                  />
+                  <Legend wrapperStyle={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', marginTop: '10px' }} />
+                  <Line type="monotone" dataKey="CottonPrice" name="Shankar-6 Landed (₹/Kg)" stroke="#10B981" strokeWidth={2.5} dot={{ r: 2 }} />
+                  <Line type="monotone" dataKey="PolyPrice" name="Polyester PSF Landed (₹/Kg)" stroke="#8B5CF6" strokeWidth={2.5} dot={{ r: 2 }} />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+        </div>
+
+        {/* Dynamic Arbitrage Commentary with USD & INR Values */}
+        <div className="p-3 bg-surface-container-low/55 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-5">
+          <strong className="text-emerald-500 block mb-1">Strategic Interlock Analysis:</strong>
+          • <strong>Pricing Arbitrage Gap (June 26):</strong> The current spot gap is <strong>₹{(cottonInrPerKg - estimatedPsfInr).toFixed(1)}/Kg</strong> (${(cottonUSDPerKg - estimatedPsfUSD).toFixed(2)}/Kg) (Cotton at ₹{cottonInrPerKg.toFixed(1)}/Kg [${cottonUSDPerKg.toFixed(2)}/Kg] vs Polyester at ₹{estimatedPsfInr.toFixed(1)}/Kg [${estimatedPsfUSD.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonInrPerKg / estimatedPsfInr).toFixed(2)}x</strong>.<br />
+          • <strong>July 26 Projection:</strong> Sourcing gap is estimated to contract to <strong>₹{(cottonSpotJulINR - psfInrJul).toFixed(1)}/Kg</strong> (${(cottonSpotJulUSD - psfUsdJul).toFixed(2)}/Kg) (Cotton ₹{cottonSpotJulINR.toFixed(1)}/Kg [${cottonSpotJulUSD.toFixed(2)}/Kg], Polyester ₹{psfInrJul.toFixed(1)}/Kg [${psfUsdJul.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonSpotJulINR / psfInrJul).toFixed(2)}x</strong>.<br />
+          • <strong>August 26 Projection:</strong> Parity targets a spread of <strong>₹{(cottonSpotAugINR - psfInrAug).toFixed(1)}/Kg</strong> (${(cottonSpotAugUSD - psfUsdAug).toFixed(2)}/Kg) (Cotton ₹{cottonSpotAugINR.toFixed(1)}/Kg [${cottonSpotAugUSD.toFixed(2)}/Kg], Polyester ₹{psfInrAug.toFixed(1)}/Kg [${psfUsdAug.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonSpotAugINR / psfInrAug).toFixed(2)}x</strong>.
         </div>
       </div>
     </div>
