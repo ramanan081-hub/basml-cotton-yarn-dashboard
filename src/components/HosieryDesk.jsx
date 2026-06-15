@@ -1,5 +1,5 @@
 // src/components/HosieryDesk.jsx
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   ResponsiveContainer, 
   LineChart, 
@@ -20,6 +20,10 @@ export function HosieryDesk({ data, yarns, colors, darkMode }) {
   // State for interactive calculator
   const shankar6Spot = data?.prices?.types?.[0]?.current || 62350;
   const [cottonPrice, setCottonPrice] = useState(shankar6Spot);
+
+  useEffect(() => {
+    setCottonPrice(shankar6Spot);
+  }, [shankar6Spot]);
   const [yarnCount, setYarnCount] = useState('30s');
   const [yarnType, setYarnType] = useState('combed_hosiery');
   const [conversionCost, setConversionCost] = useState(65);

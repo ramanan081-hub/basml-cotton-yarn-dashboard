@@ -5972,7 +5972,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
       )}
 
       {subTab === 'explorer' && (
-        <VarietyExplorer darkMode={darkMode} colors={colors} />
+        <VarietyExplorer data={data} darkMode={darkMode} colors={colors} />
       )}
 
       {subTab === 'calendar' && (
@@ -5980,7 +5980,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
       )}
 
       {subTab === 'technical' && (
-        <PriceAnalytics darkMode={darkMode} colors={colors} />
+        <PriceAnalytics data={data} darkMode={darkMode} colors={colors} />
       )}
 
       {subTab === 'msp' && (

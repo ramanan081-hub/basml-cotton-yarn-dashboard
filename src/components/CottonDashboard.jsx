@@ -120,8 +120,8 @@ function TradingDeskInfoBox({ selectedName, colors }) {
 }
 
 export default function CottonDashboard({ data, darkMode, colors }) {
-  const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (Most Popular)');
-  const [selectedCalculatorVariety, setSelectedCalculatorVariety] = useState('Shankar-6 (Most Popular)');
+  const [selectedVariety, setSelectedVariety] = useState('Shankar-6');
+  const [selectedCalculatorVariety, setSelectedCalculatorVariety] = useState('Shankar-6');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Noise list

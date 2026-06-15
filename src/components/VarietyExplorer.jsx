@@ -1,7 +1,52 @@
 import React, { useState, useMemo } from 'react';
 import { expandedCottonVarieties, expandedYarnVarieties } from '../expandedData';
 
-export default function VarietyExplorer({ darkMode, colors }) {
+export function getLivePriceForVariety(item, data) {
+  if (!data) return null;
+  const name = item.name;
+  const group = item.group;
+
+  if (group === 'Indian Cotton') {
+    if (name.includes('Shankar-6')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[0]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('MCU-5')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[1]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('DCH-32') || name.includes('Suvin')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[2]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('MECH-1') || name.includes('Bunny') || name.includes('Brahma')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[3]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('J-34')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[4]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('V797')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[5]?.current).toLocaleString('en-IN')}/Candy`;
+    }
+  } else if (group === 'International Cotton') {
+    if (name.includes('ICE US') || name.includes('ICE Cotton')) {
+      return `${data.globalCotton?.prices?.types?.[1]?.current?.toFixed(2)} ¢/lb`;
+    } else if (name.includes('Cotlook A')) {
+      return `${data.globalCotton?.prices?.types?.[0]?.current?.toFixed(2)} ¢/lb`;
+    } else if (name.includes('Brazil')) {
+      return `${data.globalCotton?.prices?.types?.[3]?.current?.toFixed(2)} ¢/lb`;
+    } else if (name.includes('Supima') || name.includes('Pima')) {
+      return `${data.globalCotton?.prices?.types?.[4]?.current?.toFixed(2)} ¢/lb`;
+    } else if (name.includes('Giza') || name.includes('Egyptian')) {
+      return `${data.globalCotton?.prices?.types?.[5]?.current?.toFixed(2)} ¢/lb`;
+    } else if (name.includes('West African')) {
+      return `${data.globalCotton?.prices?.types?.[10]?.current?.toFixed(2)} ¢/lb`;
+    }
+  } else {
+    // If it's a yarn variety
+    if (data?.yarns?.india?.prices) {
+      const match = data.yarns.india.prices.find(p => name.toLowerCase().includes(p.type.split(' ')[0].toLowerCase()));
+      if (match) {
+        return `₹${Math.round(match.current).toLocaleString('en-IN')}/kg`;
+      }
+    }
+  }
+  return null;
+}
+
+export default function VarietyExplorer({ data, darkMode, colors }) {
   const [dbTab, setDbTab] = useState('cotton'); // 'cotton', 'yarn'
 
   // Cotton States
@@ -232,10 +277,10 @@ export default function VarietyExplorer({ darkMode, colors }) {
                         <span className="font-bold text-on-surface">{item.specs.Strength}</span>
                       </div>
                     )}
-                    <div className="flex justify-between text-xs mt-3 bg-surface-container-high/40 p-2 rounded-lg border border-outline-variant/10">
-                      <span className="text-primary font-bold">Price range:</span>
-                      <span className="font-bold text-primary">{item.price}</span>
-                    </div>
+                     <div className="flex justify-between text-xs mt-3 bg-surface-container-high/40 p-2 rounded-lg border border-outline-variant/10">
+                       <span className="text-primary font-bold">{getLivePriceForVariety(item, data) ? 'Live Price:' : 'Price range:'}</span>
+                       <span className="font-bold text-primary">{getLivePriceForVariety(item, data) || item.price}</span>
+                     </div>
                   </div>
 
                   {item.applications && (
@@ -358,10 +403,10 @@ export default function VarietyExplorer({ darkMode, colors }) {
                       <span className="font-bold text-on-surface">{item.specs['Tensile Strength']}</span>
                     </div>
                   )}
-                  <div className="flex justify-between text-xs mt-3 bg-surface-container-high/40 p-2 rounded-lg border border-outline-variant/10">
-                    <span className="text-primary font-bold">Estimated Price:</span>
-                    <span className="font-bold text-primary">{item.price}</span>
-                  </div>
+                   <div className="flex justify-between text-xs mt-3 bg-surface-container-high/40 p-2 rounded-lg border border-outline-variant/10">
+                     <span className="text-primary font-bold">{getLivePriceForVariety(item, data) ? 'Live Price:' : 'Estimated Price:'}</span>
+                     <span className="font-bold text-primary">{getLivePriceForVariety(item, data) || item.price}</span>
+                   </div>
                 </div>
               </div>
             ))}
@@ -413,12 +458,12 @@ export default function VarietyExplorer({ darkMode, colors }) {
                       <td key={c.id} className="p-4 border-r border-outline-variant text-center">{c.category}</td>
                     ))}
                   </tr>
-                  <tr>
-                    <td className="p-4 font-bold bg-surface-container-low/40">Price Range</td>
-                    {compareList.map(c => (
-                      <td key={c.id} className="p-4 border-r border-outline-variant text-center font-bold text-primary">{c.price}</td>
-                    ))}
-                  </tr>
+                   <tr>
+                     <td className="p-4 font-bold bg-surface-container-low/40">Price Range</td>
+                     {compareList.map(c => (
+                       <td key={c.id} className="p-4 border-r border-outline-variant text-center font-bold text-primary">{getLivePriceForVariety(c, data) || c.price}</td>
+                     ))}
+                   </tr>
                   <tr>
                     <td className="p-4 font-bold bg-surface-container-low/40">Staple Length</td>
                     {compareList.map(c => (
@@ -514,10 +559,10 @@ export default function VarietyExplorer({ darkMode, colors }) {
                 <span className="text-outline">Composition:</span>
                 <span className="font-bold text-on-surface">{selectedYarn.composition || '100% Cotton'}</span>
               </div>
-              <div className="flex justify-between py-1.5 border-b border-outline-variant/10 text-primary">
-                <span className="font-bold">Estimated Price:</span>
-                <span className="font-bold">{selectedYarn.price}</span>
-              </div>
+               <div className="flex justify-between py-1.5 border-b border-outline-variant/10 text-primary">
+                 <span className="font-bold">{getLivePriceForVariety(selectedYarn, data) ? 'Live Price:' : 'Estimated Price:'}</span>
+                 <span className="font-bold">{getLivePriceForVariety(selectedYarn, data) || selectedYarn.price}</span>
+               </div>
 
               {/* Dynamic specs */}
               {Object.entries(selectedYarn.specs || {}).map(([key, val]) => (

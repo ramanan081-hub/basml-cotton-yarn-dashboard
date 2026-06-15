@@ -14,7 +14,7 @@ import {
 
 import { expandedCottonVarieties, expandedYarnVarieties } from '../expandedData';
 
-export default function PriceAnalytics({ darkMode, colors }) {
+export default function PriceAnalytics({ data, darkMode, colors }) {
   // Helper to extract a base price from price string (e.g. "₹68,100-70,000/bale" -> 69050, "₹240-260/kg" -> 250)
   const parseBasePrice = (priceStr, isYarn) => {
     if (!priceStr) return isYarn ? 250 : 65000;
@@ -39,12 +39,56 @@ export default function PriceAnalytics({ darkMode, colors }) {
       .filter(c => !noiseIds.includes(c.id) && c.name)
       .map(c => {
         const trend = c.name.length % 3 === 0 ? 'up' : c.name.length % 3 === 1 ? 'down' : 'flat';
+        let base = parseBasePrice(c.price, false);
+        let unit = c.price?.includes('bale') ? '/bale' : '/candy';
+        
+        // Dynamic live price injection if data is present
+        if (data) {
+          if (c.name.includes('Shankar-6')) {
+            base = data.indianCotton?.prices?.types?.[0]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('MCU-5')) {
+            base = data.indianCotton?.prices?.types?.[1]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('DCH-32') || c.name.includes('Suvin')) {
+            base = data.indianCotton?.prices?.types?.[2]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('MECH-1') || c.name.includes('Bunny') || c.name.includes('Brahma')) {
+            base = data.indianCotton?.prices?.types?.[3]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('J-34')) {
+            base = data.indianCotton?.prices?.types?.[4]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('V797')) {
+            base = data.indianCotton?.prices?.types?.[5]?.current || base;
+            unit = '/candy';
+          } else if (c.name.includes('ICE US') || c.name.includes('ICE Cotton')) {
+            base = data.globalCotton?.prices?.types?.[1]?.current || base;
+            unit = ' ¢/lb';
+          } else if (c.name.includes('Cotlook A')) {
+            base = data.globalCotton?.prices?.types?.[0]?.current || base;
+            unit = ' ¢/lb';
+          } else if (c.name.includes('Brazil')) {
+            base = data.globalCotton?.prices?.types?.[3]?.current || base;
+            unit = ' ¢/lb';
+          } else if (c.name.includes('Supima') || c.name.includes('Pima')) {
+            base = data.globalCotton?.prices?.types?.[4]?.current || base;
+            unit = ' ¢/lb';
+          } else if (c.name.includes('Giza') || c.name.includes('Egyptian')) {
+            base = data.globalCotton?.prices?.types?.[5]?.current || base;
+            unit = ' ¢/lb';
+          } else if (c.name.includes('West African')) {
+            base = data.globalCotton?.prices?.types?.[10]?.current || base;
+            unit = ' ¢/lb';
+          }
+        }
+
         return {
           name: `${c.name} (Cotton)`,
-          base: parseBasePrice(c.price, false),
+          base,
           trend,
           isYarn: false,
-          unit: '/bale'
+          unit
         };
       });
 
@@ -52,9 +96,19 @@ export default function PriceAnalytics({ darkMode, colors }) {
       .filter(y => !noiseIds.includes(y.id) && y.name)
       .map(y => {
         const trend = y.name.length % 3 === 0 ? 'up' : y.name.length % 3 === 1 ? 'down' : 'flat';
+        let base = parseBasePrice(y.price, true);
+
+        // Dynamic live price injection if data is present
+        if (data?.yarns?.india?.prices) {
+          const match = data.yarns.india.prices.find(p => y.name.toLowerCase().includes(p.type.split(' ')[0].toLowerCase()));
+          if (match) {
+            base = match.current;
+          }
+        }
+
         return {
           name: `${y.name} (Yarn)`,
-          base: parseBasePrice(y.price, true),
+          base,
           trend,
           isYarn: true,
           unit: '/kg'
@@ -62,9 +116,9 @@ export default function PriceAnalytics({ darkMode, colors }) {
       });
 
     return [...cottons, ...yarns];
-  }, []);
+  }, [data]);
 
-  const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (Most Popular) (Cotton)');
+  const [selectedVariety, setSelectedVariety] = useState('Shankar-6 (Cotton)');
 
   // Generate 60 days of historical price data ending at base price
   const chartData = useMemo(() => {
