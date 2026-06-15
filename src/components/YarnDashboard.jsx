@@ -150,7 +150,16 @@ export default function YarnDashboard({ data, darkMode, colors }) {
     return expandedYarnVarieties
       .filter(item => !noiseIds.includes(item.id) && item.name)
       .map(item => {
-        const base = parseBasePrice(item.price);
+        let base = parseBasePrice(item.price);
+        
+        // Inject live prices from data
+        if (data?.india?.prices) {
+          const match = data.india.prices.find(p => item.name.toLowerCase().includes(p.type.split(' ')[0].toLowerCase()));
+          if (match) {
+            base = match.current;
+          }
+        }
+        
         const growth = item.name.length % 2 === 0 ? '+2.2%' : '-0.8%';
         const est = Math.round(base * (growth.includes('+') ? 1.022 : 0.992));
 
@@ -161,7 +170,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
           growth
         };
       });
-  }, []);
+  }, [data]);
 
   const filteredYarns = useMemo(() => {
     return allYarns.filter(y => {

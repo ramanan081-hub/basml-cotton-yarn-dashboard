@@ -148,8 +148,49 @@ export default function CottonDashboard({ data, darkMode, colors }) {
     return expandedCottonVarieties
       .filter(item => !noiseIds.includes(item.id) && item.name)
       .map(item => {
-        const base = parseBasePrice(item.price);
+        let base = parseBasePrice(item.price);
         const isGlobal = item.group === 'International Cotton';
+        
+        // Inject live prices from data
+        if (data) {
+          if (isGlobal) {
+            // Global cotton prices in data.globalCotton.prices.types
+            const types = data.globalCotton?.prices?.types;
+            if (types) {
+              if (item.name.includes('ICE US') || item.name.includes('ICE Cotton')) {
+                base = types[1]?.current || base;
+              } else if (item.name.includes('Cotlook A')) {
+                base = types[0]?.current || base;
+              } else if (item.name.includes('Brazil')) {
+                base = types[3]?.current || base;
+              } else if (item.name.includes('Supima') || item.name.includes('Pima')) {
+                base = types[4]?.current || base;
+              } else if (item.name.includes('Giza') || item.name.includes('Egyptian')) {
+                base = types[5]?.current || base;
+              } else if (item.name.includes('West African')) {
+                base = types[10]?.current || base;
+              }
+            }
+          } else {
+            // Indian cotton prices in data.indianCotton.prices.types
+            const types = data.indianCotton?.prices?.types;
+            if (types) {
+              if (item.name.includes('Shankar-6')) {
+                base = types[0]?.current || base;
+              } else if (item.name.includes('MCU-5')) {
+                base = types[1]?.current || base;
+              } else if (item.name.includes('DCH-32') || item.name.includes('Suvin')) {
+                base = types[2]?.current || base;
+              } else if (item.name.includes('MECH-1') || item.name.includes('Bunny') || item.name.includes('Brahma')) {
+                base = types[3]?.current || base;
+              } else if (item.name.includes('J-34')) {
+                base = types[4]?.current || base;
+              } else if (item.name.includes('V797')) {
+                base = types[5]?.current || base;
+              }
+            }
+          }
+        }
         
         // Calculate dynamic properties
         const growth = item.name.length % 2 === 0 ? '+1.8%' : '-0.5%';
@@ -163,7 +204,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
           isGlobal
         };
       });
-  }, []);
+  }, [data]);
 
   const filteredCottons = useMemo(() => {
     return allCottons.filter(c => {
