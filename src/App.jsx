@@ -3731,6 +3731,17 @@ function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, su
           <p className="text-white/80 font-body text-sm md:text-base max-w-xl">
             Deep integration of global supply chain logistics, predictive pricing models, and industrial-grade quality assurance metrics.
           </p>
+          <div className="pt-2">
+            <a
+              href={`https://www.cottoninc.com/wp-content/uploads/${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-Monthly-Economic-Letter.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-tertiary hover:bg-tertiary/90 text-white font-mono text-xs font-bold transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border border-white/20"
+            >
+              <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
+              Open Cotton Inc. Economic Letter ({['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][new Date().getMonth()]} {new Date().getFullYear()})
+            </a>
+          </div>
         </div>
       </section>
 
