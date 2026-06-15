@@ -1627,7 +1627,7 @@ function App() {
             loading={loading} 
             error={error} 
           />
-          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} darkMode={darkMode} colors={themeColors} subTab={globalSubTab} setSubTab={setGlobalSubTab} />}
+          {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} brentCrude={data.brentCrude} darkMode={darkMode} colors={themeColors} subTab={globalSubTab} setSubTab={setGlobalSubTab} />}
           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} subTab={indiaSubTab} setSubTab={setIndiaSubTab} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
@@ -3680,7 +3680,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   );
 }
 
-function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'overview', setSubTab }) {
+function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, subTab = 'overview', setSubTab }) {
   const [selectedVariety, setSelectedVariety] = useState('Cotlook A-Index');
 
   const getMovementsKey = (type) => {
@@ -3715,7 +3715,7 @@ function GlobalDashboard({ data, yarns, usdInr, darkMode, colors, subTab = 'over
       </div>
 
       {subTab === 'globalMarket' ? (
-        <GlobalMarketDesk globalCotton={data} yarns={yarns} usdInr={usdInr} colors={colors} darkMode={darkMode} />
+        <GlobalMarketDesk globalCotton={data} yarns={yarns} usdInr={usdInr} brentCrude={brentCrude} colors={colors} darkMode={darkMode} />
       ) : (
         <>
           <section className="relative mb-gutter h-64 md:h-80 rounded-xxl overflow-hidden flex items-center justify-between p-8 bg-cover bg-center neumorphic-raised" style={{ backgroundImage: `url(${import.meta.env.BASE_URL}bg-cotton.png)` }}>

@@ -17,9 +17,9 @@ import {
   Legend 
 } from 'recharts';
 
-export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode }) {
+export function GlobalMarketDesk({ globalCotton, yarns, usdInr, brentCrude, colors, darkMode }) {
   // Interactive Blending & Substitution Calculator State
-  const [crudeOil, setCrudeOil] = useState(94.98); // USD/bbl (June 1, 2026 Spot)
+  const [crudeOil, setCrudeOil] = useState(() => brentCrude || 94.98); // USD/bbl (June 1, 2026 Spot)
   const [cottonSpot, setCottonSpot] = useState(() => globalCotton?.prices?.types?.[0]?.current || 87.92); // cents/lb
   const [simulatedInr, setSimulatedInr] = useState(() => usdInr || 96.83); // USD/INR Rate
 
@@ -31,6 +31,12 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
   const [isSettingsExpanded, setIsSettingsExpanded] = useState(false);
 
   // Sync state with live props if they change in the parent
+  useEffect(() => {
+    if (brentCrude) {
+      setCrudeOil(brentCrude);
+    }
+  }, [brentCrude]);
+
   useEffect(() => {
     if (globalCotton?.prices?.types?.[0]?.current) {
       setCottonSpot(globalCotton.prices.types[0].current);

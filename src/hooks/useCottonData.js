@@ -66,6 +66,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
       const usdInr = apiResults.exchangeRates.usdInr;
       const eurInr = apiResults.exchangeRates.eurInr;
       const iceCottonPrice = apiResults.iceCotton.price;
+      const brentCrude = apiResults.brentCrude || 82.83;
 
       setData(prevData => {
         const updated = JSON.parse(JSON.stringify(prevData));
@@ -73,6 +74,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           updated.exchangeRates.usdInr = usdInr;
           updated.exchangeRates.eurInr = eurInr;
         }
+        updated.brentCrude = brentCrude;
 
         // Dynamically update global cotton prices
         if (updated.globalCotton && updated.globalCotton.prices && updated.globalCotton.prices.types) {

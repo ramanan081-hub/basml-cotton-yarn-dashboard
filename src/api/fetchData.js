@@ -138,6 +138,7 @@ export async function fetchAllCottonData() {
   let iceCottonPrice = 77.42;
   let usdInr = 84.35;
   let eurInr = 90.70;
+  let brentCrude = 82.83;
   let fileSuccess = false;
   let rateSuccess = false;
   let iceSuccess = false;
@@ -146,6 +147,7 @@ export async function fetchAllCottonData() {
     iceCottonPrice = priceFile.iceCottonCentsPerLb;
     usdInr = priceFile.usdInr;
     eurInr = priceFile.eurInr;
+    brentCrude = priceFile.brentCrude || brentCrude;
     fileSuccess = true;
 
     // Check if file is fresh (<25 hours old)
@@ -197,6 +199,7 @@ export async function fetchAllCottonData() {
   const result = {
     exchangeRates: { usdInr, eurInr, success: rateSuccess || fileSuccess },
     iceCotton: { price: iceCottonPrice, success: iceSuccess || fileSuccess },
+    brentCrude: brentCrude,
     fetchTime: new Date(),
     status,
     priceSource: priceFile?.source || (iceSuccess ? 'live-proxy' : 'baseline'),

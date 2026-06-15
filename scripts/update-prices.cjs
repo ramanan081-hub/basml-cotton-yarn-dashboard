@@ -148,13 +148,20 @@ async function run() {
     iceCottonPrice = 77.42;
     iceSource = 'baseline-fallback';
   }
-  console.log(`[Scraper] ICE Cotton price resolved: ${iceCottonPrice} ¢/lb (Source: ${iceSource})`);
+  // 2. Fetch Brent Crude price
+  let brentCrude = await getYahooPrice('BZ=F');
+  if (!brentCrude) {
+    console.log('[Scraper] Yahoo Brent crude failed, using baseline fallback...');
+    brentCrude = 82.83;
+  }
+  console.log(`[Scraper] Brent Crude price resolved: $${brentCrude} / bbl`);
 
   // 3. Write output JSON
   const data = {
     iceCottonCentsPerLb: iceCottonPrice,
     usdInr: usdInr,
     eurInr: eurInr,
+    brentCrude: brentCrude,
     lastUpdated: now.toISOString(),
     source: iceSource,
     erSource: erSource,
