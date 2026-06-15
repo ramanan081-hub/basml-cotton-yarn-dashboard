@@ -441,21 +441,80 @@ svg *:focus {
 
 /* Card specific soft gradients for Tables and Charts */
 .card-table-orange {
-  background: linear-gradient(135deg, rgba(252, 161, 48, 0.07) 0%, rgba(245, 158, 11, 0.03) 50%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(252, 161, 48, 0.16) !important;
+  background: linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(251, 140, 0, 0.2) !important;
 }
 .dark .card-table-orange {
-  background: linear-gradient(135deg, rgba(252, 161, 48, 0.12) 0%, rgba(245, 158, 11, 0.05) 50%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(252, 161, 48, 0.28) !important;
+  background: linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(251, 140, 0, 0.3) !important;
 }
 
 .card-chart-green {
-  background: linear-gradient(135deg, rgba(27, 94, 32, 0.07) 0%, rgba(16, 185, 129, 0.03) 50%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(27, 94, 32, 0.16) !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
 }
 .dark .card-chart-green {
-  background: linear-gradient(135deg, rgba(27, 94, 32, 0.12) 0%, rgba(16, 185, 129, 0.05) 50%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(27, 94, 32, 0.28) !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Blue metric/info cards for Quality, News, Analysis and all neutral cards */
+.card-metric-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.18) !important;
+}
+.dark .card-metric-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.13) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.28) !important;
+}
+
+/* Purple gradient cards — Live News tab */
+.card-live-purple {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(147, 51, 234, 0.22) !important;
+}
+.dark .card-live-purple {
+  background: linear-gradient(135deg, rgba(167, 80, 255, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(167, 80, 255, 0.30) !important;
+}
+
+/* Sidebar nav item – active state: transparent blue glass */
+.sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.20) 0%, rgba(99, 102, 241, 0.12) 100%) !important;
+  color: #3b82f6 !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15) !important;
+  font-weight: 700 !important;
+  backdrop-filter: blur(4px);
+}
+.dark .sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(99, 102, 241, 0.10) 100%) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.20) !important;
+}
+
+/* Sidebar sub-item active state: transparent blue */
+.sidebar-sub-active {
+  color: #3b82f6 !important;
+  background: rgba(59, 130, 246, 0.10) !important;
+  font-weight: 700 !important;
+}
+.dark .sidebar-sub-active {
+  color: #93c5fd !important;
+  background: rgba(59, 130, 246, 0.15) !important;
+}
+
+/* Sidebar overall: blue-tinted glass */
+.sidebar-desktop {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.07) 0%, rgba(255, 255, 255, 0.55) 100%) !important;
+  backdrop-filter: blur(24px) !important;
+  -webkit-backdrop-filter: blur(24px) !important;
+  border-right: 1px solid rgba(59, 130, 246, 0.15) !important;
+}
+.dark .sidebar-desktop {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.10) 0%, rgba(31, 31, 33, 0.85) 100%) !important;
+  border-right: 1px solid rgba(59, 130, 246, 0.20) !important;
 }
 
 /* Global compact table adjustments to fix alignment and text wrapping */

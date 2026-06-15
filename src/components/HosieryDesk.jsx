@@ -91,7 +91,7 @@ export function HosieryDesk({ data, yarns, colors, darkMode }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Count Matrix Card */}
-        <div className="lg:col-span-7 glass-card border rounded-xxl p-5 shadow-xs flex flex-col justify-between transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="lg:col-span-7 glass-card border rounded-xxl p-5 shadow-xs flex flex-col justify-between transition-colors" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div>
             <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider">
@@ -146,7 +146,7 @@ export function HosieryDesk({ data, yarns, colors, darkMode }) {
         </div>
 
         {/* Spread Line Chart Card */}
-        <div className="lg:col-span-5 glass-card border rounded-xxl p-5 shadow-xs transition-colors" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+        <div className="lg:col-span-5 glass-card border rounded-xxl p-5 shadow-xs transition-colors" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
           <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider">
               30s Combed: Hosiery vs. Weaving Spread Trend
@@ -183,7 +183,7 @@ export function HosieryDesk({ data, yarns, colors, darkMode }) {
       </div>
 
       {/* Sourcing Cost Arbitrage Calculator */}
-      <div className="glass-card border rounded-xxl p-5 transition-colors" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5 transition-colors" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
         <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
           <span className="material-symbols-outlined text-primary text-base">calculate</span>
           Sourcing Cost & Margin Arbitrage Calculator (Coimbatore / Tiruppur Hub)

@@ -113,7 +113,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
       {dbTab === 'cotton' && (
         <div className="space-y-6">
           {/* Filters Panel */}
-          <div className="glass-card rounded-xl p-5 border border-outline-variant/20 grid grid-cols-1 md:grid-cols-4 gap-4 bg-surface-container-low">
+          <div className="card-metric-blue rounded-xl p-5 grid grid-cols-1 md:grid-cols-4 gap-4">
             {/* Search */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-outline">Search Database</label>
@@ -184,7 +184,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
               return (
                 <div
                   key={item.id}
-                  className="glass-card rounded-2xl p-5 border border-outline-variant/20 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-200 bg-surface-container-low hover:border-primary/40 relative overflow-hidden group"
+                  className="card-chart-green rounded-2xl p-5 flex flex-col justify-between hover:translate-y-[-4px] transition-all duration-200 bg-surface-container-low hover:border-primary/40 relative overflow-hidden group"
                 >
                   <div className="flex justify-between items-start mb-4">
                     <div>
@@ -287,7 +287,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
       {dbTab === 'yarn' && (
         <div className="space-y-6">
           {/* Filters Panel */}
-          <div className="glass-card rounded-xl p-5 border border-outline-variant/20 grid grid-cols-1 md:grid-cols-2 gap-4 bg-surface-container-low">
+          <div className="card-metric-blue rounded-xl p-5 grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Search */}
             <div className="flex flex-col gap-1.5">
               <label className="text-[11px] font-mono font-bold uppercase tracking-wider text-outline">Search Database</label>
@@ -328,7 +328,7 @@ export default function VarietyExplorer({ darkMode, colors }) {
               <div
                 key={item.id}
                 onClick={() => setSelectedYarn(item)}
-                className="glass-card rounded-2xl p-5 border border-outline-variant/20 flex flex-col justify-between hover:translate-y-[-4px] cursor-pointer transition-all duration-200 bg-surface-container-low hover:border-primary/40 group relative overflow-hidden"
+                className="card-chart-green rounded-2xl p-5 flex flex-col justify-between hover:translate-y-[-4px] cursor-pointer transition-all duration-200 bg-surface-container-low hover:border-primary/40 group relative overflow-hidden"
               >
                 <div>
                   <div className="flex justify-between items-start mb-2">

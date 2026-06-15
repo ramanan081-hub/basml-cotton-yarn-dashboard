@@ -483,7 +483,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       {/* Top Benchmarks Grid */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Brent Crude */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Brent Crude Oil</span>
             <span className="material-symbols-outlined text-primary text-xs">oil_barrel</span>
@@ -493,7 +493,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* PTA Feedstock */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>PTA (Feedstock)</span>
             <span className="material-symbols-outlined text-outline text-xs">science</span>
@@ -503,7 +503,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* MEG Feedstock */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>MEG (Feedstock)</span>
             <span className="material-symbols-outlined text-outline text-xs">biotech</span>
@@ -513,7 +513,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* PSF Global */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Polyester PSF</span>
             <span className="material-symbols-outlined text-tertiary text-xs">precision_manufacturing</span>
@@ -523,7 +523,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* Cotlook A-Index */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Cotlook A-Index</span>
             <span className="material-symbols-outlined text-emerald-500 text-xs">eco</span>
@@ -533,7 +533,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* Parity Index */}
-        <div className="glass-card border rounded-xl p-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+        <div className="glass-card border rounded-xl p-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
           <div className="flex justify-between items-center text-[10px] font-mono text-outline font-bold uppercase">
             <span>Cotton/PSF Ratio</span>
             <span className="material-symbols-outlined text-amber-500 text-xs">compare_arrows</span>
@@ -547,7 +547,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Geopolitical & Shipping Risk Table & Supply/Demand Chart */}
         <div className="lg:col-span-7 space-y-6">
-          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+          <div className="glass-card border rounded-xxl p-5" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
               <span className="material-symbols-outlined text-primary text-base">emergency_home</span>
               Geopolitical Risk & Shipping Route Disruptions
@@ -586,7 +586,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
           </div>
 
           {/* Energy Spike & Substitution Dynamics Chart */}
-          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
             <div>
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-primary text-base">analytics</span>
@@ -638,7 +638,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         {/* Chart Card */}
         <div className="lg:col-span-5 flex flex-col gap-6">
           {/* Historical Correlation Chart */}
-          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+          <div className="glass-card border rounded-xxl p-5" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
               <span>Oil vs. Cotton vs. Polyester Correlation</span>
               <span className="text-[9px] text-emerald-500 font-bold">12M Trend</span>
@@ -672,7 +672,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
           </div>
 
           {/* Crude Oil Price Benchmark Trend (Brent vs. WTI) */}
-          <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+          <div className="glass-card border rounded-xxl p-5" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
             <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex justify-between items-center">
               <span>Crude Oil Price Trend (Brent vs. WTI)</span>
               <span className="text-[9px] text-primary font-bold">USD/Barrel</span>
@@ -723,7 +723,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
           </div>
 
           {/* Crude Oil Utilizations in Synthetic & Blended Yarns */}
-          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+          <div className="glass-card border rounded-xxl p-5 text-xs font-mono space-y-4" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
             <div>
               <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider border-b border-outline-variant/20 pb-2 flex items-center gap-1.5">
                 <span className="material-symbols-outlined text-primary text-base">layers</span>
@@ -848,7 +848,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       </div>
 
       {/* Spinning Mill Procurement & Risk Control Desk */}
-      <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
         <div className="flex justify-between items-center mb-4 border-b border-outline-variant/20 pb-3">
           <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider flex items-center gap-1.5">
             <span className="material-symbols-outlined text-primary text-base">domain</span>
@@ -1091,7 +1091,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       </div>
 
       {/* USD/INR Exchange Rate & Domestic Spinning Parity Matrix */}
-      <div className="glass-card border rounded-xxl p-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.6)' : '#FFF8F2', borderColor: darkMode ? 'rgba(251, 140, 0, 0.2)' : 'rgba(251, 140, 0, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, rgba(32, 22, 16, 0.6) 100%)' : 'linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(251, 140, 0, 0.3)' : 'rgba(251, 140, 0, 0.2)' }}>
         <h4 className="text-xs font-mono font-bold text-outline uppercase tracking-wider mb-4 border-b border-outline-variant/20 pb-3 flex items-center gap-1.5">
           <span className="material-symbols-outlined text-primary text-base">currency_exchange</span>
           USD/INR Currency Transmission & Spinning Mills Impact Desk
@@ -1278,7 +1278,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       </div>
 
       {/* Global Maritime Freight & Logistics Desk */}
-      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
         <h4 className="text-sm font-bold text-primary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-primary">directions_boat</span>
           Global Maritime Freight Index (FBX) & Sourcing Logistics Desk
@@ -1332,7 +1332,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
               </p>
             </div>
 
-            <div className="overflow-x-auto border border-outline-variant/20 rounded-lg" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+            <div className="overflow-x-auto border border-outline-variant/20 rounded-lg" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
               <table className="w-full text-[10px] text-left">
                 <thead>
                   <tr className="bg-surface-container-low text-[9px] text-outline font-bold border-b border-outline-variant/20">
@@ -1391,7 +1391,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
       </div>
 
       {/* Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk */}
-      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
         <h4 className="text-sm font-bold text-tertiary mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-tertiary">analytics</span>
           Indian Crude Oil Sourcing, Currency Holdings & Sectoral Consumption Desk
@@ -1483,17 +1483,17 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
 
             <div className="space-y-2 mt-2">
               <div className="grid grid-cols-2 gap-2 text-[9px] leading-normal text-on-surface-variant">
-                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[0] }}>Public (50%)</span>
                   Transportation fuel (diesel/petrol) & household LPG cooking gas.
                 </div>
-                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[1] }}>Mills & Ind. (25%)</span>
                   Petrochemical precursors (PTA/MEG) for polyester fiber & plastics.
                 </div>
-                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[2] }}>Government (15%)</span>
-                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+                <div className="border border-outline-variant/10 rounded-lg p-2" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
                   <span className="font-bold block" style={{ color: colors.chartPalette[3] }}>Other Usage (10%)</span>
                   Aviation turbine fuels (ATF) & agricultural irrigation run-rates.
                 </div>
@@ -1520,7 +1520,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
     </div>
 
       {/* Cotton & Polyester Supply-Demand and Price Interlocks Desk */}
-      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ backgroundColor: darkMode ? 'rgba(20, 32, 25, 0.6)' : '#F0F8F4', borderColor: darkMode ? 'rgba(16, 185, 129, 0.2)' : 'rgba(16, 185, 129, 0.15)' }}>
+      <div className="glass-card border rounded-xxl p-5 font-mono text-xs mt-6" style={{ background: darkMode ? 'linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(20, 32, 25, 0.6) 100%)' : 'linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%)', borderColor: darkMode ? 'rgba(16, 185, 129, 0.3)' : 'rgba(16, 185, 129, 0.2)' }}>
         <h4 className="text-sm font-bold text-emerald-500 mb-2 flex items-center gap-2 border-b border-outline-variant/20 pb-3">
           <span className="material-symbols-outlined text-emerald-500">compare_arrows</span>
           Cotton & Polyester Supply-Demand and Price Interlocks Desk
@@ -1602,7 +1602,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, colors, darkMode
         </div>
 
         {/* Dynamic Arbitrage Commentary with USD & INR Values */}
-        <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : '#FFF8F2' }}>
+        <div className="p-3 rounded-xl border border-outline-variant/10 text-[9.5px] leading-relaxed text-on-surface-variant mt-5" style={{ backgroundColor: darkMode ? 'rgba(32, 22, 16, 0.5)' : 'rgba(251, 140, 0, 0.06)' }}>
           <strong className="text-emerald-500 block mb-1">Strategic Interlock Analysis:</strong>
           • <strong>Pricing Arbitrage Gap (June 26):</strong> The current spot gap is <strong>₹{(cottonInrPerKg - estimatedPsfInr).toFixed(1)}/Kg</strong> (${(cottonUSDPerKg - estimatedPsfUSD).toFixed(2)}/Kg) (Cotton at ₹{cottonInrPerKg.toFixed(1)}/Kg [${cottonUSDPerKg.toFixed(2)}/Kg] vs Polyester at ₹{estimatedPsfInr.toFixed(1)}/Kg [${estimatedPsfUSD.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonInrPerKg / estimatedPsfInr).toFixed(2)}x</strong>.<br />
           • <strong>July 26 Projection:</strong> Sourcing gap is estimated to contract to <strong>₹{(cottonSpotJulINR - psfInrJul).toFixed(1)}/Kg</strong> (${(cottonSpotJulUSD - psfUsdJul).toFixed(2)}/Kg) (Cotton ₹{cottonSpotJulINR.toFixed(1)}/Kg [${cottonSpotJulUSD.toFixed(2)}/Kg], Polyester ₹{psfInrJul.toFixed(1)}/Kg [${psfUsdJul.toFixed(2)}/Kg]) with a parity ratio of <strong>{(cottonSpotJulINR / psfInrJul).toFixed(2)}x</strong>.<br />

@@ -245,7 +245,7 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
     <div className="flex flex-col gap-6">
       
       {/* Search and Category Control Header */}
-      <div className="bg-surface-container-low border border-outline-variant rounded-xl p-6 flex flex-col gap-4">
+      <div className="card-live-purple rounded-xl p-6 flex flex-col gap-4">
         <div className="flex justify-between items-center flex-wrap gap-4">
           <div>
             <h2 className="text-xl font-headline font-extrabold text-primary tracking-tight">LIVE COTTON & YARN INTELLIGENCE HUB</h2>
@@ -312,7 +312,7 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
 
       {/* Forex Parity Cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-surface-container-low border border-outline-variant rounded-xl p-5 flex justify-between items-center min-h-[90px]">
+        <div className="card-live-purple rounded-xl p-5 flex justify-between items-center min-h-[90px]">
           <div>
             <span className="text-[10px] text-on-surface-variant font-extrabold tracking-wider uppercase font-mono">FOREX PARITY</span>
             <h3 className="text-sm font-headline font-bold text-on-surface mt-1">USD to INR Exchange Value</h3>
@@ -325,7 +325,7 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
           </div>
         </div>
 
-        <div className="bg-surface-container-low border border-outline-variant rounded-xl p-5 flex justify-between items-center min-h-[90px]">
+        <div className="card-live-purple rounded-xl p-5 flex justify-between items-center min-h-[90px]">
           <div>
             <span className="text-[10px] text-on-surface-variant font-extrabold tracking-wider uppercase font-mono">FOREX PARITY</span>
             <h3 className="text-sm font-headline font-bold text-on-surface mt-1">EUR to INR Exchange Value</h3>
@@ -343,7 +343,7 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         
         {/* Left Column - Global Focus */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+        <div className="card-live-purple rounded-xxl neumorphic-raised p-card-padding">
           <h3 className="flex items-center gap-2 mb-5 pb-3 text-base font-headline font-bold text-primary border-b border-outline-variant">
             <Globe size={16} className="text-primary" />
             GLOBAL FOCUS FEED ({globalFeed.length})
@@ -368,7 +368,7 @@ const LiveNews = ({ exchangeRates, darkMode, colors }) => {
         </div>
 
         {/* Right Column - India Focus */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+        <div className="card-live-purple rounded-xxl neumorphic-raised p-card-padding">
           <h3 className="flex items-center gap-2 mb-5 pb-3 text-base font-headline font-bold text-primary border-b border-outline-variant">
             <MapPin size={16} className="text-primary" />
             INDIA FOCUS FEED ({indiaFeed.length})

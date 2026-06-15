@@ -262,25 +262,25 @@ export default function PriceAnalytics({ darkMode, colors }) {
       {/* Grid: 6 Metrics Cards */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
         {/* Metric 1 */}
-        <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-4 flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Current Price</span>
           <h4 className="text-base font-extrabold text-on-surface font-headline mt-2">₹{metrics.currentPrice.toLocaleString()}{activeVarietyInfo?.unit}</h4>
         </div>
 
         {/* Metric 2 */}
-        <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-4 flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">10-Day MA</span>
           <h4 className="text-base font-bold text-on-surface font-headline mt-2">₹{metrics.ma10.toLocaleString()}</h4>
         </div>
 
         {/* Metric 3 */}
-        <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-4 flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">50-Day MA</span>
           <h4 className="text-base font-bold text-on-surface font-headline mt-2">₹{metrics.ma50.toLocaleString()}</h4>
         </div>
 
         {/* Metric 4 */}
-        <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-4 flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Annualized Vol</span>
           <h4 className="text-base font-bold text-on-surface font-headline mt-2">{metrics.volatility}%</h4>
         </div>
@@ -292,7 +292,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
         </div>
 
         {/* Metric 6 */}
-        <div className="glass-card rounded-xl p-4 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-4 flex flex-col justify-between">
           <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Price Position</span>
           <h4 className="text-xs font-bold text-on-surface font-headline mt-2 uppercase">
             {metrics.currentPrice > metrics.ma10 ? '↑ Above MA10' : '↓ Below MA10'}
@@ -304,7 +304,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         
         {/* Chart Column */}
-        <div className="lg:col-span-2 glass-card rounded-xl p-5 border border-outline-variant/20 bg-surface-container-low">
+        <div className="lg:col-span-2 card-chart-green rounded-xl p-5">
           <h4 className="text-sm font-bold text-on-surface font-headline mb-4 flex items-center gap-2">
             <span className="material-symbols-outlined text-primary">show_chart</span>
             60-Day Price & Moving Average Indicators
@@ -342,7 +342,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
         </div>
 
         {/* Signals Column */}
-        <div className="glass-card rounded-xl p-5 border border-outline-variant/20 bg-surface-container-low flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xl p-5 flex flex-col justify-between">
           <div>
             <h4 className="text-sm font-bold text-on-surface font-headline mb-4 pb-2 border-b border-outline-variant/15 flex items-center gap-2">
               <span className="material-symbols-outlined text-primary">analytics</span>
@@ -427,7 +427,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
       </div>
 
       {/* 3-Scenario Algorithmic Price Forecast Panel */}
-      <div className="glass-card rounded-xl p-6 border border-outline-variant/20 bg-surface-container-low">
+      <div className="card-chart-green rounded-xl p-6">
         <div className="flex justify-between items-start mb-4">
           <div>
             <h4 className="text-base font-bold text-primary font-headline flex items-center gap-2">
@@ -491,7 +491,7 @@ export default function PriceAnalytics({ darkMode, colors }) {
       </div>
 
       {/* Future Production & Sourcing Forecast Plan */}
-      <div className="glass-card rounded-xl p-6 border border-outline-variant/20 bg-surface-container-low">
+      <div className="card-chart-green rounded-xl p-6">
         <h4 className="text-base font-bold text-primary font-headline mb-4 flex items-center gap-2">
           <span className="material-symbols-outlined">analytics</span>
           Future Production & Sourcing Forecast Plan: {selectedVariety.replace(/ \(Cotton\)|\n/g, '').replace(/ \(Yarn\)|\n/g, '')}

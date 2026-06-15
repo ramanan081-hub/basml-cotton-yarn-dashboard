@@ -85,7 +85,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Slide 2: Cotton Prices & Quality */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
         <div className="flex justify-between items-center border-b border-outline-variant pb-3">
           <div>
             <h2 className="text-lg font-headline font-bold text-primary">1. Cotton Variety Spot Prices</h2>
@@ -148,7 +148,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Slide 3: 5-Year Global Balance Sheet */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
         <div className="flex justify-between items-center border-b border-outline-variant pb-3">
           <div>
             <h2 className="text-lg font-headline font-bold text-primary">2. Global Cotton Balance Sheet</h2>
@@ -207,7 +207,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Slide 4: Indian Regional Harvest Output */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
         <div className="flex justify-between items-center border-b border-outline-variant pb-3">
           <div>
             <h2 className="text-lg font-headline font-bold text-primary">3. Indian Regional Harvest Output</h2>
@@ -260,7 +260,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Slide 5: Spinners' Margin Calculator */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
         <div className="flex justify-between items-center border-b border-outline-variant pb-3">
           <div>
             <h2 className="text-lg font-headline font-bold text-primary">4. Spinners' Margin Calculator</h2>
@@ -329,7 +329,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
       </div>
 
       {/* Slide 6: Actionable Margin & Growth Roadmap */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding flex flex-col justify-between">
         <div className="flex justify-between items-center border-b border-outline-variant pb-3">
           <div>
             <h2 className="text-lg font-headline font-bold text-primary">5. Actionable Growth Roadmap</h2>
@@ -1300,8 +1300,8 @@ function App() {
           }}
           className={`w-full flex items-center justify-between px-4 py-3 rounded-md transition-all duration-150 ease-in-out font-medium text-sm text-left ${
             isActive
-              ? 'bg-primary text-on-primary font-semibold shadow-sm'
-              : 'text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface'
+              ? 'sidebar-nav-active'
+              : 'text-on-surface-variant hover:bg-blue-50/30 dark:hover:bg-blue-900/10 hover:text-on-surface'
           }`}
         >
           <div className="flex items-center gap-3">
@@ -1344,8 +1344,8 @@ function App() {
                   }}
                   className={`w-full text-left px-3 py-2 rounded-md text-xs font-medium font-mono transition-all duration-150 ${
                     isSubActive
-                      ? 'text-primary font-bold bg-primary/10'
-                      : 'text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high/60'
+                      ? 'sidebar-sub-active'
+                      : 'text-on-surface-variant hover:text-blue-500 dark:hover:text-blue-300 hover:bg-blue-50/30 dark:hover:bg-blue-900/10'
                   }`}
                 >
                   {sub.label}
@@ -1401,7 +1401,7 @@ function App() {
       {/* Sidebar Navigation - Mobile (Drawer overlay) */}
       {sidebarOpen && (
         <div className="fixed inset-0 bg-black/50 z-50 lg:hidden" onClick={() => setSidebarOpen(false)}>
-          <aside className="w-[240px] h-full glass-card border-r border-white/10 rounded-none py-6 px-4 flex flex-col" onClick={(e) => e.stopPropagation()}>
+          <aside className="w-[240px] h-full border-r rounded-none py-6 px-4 flex flex-col" style={{ background: 'linear-gradient(180deg, rgba(59,130,246,0.10) 0%, rgba(255,255,255,0.92) 100%)', backdropFilter: 'blur(24px)', WebkitBackdropFilter: 'blur(24px)', borderColor: 'rgba(59,130,246,0.18)' }} onClick={(e) => e.stopPropagation()}>
             <div className="flex justify-between items-center px-2 mb-8">
               <div className="flex items-center gap-2">
                 <img 
@@ -5356,7 +5356,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
       {subTab === 'cotton' && (
         <div className="space-y-gutter">
           {/* Cotton variety filter selector */}
-          <div className="glass-card rounded-xl p-6">
+          <div className="card-metric-blue rounded-xl p-6">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div>
                 <span className="text-xs font-mono font-bold text-on-surface-variant block mb-2 tracking-wider">FILTER COTTON VARIETY</span>
@@ -5390,7 +5390,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* DAY-WISE PROCUREMENT PLAN */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">calendar_today</span>
                 {selectedCotton} Day-Wise Purchase Plan & Price Forecast
@@ -5433,7 +5433,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">bar_chart</span>
                 {selectedCotton} Day-Wise Target Purchasing Volumes
@@ -5466,7 +5466,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* MONTH-WISE STRATEGIC BUDGET */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">currency_rupee</span>
                 {selectedCotton} Month-Wise Budget & Hedging Ratios
@@ -5504,7 +5504,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">pie_chart</span>
                 {selectedCotton} Monthly Budget vs Hedging Ratio
@@ -5537,7 +5537,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* YEAR-WISE OUTLOOK & RISK FACTORS */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">trending_up</span>
                 {selectedCotton} Long-Term Annual Purchase Outlook
@@ -5566,7 +5566,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">analytics</span>
                 {selectedCotton} Specific Price Driving Factors
@@ -5605,7 +5605,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
       {subTab === 'yarn' && (
         <div className="space-y-gutter">
           {/* Yarn count variety filter selector */}
-          <div className="glass-card rounded-xl p-6">
+          <div className="card-metric-blue rounded-xl p-6">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
               <div>
                 <span className="text-xs font-mono font-bold text-on-surface-variant block mb-2 tracking-wider">FILTER YARN COUNT TYPE</span>
@@ -5638,7 +5638,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* DAY-WISE YARN PROCUREMENT PLAN */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">calendar_today</span>
                 {selectedYarn} Day-Wise Purchase Plan & Spot Parity Forecast
@@ -5683,7 +5683,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">bar_chart</span>
                 {selectedYarn} Day-Wise Purchase Target Volumes & Margins
@@ -5716,7 +5716,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* MONTH-WISE DEMAND AND CONTAINER FORECAST */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">receipt_long</span>
                 {selectedYarn} Month-Wise Demand & Projected Export Containers
@@ -5747,7 +5747,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">show_chart</span>
                 {selectedYarn} Monthly Demand Index Trends
@@ -5779,7 +5779,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
           {/* YEAR-WISE OUTLOOK & PRODUCT YARN GROWTH RATES */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-table-orange rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">trending_up</span>
                 {selectedYarn} Long-Term Demand & Spinner Spread Outlook
@@ -5808,7 +5808,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
               </div>
             </div>
 
-            <div className="glass-card rounded-xl p-6">
+            <div className="card-chart-green rounded-xl p-6">
               <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
                 <span className="material-symbols-outlined text-xl">donut_large</span>
                 Global Yarn Count Growth & Market Breakdown Overview
@@ -5858,13 +5858,13 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
           </div>
 
           {/* NEW IDEAS & PLANS IN INDIA AND TAMIL NADU */}
-          <div className="glass-card rounded-xl p-6">
+          <div className="card-metric-blue rounded-xl p-6">
             <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-2xl">lightbulb</span>
               Strategic Infrastructure Initiatives: India & Tamil Nadu
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
-              <div className="glass-card border-transparent p-5 rounded-xl flex flex-col justify-between">
+              <div className="card-metric-blue border-transparent p-5 rounded-xl flex flex-col justify-between">
                 <div>
                   <h4 className="text-xs font-mono font-bold text-primary mb-2 flex items-center gap-1.5">
                     <span className="material-symbols-outlined text-base">domain</span>
@@ -5875,7 +5875,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
                   </p>
                 </div>
               </div>
-              <div className="glass-card border-transparent p-5 rounded-xl flex flex-col justify-between">
+              <div className="card-metric-blue border-transparent p-5 rounded-xl flex flex-col justify-between">
                 <div>
                   <h4 className="text-xs font-mono font-bold text-tertiary mb-2 flex items-center gap-1.5">
                     <span className="material-symbols-outlined text-base">bolt</span>
@@ -5894,7 +5894,7 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
       {subTab === 'macro' && (
         <div className="space-y-gutter">
           {/* GLOBAL INCIDENTS TABLE */}
-          <div className="glass-card rounded-xl p-6">
+          <div className="card-table-orange rounded-xl p-6">
             <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-xl">globe</span>
               Global News, Incidents & Macro-Economic Impacts
@@ -5940,14 +5940,14 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
           </div>
 
           {/* ACTIONABLE STRATEGIES FOR GROWTH */}
-          <div className="glass-card rounded-xl p-6">
+          <div className="card-metric-blue rounded-xl p-6">
             <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
               <span className="material-symbols-outlined text-xl">rocket_launch</span>
               Actionable Margin & Growth Recommendations (How to Increase Growth)
             </h3>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-gutter">
               {strategicGrowth.map((strategy, idx) => (
-                <div key={idx} className="glass-card border-transparent p-5 rounded-xl flex flex-col justify-between gap-4">
+                <div key={idx} className="card-metric-blue border-transparent p-5 rounded-xl flex flex-col justify-between gap-4">
                   <div className="space-y-2">
                     <div className="flex justify-between items-start gap-2">
                       <h4 className="text-sm font-headline font-bold text-on-surface">

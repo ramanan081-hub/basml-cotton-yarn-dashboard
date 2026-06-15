@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BASML Cotton & Yarn Intelligence Platform - Comprehensive Audit & Operational Report</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;700&display=swap');
+    
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      line-height: 1.6;
+      color: #2d3748;
+      background-color: #f7fafc;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 40px 20px;
+      background-color: #ffffff;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+    }
+    
+    /* Cover Page Styling */
+    .cover-page {
+      padding: 100px 40px;
+      text-align: center;
+      background: linear-gradient(135deg, #1b3620 0%, #2e5939 100%);
+      color: #ffffff;
+      border-radius: 12px;
+      margin-bottom: 50px;
+    }
+    
+    .cover-title {
+      font-size: 42px;
+      font-weight: 800;
+      margin: 0 0 10px 0;
+      letter-spacing: -1px;
+      line-height: 1.2;
+    }
+    
+    .cover-subtitle {
+      font-size: 20px;
+      font-weight: 300;
+      opacity: 0.9;
+      margin: 0 0 40px 0;
+    }
+    
+    .cover-meta {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      display: inline-block;
+      padding: 8px 16px;
+      background-color: rgba(255,255,255,0.1);
+      border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    
+    /* Document Layout */
+    h1 {
+      font-size: 28px;
+      color: #1b3620;
+      border-bottom: 2px solid #e2e8f0;
+      padding-bottom: 8px;
+      margin-top: 50px;
+      margin-bottom: 20px;
+    }
+    
+    h2 {
+      font-size: 20px;
+      color: #2d5a27;
+      margin-top: 35px;
+      margin-bottom: 15px;
+    }
+    
+    p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+    
+    /* Table Styling */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+    
+    th {
+      background-color: #f1f5f9;
+      color: #1a202c;
+      font-weight: 700;
+      text-align: left;
+      padding: 12px;
+      border: 1px solid #cbd5e1;
+    }
+    
+    td {
+      padding: 12px;
+      border: 1px solid #e2e8f0;
+      vertical-align: top;
+    }
+    
+    tr:nth-child(even) td {
+      background-color: #f8fafc;
+    }
+    
+    /* Code/Formulas */
+    .formula {
+      font-family: 'JetBrains Mono', monospace;
+      background-color: #f1f5f9;
+      padding: 15px;
+      border-left: 4px solid #3b7a57;
+      border-radius: 4px;
+      margin: 20px 0;
+      font-size: 13px;
+    }
+    
+    .formula-title {
+      font-weight: 700;
+      color: #1b3620;
+      margin-bottom: 5px;
+      display: block;
+    }
+    
+    /* Embedded Image Styling */
+    .screenshot-container {
+      text-align: center;
+      margin: 30px 0;
+      padding: 15px;
+      background-color: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+    }
+    
+    .screenshot {
+      width: 100%;
+      max-width: 900px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    }
+    
+    .screenshot-caption {
+      font-size: 11px;
+      color: #718096;
+      margin-top: 8px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    
+    /* Bullet points */
+    ul {
+      margin-bottom: 20px;
+      padding-left: 20px;
+    }
+    
+    li {
+      margin-bottom: 8px;
+    }
+    
+    /* Print media configurations */
+    @media print {
+      body {
+        background-color: #ffffff;
+        color: #000000;
+      }
+      .container {
+        box-shadow: none;
+        padding: 0;
+      }
+      .page-break {
+        page-break-before: always;
+      }
+      .cover-page {
+        background: none;
+        color: #000000;
+        border: 2px solid #000000;
+        border-radius: 0;
+        padding: 150px 20px;
+      }
+      .cover-title {
+        color: #000000;
+      }
+      .cover-meta {
+        color: #000000;
+        border: 1px solid #000000;
+        background-color: transparent;
+      }
+      h1, h2 {
+        color: #000000;
+        page-break-after: avoid;
+      }
+      .screenshot-container {
+        page-break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  
+  <!-- Cover Page -->
+  <div class="cover-page">
+    <h1 class="cover-title">BASML Cotton & Yarn Intelligence Platform</h1>
+    <p class="cover-subtitle">Comprehensive Operations, Methodology, & Data Analytics Audit Report</p>
+    <div class="cover-meta">
+      Report Generated: May 30, 2026<br>
+      Deployment Target: GitHub Pages Live System<br>
+      Audited Version: v1.1.0-Stabilized
+    </div>
+  </div>
+  
+  <div class="page-break"></div>
+
+  <h1>1. Executive Summary & Platform Overview</h1>
+  <p>
+    The <strong>BASML Cotton & Yarn Intelligence Platform</strong> is a corporate-grade Commodity Decision Support System (CDSS) built to manage raw material volatility, optimize sourcing channels, and enforce strict yarn quality standards for mills in Tamil Nadu. Raw cotton represents up to 60-65% of yarn manufacturing expenses. In an environment marked by weather irregularities (such as El Niño), international trade disputes, and currency fluctuations, the platform integrates live financial feeds, regulatory floor prices, and manufacturing conversion metrics into a unified cockpit.
+  </p>
+  <p>
+    The platform is structured around a multi-tab sidebar navigation, feeding live metrics into analytical dashboards:
+  </p>
+  <ul>
+    <li><strong>Global Focus</strong>: Monitors international price benchmarks (ICE, Cotlook A-Index) and global supply/demand balances.</li>
+    <li><strong>India Focus</strong>: Tracks domestic spot prices, APMC mandi arrivals, and central buffer stock levels.</li>
+    <li><strong>Cotton Markets</strong>: Analyzes ginning out-turn parity (GOT%) and pressed candy profit margins.</li>
+    <li><strong>Yarn Markets</strong>: Compares yarn count prices and maps spinning margin spreads relative to raw cotton.</li>
+    <li><strong>Import & Export Plan</strong>: Interactive logistics calculators evaluating global import landed costs and export realizations.</li>
+    <li><strong>Analysis Suite</strong>: Houses the 80+ Variety Explorer, 12-Month Crop Calendar, Technical Price Indicators, and MSP floor reference sheets.</li>
+    <li><strong>Yarn Quality (Global Focus)</strong>: Real-time Statistical Process Control (SPC) monitor displaying count deviations and defect indexes.</li>
+  </ul>
+
+  <div class="page-break"></div>
+
+  <h1>2. Global Focus (Tab 1)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    The Global Focus view provides international market awareness. Indian spinners rely on imported long-staple cotton (e.g., US Pima, Egyptian Giza) to spin premium compact counts. Therefore, tracking the <strong>ICE US Cotton No. 2 Futures</strong> and currency conversion rates is vital for identifying favorable import arbitrage windows and hedging currency exposure.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 1: ICE US Cotton INR Candy Parity Equivalent</span>
+    $$	ext{ICE Parity Candy (INR)} = 	ext{ICE Price (cents/lb)} 	imes 7.84 	imes 	ext{USD/INR Exchange Rate}$$
+    <br>
+    <em>Where: 7.84 is the conversion factor translating standard US pounds to one Indian Candy (784 lbs = 355.62 kg).</em>
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Tickers & Cards</strong>: Displays the current price of ICE Futures, Cotlook A-Index, Brazilian Index, Chinese Index, and Pakistani Spot Rates.</li>
+    <li><strong>Global Crop Balance Sheet</strong>: Lists years against global production, consumption, and ending stock indexes, alerting buyers to global inventory crunches.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/global_focus.png" class="screenshot" alt="Global Focus Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 2.1: Global Focus Dashboard showing international price feeds and USDA balance sheet data.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>3. India Focus (Tab 2)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    The India Focus dashboard acts as the primary cockpit for domestic sourcing. Since domestic varieties like Shankar-6 and MCU-5 form the baseline feed for standard carded/combed counts, monitoring Mandi arrivals, Cotton Corporation of India (CCI) procurement, and spot price movements ensures that procurement teams buy when the physical arrivals peak and prices dip.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 2: MSP-Aware Shankar-6 Spot Pricing Parity</span>
+    $$	ext{Shankar-6 Spot Price} = maxleft(54500, lfloor	ext{ICE INR Equivalent} 	imes 0.965flooright)$$
+    <br>
+    <em>Where: ₹54,500 is the regulatory Minimum Support Price (MSP) floor candy equivalent. A discount factor of 0.965 accounts for higher average trash content in domestic lint.</em>
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Domestic Price list</strong>: Highlights regional variety rates per candy and bale.</li>
+    <li><strong>Mandi Arrivals Bar Chart</strong>: Plots weekly raw arrivals in regional markets, helping predict near-term spot price declines when arrival curves spike.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/india_focus.png" class="screenshot" alt="India Focus Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 3.1: India Focus Dashboard tracking Shankar-6, MCU-5, and regional Mandi arrivals.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>4. Cotton Markets & Ginning Parity (Tab 3)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    Ginning Out-Turn (GOT%) represents the percentage of lint extracted from raw seed cotton (Kapas). Different regions and crop varieties produce different GOT yields. Sourcing cotton with a high GOT percentage maximizes processed fiber yield and directly increases the ginning margin spread.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 3: Ginned Candy Cost & Parity Spread</span>
+    $$	ext{Clean Cotton Cost} = rac{	ext{Mandi Candy Price}}{1 - 	ext{Waste}%}$$
+    $$	ext{Total Ginned Candy Cost} = 	ext{Clean Cotton Cost} + 	ext{Pressed Baling Cost} + 	ext{Sorting Expenses}$$
+    $$	ext{Net Ginning Margin (Spread)} = 	ext{Market Selling Price} - 	ext{Total Ginned Candy Cost}$$
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Interactive Parity Calculator</strong>: Calculates the raw Kapas value per quintal and total candy cost based on the selected variety, showing the exact net ginning margin.</li>
+    <li><strong>Indian State-Wise GOT Parity Table</strong>: Lists production alongside regional average yields and Ginning Out-Turn percentages.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/cotton_markets.png" class="screenshot" alt="Cotton Markets Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 4.1: Cotton Markets Dashboard displaying crop parity calculators and state-wise ginning parameters.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>5. Yarn Markets & Spinning Parity (Tab 4)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    Spinning mills face severe margin squeezes. When cotton prices rise, yarn prices do not always rise in tandem, resulting in margin contraction. The Yarn Markets tab helps spinning mills monitor count-specific <strong>Spinning Spreads</strong> (Yarn Price minus Raw Cotton Cost & conversion overheads) to determine which counts are profitable to spin.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 4: Yarn Count Physical Costing & Margin Spreads</span>
+    $$	ext{Clean Cotton Cost (₹/kg)} = rac{	ext{Shankar-6 Spot Price (₹/Candy)}}{355.62 	imes 	ext{Yield}}$$
+    $$	ext{Total Yarn Manufacturing Cost} = 	ext{Clean Cotton Cost} + 	ext{Mill Conversion Cost}$$
+    $$	ext{Spinning Margin Spread (₹/kg)} = 	ext{Yarn Market Selling Price} - 	ext{Total Yarn Manufacturing Cost}$$
+    <br>
+    <em>Where Yield and Conversion Costs vary by count spinning system:</em>
+    <ul>
+      <li>20s Carded: Yield = 91%, Conversion Cost = ₹45/kg</li>
+      <li>30s Combed: Yield = 80%, Conversion Cost = ₹65/kg</li>
+      <li>40s Compact: Yield = 77%, Conversion Cost = ₹95/kg</li>
+      <li>80s Compact: Yield = 50%, Conversion Cost = ₹265/kg</li>
+    </ul>
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Split Tables</strong>: Displays pure cotton yarns and synthetic/blends tables side-by-side.</li>
+    <li><strong>Interactive Spinning Margin Calculator</strong>: Computes the count-specific yarn price, clean raw material equivalent, fixed power/labor conversion cost, and finished manufacturing cost to evaluate profit spreads.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/yarn_markets.png" class="screenshot" alt="Yarn Markets Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 5.1: Yarn Markets Dashboard showing split count lists and the Spinning Parity Calculator.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>6. Import & Export Sourcing Desk (Tab 5)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    Spinning mills must evaluate whether importing foreign cotton is more cost-effective than purchasing domestic out-of-state cotton (e.g., from Gujarat). Similarly, export realizations must be evaluated against local sales. The Import & Export Desk provides full logistics visibility, factoring in customs, surcharges, and local port freight.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 5: Sourcing Landed Cost Equations</span>
+    $$	ext{CIF (INR)} = 	ext{FOB Price (INR)} + 	ext{Ocean Freight} + 	ext{Marine Insurance}$$
+    $$	ext{Basic Customs Duty (BCD)} = 	ext{CIF} 	imes 10%$$
+    $$	ext{Agri Infrastructure Cess (AIDC)} = 	ext{CIF} 	imes 5%$$
+    $$	ext{Social Welfare Surcharge (SWS)} = (	ext{BCD} + 	ext{AIDC}) 	imes 10%$$
+    $$	ext{Global Landed Cost} = 	ext{CIF} + 	ext{BCD} + 	ext{AIDC} + 	ext{SWS} + 	ext{Port Handling} + 	ext{Inland Road Freight}$$
+    <br>
+    $$	ext{Domestic Interstate Landed Cost} = 	ext{Mandi Spot Price} + 	ext{Inland Freight} + 	ext{GST (RCM 5%)} + 	ext{Mandi Cess (1%)} + 	ext{Handling}$$
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Sourcing Landed Cost Calculator</strong>: Computes global container freight and duties vs domestic road transportation costs.</li>
+    <li><strong>Yarn Export Net Realization</strong>: Deducts port commissions, export wrapping, and sea logistics from destination sale values to show net mill-gate profits.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/import_export.png" class="screenshot" alt="Import & Export Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 6.1: Import & Export Planning Desk displaying Landed Cost Calculator fields.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>7. Live News & Arbitrage Playbook (Tab 6)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    Textile markets respond heavily to news events, macro policies, and agricultural warnings. The Playbook establishes operational SOPs (Standard Operating Procedures) for buyers during weather anomalies (such as El Niño droughts) or tariff changes. This helps the mill stay proactive rather than reactive during supply shocks.
+  </p>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>Arbitrage Rules</strong>: Guides buyers on when to buy long-term forwards (e.g. when ICE price dips below MSP margins).</li>
+    <li><strong>Macro Incident Grid</strong>: Connects global news (e.g., Canal transit constraints) to affected segments and finished yarn price implications.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/live_news.png" class="screenshot" alt="Live News & Playbook Screenshot">
+    <div class="screenshot-caption">Figure 7.1: Live News, Incidents, & Sourcing Playbook Desk.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>8. Variety Explorer Suite (Analysis Sub-Tabs)</h1>
+  <h2>8.1. 80+ Variety Explorer</h2>
+  <p>
+    <strong>Purpose:</strong> A searchable, categorized library of domestic cottons, global benchmarks, and yarn varieties. It permits buyers to cross-examine properties (staple, micronaire, price) and compare up to three varieties in a spec matrix.
+  </p>
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/variety_explorer.png" class="screenshot" alt="80+ Varieties Explorer Screenshot">
+    <div class="screenshot-caption">Figure 8.1: Variety Explorer sub-tab featuring the Comparison Matrix.</div>
+  </div>
+
+  <h2>8.2. Crop Cycle & Pricing Calendar</h2>
+  <p>
+    <strong>Purpose:</strong> Displays sowing, growth, harvesting cycles, and seasonal spot price expectations across 12 months. It guides buyers to build stockpiles during low-price harvest windows (Nov-Feb) and minimize buying during high-price sowing cycles (July-Sept).
+  </p>
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/crop_calendar.png" class="screenshot" alt="Crop Sowing Calendar Screenshot">
+    <div class="screenshot-caption">Figure 8.2: 12-Month Sowing & Pricing Seasonality Calendar.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h2>8.3. Technical Price Analytics & Crossover Alerts</h2>
+  <p>
+    <strong>Purpose:</strong> Evaluates active spot price trend charts and moving averages (10-day MA, 50-day MA). It computes support/resistance thresholds and volatility indices, generating buy/sell momentum signals (Golden Cross / Death Cross).
+  </p>
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/price_analytics.png" class="screenshot" alt="Technical Price Analytics Screenshot">
+    <div class="screenshot-caption">Figure 8.3: Technical price analytics with 60-day moving average chart and crossover alerts.</div>
+  </div>
+
+  <h2>8.4. State-Wise MSP Floor Reference Sheets</h2>
+  <p>
+    <strong>Purpose:</strong> Monitors regulatory floor prices (Minimum Support Prices) across Indian states, helping procurement managers assess state-wise crop margins.
+  </p>
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/state_msp.png" class="screenshot" alt="State-Wise MSP Table Screenshot">
+    <div class="screenshot-caption">Figure 8.4: Government MSP pricing table showing year-on-year increases.</div>
+  </div>
+
+  <div class="page-break"></div>
+
+  <h1>9. Yarn Quality & Statistical Process Control (Tab 7)</h1>
+  <h2>Purpose & Business Reason</h2>
+  <p>
+    Spinning floor quality stability dictates export contract compliance. Count variations cause fabric shading defects (barre), and weak strands trigger high-speed loom warp breaks. By monitoring Uster benchmarks and count runs, spinning technicians can stop machinery immediately upon observing count drift, avoiding waste.
+  </p>
+  
+  <h2>Calculations & Formulas</h2>
+  <div class="formula">
+    <span class="formula-title">Formula 6: SPC Count Limits & CV% Formulas</span>
+    $$	ext{Upper Control Limit (UCL)} = 	ext{Target Count} + left(	ext{Target Count} 	imes 2.0%ight)$$
+    $$	ext{Lower Control Limit (LCL)} = 	ext{Target Count} - left(	ext{Target Count} 	imes 2.0%ight)$$
+    $$	ext{Count Coefficient of Variation (CV%)} = rac{	ext{Standard Deviation of Yarn Count}}{	ext{Average Measured Count}} 	imes 100$$
+    <br>
+    <em>Where: A CV% below 1.0% represents top-tier global spinning consistency.</em>
+  </div>
+
+  <h2>How to Read the Visual Elements</h2>
+  <ul>
+    <li><strong>SPC Run Chart</strong>: Plots 15 daily batch runs against the Center Line (Target Count), UCL, and LCL. Points outside the boundaries indicate drafting zone instability.</li>
+    <li><strong>IPI Defect Bar Chart</strong>: Plots Thin, Thick, and Nep defects per kilometer against the top Uster 5% world benchmark.</li>
+  </ul>
+
+  <div class="screenshot-container">
+    <img src="file:///C:/Users/RAMANAN/Downloads/report_images/yarn_quality.png" class="screenshot" alt="Yarn Quality SPC Dashboard Screenshot">
+    <div class="screenshot-caption">Figure 9.1: Yarn Quality Dashboard showing the Count Run SPC chart and IPI defect breakdown.</div>
+  </div>
+
+</div>
+
+</body>
+</html>

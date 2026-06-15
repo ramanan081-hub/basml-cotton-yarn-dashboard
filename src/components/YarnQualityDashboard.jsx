@@ -361,7 +361,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       {/* Grid Overview Metrics */}
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-gutter">
         {/* Metric 1 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Strength (RKM)</span>
             <Award size={18} className="text-primary" />
@@ -373,7 +373,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Metric 2 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Count Deviation</span>
             <Activity size={18} className="text-primary" />
@@ -385,7 +385,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Metric 3 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Total Defects</span>
             <ShieldAlert size={18} className="text-tertiary" />
@@ -397,7 +397,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Metric 4 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Daily Output</span>
             <Database size={18} className="text-primary" />
@@ -409,7 +409,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Metric 5 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Hairiness (H)</span>
             <Layers size={18} className="text-primary" />
@@ -421,7 +421,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Metric 6 */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
+        <div className="card-metric-blue rounded-xxl neumorphic-raised p-5 flex flex-col justify-between">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] font-mono font-bold text-on-surface-variant uppercase tracking-wider">Elongation</span>
             <TrendingUp size={18} className="text-primary" />
@@ -434,7 +434,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       </div>
 
       {/* Row 1: Yarn Strength Analysis (Composed Layout: Text + Image) */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
         <h3 className="text-lg font-headline font-bold text-primary mb-4 flex items-center gap-2">
           <span className="material-symbols-outlined text-2xl">science</span>
           Yarn Strength Analysis & Tensile Correlation
@@ -465,7 +465,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       </div>
 
       {/* Row 2: Yarn Count Graph (Process Control SPC Chart) */}
-      <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+      <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
         <h3 className="text-lg font-headline font-bold text-primary mb-4 flex items-center gap-2">
           <span className="material-symbols-outlined text-2xl">show_chart</span>
           Yarn Count Graph & Statistical Process Control (SPC)
@@ -535,7 +535,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
       {/* Row 3: Imperfections Summary & Production Output Charts */}
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-gutter">
         {/* Left Column: Imperfections Summary */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+        <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
           <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
             <span className="material-symbols-outlined text-xl">report_problem</span>
             Imperfections Summary (IPI)
@@ -569,7 +569,7 @@ export default function YarnQualityDashboard({ darkMode, colors }) {
         </div>
 
         {/* Right Column: Production Output */}
-        <div className="bg-[#fffefe] dark:bg-[#1f1f21] rounded-xxl neumorphic-raised p-card-padding">
+        <div className="card-chart-green rounded-xxl neumorphic-raised p-card-padding">
           <h3 className="text-base font-headline font-bold text-primary mb-4 flex items-center gap-2">
             <span className="material-symbols-outlined text-xl">bar_chart</span>
             Production Output Chart
