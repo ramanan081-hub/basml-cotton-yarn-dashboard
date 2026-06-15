@@ -1181,7 +1181,7 @@ function App() {
 
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'instant' });
-  }, [activeTab]);
+  }, [activeTab, globalSubTab, indiaSubTab, impexpSubTab, analysisSubTab]);
 
   const themeColors = darkMode ? {
     primary: '#FB8C00',
