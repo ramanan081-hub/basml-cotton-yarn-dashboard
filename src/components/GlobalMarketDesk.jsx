@@ -478,12 +478,23 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, brentCrude, colo
           <span className="material-symbols-outlined text-tertiary">globe</span>
           Global Market, Energy & Geopolitics Desk
         </h3>
-        <p className="text-xs text-on-surface-variant max-w-4xl leading-relaxed">
-          The international cotton and synthetic fiber markets are profoundly intertwined with energy costs and geopolitical stability. 
-          **Polyester Staple Fiber (PSF)** is a direct petrochemical derivative. spattering crude oil prices raise precursor costs for 
-          **PTA** and **MEG**, lifting synthetic yarn rates. Concurrently, maritime wars and territorial blocks disrupt shipping routes, 
-          causing freight hikes and supply localization.
-        </p>
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          <p className="text-xs text-on-surface-variant max-w-3xl leading-relaxed">
+            The international cotton and synthetic fiber markets are profoundly intertwined with energy costs and geopolitical stability. 
+            **Polyester Staple Fiber (PSF)** is a direct petrochemical derivative. Spattering crude oil prices raise precursor costs for 
+            **PTA** and **MEG**, lifting synthetic yarn rates. Concurrently, maritime wars and territorial blocks disrupt shipping routes, 
+            causing freight hikes and supply localization.
+          </p>
+          <a
+            href={`https://www.cottoninc.com/wp-content/uploads/${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-Monthly-Economic-Letter.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-tertiary hover:bg-tertiary/90 text-white font-mono text-xs font-bold transition-all shadow-md hover:shadow-lg shrink-0 border border-white/10"
+          >
+            <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
+            Open Cotton Inc. Economic Letter ({['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][new Date().getMonth()]} {new Date().getFullYear()})
+          </a>
+        </div>
       </div>
 
       {/* Top Benchmarks Grid */}
