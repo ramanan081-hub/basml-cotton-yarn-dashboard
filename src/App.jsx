@@ -2201,6 +2201,69 @@ const stateTransportProfiles = {
   }
 };
 
+const cottonTypeSpecs = {
+  'Shankar-6': {
+    name: 'Shankar-6 (S-6)',
+    desc: 'Standard Medium-Long staple Indian cotton. Industry benchmark.',
+    basePriceDomestic: 65100,
+    basePriceGlobalCentsLb: 78.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '29.5 mm',
+    mic: '3.8 - 4.2'
+  },
+  'MCU-5': {
+    name: 'MCU-5',
+    desc: 'Premium South Indian long staple. Spinners choice for 40s-60s counts.',
+    basePriceDomestic: 69500,
+    basePriceGlobalCentsLb: 92.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '31.0 mm',
+    mic: '3.7 - 4.0'
+  },
+  'DCH-32 / Suvin': {
+    name: 'DCH-32 / Suvin (ELS)',
+    desc: 'Extra Long Staple (ELS) premium cotton. Used for luxury 80s-120s compact yarns.',
+    basePriceDomestic: 115000,
+    basePriceGlobalCentsLb: 210.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '35.0 mm',
+    mic: '3.2 - 3.6'
+  },
+  'Bunny': {
+    name: 'Bunny',
+    desc: 'Central India long staple variety. Uniform strength profiles.',
+    basePriceDomestic: 63800,
+    basePriceGlobalCentsLb: 82.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '30.0 mm',
+    mic: '3.8 - 4.3'
+  },
+  'J-34': {
+    name: 'J-34',
+    desc: 'North India short/medium staple. Coarse open-end counts.',
+    basePriceDomestic: 61200,
+    basePriceGlobalCentsLb: 72.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '27.5 mm',
+    mic: '4.0 - 4.6'
+  },
+  'Australia ECTA': {
+    name: 'Australian ECTA Premium',
+    desc: 'Australian premium clean long staple. Duty-free under ECTA.',
+    basePriceDomestic: 73000,
+    basePriceGlobalCentsLb: 88.0,
+    importBcd: 0,
+    importSws: 0,
+    staple: '29.4 mm',
+    mic: '3.8 - 4.4'
+  }
+};
+
 function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   
   const formatStateName = (name) => {
@@ -2216,6 +2279,12 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   // Import States - split into Global and Domestic channels
   const [selectedGlobalOrigin, setSelectedGlobalOrigin] = useState('USA');
   const [selectedDomesticOrigin, setSelectedDomesticOrigin] = useState('Gujarat (Dom)');
+  
+  // Cotton Sourcing Wizard States
+  const [selectedCottonType, setSelectedCottonType] = useState('Shankar-6');
+  const [selectedChannel, setSelectedChannel] = useState('global'); // 'global' or 'domestic'
+  const [tnLocalDistance, setTnLocalDistance] = useState(120); // local transport distance in km
+  
   
   // Global Sourcing states
   const [globalFobCentsLb, setGlobalFobCentsLb] = useState(liveIceCotton);
@@ -2367,6 +2436,16 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
       setUsdInrRate(liveUsdInr);
     }
   }, [liveUsdInr]);
+
+  useEffect(() => {
+    const spec = cottonTypeSpecs[selectedCottonType];
+    if (spec) {
+      setGlobalFobCentsLb(spec.basePriceGlobalCentsLb);
+      setGlobalBcdRate(spec.importBcd);
+      setGlobalSwsRate(spec.importSws);
+      setDomesticMandiPrice(spec.basePriceDomestic);
+    }
+  }, [selectedCottonType]);
 
   // Spinning count properties for simulator
   const countParams = {
@@ -4193,14 +4272,90 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
             </p>
           </div>
 
+          {/* Interactive Sourcing Wizard Card */}
+          <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4 bg-gradient-to-br from-primary-container/5 to-transparent">
+            <h3 className="text-sm font-headline font-bold text-primary flex items-center gap-2">
+              <span className="material-symbols-outlined text-lg">tune</span>
+              Interactive Cotton Sourcing Cost Wizard
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
+              {/* Step 1: Select Cotton Variety */}
+              <div className="md:col-span-7 space-y-2.5">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 1: Select Cotton Variety ({selectedCottonType})</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {Object.keys(cottonTypeSpecs).map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setSelectedCottonType(type)}
+                      className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                        selectedCottonType === type
+                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
+                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+                </div>
+                <div className="bg-surface-container-low/50 p-3 rounded-lg border border-outline-variant/15 text-xs text-on-surface-variant">
+                  <strong>Variety Characteristics</strong>: {cottonTypeSpecs[selectedCottonType]?.desc}
+                  <span className="block font-mono text-[10px] mt-1 text-primary">
+                    Staple Length: {cottonTypeSpecs[selectedCottonType]?.staple} | Micronaire: {cottonTypeSpecs[selectedCottonType]?.mic} | Target Cost: ₹{cottonTypeSpecs[selectedCottonType]?.basePriceDomestic.toLocaleString('en-IN')}/Candy
+                  </span>
+                </div>
+              </div>
+
+              {/* Step 2: Choose Sourcing Channel */}
+              <div className="md:col-span-5 space-y-2.5">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 2: Choose Sourcing Channel</span>
+                <div className="flex gap-2.5">
+                  <button
+                    onClick={() => setSelectedChannel('global')}
+                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 ${
+                      selectedChannel === 'global'
+                        ? 'bg-primary text-on-primary border-primary shadow-md ring-2 ring-primary/20'
+                        : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-sm">public</span>
+                    🌍 Global Import
+                  </button>
+                  <button
+                    onClick={() => setSelectedChannel('domestic')}
+                    className={`flex-1 py-2 px-3 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 ${
+                      selectedChannel === 'domestic'
+                        ? 'bg-primary text-on-primary border-primary shadow-md ring-2 ring-primary/20'
+                        : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                    }`}
+                  >
+                    <span className="material-symbols-outlined text-sm">local_shipping</span>
+                    🚛 Domestic Interstate
+                  </button>
+                </div>
+                <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  {selectedChannel === 'global'
+                    ? `Visualizing landed charges & documentation for overseas imported ${selectedCottonType}.`
+                    : `Visualizing road vs rail freight and mandi charges for domestic ${selectedCottonType}.`}
+                </p>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-12 gap-gutter">
             {/* Global Port-to-Mill Corridor */}
-            <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
+            <div className={`col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border transition-all duration-300 space-y-5 ${
+              selectedChannel === 'global' 
+                ? 'border-primary/40 shadow-lg ring-1 ring-primary/20 opacity-100 scale-[1.005]' 
+                : 'border-primary/10 opacity-55 saturate-50 hover:opacity-85 hover:saturate-100'
+            }`}>
               <div className="space-y-3">
-                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-lg">directions_boat</span>
-                  Global Import Corridor (Port to Tamil Nadu Mill)
-                </h4>
+                <div className="flex justify-between items-center">
+                  <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-lg">directions_boat</span>
+                    Global Import Corridor (Port to Tamil Nadu Mill)
+                  </h4>
+                  {selectedChannel === 'global' && <span className="text-[8px] bg-primary text-on-primary font-mono px-1.5 py-0.5 rounded font-bold">WIZARD ACTIVE</span>}
+                </div>
                 
                 {/* Country Selector Buttons */}
                 <div className="space-y-1.5">
@@ -4209,7 +4364,10 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     {['USA', 'Brazil', 'Egypt', 'West Africa', 'Australia', 'Greece', 'Turkey'].map((country) => (
                       <button
                         key={country}
-                        onClick={() => setSelectedGlobalOrigin(country)}
+                        onClick={() => {
+                          setSelectedGlobalOrigin(country);
+                          setSelectedChannel('global');
+                        }}
                         className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
                           selectedGlobalOrigin === country
                             ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
@@ -4315,12 +4473,19 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
             </div>
 
             {/* Domestic Mandi-to-Mill Corridor */}
-            <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
+            <div className={`col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border transition-all duration-300 space-y-5 ${
+              selectedChannel === 'domestic' 
+                ? 'border-primary/40 shadow-lg ring-1 ring-primary/20 opacity-100 scale-[1.005]' 
+                : 'border-primary/10 opacity-55 saturate-50 hover:opacity-85 hover:saturate-100'
+            }`}>
               <div className="space-y-3">
-                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                  <span className="material-symbols-outlined text-lg">local_shipping</span>
-                  Domestic Interstate Corridor (Mandi to Tamil Nadu Mill)
-                </h4>
+                <div className="flex justify-between items-center">
+                  <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                    <span className="material-symbols-outlined text-lg">local_shipping</span>
+                    Domestic Interstate Corridor (Mandi to Tamil Nadu Mill)
+                  </h4>
+                  {selectedChannel === 'domestic' && <span className="text-[8px] bg-primary text-on-primary font-mono px-1.5 py-0.5 rounded font-bold">WIZARD ACTIVE</span>}
+                </div>
 
                 {/* State Selector Buttons */}
                 <div className="space-y-1.5">
@@ -4329,7 +4494,10 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     {['Gujarat (Dom)', 'Maharashtra (Dom)', 'Telangana (Dom)', 'Andhra Pradesh (Dom)', 'Karnataka (Dom)', 'Madhya Pradesh (Dom)', 'Punjab (Dom)', 'Rajasthan (Dom)'].map((state) => (
                       <button
                         key={state}
-                        onClick={() => setSelectedDomesticOrigin(state)}
+                        onClick={() => {
+                          setSelectedDomesticOrigin(state);
+                          setSelectedChannel('domestic');
+                        }}
                         className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
                           selectedDomesticOrigin === state
                             ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
@@ -4467,6 +4635,111 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     <span>₹{getDomesticImportDetails(selectedDomesticOrigin).landedKg.toFixed(2)}/Kg</span>
                   </div>
                 </div>
+              </div>
+            </div>
+
+            {/* Tamil Nadu Local Sourcing Corridor (Theni/Madurai/Rajapalayam to Erode/Salem Mill Gate) */}
+            <div className="col-span-12 card-table-orange rounded-xxl p-6 border border-primary/20 space-y-5 bg-gradient-to-r from-forest-green/5 via-transparent to-transparent">
+              <div className="flex justify-between items-center flex-wrap gap-2">
+                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-lg">local_shipping</span>
+                  Tamil Nadu Local Corridor (Local Mandi/Farm to Mill Gate Sourcing)
+                </h4>
+                <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-forest-green/15 text-forest-green border border-forest-green/25 text-[9px] font-mono font-bold">
+                  <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                  LOCAL SOURCING OPTION
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                {/* Inputs */}
+                <div className="md:col-span-4 space-y-4">
+                  <div className="space-y-1.5">
+                    <label className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Local Road Distance (km)</label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="range"
+                        min="30"
+                        max="400"
+                        step="10"
+                        value={tnLocalDistance}
+                        onChange={(e) => setTnLocalDistance(parseInt(e.target.value) || 30)}
+                        className="flex-1 accent-primary h-1.5 bg-surface-container rounded-lg appearance-none cursor-pointer"
+                      />
+                      <span className="text-xs font-mono font-bold w-12 text-right">{tnLocalDistance} km</span>
+                    </div>
+                  </div>
+
+                  {/* Operational parameters list */}
+                  <div className="text-[10px] font-mono bg-surface-container-low/50 p-3 rounded-lg border border-outline-variant/15 space-y-1">
+                    <strong className="text-primary uppercase tracking-wider block mb-1">Local TN Logistics Benchmarks</strong>
+                    <div>• <strong>Road Rate/km</strong>: ₹4.50 per Candy/km</div>
+                    <div>• <strong>Toll Plazas</strong>: {Math.max(1, Math.round(tnLocalDistance / 80))} local plaza(s)</div>
+                    <div>• <strong>Mandi Cess</strong>: 1% TN Market Cess (Neutral if direct ginner bill)</div>
+                    <div>• <strong>TN Handling</strong>: ₹800 / Candy</div>
+                  </div>
+                </div>
+
+                {/* Calculation math */}
+                {(() => {
+                  const localFreightPerCandy = tnLocalDistance * 4.5;
+                  const localTollsCount = Math.max(1, Math.round(tnLocalDistance / 80));
+                  const localTollsCost = localTollsCount * 180; // Local commercial vehicle toll is ~₹180 per plaza
+                  const localBasePrice = cottonTypeSpecs[selectedCottonType]?.basePriceDomestic || 65100;
+                  const localMandiFee = localBasePrice * 0.01; // 1% of selected variety
+                  const localHandlingCost = 800;
+                  const localTotalLanded = localBasePrice + localFreightPerCandy + localTollsCost + localMandiFee + localHandlingCost;
+
+                  return (
+                    <>
+                      {/* Cost Breakdown Table */}
+                      <div className="md:col-span-4 overflow-x-auto">
+                        <table className="w-full text-left font-mono text-[10px] border-collapse">
+                          <thead>
+                            <tr className="border-b border-outline-variant/40 text-outline">
+                              <th className="pb-1.5 font-bold">Local Cost Component</th>
+                              <th className="pb-1.5 font-bold text-right">Charges (₹/Candy)</th>
+                            </tr>
+                          </thead>
+                          <tbody className="divide-y divide-outline-variant/20 text-on-surface text-right">
+                            <tr>
+                              <td className="py-2 text-left font-sans font-bold">Local Mandi Price ({selectedCottonType})</td>
+                              <td className="py-2 font-bold">₹{localBasePrice.toLocaleString('en-IN')}</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 text-left font-sans font-bold">Local Road Freight</td>
+                              <td className="py-2 font-bold">₹{Math.round(localFreightPerCandy).toLocaleString('en-IN')}</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 text-left font-sans font-bold">Local NHAI Toll Plazas ({localTollsCount})</td>
+                              <td className="py-2 font-bold text-error">₹{localTollsCost.toLocaleString('en-IN')}</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 text-left font-sans font-bold">TN APMC Mandi Cess (1%)</td>
+                              <td className="py-2 font-bold">₹{Math.round(localMandiFee).toLocaleString('en-IN')}</td>
+                            </tr>
+                            <tr>
+                              <td className="py-2 text-left font-sans font-bold">Loading/Unloading & Handling</td>
+                              <td className="py-2 font-bold">₹{localHandlingCost.toLocaleString('en-IN')}</td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+
+                      {/* Summary Box */}
+                      <div className="md:col-span-4 bg-surface-container-low p-4 rounded-xl border border-outline-variant/30 space-y-3 font-mono">
+                        <div className="text-center">
+                          <span className="text-[10px] text-outline block font-bold">TOTAL LOCAL LANDED COST</span>
+                          <span className="text-xl font-black text-forest-green">₹{Math.round(localTotalLanded).toLocaleString('en-IN')}</span>
+                          <span className="text-[9px] text-on-surface-variant block mt-1">(Madurai/Theni/Rajapalayam ➔ Mill)</span>
+                        </div>
+                        <div className="text-[10px] text-on-surface-variant border-t border-dashed border-outline-variant/30 pt-2 text-center leading-relaxed">
+                          Local TN road haulage is **₹{(Math.round(getDomesticImportDetails(selectedDomesticOrigin).freightInr) - Math.round(localFreightPerCandy)).toLocaleString('en-IN')} cheaper** than importing road freight from {formatStateName(selectedDomesticOrigin)}, saving on high interstate toll plazas.
+                        </div>
+                      </div>
+                    </>
+                  );
+                })()}
               </div>
             </div>
           </div>
