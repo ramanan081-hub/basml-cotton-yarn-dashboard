@@ -5577,12 +5577,21 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                       {data.prices.types
                         .filter(t => !t.type.includes('ICE Cotton'))
                         .map((entry, index) => {
-                          const isSpecial = entry.type.includes('Bunny') || entry.type.includes('MCU-5');
+                          const orangeColors = [
+                            '#E65100', // Deep Orange
+                            '#EF6C00', // Medium-Deep Orange
+                            '#F57C00', // Medium Orange
+                            '#FB8C00', // Bright Orange
+                            '#FF9800', // Standard Orange
+                            '#FFA726', // Light Orange
+                            '#FFB74D', // Soft Peach Orange
+                            '#FFCC80'  // Pale Orange
+                          ];
+                          const color = orangeColors[index % orangeColors.length];
                           return (
                             <Cell 
                               key={`cell-${index}`} 
-                              fill={isSpecial ? 'var(--color-primary)' : 'var(--color-secondary)'} 
-                              opacity={isSpecial ? 1.0 : 0.6}
+                              fill={color}
                             />
                           );
                         })}
@@ -5592,12 +5601,8 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
               </div>
               <div className="flex justify-center items-center gap-4 text-[10px] font-mono font-bold text-on-surface-variant">
                 <span className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 bg-primary rounded-sm"></span>
-                  Bunny / MCU-5 Focus
-                </span>
-                <span className="flex items-center gap-1.5">
-                  <span className="w-3 h-3 bg-secondary opacity-60 rounded-sm"></span>
-                  Other Varieties
+                  <span className="w-6 h-1.5 rounded-full" style={{ background: 'linear-gradient(90deg, #E65100, #FFCC80)' }}></span>
+                  Domestic Spot Price Spectrum (Orange Shades)
                 </span>
               </div>
             </div>
