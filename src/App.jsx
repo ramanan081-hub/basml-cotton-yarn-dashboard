@@ -2202,65 +2202,183 @@ const stateTransportProfiles = {
 };
 
 const cottonTypeSpecs = {
+  // --- Indian Domestic Varieties ---
   'Shankar-6': {
     name: 'Shankar-6 (S-6)',
-    desc: 'Standard Medium-Long staple Indian cotton. Industry benchmark.',
+    desc: 'Standard Medium-Long staple Indian cotton. Benchmarked for hosiery and weaving counts (30s-40s).',
     basePriceDomestic: 65100,
     basePriceGlobalCentsLb: 78.5,
     importBcd: 10,
     importSws: 10,
     staple: '29.5 mm',
-    mic: '3.8 - 4.2'
+    mic: '3.8 - 4.2',
+    originType: 'Domestic'
   },
   'MCU-5': {
     name: 'MCU-5',
-    desc: 'Premium South Indian long staple. Spinners choice for 40s-60s counts.',
+    desc: 'Premium South Indian long staple. Spinners choice for high-strength 40s-60s combed counts.',
     basePriceDomestic: 69500,
     basePriceGlobalCentsLb: 92.0,
     importBcd: 10,
     importSws: 10,
     staple: '31.0 mm',
-    mic: '3.7 - 4.0'
+    mic: '3.7 - 4.0',
+    originType: 'Domestic'
   },
   'DCH-32 / Suvin': {
     name: 'DCH-32 / Suvin (ELS)',
-    desc: 'Extra Long Staple (ELS) premium cotton. Used for luxury 80s-120s compact yarns.',
+    desc: 'Extra Long Staple (ELS) premium Indian cotton. Ideal for luxury 80s-120s compact warp yarns.',
     basePriceDomestic: 115000,
     basePriceGlobalCentsLb: 210.0,
     importBcd: 10,
     importSws: 10,
     staple: '35.0 mm',
-    mic: '3.2 - 3.6'
+    mic: '3.2 - 3.6',
+    originType: 'Domestic'
   },
   'Bunny': {
     name: 'Bunny',
-    desc: 'Central India long staple variety. Uniform strength profiles.',
+    desc: 'Central India long staple variety. Great dye absorption and uniform strength profiles.',
     basePriceDomestic: 63800,
     basePriceGlobalCentsLb: 82.0,
     importBcd: 10,
     importSws: 10,
     staple: '30.0 mm',
-    mic: '3.8 - 4.3'
+    mic: '3.8 - 4.3',
+    originType: 'Domestic'
+  },
+  'Kohinoor 212+': {
+    name: 'Kohinoor 212+',
+    desc: 'High-yield Central Indian medium-long variety. Suitable for 32s-40s carded knitting yarns.',
+    basePriceDomestic: 64200,
+    basePriceGlobalCentsLb: 81.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '29.0 mm',
+    mic: '3.9 - 4.4',
+    originType: 'Domestic'
+  },
+  'MCU-7': {
+    name: 'MCU-7',
+    desc: 'Coastal southern medium staple variety. Low trash, optimal for 30s carded weaving.',
+    basePriceDomestic: 62800,
+    basePriceGlobalCentsLb: 76.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '28.0 mm',
+    mic: '4.0 - 4.5',
+    originType: 'Domestic'
   },
   'J-34': {
     name: 'J-34',
-    desc: 'North India short/medium staple. Coarse open-end counts.',
+    desc: 'North India short/medium staple. Benchmarked for coarse open-end denim and utility fabrics (10s-24s).',
     basePriceDomestic: 61200,
     basePriceGlobalCentsLb: 72.0,
     importBcd: 10,
     importSws: 10,
     staple: '27.5 mm',
-    mic: '4.0 - 4.6'
+    mic: '4.0 - 4.6',
+    originType: 'Domestic'
   },
-  'Australia ECTA': {
-    name: 'Australian ECTA Premium',
-    desc: 'Australian premium clean long staple. Duty-free under ECTA.',
-    basePriceDomestic: 73000,
-    basePriceGlobalCentsLb: 88.0,
+  'V797': {
+    name: 'V797',
+    desc: 'Short staple Kalagin variety from Gujarat. Highly economical, high trash, used for 10s-20s open-end.',
+    basePriceDomestic: 42500,
+    basePriceGlobalCentsLb: 52.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '22.0 mm',
+    mic: '4.8 - 5.5',
+    originType: 'Domestic'
+  },
+  // --- Global Import Varieties ---
+  'US Upland': {
+    name: 'US Upland',
+    desc: 'Standard machine-picked US cotton. Highly standardized HVI grading and contamination-free.',
+    basePriceDomestic: 74200,
+    basePriceGlobalCentsLb: 78.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '28.6 mm',
+    mic: '3.8 - 4.5',
+    originType: 'Global'
+  },
+  'Brazil Cerrado': {
+    name: 'Brazil Cerrado',
+    desc: 'Brazilian Cerrado cotton. High volume availability during Indian off-season. Very clean.',
+    basePriceDomestic: 72800,
+    basePriceGlobalCentsLb: 73.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '30.0 mm',
+    mic: '3.9 - 4.8',
+    originType: 'Global'
+  },
+  'Egyptian Giza': {
+    name: 'Egyptian Giza ELS',
+    desc: 'Premium extra-long staple (Giza 94/96). Superb luster and strength for luxury compact yarns.',
+    basePriceDomestic: 182000,
+    basePriceGlobalCentsLb: 212.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '35.0 mm',
+    mic: '3.2 - 3.8',
+    originType: 'Global'
+  },
+  'West African': {
+    name: 'West African Styles',
+    desc: 'Hand-picked West African styles (Aon/Cotontchad). Cost-effective blending fiber.',
+    basePriceDomestic: 73500,
+    basePriceGlobalCentsLb: 82.4,
+    importBcd: 10,
+    importSws: 10,
+    staple: '27.8 mm',
+    mic: '3.8 - 4.6',
+    originType: 'Global'
+  },
+  'Australian Premium': {
+    name: 'Australian Premium',
+    desc: 'Highly uniform and clean Australian ECTA cotton. Fully exempt from BCD under trade treaty.',
+    basePriceDomestic: 81000,
+    basePriceGlobalCentsLb: 87.9,
     importBcd: 0,
     importSws: 0,
     staple: '29.4 mm',
-    mic: '3.8 - 4.4'
+    mic: '3.8 - 4.4',
+    originType: 'Global'
+  },
+  'Greek Cotton': {
+    name: 'Greek Cotton',
+    desc: 'Machine harvested Mediterranean cotton. Exceptional color grade and low moisture profiles.',
+    basePriceDomestic: 75500,
+    basePriceGlobalCentsLb: 80.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '27.8 mm',
+    mic: '3.9 - 4.5',
+    originType: 'Global'
+  },
+  'Turkish Cotton': {
+    name: 'Turkish Aegean',
+    desc: 'Aegean long staple cotton. High maturity, uniform fibers, ideal for combed hosiery counts.',
+    basePriceDomestic: 78200,
+    basePriceGlobalCentsLb: 84.8,
+    importBcd: 10,
+    importSws: 10,
+    staple: '28.6 mm',
+    mic: '4.0 - 4.6',
+    originType: 'Global'
+  },
+  'Cotlook A-Index': {
+    name: 'Cotlook A-Index Benchmark',
+    desc: 'Global benchmark representative of representative styles landed in Far East ports.',
+    basePriceDomestic: 76000,
+    basePriceGlobalCentsLb: 81.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '29.0 mm',
+    mic: '3.8 - 4.3',
+    originType: 'Global'
   }
 };
 
@@ -4282,14 +4400,32 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               {/* Step 1: Select Cotton Variety */}
               <div className="md:col-span-7 space-y-2.5">
                 <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 1: Select Cotton Variety ({selectedCottonType})</span>
-                <div className="flex flex-wrap gap-1.5">
-                  {Object.keys(cottonTypeSpecs).map((type) => (
+                <div className="flex gap-2 items-center overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/45 scrollbar-track-transparent">
+                  {/* Domestic Column Divider */}
+                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0">DOMESTIC</span>
+                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Domestic').map((type) => (
                     <button
                       key={type}
                       onClick={() => setSelectedCottonType(type)}
-                      className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
                         selectedCottonType === type
-                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
+                          ? 'bg-forest-green text-white border-forest-green shadow-sm font-extrabold scale-[1.02]'
+                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+
+                  {/* Global Column Divider */}
+                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">GLOBAL IMPORT</span>
+                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Global').map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => setSelectedCottonType(type)}
+                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
+                        selectedCottonType === type
+                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold scale-[1.02]'
                           : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
                       }`}
                     >
