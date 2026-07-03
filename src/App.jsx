@@ -1971,9 +1971,12 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   // Global Export States
   const [exportPriceUsdKg, setExportPriceUsdKg] = useState(3.40);
   const [globalExportLocalPriceInrKg, setGlobalExportLocalPriceInrKg] = useState(272);
-  const [exportIncentiveRate, setExportIncentiveRate] = useState(3.5); // RoDTEP %
-  const [oceanFreightExportKg, setOceanFreightExportKg] = useState(10.0); // INR per Kg
+  const [exportIncentiveRate, setExportIncentiveRate] = useState(1.5); // RoDTEP % (Yarn gets RoDTEP only, typically 1.2% - 1.5%)
+  const [oceanFreightExportKg, setOceanFreightExportKg] = useState(10.0); // Inland Port Freight, INR per Kg
   const [customsClearingExportKg, setCustomsClearingExportKg] = useState(3.5); // INR per Kg
+  const [exportLcDelayDays, setExportLcDelayDays] = useState(60); // LC payment delay days
+  const [workingCapitalInterestRate, setWorkingCapitalInterestRate] = useState(9.5); // WC Interest rate %
+  const [exportAgentCommissionRate, setExportAgentCommissionRate] = useState(1.5); // Global agent commission %
 
   // Domestic Export States
   const [domesticTargetPriceInrKg, setDomesticTargetPriceInrKg] = useState(285.00);
@@ -2251,14 +2254,14 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
 
   const exportGlobalPresets = {
-    'Bangladesh': { price: 3.40, domestic: 272, incentive: 3.5, freight: 10.0, clearing: 3.5, yarnSpec: '30s Carded Knit, 40s Combed Knit', mktShare: '35%', importDuty: 'Duty-Free (SAFTA)' },
-    'China': { price: 3.25, domestic: 272, incentive: 3.0, freight: 12.0, clearing: 4.0, yarnSpec: '20s Carded Weaving, 32s PC Blend', mktShare: '15%', importDuty: '3.5% Basic Duty' },
-    'Vietnam': { price: 3.30, domestic: 272, incentive: 3.5, freight: 11.5, clearing: 3.8, yarnSpec: '32s & 40s Combed Knit', mktShare: '20%', importDuty: 'Duty-Free (ASEAN-India FTA)' },
-    'Portugal': { price: 3.85, domestic: 312, incentive: 4.5, freight: 22.0, clearing: 5.5, yarnSpec: '60s & 80s Combed Compact (ELS/Org)', mktShare: '8%', importDuty: '4.0% EU Common Tariff' },
-    'Turkey': { price: 3.45, domestic: 272, incentive: 3.5, freight: 14.0, clearing: 3.8, yarnSpec: '30s & 40s Combed Knit', mktShare: '12%', importDuty: 'Duty-Free (Customs Union)' },
-    'Germany': { price: 3.90, domestic: 312, incentive: 4.5, freight: 24.0, clearing: 5.8, yarnSpec: '60s & 80s Organic Compact', mktShare: '6%', importDuty: '4.0% EU Common Tariff' },
-    'Egypt': { price: 3.50, domestic: 272, incentive: 3.5, freight: 12.0, clearing: 3.5, yarnSpec: '30s Carded, 40s Combed', mktShare: '5%', importDuty: '5.0% Basic Duty' },
-    'Italy': { price: 3.95, domestic: 312, incentive: 4.5, freight: 23.0, clearing: 5.6, yarnSpec: '80s & 100s Compact (Supima)', mktShare: '7%', importDuty: '4.0% EU Common Tariff' },
+    'Bangladesh': { price: 3.40, domestic: 272, incentive: 1.5, freight: 10.0, clearing: 3.5, lcDelayDays: 60, commission: 1.5, yarnSpec: '30s Carded Knit, 40s Combed Knit', mktShare: '35%', importDuty: 'Duty-Free (SAFTA)' },
+    'China': { price: 3.25, domestic: 272, incentive: 1.2, freight: 12.0, clearing: 4.0, lcDelayDays: 30, commission: 1.0, yarnSpec: '20s Carded Weaving, 32s PC Blend', mktShare: '15%', importDuty: '3.5% Basic Duty' },
+    'Vietnam': { price: 3.30, domestic: 272, incentive: 1.5, freight: 11.5, clearing: 3.8, lcDelayDays: 30, commission: 1.2, yarnSpec: '32s & 40s Combed Knit', mktShare: '20%', importDuty: 'Duty-Free (ASEAN-India FTA)' },
+    'Portugal': { price: 3.85, domestic: 312, incentive: 1.8, freight: 22.0, clearing: 5.5, lcDelayDays: 45, commission: 2.0, yarnSpec: '60s & 80s Combed Compact (ELS/Org)', mktShare: '8%', importDuty: '4.0% EU Common Tariff' },
+    'Turkey': { price: 3.45, domestic: 272, incentive: 1.5, freight: 14.0, clearing: 3.8, lcDelayDays: 45, commission: 1.5, yarnSpec: '30s & 40s Combed Knit', mktShare: '12%', importDuty: 'Duty-Free (Customs Union)' },
+    'Germany': { price: 3.90, domestic: 312, incentive: 1.8, freight: 24.0, clearing: 5.8, lcDelayDays: 45, commission: 2.0, yarnSpec: '60s & 80s Organic Compact', mktShare: '6%', importDuty: '4.0% EU Common Tariff' },
+    'Egypt': { price: 3.50, domestic: 272, incentive: 1.5, freight: 12.0, clearing: 3.5, lcDelayDays: 60, commission: 1.5, yarnSpec: '30s Carded, 40s Combed', mktShare: '5%', importDuty: '5.0% Basic Duty' },
+    'Italy': { price: 3.95, domestic: 312, incentive: 1.8, freight: 23.0, clearing: 5.6, lcDelayDays: 45, commission: 2.0, yarnSpec: '80s & 100s Compact (Supima)', mktShare: '7%', importDuty: '4.0% EU Common Tariff' },
   };
 
   const exportDomesticPresets = {
@@ -2387,6 +2390,8 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
     setExportIncentiveRate(p.incentive);
     setOceanFreightExportKg(p.freight);
     setCustomsClearingExportKg(p.clearing);
+    setExportLcDelayDays(p.lcDelayDays);
+    setExportAgentCommissionRate(p.commission);
   };
 
   const handleExportDomesticPreset = (st) => {
@@ -2496,7 +2501,12 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   // Global Export Calculations
   const grossExportRevenueInrKg = exportPriceUsdKg * usdInrRate;
   const incentiveRevenueInrKg = grossExportRevenueInrKg * (exportIncentiveRate / 100);
-  const netExportRealizationInrKg = grossExportRevenueInrKg + incentiveRevenueInrKg - oceanFreightExportKg - customsClearingExportKg;
+  
+  // Real-world cost modeling adjustments
+  const exportFinancingCostInrKg = grossExportRevenueInrKg * (workingCapitalInterestRate / 100) * (exportLcDelayDays / 365);
+  const exportAgentCommissionInrKg = grossExportRevenueInrKg * (exportAgentCommissionRate / 100);
+  
+  const netExportRealizationInrKg = grossExportRevenueInrKg + incentiveRevenueInrKg - oceanFreightExportKg - customsClearingExportKg - exportFinancingCostInrKg - exportAgentCommissionInrKg;
   const exportPremiumInrKg = netExportRealizationInrKg - globalExportLocalPriceInrKg;
 
   // Domestic Export Calculations
@@ -3324,7 +3334,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GOVT INCENTIVE ROSCTL/RODTEP (%)</label>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GOVT INCENTIVE RoDTEP (%) - Yarn Eligible Only</label>
                     <input
                       type="number"
                       step="0.1"
@@ -3335,7 +3345,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                   </div>
 
                   <div>
-                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">OCEAN FREIGHT & HANDLING (INR/KG)</label>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">INLAND FREIGHT TO PORT & FOB HANDLING (INR/KG)</label>
                     <input
                       type="number"
                       step="0.5"
@@ -3352,6 +3362,38 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                       step="0.1"
                       value={customsClearingExportKg}
                       onChange={(e) => setCustomsClearingExportKg(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">LC PAYMENT DELAY (DAYS)</label>
+                    <input
+                      type="number"
+                      value={exportLcDelayDays}
+                      onChange={(e) => setExportLcDelayDays(parseInt(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">WORKING CAPITAL INT. (% ANNUAL)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={workingCapitalInterestRate}
+                      onChange={(e) => setWorkingCapitalInterestRate(parseFloat(e.target.value) || 0)}
+                      className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
+                    />
+                  </div>
+
+                  <div>
+                    <label className="text-[10px] font-mono font-bold text-outline block mb-1">GLOBAL AGENT COMMISSION (%)</label>
+                    <input
+                      type="number"
+                      step="0.1"
+                      value={exportAgentCommissionRate}
+                      onChange={(e) => setExportAgentCommissionRate(parseFloat(e.target.value) || 0)}
                       className="w-full bg-surface-container-low border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface"
                     />
                   </div>
@@ -3386,12 +3428,20 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     <span className="font-bold text-on-surface">₹{grossExportRevenueInrKg.toFixed(2)} / Kg</span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                    <span className="text-on-surface-variant">Govt Export Rebate (RoDTEP/RoSCTL):</span>
+                    <span className="text-on-surface-variant">Govt Export Rebate (RoDTEP Only):</span>
                     <span className="font-bold text-forest-green">+₹{incentiveRevenueInrKg.toFixed(2)} / Kg</span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                    <span className="text-on-surface-variant">Freight & Customs Outflow:</span>
+                    <span className="text-on-surface-variant">Inland Port Freight & Customs:</span>
                     <span className="font-bold text-error">-₹{(oceanFreightExportKg + customsClearingExportKg).toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">LC Interest Cost ({exportLcDelayDays}d Delay @ {workingCapitalInterestRate}%):</span>
+                    <span className="font-bold text-error">-₹{exportFinancingCostInrKg.toFixed(2)} / Kg</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
+                    <span className="text-on-surface-variant">Global Agent Commission ({exportAgentCommissionRate}%):</span>
+                    <span className="font-bold text-error">-₹{exportAgentCommissionInrKg.toFixed(2)} / Kg</span>
                   </div>
                   <div className="flex justify-between items-center text-sm font-mono font-bold text-primary border-b border-outline-variant pb-2">
                     <span>Net Export Realization (Ex-Mill Gate):</span>
