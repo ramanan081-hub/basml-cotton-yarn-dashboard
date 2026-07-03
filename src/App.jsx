@@ -5519,11 +5519,22 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                 <tbody className="divide-y divide-outline-variant/20 text-on-surface">
                   {data.prices.types
                     .filter(t => !t.type.includes('ICE Cotton'))
-                    .map((t) => {
+                    .map((t, idx) => {
                       const shankar6Price = data.prices.types[0].current;
                       const spread = t.current - shankar6Price;
                       const isSelected = selectedVariety === t.type;
                       const isSpecial = t.type.includes('Bunny') || t.type.includes('MCU-5');
+                      const orangeColors = [
+                        '#E65100', // Deep Orange
+                        '#EF6C00', // Medium-Deep Orange
+                        '#F57C00', // Medium Orange
+                        '#FB8C00', // Bright Orange
+                        '#FF9800', // Standard Orange
+                        '#FFA726', // Light Orange
+                        '#FFB74D', // Soft Peach Orange
+                        '#FFCC80'  // Pale Orange
+                      ];
+                      const color = orangeColors[idx % orangeColors.length];
 
                       return (
                         <tr 
@@ -5533,8 +5544,8 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
                             isSelected ? 'bg-primary/10 border-l-4 border-primary font-bold' : ''
                           } ${isSpecial ? 'bg-amber-500/5' : ''}`}
                         >
-                          <td className="p-3 font-sans flex items-center gap-1.5">
-                            {isSpecial && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>}
+                          <td className="p-3 font-sans flex items-center gap-2">
+                            <span className="w-2 h-2 rounded-full shrink-0" style={{ backgroundColor: color }}></span>
                             {t.type}
                           </td>
                           <td className="p-3 text-[11px] text-on-surface-variant">{t.staple}</td>
