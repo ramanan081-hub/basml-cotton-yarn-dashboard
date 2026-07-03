@@ -4538,6 +4538,122 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         </div>
       </div>
 
+      {/* Indian Cotton Varieties Price Benchmarks & Comparative Chart */}
+      <div className="card-table-orange rounded-xxl neumorphic-raised p-6 border border-outline-variant/30 space-y-6 bg-gradient-to-br from-surface-container-low to-surface-container-high text-left">
+        <div className="flex justify-between items-center border-b border-outline-variant/20 pb-3">
+          <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+            <span className="material-symbols-outlined text-xl font-bold">format_list_bulleted</span>
+            All-India Cotton Varieties Spot Price Ledger & Comparison
+          </h3>
+          <span className="text-xs text-on-surface-variant font-mono bg-surface-container/60 border border-outline-variant/30 px-2.5 py-1 rounded-md font-bold">
+            8 Active Varieties Listed
+          </span>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+          {/* Table side */}
+          <div className="lg:col-span-7 space-y-4">
+            <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Indian Cotton Price Ledger</span>
+            <div className="overflow-x-auto border border-outline-variant/30 rounded-xl bg-surface-container-low">
+              <table className="w-full text-left font-mono text-xs border-collapse">
+                <thead>
+                  <tr className="border-b border-outline-variant/40 bg-surface-container/60 text-outline">
+                    <th className="p-3 font-bold">Variety</th>
+                    <th className="p-3 font-bold">Staple Length</th>
+                    <th className="p-3 font-bold text-right">Spot (₹/Candy)</th>
+                    <th className="p-3 font-bold text-right">Est. Target</th>
+                    <th className="p-3 font-bold text-right">Spread vs S-6</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-outline-variant/20 text-on-surface">
+                  {data.prices.types
+                    .filter(t => !t.type.includes('ICE Cotton'))
+                    .map((t) => {
+                      const shankar6Price = data.prices.types[0].current;
+                      const spread = t.current - shankar6Price;
+                      const isSelected = selectedVariety === t.type;
+                      const isSpecial = t.type.includes('Bunny') || t.type.includes('MCU-5');
+
+                      return (
+                        <tr 
+                          key={t.type} 
+                          onClick={() => setSelectedVariety(t.type)}
+                          className={`hover:bg-primary/5 cursor-pointer transition-colors ${
+                            isSelected ? 'bg-primary/10 border-l-4 border-primary font-bold' : ''
+                          } ${isSpecial ? 'bg-amber-500/5' : ''}`}
+                        >
+                          <td className="p-3 font-sans flex items-center gap-1.5">
+                            {isSpecial && <span className="w-1.5 h-1.5 rounded-full bg-amber-500 animate-pulse"></span>}
+                            {t.type}
+                          </td>
+                          <td className="p-3 text-[11px] text-on-surface-variant">{t.staple}</td>
+                          <td className="p-3 text-right font-bold">₹{Math.round(t.current).toLocaleString('en-IN')}</td>
+                          <td className="p-3 text-right text-forest-green font-bold">₹{Math.round(t.est).toLocaleString('en-IN')}</td>
+                          <td className={`p-3 text-right font-bold ${spread > 0 ? 'text-forest-green' : spread < 0 ? 'text-error' : 'text-outline'}`}>
+                            {spread > 0 ? `+₹${spread.toLocaleString('en-IN')}` : spread < 0 ? `-₹${Math.abs(spread).toLocaleString('en-IN')}` : 'Base'}
+                          </td>
+                        </tr>
+                      );
+                    })}
+                </tbody>
+              </table>
+            </div>
+            <div className="text-[10px] text-outline font-mono">
+              * Note: Click on any variety in the table to display its predictive forecasts and CCI MSP parameters.
+            </div>
+          </div>
+
+          {/* Chart side */}
+          <div className="lg:col-span-5 space-y-4">
+            <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Spot Price Comparison (₹ per Candy)</span>
+            <div className="h-[310px] bg-surface-container-low/40 rounded-xl p-3 border border-outline-variant/20 flex flex-col justify-between">
+              <div className="h-[250px] w-full">
+                <ResponsiveContainer width="100%" height="100%">
+                  <BarChart 
+                    data={data.prices.types.filter(t => !t.type.includes('ICE Cotton'))} 
+                    layout="vertical"
+                    margin={{ top: 5, right: 15, left: 10, bottom: 5 }}
+                  >
+                    <CartesianGrid strokeDasharray="3 3" horizontal={false} stroke="var(--color-outline-variant)" opacity={0.2} />
+                    <XAxis type="number" domain={[0, 90000]} hide />
+                    <YAxis dataKey="type" type="category" width={110} tick={{ fontSize: 9, fill: 'var(--color-on-surface-variant)' }} />
+                    <Tooltip 
+                      wrapperStyle={{ zIndex: 1000 }}
+                      contentStyle={{background: 'var(--color-surface-container-low)', borderColor: 'var(--color-outline-variant)', color: 'var(--color-on-surface)', borderRadius: '8px', fontSize: 11}}
+                      formatter={(value) => [`₹${Math.round(value).toLocaleString('en-IN')}/Candy`]}
+                    />
+                    <Bar dataKey="current" radius={[0, 4, 4, 0]}>
+                      {data.prices.types
+                        .filter(t => !t.type.includes('ICE Cotton'))
+                        .map((entry, index) => {
+                          const isSpecial = entry.type.includes('Bunny') || entry.type.includes('MCU-5');
+                          return (
+                            <Cell 
+                              key={`cell-${index}`} 
+                              fill={isSpecial ? 'var(--color-primary)' : 'var(--color-secondary)'} 
+                              opacity={isSpecial ? 1.0 : 0.6}
+                            />
+                          );
+                        })}
+                    </Bar>
+                  </BarChart>
+                </ResponsiveContainer>
+              </div>
+              <div className="flex justify-center items-center gap-4 text-[10px] font-mono font-bold text-on-surface-variant">
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 bg-primary rounded-sm"></span>
+                  Bunny / MCU-5 Focus
+                </span>
+                <span className="flex items-center gap-1.5">
+                  <span className="w-3 h-3 bg-secondary opacity-60 rounded-sm"></span>
+                  Other Varieties
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Row 1: Domestic Balance Sheet & Price Trends */}
       <div className="grid grid-cols-12 gap-6">
         {/* Left Column: S&D Chart & Balance Sheet Table */}
