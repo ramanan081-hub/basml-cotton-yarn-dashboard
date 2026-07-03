@@ -300,7 +300,7 @@ export const expandedCottonVarieties = [
   },
   {
     "id": "mcu_5",
-    "name": "MCU-5",
+    "name": "MCU-5 (Local)",
     "group": "Indian Cotton",
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
@@ -310,13 +310,54 @@ export const expandedCottonVarieties = [
       "Harvest": "Oct-Jan"
     },
     "price": "₹70,500-73,000/bale",
-    "staple": "25-26 mm",
+    "staple": "31-33 mm",
     "origin": "Tamil Nadu, AP",
     "applications": [
       "Premium yarn",
       "blends"
     ],
     "quality": "Premium"
+  },
+  {
+    "id": "bunny_ncs_145",
+    "name": "Bunny (NCS-145)",
+    "group": "Indian Cotton",
+    "category": "LONG STAPLE VARIETIES (25-28",
+    "specs": {
+      "Micronaire": "3.8-4.2",
+      "Strength": "29.0 g/tex",
+      "Market Share": "18%",
+      "Harvest": "Nov-Feb"
+    },
+    "price": "₹64,000-66,000/bale",
+    "staple": "29-31 mm",
+    "origin": "Telangana, Andhra Pradesh, Maharashtra",
+    "applications": [
+      "Combed yarn",
+      "carded yarn",
+      "hosiery"
+    ],
+    "quality": "Premium"
+  },
+  {
+    "id": "kohinoor_212",
+    "name": "Kohinoor 212+",
+    "group": "Indian Cotton",
+    "category": "LONG STAPLE VARIETIES (25-28",
+    "specs": {
+      "Micronaire": "3.6-4.0",
+      "Strength": "28.0 g/tex",
+      "Market Share": "12%",
+      "Harvest": "Nov-Feb"
+    },
+    "price": "₹63,000-65,000/bale",
+    "staple": "28-30 mm",
+    "origin": "Central & Southern India",
+    "applications": [
+      "Medium count yarn",
+      "warp yarn"
+    ],
+    "quality": "Good"
   },
   {
     "id": "mcu_6",
@@ -340,7 +381,7 @@ export const expandedCottonVarieties = [
   },
   {
     "id": "mcu_7",
-    "name": "MCU-7",
+    "name": "MCU-7 (7 Local)",
     "group": "Indian Cotton",
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
@@ -349,7 +390,7 @@ export const expandedCottonVarieties = [
       "Harvest": "Oct-Jan"
     },
     "price": "₹71,000-73,500/bale",
-    "staple": "26 mm",
+    "staple": "23.7-25 mm",
     "origin": "Tamil Nadu, Andhra Pradesh",
     "quality": "Good",
     "applications": [

@@ -142,7 +142,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           types[0].current = shankar6Spot;
           types[0].est = Math.floor(shankar6Spot * 1.015);
 
-          // MCU-5
+          // MCU-5 (Local)
           types[1].current = Math.floor(shankar6Spot * 1.07);
           types[1].est = Math.floor(types[1].current * 1.015);
 
@@ -150,21 +150,29 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           types[2].current = Math.floor(shankar6Spot * 1.35);
           types[2].est = Math.floor(types[2].current * 1.02);
 
-          // MECH-1 (Bunny/Brahma)
+          // Bunny (NCS-145)
           types[3].current = Math.floor(shankar6Spot * 1.03);
           types[3].est = Math.floor(types[3].current * 1.015);
 
-          // J-34
-          types[4].current = Math.floor(shankar6Spot * 0.96);
+          // Kohinoor 212+
+          types[4].current = Math.floor(shankar6Spot * 1.02);
           types[4].est = Math.floor(types[4].current * 1.015);
 
-          // V797
-          types[5].current = Math.floor(shankar6Spot * 0.69);
+          // MCU-7 (7 Local)
+          types[5].current = Math.floor(shankar6Spot * 0.93);
           types[5].est = Math.floor(types[5].current * 1.015);
 
+          // J-34
+          types[6].current = Math.floor(shankar6Spot * 0.96);
+          types[6].est = Math.floor(types[6].current * 1.015);
+
+          // V797
+          types[7].current = Math.floor(shankar6Spot * 0.69);
+          types[7].est = Math.floor(types[7].current * 1.015);
+
           // ICE Cotton No. 2 INR Equivalent
-          types[6].current = iceInrEquivalent;
-          types[6].est = Math.floor(iceInrEquivalent * 1.02);
+          types[8].current = iceInrEquivalent;
+          types[8].est = Math.floor(iceInrEquivalent * 1.02);
 
           // Update monthly trends — roll last 6 entries to current calendar months
           if (updated.indianCotton.prices.monthlyTrend) {
@@ -182,27 +190,27 @@ export function useCottonData(refreshInterval = 60 * 1000) {
             // Ratios: Dec25 was ~10% above current, tapering down to Jun26 current
             trend[11].Shankar6 = shankar6Spot;
             trend[11].MCU5 = types[1].current;
-            trend[11].J34 = types[4].current;
+            trend[11].J34 = types[6].current;
 
             trend[10].Shankar6 = Math.floor(shankar6Spot * 1.008); // 1 month ago
             trend[10].MCU5 = Math.floor(types[1].current * 1.007);
-            trend[10].J34 = Math.floor(types[4].current * 1.007);
+            trend[10].J34 = Math.floor(types[6].current * 1.007);
 
             trend[9].Shankar6 = Math.floor(shankar6Spot * 1.026);  // 2 months ago
             trend[9].MCU5 = Math.floor(types[1].current * 1.024);
-            trend[9].J34 = Math.floor(types[4].current * 1.024);
+            trend[9].J34 = Math.floor(types[6].current * 1.024);
 
             trend[8].Shankar6 = Math.floor(shankar6Spot * 1.055);  // 3 months ago
             trend[8].MCU5 = Math.floor(types[1].current * 1.052);
-            trend[8].J34 = Math.floor(types[4].current * 1.052);
+            trend[8].J34 = Math.floor(types[6].current * 1.052);
 
             trend[7].Shankar6 = Math.floor(shankar6Spot * 1.078);  // 4 months ago
             trend[7].MCU5 = Math.floor(types[1].current * 1.075);
-            trend[7].J34 = Math.floor(types[4].current * 1.075);
+            trend[7].J34 = Math.floor(types[6].current * 1.075);
 
             trend[6].Shankar6 = Math.floor(shankar6Spot * 1.098);  // 5 months ago (peak season)
             trend[6].MCU5 = Math.floor(types[1].current * 1.093);
-            trend[6].J34 = Math.floor(types[4].current * 1.093);
+            trend[6].J34 = Math.floor(types[6].current * 1.093);
           }
 
           // Also roll the global monthly trend last 6 entries to current calendar months

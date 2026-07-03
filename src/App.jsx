@@ -597,9 +597,9 @@ function CottonVarietyExplorer({ mode, data, colors }) {
         { month: 'Aug 26', volume: '10,000', price: 66000, hedging: '60%' }
       ]
     },
-    'MCU-5': {
+    'MCU-5 (Local)': {
       key: 'MCU_5',
-      typeMatch: 'MCU-5',
+      typeMatch: 'MCU-5 (Local)',
       staple: '31-33mm',
       mic: '3.6-4.0 NCL',
       strength: '32.0 g/tex',
@@ -623,6 +623,87 @@ function CottonVarietyExplorer({ mode, data, colors }) {
         { month: 'Jun 26', volume: '6,000', price: 70000, hedging: '45%' },
         { month: 'Jul 26', volume: '7,500', price: 70500, hedging: '50%' },
         { month: 'Aug 26', volume: '5,000', price: 71000, hedging: '55%' }
+      ]
+    },
+    'Bunny (NCS-145)': {
+      key: 'Bunny_NCS_145',
+      typeMatch: 'Bunny (NCS-145)',
+      staple: '29-31mm',
+      mic: '3.8-4.2 NCL',
+      strength: '29.0 g/tex',
+      trash: '1.60%',
+      moisture: '8.2%',
+      origin: 'Telangana / Maharashtra',
+      score: 93,
+      dayForecast: [
+        { day: 'Day 1', price: 64220 },
+        { day: 'Day 2', price: 64400 },
+        { day: 'Day 3', price: 63900 },
+        { day: 'Day 4', price: 64500 },
+        { day: 'Day 5', price: 64800 },
+        { day: 'Day 6', price: 65000 },
+        { day: 'Day 7', price: 65180 }
+      ],
+      buyTarget: 63500,
+      holdLine: 65500,
+      sourcing: [
+        { month: 'Jun 26', volume: '8,000', price: 64220, hedging: '50%' },
+        { month: 'Jul 26', volume: '10,000', price: 64700, hedging: '55%' },
+        { month: 'Aug 26', volume: '6,000', price: 65180, hedging: '60%' }
+      ]
+    },
+    'Kohinoor 212+': {
+      key: 'Kohinoor_212',
+      typeMatch: 'Kohinoor 212+',
+      staple: '28-30mm',
+      mic: '3.6-4.0 NCL',
+      strength: '28.0 g/tex',
+      trash: '1.70%',
+      moisture: '8.5%',
+      origin: 'Central India / South India',
+      score: 91,
+      dayForecast: [
+        { day: 'Day 1', price: 63600 },
+        { day: 'Day 2', price: 63800 },
+        { day: 'Day 3', price: 63300 },
+        { day: 'Day 4', price: 63900 },
+        { day: 'Day 5', price: 64200 },
+        { day: 'Day 6', price: 64400 },
+        { day: 'Day 7', price: 64550 }
+      ],
+      buyTarget: 62800,
+      holdLine: 64800,
+      sourcing: [
+        { month: 'Jun 26', volume: '5,000', price: 63600, hedging: '45%' },
+        { month: 'Jul 26', volume: '7,000', price: 64100, hedging: '50%' },
+        { month: 'Aug 26', volume: '4,000', price: 64550, hedging: '55%' }
+      ]
+    },
+    'MCU-7 (7 Local)': {
+      key: 'MCU_7',
+      typeMatch: 'MCU-7 (7 Local)',
+      staple: '23.7-25mm',
+      mic: '4.0-4.8 NCL',
+      strength: '22.0 g/tex',
+      trash: '2.00%',
+      moisture: '8.8%',
+      origin: 'Tamil Nadu (Rice Fallow)',
+      score: 87,
+      dayForecast: [
+        { day: 'Day 1', price: 57985 },
+        { day: 'Day 2', price: 58150 },
+        { day: 'Day 3', price: 57700 },
+        { day: 'Day 4', price: 58300 },
+        { day: 'Day 5', price: 58550 },
+        { day: 'Day 6', price: 58700 },
+        { day: 'Day 7', price: 58855 }
+      ],
+      buyTarget: 57200,
+      holdLine: 59200,
+      sourcing: [
+        { month: 'Jun 26', volume: '4,000', price: 57985, hedging: '40%' },
+        { month: 'Jul 26', volume: '5,000', price: 58400, hedging: '45%' },
+        { month: 'Aug 26', volume: '3,000', price: 58855, hedging: '50%' }
       ]
     },
     'DCH-32 / Suvin': {
@@ -755,6 +836,15 @@ function CottonVarietyExplorer({ mode, data, colors }) {
     } else if (variety.key === 'DCH_32') {
       const scale = (data.prices.types.find(x => x.type.includes('DCH-32'))?.current || 88000) / (data.prices.types.find(x => x.type.includes('MCU-5'))?.current || 70000);
       price = Math.round(t.MCU5 * scale);
+    } else if (variety.key === 'Bunny_NCS_145') {
+      const scale = (data.prices.types.find(x => x.type.includes('Bunny'))?.current || 64220) / (data.prices.types.find(x => x.type.includes('Shankar-6'))?.current || 62350);
+      price = Math.round(t.Shankar6 * scale);
+    } else if (variety.key === 'Kohinoor_212') {
+      const scale = (data.prices.types.find(x => x.type.includes('Kohinoor 212+'))?.current || 63600) / (data.prices.types.find(x => x.type.includes('Shankar-6'))?.current || 62350);
+      price = Math.round(t.Shankar6 * scale);
+    } else if (variety.key === 'MCU_7') {
+      const scale = (data.prices.types.find(x => x.type.includes('MCU-7'))?.current || 57985) / (data.prices.types.find(x => x.type.includes('Shankar-6'))?.current || 62350);
+      price = Math.round(t.Shankar6 * scale);
     }
     return { month: t.month, price };
   }) || [];

@@ -15,10 +15,14 @@ export function getLivePriceForVariety(item, data) {
       return `₹${Math.round(data.indianCotton?.prices?.types?.[2]?.current).toLocaleString('en-IN')}/Candy`;
     } else if (name.includes('MECH-1') || name.includes('Bunny') || name.includes('Brahma')) {
       return `₹${Math.round(data.indianCotton?.prices?.types?.[3]?.current).toLocaleString('en-IN')}/Candy`;
-    } else if (name.includes('J-34')) {
+    } else if (name.includes('Kohinoor') || name.includes('212')) {
       return `₹${Math.round(data.indianCotton?.prices?.types?.[4]?.current).toLocaleString('en-IN')}/Candy`;
-    } else if (name.includes('V797')) {
+    } else if (name.includes('MCU-7') || name.includes('7 Local')) {
       return `₹${Math.round(data.indianCotton?.prices?.types?.[5]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('J-34')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[6]?.current).toLocaleString('en-IN')}/Candy`;
+    } else if (name.includes('V797')) {
+      return `₹${Math.round(data.indianCotton?.prices?.types?.[7]?.current).toLocaleString('en-IN')}/Candy`;
     }
   } else if (group === 'International Cotton') {
     if (name.includes('ICE US') || name.includes('ICE Cotton')) {

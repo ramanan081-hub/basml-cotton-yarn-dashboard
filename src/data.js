@@ -83,9 +83,11 @@ export const initialData = {
       ],
       types: [
         { type: 'Shankar-6 (S-6)', current: 62350, est: 63285, staple: '29-31mm (Long Staple)' },
-        { type: 'MCU-5', current: 66700, est: 67700, staple: '31-33mm (ELS)' },
+        { type: 'MCU-5 (Local)', current: 66700, est: 67700, staple: '31-33mm (ELS)' },
         { type: 'DCH-32 / Suvin', current: 84170, est: 85850, staple: '33-36mm (ELS)' },
-        { type: 'MECH-1 (Bunny/Brahma)', current: 64220, est: 65180, staple: '28-30mm (Long Staple)' },
+        { type: 'Bunny (NCS-145)', current: 64220, est: 65180, staple: '28-30mm (Long Staple)' },
+        { type: 'Kohinoor 212+', current: 63600, est: 64550, staple: '28-30mm (Long Staple)' },
+        { type: 'MCU-7 (7 Local)', current: 57985, est: 58855, staple: '23.7-25mm (Medium Staple)' },
         { type: 'J-34', current: 59850, est: 60750, staple: '25-27mm (Medium-Long)' },
         { type: 'V797', current: 43020, est: 43665, staple: '22mm (Short Staple)' },
         { type: 'ICE Cotton No. 2 (INR Equiv)', current: 60185, est: 61380, staple: 'US Upland Futures (Candy Equivalent)' }
