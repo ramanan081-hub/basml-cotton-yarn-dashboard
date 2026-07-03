@@ -1929,6 +1929,254 @@ function TradingDeskInfoBox({ selectedName, mode, colors }) {
   );
 }
 
+const nationTransportProfiles = {
+  'USA': {
+    transitTime: '32 - 40 Days (via Cape of Good Hope)',
+    route: 'US Gulf/East Coast ➔ Cape of Good Hope ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Define USDA Grade standards, weight tolerances, and FOB Gulf/CIF Tuticorin Incoterms.' },
+      { title: 'Phytosanitary Certificate', desc: 'US APHIS (USDA) stamp required. Must certify zero weed seed contamination.' },
+      { title: 'Letter of Credit (LC)', desc: 'USD L/C routed via prime US corresponding bank. 45-day post-shipment interest rates apply.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Direct liner B/L issued at Houston/Savannah. Transshipment at Colombo/Singapore.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + AIDC 0% + SWS 10% + 18% IGST (GST offset neutral) on Assessable Value.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Mandatory Methyl Bromide fumigation at Tuticorin port if not pre-cleared at US port.' }
+    ],
+    freightCost: '$2,200 / Container',
+    costSaving: 'Fumigation waiver can be availed if pre-cleared at Gulf ports. Request 21 days free time to mitigate Tuticorin quarantine queues.'
+  },
+  'Brazil': {
+    transitTime: '35 - 45 Days',
+    route: 'Santos Port ➔ Cape of Good Hope ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Contract locked under HVI parameters. Weight tolerance +/- 1%.' },
+      { title: 'Phytosanitary Certificate', desc: 'MAPA Brazil certification. High scrutiny on soil and seed residues.' },
+      { title: 'Letter of Credit (LC)', desc: 'Irrevocable L/C at sight or Usance 90 days. Hedged at 95.28 USD/INR.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Santos Port loading. Cape of Good Hope routing avoids Red Sea delays.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + SWS 10% + AIDC 0% + 18% IGST. Calculated on CIF + 1% Landing Charge.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Fumigation must be done in-transit or upon arrival at Tuticorin Port.' }
+    ],
+    freightCost: '$2,500 / Container',
+    costSaving: 'Purchase during Santos off-season (Feb-May) to negotiate lower carrier surcharges. Request 14 days demurrage extension.'
+  },
+  'Egypt': {
+    transitTime: '20 - 28 Days',
+    route: 'Damietta/Alexandria Port ➔ Suez Canal ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Alexandria Cotton Association (ALCOTEXA) contract terms. Premium Giza ELS cotton.' },
+      { title: 'Phytosanitary Certificate', desc: 'CAPQ Egypt stamp. Mandatory inspection for pink bollworm and cotton leaf worm.' },
+      { title: 'Letter of Credit (LC)', desc: 'Sight L/C required by Egyptian central bank regulations. Higher local banking charges.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Suez Canal transit path. Close monitoring of Red Sea security surcharges.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + SWS 10% + 18% IGST. Higher assessable value due to premium Giza base cost.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Strict inspection of long-staple bales. Mandatory quarantine checking.' }
+    ],
+    freightCost: '$1,800 / Container',
+    costSaving: 'Egypt to India transit is faster (under 25 days) compared to Americas. Use Alexandria direct lines to bypass transshipment at Colombo.'
+  },
+  'West Africa': {
+    transitTime: '38 - 48 Days',
+    route: 'Abidjan/Cotonou Port ➔ Cape of Good Hope ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Define merchant weights. Standard West African styles (Aon/Cotontchad).' },
+      { title: 'Phytosanitary Certificate', desc: 'Ministerial agricultural stamp from Cote d\'Ivoire/Benin. Requires insect-free status.' },
+      { title: 'Letter of Credit (LC)', desc: 'L/C routed through West African regional banks. Slower document dispatch.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Abidjan/Dakar loading. Multi-port coastal pickup increases initial transit time.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + SWS 10% + 18% IGST. Ensure COO (Certificate of Origin) is filed correctly.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'High risk of seeds/trash. Intensive physical quarantine check at Indian ports.' }
+    ],
+    freightCost: '$2,400 / Container',
+    costSaving: 'Ensure pre-shipment inspection is done by SGS/Bureau Veritas at loading port to avoid local customs rejections in Tamil Nadu.'
+  },
+  'Australia': {
+    transitTime: '24 - 30 Days',
+    route: 'Brisbane/Sydney Port ➔ Indian Ocean ➔ Tuticorin/Chennai Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Australian Cotton Shippers Association (ACSA) rules. High strength parameters.' },
+      { title: 'Phytosanitary Certificate', desc: 'DAFF Australia certification. Cleanest machine-picked cotton globally.' },
+      { title: 'Letter of Credit (LC)', desc: 'Low-interest bank allocation. Standard 60-day Usance L/C accepted.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Direct Indian Ocean transit. Shortest transit route for imported cotton.' },
+      { title: 'Customs clearance (Icegate)', desc: 'Duty-free status under India-Australia ECTA! File COO to claim BCD waiver.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Waived or fast-tracked due to high cleanliness grade of Australian bales.' }
+    ],
+    freightCost: '$2,100 / Container',
+    costSaving: 'Utilize the India-Australia ECTA trade agreement to completely waive the 10% Basic Customs Duty (BCD). Save ₹6,000+ per Candy!'
+  },
+  'Greece': {
+    transitTime: '22 - 30 Days',
+    route: 'Piraeus Port ➔ Suez Canal ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'EU standards. Strict limits on moisture and trash.' },
+      { title: 'Phytosanitary Certificate', desc: 'Greek Ministry of Agriculture. Certifies pesticide residue limits.' },
+      { title: 'Letter of Credit (LC)', desc: 'Euro-denominated L/C options. Low bank processing delay.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Piraeus hub loading. Direct vessels through Suez Canal.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + SWS 10% + 18% IGST calculated on Euro converted Assessable Value.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Standard entry checking. Low pest risk due to cold Greek winter harvests.' }
+    ],
+    freightCost: '$1,900 / Container',
+    costSaving: 'Route via Piraeus transshipment hub. Greek cotton has low moisture; verify bale dry weights to avoid payment disputes.'
+  },
+  'Turkey': {
+    transitTime: '25 - 32 Days',
+    route: 'Izmir/Mersin Port ➔ Suez Canal ➔ Tuticorin Port',
+    documentation: [
+      { title: 'Proforma Invoice & Contract Lock', desc: 'Izmir Exchange rules. Premium Aegean/Izmir medium-long staple.' },
+      { title: 'Phytosanitary Certificate', desc: 'Turkish Ministry of Agriculture. Certifies zero pesticide contamination.' },
+      { title: 'Letter of Credit (LC)', desc: 'Sight L/C or CAD (Cash Against Documents). Local currency conversion hedges available.' },
+      { title: 'Ocean Bill of Lading (B/L)', desc: 'Mersin loading. High frequency of feeder vessels to Mediterranean mainlines.' },
+      { title: 'Customs clearance (Icegate)', desc: 'BCD 10% + SWS 10% + 18% IGST. Calculated on Assessable Value.' },
+      { title: 'Plant Quarantine & Fumigation', desc: 'Standard fumigation protocols at Chennai/Tuticorin ports.' }
+    ],
+    freightCost: '$2,000 / Container',
+    costSaving: 'Aegean cotton is high yield; consolidate with Greece shipping lines to negotiate joint freight rates.'
+  }
+};
+
+const stateTransportProfiles = {
+  'Gujarat (Dom)': {
+    costRail: '₹2,900',
+    costRoad: '₹4,800',
+    transitRail: '6 - 9 Days',
+    transitRoad: '3 - 4 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (50-60 Bales)',
+    weatherRail: 'Medium (Covered BCN rakes)',
+    weatherRoad: 'Low (Tarpaulin essential)',
+    handlingRail: 'Double (Station ➔ Rake ➔ Terminal ➔ Truck)',
+    handlingRoad: 'Direct Door-to-Door (Mandi to Mill)',
+    docRail: 'RR, e-Way Bill, Mandi Invoice, GST Invoice',
+    docRoad: 'LR, e-Way Bill, Mandi Invoice, State Entry Declaration',
+    coopRake: 'Active pooling with Salem/Erode spinning clusters. Monthly saving: ₹1.2 Lakhs/mill.',
+    backhaul: 'High availability. empty trucks returning from Chennai/Coimbatore auto-component corridors reduce rates by 22%.',
+    moisture: 'Low moisture (dry crop). require waterproof tarpaulins to prevent unexpected rainy season absorption.',
+    routeInfo: 'Rajkot/Kadi Mandi ➔ Wankaner Station ➔ Salem JN ➔ Mill Gate.'
+  },
+  'Maharashtra (Dom)': {
+    costRail: '₹2,700',
+    costRoad: '₹4,500',
+    transitRail: '5 - 8 Days',
+    transitRoad: '3 - 4 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (55 Bales)',
+    weatherRail: 'High (Monsoon delays in Central Railway zones)',
+    weatherRoad: 'Low (Tarpaulin direct)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, APMC Mandi Tax Receipt',
+    docRoad: 'LR, e-Way Bill, APMC Mandi Tax Receipt',
+    coopRake: 'Establish shared rakes from Wardha/Yavatmal hubs to Coimbatore rail siding.',
+    backhaul: 'High backhaul trucking from Pune/Mumbai industrial corridor. Save up to 25% on return trips.',
+    moisture: 'Mid-level. Cotton has high natural wax; ensure humidity level is certified at 7.5% maximum before load.',
+    routeInfo: 'Yavatmal/Akola Mandi ➔ Wardha Siding ➔ Tiruppur Siding ➔ Mill Gate.'
+  },
+  'Telangana (Dom)': {
+    costRail: '₹2,300',
+    costRoad: '₹3,500',
+    transitRail: '4 - 6 Days',
+    transitRoad: '2 - 3 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (50 Bales)',
+    weatherRail: 'Low (Fully covered BCNHL rakes)',
+    weatherRoad: 'Low (Express highway transit)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, Mandi Bill',
+    docRoad: 'LR, e-Way Bill, Mandi Bill',
+    coopRake: 'Telangana is closest major supplier. Share rakes with Salem cluster from Warangal siding. Fast transit.',
+    backhaul: 'Moderate backhaul. Garment empty trucks from Tiruppur return corridor can be booked via booking apps.',
+    moisture: 'Very low. Excellent staple dryness; verify ginner weight scale accuracy at mandi to prevent disputes.',
+    routeInfo: 'Warangal/Adilabad Mandi ➔ Warangal Station ➔ Erode JN ➔ Mill Gate.'
+  },
+  'Andhra Pradesh (Dom)': {
+    costRail: '₹2,100',
+    costRoad: '₹3,000',
+    transitRail: '3 - 5 Days',
+    transitRoad: '1 - 2 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (50 Bales)',
+    weatherRail: 'Low (Covered rakes)',
+    weatherRoad: 'Low (Direct road connect)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, Mandi Invoice',
+    docRoad: 'LR, e-Way Bill, Mandi Invoice',
+    coopRake: 'Guntur/Adoni mandis have direct rail siding. Excellent for immediate rake booking.',
+    backhaul: 'High availability. Rice and cement returning trucks from AP to TN offer competitive spot road rates.',
+    moisture: 'Coastal moisture risk during October. Mandatory moisture checking (limit to 8%) at dispatch point.',
+    routeInfo: 'Guntur/Adoni Mandi ➔ Adoni Siding ➔ Salem JN ➔ Mill Gate.'
+  },
+  'Karnataka (Dom)': {
+    costRail: '₹2,000',
+    costRoad: '₹2,800',
+    transitRail: '3 - 5 Days',
+    transitRoad: '1 - 2 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (50 Bales)',
+    weatherRail: 'Low (Covered rakes)',
+    weatherRoad: 'Low (Short haul road)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, APMC Cess paid invoice',
+    docRoad: 'LR, e-Way Bill, APMC Cess paid invoice',
+    coopRake: 'Consolidate small scale purchases from Raichur mandi into single rake pooling.',
+    backhaul: 'Very high. Regular traffic between Bengaluru/Hubli and Tamil Nadu. Lowest road freight rates.',
+    moisture: 'Standard. Ensure crop is stored in covered storage during transit to maintain color grade.',
+    routeInfo: 'Raichur/Dharwad Mandi ➔ Raichur Station ➔ Erode Siding ➔ Mill Gate.'
+  },
+  'Madhya Pradesh (Dom)': {
+    costRail: '₹2,800',
+    costRoad: '₹5,200',
+    transitRail: '6 - 9 Days',
+    transitRoad: '3 - 5 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (55 Bales)',
+    weatherRail: 'High (Central railway congestion)',
+    weatherRoad: 'Low (Express highway routing)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, Mandi Tax paid slip',
+    docRoad: 'LR, e-Way Bill, Mandi Tax paid slip',
+    coopRake: 'Rake pooling from Khandwa/Khargone station direct to Coimbatore JN. Saves ₹1.5/kg.',
+    backhaul: 'Moderate. Empty metal/chemical carriers returning from TN ports can be utilized.',
+    moisture: 'Low. Require tarpaulin verification certificate before dispatch from Mandi.',
+    routeInfo: 'Khandwa/Sendhwa Mandi ➔ Khandwa Siding ➔ Coimbatore JN ➔ Mill Gate.'
+  },
+  'Punjab (Dom)': {
+    costRail: '₹3,500',
+    costRoad: '₹7,200',
+    transitRail: '8 - 12 Days',
+    transitRoad: '5 - 7 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (60 Bales)',
+    weatherRail: 'High (Winter fog delays, Monsoon waterlogging)',
+    weatherRoad: 'Medium (Long haul highway fatigue)',
+    handlingRail: 'Triple transshipment (extra rail yard loading)',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, Mandi Tax Invoice, J-Form',
+    docRoad: 'LR, e-Way Bill, Mandi Tax Invoice, J-Form',
+    coopRake: 'Long-distance rail pooling is critical. Road trucking is highly uneconomical (₹7,200/Candy). Always use rail.',
+    backhaul: 'Low. Very few empty return trucks direct from Punjab. Use Delhi NCR backhaul consolidation centers.',
+    moisture: 'Winter crop has high morning dew. Mandate moisture testing at Mandi (reject above 8.5%).',
+    routeInfo: 'Bathinda/Abohar Mandi ➔ Bathinda JN ➔ Salem JN ➔ Mill Gate.'
+  },
+  'Rajasthan (Dom)': {
+    costRail: '₹3,300',
+    costRoad: '₹6,800',
+    transitRail: '8 - 11 Days',
+    transitRoad: '5 - 6 Days',
+    batchRail: '1 Rake (1,500 Bales)',
+    batchRoad: '1 Truck (55 Bales)',
+    weatherRail: 'High (Fog delays in North-Western Railway)',
+    weatherRoad: 'Medium (Long transit)',
+    handlingRail: 'Double transshipment',
+    handlingRoad: 'Single load direct',
+    docRail: 'RR, e-Way Bill, Mandi Invoice, State Gate entry',
+    docRoad: 'LR, e-Way Bill, Mandi Invoice',
+    coopRake: 'Establish rake pooling at Sri Ganganagar siding with Erode cluster mills.',
+    backhaul: 'Low to Moderate. Consolidate with Jaipur/Delhi backhaul transport agencies.',
+    moisture: 'Very low (desert climate). Crop is clean; watch out for sand/dust trash contamination during transit.',
+    routeInfo: 'Sri Ganganagar/Hanumangarh Mandi ➔ Sri Ganganagar Station ➔ Erode Siding ➔ Mill Gate.'
+  }
+};
+
 function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   
   const formatStateName = (name) => {
@@ -3858,51 +4106,44 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
           <div className="grid grid-cols-12 gap-gutter">
             {/* Global Port-to-Mill Corridor */}
             <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
-              <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-lg">directions_boat</span>
-                Global Import Corridor (Port to Tamil Nadu Mill)
-              </h4>
+              <div className="space-y-3">
+                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-lg">directions_boat</span>
+                  Global Import Corridor (Port to Tamil Nadu Mill)
+                </h4>
+                
+                {/* Country Selector Buttons */}
+                <div className="space-y-1.5">
+                  <span className="text-[9px] font-mono font-bold text-outline block uppercase tracking-wider">Select Import Country</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['USA', 'Brazil', 'Egypt', 'West Africa', 'Australia', 'Greece', 'Turkey'].map((country) => (
+                      <button
+                        key={country}
+                        onClick={() => setSelectedGlobalOrigin(country)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          selectedGlobalOrigin === country
+                            ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {country}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
               {/* Documentation Stages */}
-              <div className="space-y-3">
-                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Customs & Shipping Documentation Flow</span>
+              <div className="space-y-3 pt-2 border-t border-outline-variant/20">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Customs & Shipping Documentation Flow ({selectedGlobalOrigin} ➔ TN)</span>
                 <div className="relative pl-6 border-l-2 border-primary/20 space-y-4 text-xs">
-                  {/* Step 1 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">1</div>
-                    <strong className="text-on-surface block">Proforma Invoice & Contract Lock</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Agreement with supplier (USA/Brazil). Define incoterms (FOB/CIF) and weight tolerances.</span>
-                  </div>
-                  {/* Step 2 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">2</div>
-                    <strong className="text-on-surface block">Phytosanitary Certification</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Issued by exporting nation's agricultural authority. Verifies cotton is free of pests/weeds.</span>
-                  </div>
-                  {/* Step 3 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">3</div>
-                    <strong className="text-on-surface block">Letter of Credit (LC) & Bank Allocation</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Payment settlement mechanism. Allocates capital. Note: 45-60 day settlements lock up working capital.</span>
-                  </div>
-                  {/* Step 4 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">4</div>
-                    <strong className="text-on-surface block">Bill of Lading & COO Filing</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Carrier issues B/L. File Certificate of Origin to claim duty-free benefits under SAFTA/ASEAN.</span>
-                  </div>
-                  {/* Step 5 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">5</div>
-                    <strong className="text-on-surface block">Bill of Entry (BOE) & Customs Clearance</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Filing details on Icegate. Duties (BCD + AIDC + SWS + IGST) are calculated on AV (CIF + 1% Landing Charge).</span>
-                  </div>
-                  {/* Step 6 */}
-                  <div className="relative">
-                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">6</div>
-                    <strong className="text-on-surface block">Plant Quarantine (PQ) & Methyl Bromide Fumigation</strong>
-                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Mandatory quarantine check at port. Cargo must undergo fumigation if not pre-cleared.</span>
-                  </div>
+                  {(nationTransportProfiles[selectedGlobalOrigin] || nationTransportProfiles['USA']).documentation.map((step, idx) => (
+                    <div key={idx} className="relative">
+                      <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">{idx + 1}</div>
+                      <strong className="text-on-surface block">{step.title}</strong>
+                      <span className="text-[11px] text-on-surface-variant block mt-0.5">{step.desc}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
 
@@ -3913,19 +4154,21 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                   <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
                     <strong className="text-primary flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-sm">schedule</span>
-                      Free Time Extension (Demurrage Mitigation)
+                      Transit Time & Sourcing Route
                     </strong>
                     <span className="text-[11px] text-on-surface-variant block mt-1">
-                      Always negotiate for **14 to 21 days of container free time** (demurrage/detention) with the shipping line before departure, instead of the standard 7 days. This cushions against Plant Quarantine delays at Tuticorin/Chennai ports.
+                      **Estimated Ocean Transit**: {(nationTransportProfiles[selectedGlobalOrigin] || nationTransportProfiles['USA']).transitTime}<br />
+                      **Shipping Route**: {(nationTransportProfiles[selectedGlobalOrigin] || nationTransportProfiles['USA']).route}
                     </span>
                   </div>
                   <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
                     <strong className="text-primary flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-sm">anchor</span>
-                      Tuticorin Port Optimization
+                      Ocean Container Freight & Port Surcharges
                     </strong>
                     <span className="text-[11px] text-on-surface-variant block mt-1">
-                      Direct call vessels to **Tuticorin Port** save ₹4,000–6,000 per container in first/last-mile domestic haulage compared to routing through Chennai Port for spinning mills in Salem, Erode, and Coimbatore.
+                      **Ocean Freight Cost**: {(nationTransportProfiles[selectedGlobalOrigin] || nationTransportProfiles['USA']).freightCost}<br />
+                      **Cost Cut Plan**: {(nationTransportProfiles[selectedGlobalOrigin] || nationTransportProfiles['USA']).costSaving}
                     </span>
                   </div>
                 </div>
@@ -3934,14 +4177,36 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
             {/* Domestic Mandi-to-Mill Corridor */}
             <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
-              <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
-                <span className="material-symbols-outlined text-lg">local_shipping</span>
-                Domestic Interstate Corridor (Mandi to Tamil Nadu Mill)
-              </h4>
+              <div className="space-y-3">
+                <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                  <span className="material-symbols-outlined text-lg">local_shipping</span>
+                  Domestic Interstate Corridor (Mandi to Tamil Nadu Mill)
+                </h4>
+
+                {/* State Selector Buttons */}
+                <div className="space-y-1.5">
+                  <span className="text-[9px] font-mono font-bold text-outline block uppercase tracking-wider">Select Mandi State</span>
+                  <div className="flex flex-wrap gap-1.5">
+                    {['Gujarat (Dom)', 'Maharashtra (Dom)', 'Telangana (Dom)', 'Andhra Pradesh (Dom)', 'Karnataka (Dom)', 'Madhya Pradesh (Dom)', 'Punjab (Dom)', 'Rajasthan (Dom)'].map((state) => (
+                      <button
+                        key={state}
+                        onClick={() => setSelectedDomesticOrigin(state)}
+                        className={`py-1 px-2.5 rounded-lg text-[10px] font-mono font-semibold border transition-all ${
+                          selectedDomesticOrigin === state
+                            ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold'
+                            : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                        }`}
+                      >
+                        {formatStateName(state)}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
 
               {/* Transit Comparison */}
-              <div className="space-y-3">
-                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Transportation Mode Analysis (North/Central Mandis to TN Gate)</span>
+              <div className="space-y-3 pt-2 border-t border-outline-variant/20">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Transportation Mode Analysis ({formatStateName(selectedDomesticOrigin)} to TN Gate)</span>
                 <div className="overflow-x-auto">
                   <table className="w-full text-left font-mono text-[10px] border-collapse">
                     <thead>
@@ -3954,33 +4219,33 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     <tbody className="divide-y divide-outline-variant/20 text-on-surface">
                       <tr>
                         <td className="py-2 font-sans font-bold">Cost per Candy</td>
-                        <td className="py-2 text-forest-green font-bold">₹2,800 - ₹3,500 (Cheaper by ~35%)</td>
-                        <td className="py-2 text-error font-bold">₹4,500 - ₹7,200</td>
+                        <td className="py-2 text-forest-green font-bold">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).costRail} (Cheaper by ~35%)</td>
+                        <td className="py-2 text-error font-bold">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).costRoad}</td>
                       </tr>
                       <tr>
                         <td className="py-2 font-sans font-bold">Transit Time</td>
-                        <td className="py-2 text-error">7 - 10 Days (Unpredictable)</td>
-                        <td className="py-2 text-forest-green">3 - 5 Days (Direct Express)</td>
+                        <td className="py-2 text-error">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).transitRail} (Unpredictable)</td>
+                        <td className="py-2 text-forest-green">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).transitRoad} (Direct Express)</td>
                       </tr>
                       <tr>
                         <td className="py-2 font-sans font-bold">Min. Batch Load</td>
-                        <td className="py-2">1 Rake (~1,500 Bales / 250t)</td>
-                        <td className="py-2">1 Truck (~50-60 Bales / 10t)</td>
+                        <td className="py-2">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).batchRail}</td>
+                        <td className="py-2">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).batchRoad}</td>
                       </tr>
                       <tr>
                         <td className="py-2 font-sans font-bold">Weather Risk</td>
-                        <td className="py-2 text-amber-500">High (Moisture risk in open wagons)</td>
-                        <td className="py-2 text-forest-green">Low (Tarpaulin/Container Trucks)</td>
+                        <td className="py-2 text-amber-500">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).weatherRail}</td>
+                        <td className="py-2 text-forest-green">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).weatherRoad}</td>
                       </tr>
                       <tr>
                         <td className="py-2 font-sans font-bold">Handling Steps</td>
-                        <td className="py-2 text-error">Triple transshipment (mandi ➔ station ➔ rake ➔ TN port/rail ➔ truck ➔ mill)</td>
-                        <td className="py-2 text-forest-green">Single load (direct door-to-door)</td>
+                        <td className="py-2 text-error">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).handlingRail}</td>
+                        <td className="py-2 text-forest-green">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).handlingRoad}</td>
                       </tr>
                       <tr>
                         <td className="py-2 font-sans font-bold">Doc Requirements</td>
-                        <td className="py-2">Railway Receipt (RR), e-Way Bill, Mandi Invoice, State Entry Declaration</td>
-                        <td className="py-2">Lorry Receipt (LR), e-Way Bill, Mandi Invoice</td>
+                        <td className="py-2 text-[9px]">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).docRail}</td>
+                        <td className="py-2 text-[9px]">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).docRoad}</td>
                       </tr>
                     </tbody>
                   </table>
@@ -3989,7 +4254,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
               {/* Cost Cutting Guidelines */}
               <div className="space-y-2.5 pt-2 border-t border-outline-variant/30">
-                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Domestic Sourcing Cost Management Plan</span>
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Domestic Sourcing Cost Management Plan ({formatStateName(selectedDomesticOrigin)})</span>
                 <div className="grid grid-cols-1 gap-2.5 text-xs">
                   <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
                     <strong className="text-primary flex items-center gap-1.5">
@@ -3997,7 +4262,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                       Cooperative Rake Booking (Rail Pooling)
                     </strong>
                     <span className="text-[11px] text-on-surface-variant block mt-1">
-                      To overcome the high 1,500-bale minimum batch requirement of rail rakes, establish **rake-sharing agreements** with other spinning mills in the same Salem/Erode cluster. This allows you to split rake logistics costs, capturing the 35% rail savings on long-haul transport.
+                      {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).coopRake}
                     </span>
                   </div>
                   <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
@@ -4006,16 +4271,17 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                       Backhaul Trucking Optimization
                     </strong>
                     <span className="text-[11px] text-on-surface-variant block mt-1">
-                      Establish contracts with logistics companies operating **backhaul trips**. Trucks carrying engineering goods, garments, or cement from South India to Central/North India often return empty. Booking these empty backhaul trucks can reduce road freight rates by **15% to 25%**.
+                      {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).backhaul}
                     </span>
                   </div>
                   <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
                     <strong className="text-primary flex items-center gap-1.5">
                       <span className="material-symbols-outlined text-sm">water_drop</span>
-                      Transit Moisture Management
+                      Transit Moisture & Route Sourcing
                     </strong>
                     <span className="text-[11px] text-on-surface-variant block mt-1">
-                      Always require **waterproof tarpaulin verification certificates** before truck dispatch. For rail, verify that covered wagons (BCN/BCNHL) are sealed. Excess moisture absorbed during transport increases bale weights temporarily, causing billing discrepancies and quality degradation.
+                      **Mandi Corridor Sourcing Route**: {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).routeInfo}<br />
+                      **Moisture Protection**: {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).moisture}
                     </span>
                   </div>
                 </div>
