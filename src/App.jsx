@@ -4411,56 +4411,40 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
               {/* Step 1: Select Cotton Variety */}
               <div className="md:col-span-7 space-y-2.5">
-                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 1: Select Cotton Variety ({selectedCottonType})</span>
-                <div className="flex gap-2 items-center overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/45 scrollbar-track-transparent">
-                  {/* Both/Dual-Source Section */}
-                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0">DUAL-SOURCE</span>
-                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Both').map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => handleSelectCottonType(type)}
-                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
-                        selectedCottonType === type
-                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold scale-[1.02]'
-                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
-
-                  {/* Domestic Only Column Divider */}
-                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">DOMESTIC ONLY</span>
-                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Domestic').map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => handleSelectCottonType(type)}
-                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
-                        selectedCottonType === type
-                          ? 'bg-forest-green text-white border-forest-green shadow-sm font-extrabold scale-[1.02]'
-                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
-
-                  {/* Global Only Column Divider */}
-                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">GLOBAL ONLY</span>
-                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Global').map((type) => (
-                    <button
-                      key={type}
-                      onClick={() => handleSelectCottonType(type)}
-                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
-                        selectedCottonType === type
-                          ? 'bg-blue-600 text-white border-blue-600 shadow-sm font-extrabold scale-[1.02]'
-                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                      }`}
-                    >
-                      {type}
-                    </button>
-                  ))}
-                </div>
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 1: Select Cotton Variety</span>
+                <select
+                  value={selectedCottonType}
+                  onChange={(e) => handleSelectCottonType(e.target.value)}
+                  className="w-full py-2 px-3 rounded-xl text-xs font-mono font-bold bg-surface-container-high text-on-surface border border-outline-variant focus:border-primary focus:ring-2 focus:ring-primary/20 outline-none transition-all cursor-pointer shadow-sm"
+                >
+                  <optgroup label="DUAL-SOURCE (GLOBAL & DOMESTIC)">
+                    {Object.keys(cottonTypeSpecs)
+                      .filter((k) => cottonTypeSpecs[k].originType === 'Both')
+                      .map((type) => (
+                        <option key={type} value={type}>
+                          {type} (Dual Sourced)
+                        </option>
+                      ))}
+                  </optgroup>
+                  <optgroup label="DOMESTIC ONLY">
+                    {Object.keys(cottonTypeSpecs)
+                      .filter((k) => cottonTypeSpecs[k].originType === 'Domestic')
+                      .map((type) => (
+                        <option key={type} value={type}>
+                          {type} (Domestic Sourced)
+                        </option>
+                      ))}
+                  </optgroup>
+                  <optgroup label="GLOBAL IMPORT ONLY">
+                    {Object.keys(cottonTypeSpecs)
+                      .filter((k) => cottonTypeSpecs[k].originType === 'Global')
+                      .map((type) => (
+                        <option key={type} value={type}>
+                          {type} (Global Import)
+                        </option>
+                      ))}
+                  </optgroup>
+                </select>
                 <div className="bg-surface-container-low/50 p-3 rounded-lg border border-outline-variant/15 text-xs text-on-surface-variant">
                   <strong>Variety Characteristics</strong>: {cottonTypeSpecs[selectedCottonType]?.desc}
                   <span className="block font-mono text-[10px] mt-1 text-primary">
