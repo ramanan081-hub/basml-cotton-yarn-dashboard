@@ -52,7 +52,7 @@ export const cottonAnalysis = {
       description: 'Shankar-6 is the premier Indian cotton benchmark. It represents the bulk of raw cotton commercial volume, controlling the price floors for 30s and 40s combed yarns in domestic markets.',
       dayWisePlan: [
         { day: 'Day 1', date: '20 May 2026', targetBales: 1500, priceForecast: 65100, triggerLevel: 64900, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 2', date: '21 May 2026', targetBales: 2200, priceForecast: 64800, triggerLevel: 64800, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
+        { day: 'Day 2', date: '21 May 2026', targetBales: 2200, priceForecast: 64800, triggerLevel: 64600, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
         { day: 'Day 3', date: '22 May 2026', targetBales: 1200, priceForecast: 65200, triggerLevel: 65000, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
         { day: 'Day 4', date: '23 May 2026', targetBales: 800, priceForecast: 65500, triggerLevel: 65100, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
         { day: 'Day 5', date: '24 May 2026', targetBales: 1000, priceForecast: 65300, triggerLevel: 65000, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
@@ -87,7 +87,7 @@ export const cottonAnalysis = {
       description: 'MCU-5 is a premium extra-long staple (ELS) variety grown mainly in Southern and Central India. It commands a quality premium and is essential for spinning high-strength 50s and 60s combed yarns.',
       dayWisePlan: [
         { day: 'Day 1', date: '20 May 2026', targetBales: 800, priceForecast: 70000, triggerLevel: 69800, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 2', date: '21 May 2026', targetBales: 1200, priceForecast: 69700, triggerLevel: 69700, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
+        { day: 'Day 2', date: '21 May 2026', targetBales: 1200, priceForecast: 69700, triggerLevel: 69500, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
         { day: 'Day 3', date: '22 May 2026', targetBales: 600, priceForecast: 70200, triggerLevel: 70000, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
         { day: 'Day 4', date: '23 May 2026', targetBales: 400, priceForecast: 70500, triggerLevel: 70100, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
         { day: 'Day 5', date: '24 May 2026', targetBales: 900, priceForecast: 70300, triggerLevel: 70000, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
@@ -122,7 +122,7 @@ export const cottonAnalysis = {
       description: 'DCH-32 and Suvin represent the highest echelon of Indian extra-long staple (ELS) cotton. Similar in strength and fiber length to Egyptian Giza and US Supima, it is used for super-fine yarn counts (80s to 120s Compact).',
       dayWisePlan: [
         { day: 'Day 1', date: '20 May 2026', targetBales: 300, priceForecast: 88000, triggerLevel: 87800, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 2', date: '21 May 2026', targetBales: 500, priceForecast: 87600, triggerLevel: 87600, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
+        { day: 'Day 2', date: '21 May 2026', targetBales: 500, priceForecast: 87600, triggerLevel: 87400, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
         { day: 'Day 3', date: '22 May 2026', targetBales: 250, priceForecast: 88200, triggerLevel: 88000, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
         { day: 'Day 4', date: '23 May 2026', targetBales: 150, priceForecast: 88900, triggerLevel: 88200, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
         { day: 'Day 5', date: '24 May 2026', targetBales: 200, priceForecast: 88500, triggerLevel: 88000, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
@@ -157,7 +157,7 @@ export const cottonAnalysis = {
       description: 'The ICE Cotton No. 2 contract is the global standard for pricing cotton. Converted to Indian Rupees and Candy (356 kg equivalent) terms, it is the primary benchmark for import/export margins and financial futures hedging.',
       dayWisePlan: [
         { day: 'Day 1', date: '20 May 2026', targetBales: 1000, priceForecast: 55260, triggerLevel: 55000, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 2', date: '21 May 2026', targetBales: 1500, priceForecast: 54900, triggerLevel: 54900, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
+        { day: 'Day 2', date: '21 May 2026', targetBales: 1500, priceForecast: 54900, triggerLevel: 54700, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
         { day: 'Day 3', date: '22 May 2026', targetBales: 900, priceForecast: 55400, triggerLevel: 55100, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
         { day: 'Day 4', date: '23 May 2026', targetBales: 500, priceForecast: 55900, triggerLevel: 55300, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
         { day: 'Day 5', date: '24 May 2026', targetBales: 700, priceForecast: 55600, triggerLevel: 55200, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },

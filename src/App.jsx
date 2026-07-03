@@ -2225,14 +2225,25 @@ const cottonTypeSpecs = {
     mic: '3.7 - 4.0',
     originType: 'Both'
   },
-  'DCH-32 / Suvin': {
-    name: 'DCH-32 / Suvin (ELS)',
-    desc: 'Extra Long Staple (ELS) premium Indian cotton. Ideal for luxury 80s-120s compact warp yarns.',
-    basePriceDomestic: 115000,
-    basePriceGlobalCentsLb: 210.0,
+  'Suvin': {
+    name: 'Suvin (ELS)',
+    desc: 'Indias premium extra-long staple (ELS) cotton. Staple length of 35-36mm. Extremely high value, high export demand.',
+    basePriceDomestic: 125000,
+    basePriceGlobalCentsLb: 220.0,
     importBcd: 10,
     importSws: 10,
-    staple: '35.0 mm',
+    staple: '35.5 mm',
+    mic: '3.1 - 3.5',
+    originType: 'Both'
+  },
+  'DCH-32': {
+    name: 'DCH-32 (ELS)',
+    desc: 'Premium Indian Extra-Long Staple (ELS) cotton. Grown in Karnataka & Andhra Pradesh, serves as Suvins primary commercial substitute.',
+    basePriceDomestic: 110000,
+    basePriceGlobalCentsLb: 195.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '34.2 mm',
     mic: '3.2 - 3.6',
     originType: 'Both'
   },
@@ -2247,6 +2258,17 @@ const cottonTypeSpecs = {
     mic: '3.8 - 4.3',
     originType: 'Domestic'
   },
+  'Bunny Bt / RCH-2 Bt': {
+    name: 'Bunny Bt / RCH-2 Bt',
+    desc: 'Bt transgenic long-staple variants. Resistant to bollworm, high uniformity index, favored for high-efficiency spinning runs.',
+    basePriceDomestic: 64500,
+    basePriceGlobalCentsLb: 83.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '30.2 mm',
+    mic: '3.7 - 4.2',
+    originType: 'Domestic'
+  },
   'Kohinoor 212+': {
     name: 'Kohinoor 212+',
     desc: 'High-yield Central Indian medium-long variety. Suitable for 32s-40s carded knitting yarns.',
@@ -2256,6 +2278,28 @@ const cottonTypeSpecs = {
     importSws: 10,
     staple: '29.0 mm',
     mic: '3.9 - 4.4',
+    originType: 'Domestic'
+  },
+  'Sankar-8': {
+    name: 'Sankar-8',
+    desc: 'Gujarat & Maharashtra hybrid. Medium-long staple, strong fiber strength, good spinning properties.',
+    basePriceDomestic: 63500,
+    basePriceGlobalCentsLb: 77.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '28.8 mm',
+    mic: '3.9 - 4.3',
+    originType: 'Domestic'
+  },
+  'NHH-44': {
+    name: 'NHH-44',
+    desc: 'Highly popular rain-fed Gujarat hybrid. Great spinning utility for coarse and medium hosiery counts.',
+    basePriceDomestic: 62000,
+    basePriceGlobalCentsLb: 75.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '27.8 mm',
+    mic: '4.0 - 4.4',
     originType: 'Domestic'
   },
   'MCU-7': {
@@ -2278,6 +2322,39 @@ const cottonTypeSpecs = {
     importSws: 10,
     staple: '27.5 mm',
     mic: '4.0 - 4.6',
+    originType: 'Domestic'
+  },
+  'Punjab F-1861 / LH-2076': {
+    name: 'Punjab F-1861 / LH-2076',
+    desc: 'North India medium staple varieties. Robust yields, preferred by northern mills for blending.',
+    basePriceDomestic: 61500,
+    basePriceGlobalCentsLb: 73.5,
+    importBcd: 10,
+    importSws: 10,
+    staple: '27.6 mm',
+    mic: '4.1 - 4.5',
+    originType: 'Domestic'
+  },
+  'G.Cot-21 / G.Cot-23': {
+    name: 'G.Cot-21 / G.Cot-23',
+    desc: 'Gujarat local desi cotton varieties. Standard coarse fiber, low irrigation requirement.',
+    basePriceDomestic: 47500,
+    basePriceGlobalCentsLb: 55.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '23.5 mm',
+    mic: '4.7 - 5.2',
+    originType: 'Domestic'
+  },
+  'AKA-7 / AKA-8401': {
+    name: 'AKA-7 / AKA-8401',
+    desc: 'Karnataka/Maharashtra local desi cotton. Short staple, coarse texture, highly resilient fiber.',
+    basePriceDomestic: 43500,
+    basePriceGlobalCentsLb: 50.0,
+    importBcd: 10,
+    importSws: 10,
+    staple: '21.0 mm',
+    mic: '4.9 - 5.6',
     originType: 'Domestic'
   },
   'V797': {
