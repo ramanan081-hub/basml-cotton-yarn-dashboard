@@ -4094,7 +4094,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
       ) : (
         <>
           {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
         {/* Card 1: MCX Cotton Spot (Bale basis) */}
         <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
           <div className="flex justify-between items-start mb-4">
@@ -4188,6 +4188,39 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
           <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
             <span>Unit: 170kg Indian Bale</span>
             <span className="text-primary font-bold">Arbitrage Spread</span>
+          </div>
+        </div>
+
+        {/* Card 4: MCU-5 / Bunny (29-31mm) Spot */}
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+          <div className="flex justify-between items-start mb-4">
+            <div>
+              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Premium Long Staple</span>
+              <h4 className="text-sm font-bold text-primary mt-0.5">MCU-5 / Bunny (29-31mm)</h4>
+            </div>
+            <span className="material-symbols-outlined text-primary text-xl">insights</span>
+          </div>
+          <div>
+            <div className="text-xl font-black text-primary flex flex-col gap-1">
+              <div className="flex justify-between items-baseline">
+                <span className="text-xs font-semibold text-on-surface-variant font-mono">MCU-5 (31-33mm):</span>
+                <span>₹{Math.round(data.prices.types[1].current).toLocaleString('en-IN')}<span className="text-[10px] font-normal text-on-surface-variant font-sans"> / Cd</span></span>
+              </div>
+              <div className="flex justify-between items-baseline border-t border-outline-variant/10 pt-1">
+                <span className="text-xs font-semibold text-on-surface-variant font-mono">Bunny (28-30mm):</span>
+                <span>₹{Math.round(data.prices.types[3].current).toLocaleString('en-IN')}<span className="text-[10px] font-normal text-on-surface-variant font-sans"> / Cd</span></span>
+              </div>
+            </div>
+            <div className="text-[10px] text-on-surface-variant font-mono mt-2 pt-2 border-t border-outline-variant/20 opacity-70">
+              Avg Landed: ₹{Math.round((data.prices.types[1].current + data.prices.types[3].current) / 2).toLocaleString('en-IN')} / Candy
+            </div>
+          </div>
+          <div className="mt-2 pt-2 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
+            <span>Staple: 29-33mm Long / ELS</span>
+            <span className="text-emerald-500 font-bold flex items-center gap-0.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+              Live Sync
+            </span>
           </div>
         </div>
       </div>
