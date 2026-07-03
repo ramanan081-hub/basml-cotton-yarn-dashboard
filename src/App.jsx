@@ -4094,7 +4094,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
       ) : (
         <>
           {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: MCX Cotton Spot (Bale basis) */}
         <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
           <div className="flex justify-between items-start mb-4">
@@ -4156,42 +4156,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
           </div>
         </div>
 
-        {/* Card 3: MCX Spot vs ICE Import Parity Spread */}
-        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
-          <div className="flex justify-between items-start mb-4">
-            <div>
-              <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Import Arbitrage</span>
-              <h4 className="text-sm font-bold text-primary mt-0.5">MCX vs ICE Parity Spread</h4>
-            </div>
-            <span className="material-symbols-outlined text-primary text-xl">compare_arrows</span>
-          </div>
-          <div>
-            {(() => {
-              const shankarCandy = data.prices.types[0].current;
-              const iceCandyEquiv = data.prices.types[6].current;
-              const spreadCandy = shankarCandy - iceCandyEquiv;
-              const spreadBale = Math.round(spreadCandy / 2.09188);
-              const pct = ((spreadCandy / iceCandyEquiv) * 100).toFixed(1);
-              return (
-                <>
-                  <div className="text-2xl font-black text-primary flex items-baseline gap-1.5">
-                    ₹{spreadBale >= 0 ? '+' : ''}{spreadBale.toLocaleString('en-IN')}
-                    <span className="text-xs font-semibold text-on-surface-variant font-sans">/ Bale ({spreadCandy >= 0 ? 'Premium' : 'Discount'})</span>
-                  </div>
-                  <div className="text-[11px] text-on-surface-variant font-mono mt-1">
-                    Spread: {pct}% vs ICE Parity (₹{Math.round(iceCandyEquiv).toLocaleString('en-IN')}/Candy)
-                  </div>
-                </>
-              );
-            })()}
-          </div>
-          <div className="mt-3 pt-3 border-t border-outline-variant/30 flex justify-between items-center text-[10px] font-mono text-on-surface-variant">
-            <span>Unit: 170kg Indian Bale</span>
-            <span className="text-primary font-bold">Arbitrage Spread</span>
-          </div>
-        </div>
-
-        {/* Card 4: MCU-5 / Bunny (29-31mm) Spot */}
+        {/* Card 3: MCU-5 / Bunny (29-31mm) Spot */}
         <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
           <div className="flex justify-between items-start mb-4">
             <div>
