@@ -1217,7 +1217,7 @@ function App() {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [globalSubTab, setGlobalSubTab] = useState('overview');
   const [indiaSubTab, setIndiaSubTab] = useState('overview');
-  const [impexpSubTab, setImpexpSubTab] = useState('import');
+  const [impexpSubTab, setImpexpSubTab] = useState('transport');
   const [analysisSubTab, setAnalysisSubTab] = useState('cotton');
   const [expandedMenus, setExpandedMenus] = useState({
     global: true,
@@ -1307,8 +1307,8 @@ function App() {
       label: 'Global Focus', 
       icon: 'globe',
       subItems: [
-        { id: 'overview', label: 'Market Overview' },
-        { id: 'globalMarket', label: 'Global Market Desk' }
+        { id: 'overview', label: 'Global Market' },
+        { id: 'globalMarket', label: 'Crude & Polyester Market' }
       ]
     },
     { 
@@ -1316,21 +1316,21 @@ function App() {
       label: 'India Focus', 
       icon: 'map',
       subItems: [
-        { id: 'overview', label: 'Market Overview' },
-        { id: 'hosiery', label: 'Hosiery Desk' }
+        { id: 'overview', label: 'India Market' },
+        { id: 'hosiery', label: 'Hosiery' }
       ]
     },
     { id: 'cotton', label: 'Cotton Markets', icon: 'grass' },
     { id: 'yarn', label: 'Yarn Markets', icon: 'trending_up' },
     { 
       id: 'impexp', 
-      label: 'Import & Export', 
+      label: 'Logistics', 
       icon: 'swap_horiz',
       subItems: [
-        { id: 'import', label: 'Import Strategic Desk' },
-        { id: 'export', label: 'Export Competitiveness' },
-        { id: 'playbook', label: 'Trade Playbook' },
-        { id: 'transport', label: 'Transportation & Logistics' }
+        { id: 'transport', label: 'Transportation' },
+        { id: 'import', label: 'Import' },
+        { id: 'export', label: 'Export' },
+        { id: 'playbook', label: 'Trade Playbook' }
       ]
     },
     { id: 'news', label: 'Live News', icon: 'feed' },
@@ -3151,13 +3151,13 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
         <div className="relative z-10 text-left space-y-2 max-w-2xl">
           <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary/20 border border-primary/30 text-on-primary-container text-[10px] font-mono font-bold uppercase tracking-wider">
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse"></span>
-            Import & Export Strategic Desk
+            Logistics Desk
           </span>
           <h2 className="font-headline text-2xl md:text-3xl font-extrabold text-white leading-tight">
-            Tamil Nadu Cotton Import & Yarn Export Planner
+            Logistics & Transportation Corridor Planner
           </h2>
           <p className="text-white/80 font-body text-xs md:text-sm">
-            Fostering competitive raw material sourcing corridors from global suppliers to Tamil Nadu mills, and maximizing premium yarn export realizations to international and domestic weaving hubs.
+            Fostering competitive transportation and raw material sourcing corridors from global suppliers to Tamil Nadu mills, and maximizing premium yarn export realizations to international and domestic weaving hubs.
           </p>
         </div>
       </section>
@@ -5008,7 +5008,7 @@ function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, su
       {/* Tab Header / Welcome bar */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-outline-variant">
         <div>
-          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">Global Cotton & Market Focus</h2>
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">Global Market</h2>
           <p className="text-sm text-on-surface-variant mt-1">International supply sheets, price indices, energy correlations, and geopolitical impact maps.</p>
         </div>
       </div>
@@ -5383,7 +5383,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
       {/* Tab Header / Welcome bar */}
       <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 pb-4 border-b border-outline-variant">
         <div>
-          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">India Cotton Focus</h2>
+          <h2 className="text-xl md:text-2xl font-bold tracking-tight text-primary">India Market</h2>
           <p className="text-sm text-on-surface-variant mt-1">Domestic raw cotton production, CCI MSP procurements, and district harvest mapping.</p>
         </div>
       </div>
@@ -6359,6 +6359,9 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
     }
     if (normalized.includes('j-34') || normalized === 'j 34') {
       return cottonAnalysis.data['J-34'];
+    }
+    if (normalized.includes('bunny')) {
+      return cottonAnalysis.data['Bunny (NCS-145)'];
     }
     if (normalized.includes('pima')) {
       return cottonAnalysis.data['US Pima'];

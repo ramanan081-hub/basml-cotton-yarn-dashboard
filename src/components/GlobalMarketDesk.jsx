@@ -476,7 +476,7 @@ export function GlobalMarketDesk({ globalCotton, yarns, usdInr, brentCrude, colo
       <div className="bg-gradient-to-r from-tertiary/10 via-primary/5 to-transparent border border-tertiary/20 rounded-xxl p-6 shadow-sm relative overflow-hidden">
         <h3 className="text-lg font-bold text-tertiary mb-2 flex items-center gap-2">
           <span className="material-symbols-outlined text-tertiary">globe</span>
-          Global Market, Energy & Geopolitics Desk
+          Crude & Polyester Market Desk
         </h3>
         <p className="text-xs text-on-surface-variant max-w-4xl leading-relaxed">
           The international cotton and synthetic fiber markets are profoundly intertwined with energy costs and geopolitical stability. 

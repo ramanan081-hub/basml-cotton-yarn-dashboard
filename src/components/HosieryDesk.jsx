@@ -83,7 +83,7 @@ export function HosieryDesk({ data, yarns, colors, darkMode }) {
       <div className="bg-gradient-to-r from-primary/10 via-tertiary/5 to-transparent border border-primary/20 rounded-xxl p-6 shadow-sm relative overflow-hidden">
         <h3 className="text-lg font-bold text-primary mb-2 flex items-center gap-2">
           <span className="material-symbols-outlined text-primary">analytics</span>
-          Hosiery vs. Weaving Yarn Desk
+          Hosiery
         </h3>
         <p className="text-xs text-on-surface-variant max-w-4xl leading-relaxed">
           Knitting (Hosiery) and Weaving yarns are engineered with distinct mechanical properties. Hosiery yarns utilize 
