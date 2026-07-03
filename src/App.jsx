@@ -2260,6 +2260,72 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
     'Tamil Nadu (Dom)': { fob: Math.floor(liveShankar6 * 1.04), freight: 1200, bcd: 0, aidc: 0, sws: 0, handling: 800, type: 'domestic' },
   };
 
+  const getGlobalImportDetails = (countryName) => {
+    const p = importPresets[countryName] || importPresets['USA'];
+    const fob = (selectedGlobalOrigin === countryName) ? globalFobCentsLb : p.fob;
+    const freight = (selectedGlobalOrigin === countryName) ? globalOceanFreight : p.freight;
+    const bcd = (selectedGlobalOrigin === countryName) ? globalBcdRate : p.bcd;
+    const aidc = (selectedGlobalOrigin === countryName) ? globalAidcRate : p.aidc;
+    const sws = (selectedGlobalOrigin === countryName) ? globalSwsRate : p.sws;
+    const handling = (selectedGlobalOrigin === countryName) ? globalHandlingCandy : p.handling;
+
+    const fobInr = (fob / 100) * lbsPerCandy * usdInrRate;
+    const freightInr = (freight * usdInrRate) / candiesPerContainer;
+    const cifInr = fobInr + freightInr;
+    const assessableValue = cifInr * 1.01;
+    const bcdInr = assessableValue * (bcd / 100);
+    const aidcInr = assessableValue * (aidc / 100);
+    const swsInr = bcdInr * (sws / 100);
+    const customsDuty = bcdInr + aidcInr + swsInr;
+    const igstInr = (assessableValue + customsDuty) * (importGstRate / 100);
+    const landedCandy = fobInr + freightInr + customsDuty + igstInr + handling;
+
+    return {
+      fob,
+      fobInr,
+      freight,
+      freightInr,
+      cifInr,
+      assessableValue,
+      bcd,
+      bcdInr,
+      aidcInr,
+      swsInr,
+      customsDuty,
+      igstInr,
+      handling,
+      landedCandy,
+      landedKg: landedCandy / kgsPerCandy
+    };
+  };
+
+  const getDomesticImportDetails = (stateName) => {
+    const p = importPresets[stateName] || importPresets['Gujarat (Dom)'];
+    const fob = (selectedDomesticOrigin === stateName) ? domesticMandiPrice : p.fob;
+    const freight = (selectedDomesticOrigin === stateName) ? domesticInlandFreight : p.freight;
+    const gst = (selectedDomesticOrigin === stateName) ? importGstRate : 5.0;
+    const mandi = (selectedDomesticOrigin === stateName) ? mandiFeeRate : 1.0;
+    const handling = (selectedDomesticOrigin === stateName) ? domesticHandlingCandy : p.handling;
+
+    const fobInr = fob;
+    const freightInr = freight;
+    const gstInr = fobInr * (gst / 100);
+    const mandiInr = fobInr * (mandi / 100);
+    const taxInr = gstInr + mandiInr;
+    const landedCandy = fobInr + freightInr + taxInr + handling;
+
+    return {
+      fobInr,
+      freightInr,
+      gstInr,
+      mandiInr,
+      taxInr,
+      handling,
+      landedCandy,
+      landedKg: landedCandy / kgsPerCandy
+    };
+  };
+
   useEffect(() => {
     if (liveIceCotton && liveIceCotton !== 78.50 && selectedGlobalOrigin === 'USA') {
       setGlobalFobCentsLb(liveIceCotton);
@@ -4173,6 +4239,55 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                   </div>
                 </div>
               </div>
+
+              {/* Landed Cost Calculation Breakdown Card */}
+              <div className="space-y-3 pt-2 border-t border-outline-variant/30">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Landed Cost Calculation ({selectedGlobalOrigin} ➔ TN Mill)</span>
+                <div className="bg-surface-container-low/60 rounded-xl p-4 border border-outline-variant/20 space-y-2.5 font-mono text-[11px]">
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>FOB Price ({(getGlobalImportDetails(selectedGlobalOrigin).fob).toFixed(2)} ¢/lb):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).fobInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Ocean Freight ({getGlobalImportDetails(selectedGlobalOrigin).freight} USD):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).freightInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant border-b border-dashed border-outline-variant/40 pb-1.5">
+                    <span>CIF Value (FOB + Freight):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).cifInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Assessable Value (CIF + 1% Landing):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).assessableValue).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Basic Customs Duty (BCD {getGlobalImportDetails(selectedGlobalOrigin).bcd}%):</span>
+                    <span className={`font-bold ${getGlobalImportDetails(selectedGlobalOrigin).bcd === 0 ? 'text-forest-green' : 'text-on-surface'}`}>
+                      {getGlobalImportDetails(selectedGlobalOrigin).bcd === 0 ? '₹0 (ECTA Free)' : `₹${Math.round(getGlobalImportDetails(selectedGlobalOrigin).bcdInr).toLocaleString('en-IN')}`}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>SWS (10% of BCD):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).swsInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>IGST ({importGstRate}%):</span>
+                    <span className="font-bold text-on-surface-variant">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).igstInr).toLocaleString('en-IN')}/Candy <span className="text-[9px] text-forest-green font-bold">(Offset)</span></span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant border-b border-dashed border-outline-variant/40 pb-1.5">
+                    <span>Port Handling & Quarantine:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).handling).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-bold text-primary pt-1">
+                    <span>Landed Cost (Candy):</span>
+                    <span>₹{Math.round(getGlobalImportDetails(selectedGlobalOrigin).landedCandy).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[10px] font-bold text-outline">
+                    <span>Landed Cost (per Kg):</span>
+                    <span>₹{getGlobalImportDetails(selectedGlobalOrigin).landedKg.toFixed(2)}/Kg</span>
+                  </div>
+                </div>
+              </div>
             </div>
 
             {/* Domestic Mandi-to-Mill Corridor */}
@@ -4283,6 +4398,41 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                       **Mandi Corridor Sourcing Route**: {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).routeInfo}<br />
                       **Moisture Protection**: {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).moisture}
                     </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Landed Cost Calculation Breakdown Card */}
+              <div className="space-y-3 pt-2 border-t border-outline-variant/30">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Landed Cost Calculation ({formatStateName(selectedDomesticOrigin)} ➔ TN Mill)</span>
+                <div className="bg-surface-container-low/60 rounded-xl p-4 border border-outline-variant/20 space-y-2.5 font-mono text-[11px]">
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Mandi Spot Price:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).fobInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Inland Transport Cost:</span>
+                    <span className="font-bold text-error">₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).freightInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>Mandi Cess / APMC Fees ({mandiFeeRate}%):</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).mandiInr).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant">
+                    <span>IGST ({importGstRate}%):</span>
+                    <span className="font-bold text-on-surface-variant">₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).gstInr).toLocaleString('en-IN')}/Candy <span className="text-[9px] text-forest-green font-bold">(Offset)</span></span>
+                  </div>
+                  <div className="flex justify-between items-center text-on-surface-variant border-b border-dashed border-outline-variant/40 pb-1.5">
+                    <span>Mill Gate Handling Charges:</span>
+                    <span className="font-bold text-on-surface">₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).handling).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-xs font-bold text-primary pt-1">
+                    <span>Landed Cost (Candy):</span>
+                    <span>₹{Math.round(getDomesticImportDetails(selectedDomesticOrigin).landedCandy).toLocaleString('en-IN')}/Candy</span>
+                  </div>
+                  <div className="flex justify-between items-center text-[10px] font-bold text-outline">
+                    <span>Landed Cost (per Kg):</span>
+                    <span>₹{getDomesticImportDetails(selectedDomesticOrigin).landedKg.toFixed(2)}/Kg</span>
                   </div>
                 </div>
               </div>
