@@ -2047,7 +2047,10 @@ const stateTransportProfiles = {
     coopRake: 'Active pooling with Salem/Erode spinning clusters. Monthly saving: ₹1.2 Lakhs/mill.',
     backhaul: 'High availability. empty trucks returning from Chennai/Coimbatore auto-component corridors reduce rates by 22%.',
     moisture: 'Low moisture (dry crop). require waterproof tarpaulins to prevent unexpected rainy season absorption.',
-    routeInfo: 'Rajkot/Kadi Mandi ➔ Wankaner Station ➔ Salem JN ➔ Mill Gate.'
+    routeInfo: 'Rajkot/Kadi Mandi ➔ Wankaner Station ➔ Salem JN ➔ Mill Gate.',
+    tollsCount: '34 Toll Plazas',
+    tollsCost: '₹15,400',
+    tollRoute: 'Kamrej (Surat) ➔ Pune ➔ Belagavi ➔ Hosur ➔ Thoppur'
   },
   'Maharashtra (Dom)': {
     costRail: '₹2,700',
@@ -2065,7 +2068,10 @@ const stateTransportProfiles = {
     coopRake: 'Establish shared rakes from Wardha/Yavatmal hubs to Coimbatore rail siding.',
     backhaul: 'High backhaul trucking from Pune/Mumbai industrial corridor. Save up to 25% on return trips.',
     moisture: 'Mid-level. Cotton has high natural wax; ensure humidity level is certified at 7.5% maximum before load.',
-    routeInfo: 'Yavatmal/Akola Mandi ➔ Wardha Siding ➔ Tiruppur Siding ➔ Mill Gate.'
+    routeInfo: 'Yavatmal/Akola Mandi ➔ Wardha Siding ➔ Tiruppur Siding ➔ Mill Gate.',
+    tollsCount: '24 Toll Plazas',
+    tollsCost: '₹10,800',
+    tollRoute: 'Wardha ➔ Kurnool ➔ Devanahalli ➔ Hosur ➔ Omalur'
   },
   'Telangana (Dom)': {
     costRail: '₹2,300',
@@ -2083,7 +2089,10 @@ const stateTransportProfiles = {
     coopRake: 'Telangana is closest major supplier. Share rakes with Salem cluster from Warangal siding. Fast transit.',
     backhaul: 'Moderate backhaul. Garment empty trucks from Tiruppur return corridor can be booked via booking apps.',
     moisture: 'Very low. Excellent staple dryness; verify ginner weight scale accuracy at mandi to prevent disputes.',
-    routeInfo: 'Warangal/Adilabad Mandi ➔ Warangal Station ➔ Erode JN ➔ Mill Gate.'
+    routeInfo: 'Warangal/Adilabad Mandi ➔ Warangal Station ➔ Erode JN ➔ Mill Gate.',
+    tollsCount: '19 Toll Plazas',
+    tollsCost: '₹8,600',
+    tollRoute: 'Raigir (Warangal) ➔ Kurnool ➔ Hosur ➔ Thoppur'
   },
   'Andhra Pradesh (Dom)': {
     costRail: '₹2,100',
@@ -2101,7 +2110,10 @@ const stateTransportProfiles = {
     coopRake: 'Guntur/Adoni mandis have direct rail siding. Excellent for immediate rake booking.',
     backhaul: 'High availability. Rice and cement returning trucks from AP to TN offer competitive spot road rates.',
     moisture: 'Coastal moisture risk during October. Mandatory moisture checking (limit to 8%) at dispatch point.',
-    routeInfo: 'Guntur/Adoni Mandi ➔ Adoni Siding ➔ Salem JN ➔ Mill Gate.'
+    routeInfo: 'Guntur/Adoni Mandi ➔ Adoni Siding ➔ Salem JN ➔ Mill Gate.',
+    tollsCount: '14 Toll Plazas',
+    tollsCost: '₹6,200',
+    tollRoute: 'Tangutur (Nellore) ➔ Sriperumbudur ➔ Krishnagiri ➔ Salem'
   },
   'Karnataka (Dom)': {
     costRail: '₹2,000',
@@ -2119,7 +2131,10 @@ const stateTransportProfiles = {
     coopRake: 'Consolidate small scale purchases from Raichur mandi into single rake pooling.',
     backhaul: 'Very high. Regular traffic between Bengaluru/Hubli and Tamil Nadu. Lowest road freight rates.',
     moisture: 'Standard. Ensure crop is stored in covered storage during transit to maintain color grade.',
-    routeInfo: 'Raichur/Dharwad Mandi ➔ Raichur Station ➔ Erode Siding ➔ Mill Gate.'
+    routeInfo: 'Raichur/Dharwad Mandi ➔ Raichur Station ➔ Erode Siding ➔ Mill Gate.',
+    tollsCount: '12 Toll Plazas',
+    tollsCost: '₹4,800',
+    tollRoute: 'Raichur ➔ Hebbal (Bengaluru) ➔ Hosur ➔ Thoppur'
   },
   'Madhya Pradesh (Dom)': {
     costRail: '₹2,800',
@@ -2137,7 +2152,10 @@ const stateTransportProfiles = {
     coopRake: 'Rake pooling from Khandwa/Khargone station direct to Coimbatore JN. Saves ₹1.5/kg.',
     backhaul: 'Moderate. Empty metal/chemical carriers returning from TN ports can be utilized.',
     moisture: 'Low. Require tarpaulin verification certificate before dispatch from Mandi.',
-    routeInfo: 'Khandwa/Sendhwa Mandi ➔ Khandwa Siding ➔ Coimbatore JN ➔ Mill Gate.'
+    routeInfo: 'Khandwa/Sendhwa Mandi ➔ Khandwa Siding ➔ Coimbatore JN ➔ Mill Gate.',
+    tollsCount: '28 Toll Plazas',
+    tollsCost: '₹12,600',
+    tollRoute: 'Sendhwa ➔ Pune ➔ Kolhapur ➔ Bengaluru ➔ Hosur'
   },
   'Punjab (Dom)': {
     costRail: '₹3,500',
@@ -2155,7 +2173,10 @@ const stateTransportProfiles = {
     coopRake: 'Long-distance rail pooling is critical. Road trucking is highly uneconomical (₹7,200/Candy). Always use rail.',
     backhaul: 'Low. Very few empty return trucks direct from Punjab. Use Delhi NCR backhaul consolidation centers.',
     moisture: 'Winter crop has high morning dew. Mandate moisture testing at Mandi (reject above 8.5%).',
-    routeInfo: 'Bathinda/Abohar Mandi ➔ Bathinda JN ➔ Salem JN ➔ Mill Gate.'
+    routeInfo: 'Bathinda/Abohar Mandi ➔ Bathinda JN ➔ Salem JN ➔ Mill Gate.',
+    tollsCount: '52 Toll Plazas',
+    tollsCost: '₹23,500',
+    tollRoute: 'Delhi Bypass ➔ Gwalior ➔ Nagpur ➔ Hyderabad ➔ Hosur'
   },
   'Rajasthan (Dom)': {
     costRail: '₹3,300',
@@ -2173,7 +2194,10 @@ const stateTransportProfiles = {
     coopRake: 'Establish rake pooling at Sri Ganganagar siding with Erode cluster mills.',
     backhaul: 'Low to Moderate. Consolidate with Jaipur/Delhi backhaul transport agencies.',
     moisture: 'Very low (desert climate). Crop is clean; watch out for sand/dust trash contamination during transit.',
-    routeInfo: 'Sri Ganganagar/Hanumangarh Mandi ➔ Sri Ganganagar Station ➔ Erode Siding ➔ Mill Gate.'
+    routeInfo: 'Sri Ganganagar/Hanumangarh Mandi ➔ Sri Ganganagar Station ➔ Erode Siding ➔ Mill Gate.',
+    tollsCount: '45 Toll Plazas',
+    tollsCost: '₹20,400',
+    tollRoute: 'Jaipur Bypass ➔ Vadodara ➔ Pune ➔ Belagavi ➔ Hosur'
   }
 };
 
@@ -4361,6 +4385,14 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                         <td className="py-2 font-sans font-bold">Doc Requirements</td>
                         <td className="py-2 text-[9px]">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).docRail}</td>
                         <td className="py-2 text-[9px]">{(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).docRoad}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Tolls (FASTag Charges)</td>
+                        <td className="py-2 text-forest-green font-bold">₹0 (Not Applicable for Rail)</td>
+                        <td className="py-2 text-error text-[10px] font-bold">
+                          {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).tollsCount} ({(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).tollsCost})
+                          <span className="block text-[8px] text-on-surface-variant font-medium mt-0.5">Route: {(stateTransportProfiles[selectedDomesticOrigin] || stateTransportProfiles['Gujarat (Dom)']).tollRoute}</span>
+                        </td>
                       </tr>
                     </tbody>
                   </table>
