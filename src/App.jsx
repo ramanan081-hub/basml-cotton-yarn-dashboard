@@ -2212,7 +2212,7 @@ const cottonTypeSpecs = {
     importSws: 10,
     staple: '29.5 mm',
     mic: '3.8 - 4.2',
-    originType: 'Domestic'
+    originType: 'Both'
   },
   'MCU-5': {
     name: 'MCU-5',
@@ -2223,7 +2223,7 @@ const cottonTypeSpecs = {
     importSws: 10,
     staple: '31.0 mm',
     mic: '3.7 - 4.0',
-    originType: 'Domestic'
+    originType: 'Both'
   },
   'DCH-32 / Suvin': {
     name: 'DCH-32 / Suvin (ELS)',
@@ -2234,7 +2234,7 @@ const cottonTypeSpecs = {
     importSws: 10,
     staple: '35.0 mm',
     mic: '3.2 - 3.6',
-    originType: 'Domestic'
+    originType: 'Both'
   },
   'Bunny': {
     name: 'Bunny',
@@ -2387,6 +2387,18 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   const formatStateName = (name) => {
     if (name === 'Tamil Nadu (Dom)') return 'Tamil Nadu (Local)';
     return name.replace(' (Dom)', '');
+  };
+
+  const handleSelectCottonType = (type) => {
+    setSelectedCottonType(type);
+    const spec = cottonTypeSpecs[type];
+    if (spec) {
+      if (spec.originType === 'Domestic') {
+        setSelectedChannel('domestic');
+      } else if (spec.originType === 'Global') {
+        setSelectedChannel('global');
+      }
+    }
   };
   
   // Auto-populate from live market data
@@ -4401,12 +4413,28 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               <div className="md:col-span-7 space-y-2.5">
                 <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Step 1: Select Cotton Variety ({selectedCottonType})</span>
                 <div className="flex gap-2 items-center overflow-x-auto pb-2 scrollbar-thin scrollbar-thumb-primary/20 hover:scrollbar-thumb-primary/45 scrollbar-track-transparent">
-                  {/* Domestic Column Divider */}
-                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0">DOMESTIC</span>
+                  {/* Both/Dual-Source Section */}
+                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0">DUAL-SOURCE</span>
+                  {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Both').map((type) => (
+                    <button
+                      key={type}
+                      onClick={() => handleSelectCottonType(type)}
+                      className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
+                        selectedCottonType === type
+                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold scale-[1.02]'
+                          : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
+                      }`}
+                    >
+                      {type}
+                    </button>
+                  ))}
+
+                  {/* Domestic Only Column Divider */}
+                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">DOMESTIC ONLY</span>
                   {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Domestic').map((type) => (
                     <button
                       key={type}
-                      onClick={() => setSelectedCottonType(type)}
+                      onClick={() => handleSelectCottonType(type)}
                       className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
                         selectedCottonType === type
                           ? 'bg-forest-green text-white border-forest-green shadow-sm font-extrabold scale-[1.02]'
@@ -4417,15 +4445,15 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     </button>
                   ))}
 
-                  {/* Global Column Divider */}
-                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">GLOBAL IMPORT</span>
+                  {/* Global Only Column Divider */}
+                  <span className="text-[8px] font-mono font-bold text-outline uppercase tracking-wider bg-surface-container-high px-2 py-1.5 rounded shrink-0 ml-4">GLOBAL ONLY</span>
                   {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Global').map((type) => (
                     <button
                       key={type}
-                      onClick={() => setSelectedCottonType(type)}
+                      onClick={() => handleSelectCottonType(type)}
                       className={`py-1.5 px-3 rounded-lg text-[10px] font-mono font-semibold border transition-all shrink-0 ${
                         selectedCottonType === type
-                          ? 'bg-primary text-on-primary border-primary shadow-sm font-extrabold scale-[1.02]'
+                          ? 'bg-blue-600 text-white border-blue-600 shadow-sm font-extrabold scale-[1.02]'
                           : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
                       }`}
                     >
@@ -4436,7 +4464,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                 <div className="bg-surface-container-low/50 p-3 rounded-lg border border-outline-variant/15 text-xs text-on-surface-variant">
                   <strong>Variety Characteristics</strong>: {cottonTypeSpecs[selectedCottonType]?.desc}
                   <span className="block font-mono text-[10px] mt-1 text-primary">
-                    Staple Length: {cottonTypeSpecs[selectedCottonType]?.staple} | Micronaire: {cottonTypeSpecs[selectedCottonType]?.mic} | Target Cost: ₹{cottonTypeSpecs[selectedCottonType]?.basePriceDomestic.toLocaleString('en-IN')}/Candy
+                    Staple Length: {cottonTypeSpecs[selectedCottonType]?.staple} | Micronaire: {cottonTypeSpecs[selectedCottonType]?.mic} | Target Cost: {cottonTypeSpecs[selectedCottonType]?.originType === 'Global' ? `${cottonTypeSpecs[selectedCottonType]?.basePriceGlobalCentsLb} ¢/lb` : `₹${cottonTypeSpecs[selectedCottonType]?.basePriceDomestic.toLocaleString('en-IN')}/Candy`}
                   </span>
                 </div>
               </div>
@@ -4447,28 +4475,33 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                 <div className="flex gap-2.5">
                   <button
                     onClick={() => setSelectedChannel('global')}
+                    disabled={cottonTypeSpecs[selectedCottonType]?.originType === 'Domestic'}
                     className={`flex-1 py-2 px-3 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 ${
                       selectedChannel === 'global'
                         ? 'bg-primary text-on-primary border-primary shadow-md ring-2 ring-primary/20'
                         : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                    }`}
+                    } ${cottonTypeSpecs[selectedCottonType]?.originType === 'Domestic' ? 'opacity-35 cursor-not-allowed' : ''}`}
                   >
                     <span className="material-symbols-outlined text-sm">public</span>
                     🌍 Global Import
                   </button>
                   <button
                     onClick={() => setSelectedChannel('domestic')}
+                    disabled={cottonTypeSpecs[selectedCottonType]?.originType === 'Global'}
                     className={`flex-1 py-2 px-3 rounded-xl text-xs font-mono font-bold border transition-all flex items-center justify-center gap-2 ${
                       selectedChannel === 'domestic'
                         ? 'bg-primary text-on-primary border-primary shadow-md ring-2 ring-primary/20'
                         : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                    }`}
+                    } ${cottonTypeSpecs[selectedCottonType]?.originType === 'Global' ? 'opacity-35 cursor-not-allowed' : ''}`}
                   >
                     <span className="material-symbols-outlined text-sm">local_shipping</span>
                     🚛 Domestic Interstate
                   </button>
                 </div>
                 <p className="text-[10px] text-on-surface-variant leading-relaxed">
+                  {cottonTypeSpecs[selectedCottonType]?.originType === 'Domestic' && <span className="text-error font-bold block mb-1">⚠️ {selectedCottonType} is a Domestic-Only variety. Global channel locked.</span>}
+                  {cottonTypeSpecs[selectedCottonType]?.originType === 'Global' && <span className="text-error font-bold block mb-1">⚠️ {selectedCottonType} is a Global-Only variety. Domestic channel locked.</span>}
+                  {cottonTypeSpecs[selectedCottonType]?.originType === 'Both' && <span className="text-forest-green font-bold block mb-1">✓ {selectedCottonType} is a Dual-Source variety. Both channels available.</span>}
                   {selectedChannel === 'global'
                     ? `Visualizing landed charges & documentation for overseas imported ${selectedCottonType}.`
                     : `Visualizing road vs rail freight and mandi charges for domestic ${selectedCottonType}.`}
