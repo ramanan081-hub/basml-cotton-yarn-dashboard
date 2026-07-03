@@ -1329,7 +1329,8 @@ function App() {
       subItems: [
         { id: 'import', label: 'Import Strategic Desk' },
         { id: 'export', label: 'Export Competitiveness' },
-        { id: 'playbook', label: 'Trade Playbook' }
+        { id: 'playbook', label: 'Trade Playbook' },
+        { id: 'transport', label: 'Transportation & Logistics' }
       ]
     },
     { id: 'news', label: 'Live News', icon: 'feed' },
@@ -3829,6 +3830,195 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                 <div>• <strong>Freight Negotiations</strong>: Consolidate container volumes under Tamil Nadu trade associations to negotiate lower ocean freight.</div>
                 <div>• <strong>Capital Coverage</strong>: Secure ECGC credit insurance for Bangladesh shipments to protect against dollar shortages.</div>
                 <div>• <strong>Forex Lock-in</strong>: Hedge exchange rate exposures using forward contracts at 83.50+ levels to lock in calculated margins.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {subTab === 'transport' && (
+        <div className="space-y-gutter animate-fade-in text-left">
+          {/* Sourcing Corridor & Ports Intro */}
+          <div className="card-table-orange rounded-xxl p-6 border border-primary/20 space-y-4">
+            <div className="flex justify-between items-start flex-wrap gap-2">
+              <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
+                <span className="material-symbols-outlined text-xl">forklift</span>
+                Transportation & Logistics Management Portal
+              </h3>
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary/15 text-primary border border-primary/25 text-[9px] font-mono font-bold">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+                ACTIVE LOGISTICS HEDGING
+              </span>
+            </div>
+            <p className="text-xs text-on-surface-variant leading-relaxed">
+              Cotton sourcing in Tamil Nadu relies heavily on efficient port-to-mill and mandi-to-mill corridors. Managing document workflows, customs compliances, shipping transits, and choosing between Rail vs. Road networks are critical levers to minimize procurement costs.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-12 gap-gutter">
+            {/* Global Port-to-Mill Corridor */}
+            <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
+              <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-lg">directions_boat</span>
+                Global Import Corridor (Port to Tamil Nadu Mill)
+              </h4>
+
+              {/* Documentation Stages */}
+              <div className="space-y-3">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Customs & Shipping Documentation Flow</span>
+                <div className="relative pl-6 border-l-2 border-primary/20 space-y-4 text-xs">
+                  {/* Step 1 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">1</div>
+                    <strong className="text-on-surface block">Proforma Invoice & Contract Lock</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Agreement with supplier (USA/Brazil). Define incoterms (FOB/CIF) and weight tolerances.</span>
+                  </div>
+                  {/* Step 2 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">2</div>
+                    <strong className="text-on-surface block">Phytosanitary Certification</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Issued by exporting nation's agricultural authority. Verifies cotton is free of pests/weeds.</span>
+                  </div>
+                  {/* Step 3 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">3</div>
+                    <strong className="text-on-surface block">Letter of Credit (LC) & Bank Allocation</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Payment settlement mechanism. Allocates capital. Note: 45-60 day settlements lock up working capital.</span>
+                  </div>
+                  {/* Step 4 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">4</div>
+                    <strong className="text-on-surface block">Bill of Lading & COO Filing</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Carrier issues B/L. File Certificate of Origin to claim duty-free benefits under SAFTA/ASEAN.</span>
+                  </div>
+                  {/* Step 5 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">5</div>
+                    <strong className="text-on-surface block">Bill of Entry (BOE) & Customs Clearance</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Filing details on Icegate. Duties (BCD + AIDC + SWS + IGST) are calculated on AV (CIF + 1% Landing Charge).</span>
+                  </div>
+                  {/* Step 6 */}
+                  <div className="relative">
+                    <div className="absolute -left-[31px] top-0.5 w-4 h-4 rounded-full bg-primary flex items-center justify-center text-[9px] font-bold text-white">6</div>
+                    <strong className="text-on-surface block">Plant Quarantine (PQ) & Methyl Bromide Fumigation</strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-0.5">Mandatory quarantine check at port. Cargo must undergo fumigation if not pre-cleared.</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Cost Cutting Guidelines */}
+              <div className="space-y-2.5 pt-2 border-t border-outline-variant/30">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Global Sourcing Cost Management Plan</span>
+                <div className="grid grid-cols-1 gap-2.5 text-xs">
+                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
+                    <strong className="text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm">schedule</span>
+                      Free Time Extension (Demurrage Mitigation)
+                    </strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-1">
+                      Always negotiate for **14 to 21 days of container free time** (demurrage/detention) with the shipping line before departure, instead of the standard 7 days. This cushions against Plant Quarantine delays at Tuticorin/Chennai ports.
+                    </span>
+                  </div>
+                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
+                    <strong className="text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm">anchor</span>
+                      Tuticorin Port Optimization
+                    </strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-1">
+                      Direct call vessels to **Tuticorin Port** save ₹4,000–6,000 per container in first/last-mile domestic haulage compared to routing through Chennai Port for spinning mills in Salem, Erode, and Coimbatore.
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Domestic Mandi-to-Mill Corridor */}
+            <div className="col-span-12 lg:col-span-6 card-table-orange rounded-xxl p-6 border border-primary/10 space-y-5">
+              <h4 className="text-sm font-headline font-bold text-primary flex items-center gap-1.5">
+                <span className="material-symbols-outlined text-lg">local_shipping</span>
+                Domestic Interstate Corridor (Mandi to Tamil Nadu Mill)
+              </h4>
+
+              {/* Transit Comparison */}
+              <div className="space-y-3">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Transportation Mode Analysis (North/Central Mandis to TN Gate)</span>
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left font-mono text-[10px] border-collapse">
+                    <thead>
+                      <tr className="border-b border-outline-variant/40 text-outline">
+                        <th className="pb-1.5 font-bold">Parameter</th>
+                        <th className="pb-1.5 font-bold">Rail (Rake Logistics)</th>
+                        <th className="pb-1.5 font-bold">Road (Trucking)</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-outline-variant/20 text-on-surface">
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Cost per Candy</td>
+                        <td className="py-2 text-forest-green font-bold">₹2,800 - ₹3,500 (Cheaper by ~35%)</td>
+                        <td className="py-2 text-error font-bold">₹4,500 - ₹7,200</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Transit Time</td>
+                        <td className="py-2 text-error">7 - 10 Days (Unpredictable)</td>
+                        <td className="py-2 text-forest-green">3 - 5 Days (Direct Express)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Min. Batch Load</td>
+                        <td className="py-2">1 Rake (~1,500 Bales / 250t)</td>
+                        <td className="py-2">1 Truck (~50-60 Bales / 10t)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Weather Risk</td>
+                        <td className="py-2 text-amber-500">High (Moisture risk in open wagons)</td>
+                        <td className="py-2 text-forest-green">Low (Tarpaulin/Container Trucks)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Handling Steps</td>
+                        <td className="py-2 text-error">Triple transshipment (mandi ➔ station ➔ rake ➔ TN port/rail ➔ truck ➔ mill)</td>
+                        <td className="py-2 text-forest-green">Single load (direct door-to-door)</td>
+                      </tr>
+                      <tr>
+                        <td className="py-2 font-sans font-bold">Doc Requirements</td>
+                        <td className="py-2">Railway Receipt (RR), e-Way Bill, Mandi Invoice, State Entry Declaration</td>
+                        <td className="py-2">Lorry Receipt (LR), e-Way Bill, Mandi Invoice</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              {/* Cost Cutting Guidelines */}
+              <div className="space-y-2.5 pt-2 border-t border-outline-variant/30">
+                <span className="text-[10px] font-mono font-bold text-outline block uppercase tracking-wider">Domestic Sourcing Cost Management Plan</span>
+                <div className="grid grid-cols-1 gap-2.5 text-xs">
+                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
+                    <strong className="text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm">groups</span>
+                      Cooperative Rake Booking (Rail Pooling)
+                    </strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-1">
+                      To overcome the high 1,500-bale minimum batch requirement of rail rakes, establish **rake-sharing agreements** with other spinning mills in the same Salem/Erode cluster. This allows you to split rake logistics costs, capturing the 35% rail savings on long-haul transport.
+                    </span>
+                  </div>
+                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
+                    <strong className="text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm">swap_calls</span>
+                      Backhaul Trucking Optimization
+                    </strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-1">
+                      Establish contracts with logistics companies operating **backhaul trips**. Trucks carrying engineering goods, garments, or cement from South India to Central/North India often return empty. Booking these empty backhaul trucks can reduce road freight rates by **15% to 25%**.
+                    </span>
+                  </div>
+                  <div className="bg-surface-container-low/60 p-3 rounded-lg border border-outline-variant/20">
+                    <strong className="text-primary flex items-center gap-1.5">
+                      <span className="material-symbols-outlined text-sm">water_drop</span>
+                      Transit Moisture Management
+                    </strong>
+                    <span className="text-[11px] text-on-surface-variant block mt-1">
+                      Always require **waterproof tarpaulin verification certificates** before truck dispatch. For rail, verify that covered wagons (BCN/BCNHL) are sealed. Excess moisture absorbed during transport increases bale weights temporarily, causing billing discrepancies and quality degradation.
+                    </span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
