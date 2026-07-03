@@ -2408,10 +2408,20 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   // Global calculations
   const globalFobInrCandy = (globalFobCentsLb / 100) * lbsPerCandy * usdInrRate;
   const globalFreightInrCandy = (globalOceanFreight * usdInrRate) / candiesPerContainer;
-  const globalBcdInrCandy = globalFobInrCandy * (globalBcdRate / 100);
-  const globalAidcInrCandy = globalFobInrCandy * (globalAidcRate / 100);
+  
+  // Customs Valuation: CIF = FOB + Freight; Assessable Value (AV) = CIF + 1% Landing Charge
+  const globalCifInrCandy = globalFobInrCandy + globalFreightInrCandy;
+  const globalAssessableValueCandy = globalCifInrCandy * 1.01;
+  
+  const globalBcdInrCandy = globalAssessableValueCandy * (globalBcdRate / 100);
+  const globalAidcInrCandy = globalAssessableValueCandy * (globalAidcRate / 100);
   const globalSwsInrCandy = globalBcdInrCandy * (globalSwsRate / 100);
-  const globalTotalTaxDutyInrCandy = globalBcdInrCandy + globalAidcInrCandy + globalSwsInrCandy;
+  const globalCustomsDutyInrCandy = globalBcdInrCandy + globalAidcInrCandy + globalSwsInrCandy;
+  
+  // IGST (5%) on (Assessable Value + Customs Duty)
+  const globalIgstInrCandy = (globalAssessableValueCandy + globalCustomsDutyInrCandy) * (importGstRate / 100);
+  
+  const globalTotalTaxDutyInrCandy = globalCustomsDutyInrCandy + globalIgstInrCandy;
   const globalLandedInrCandy = globalFobInrCandy + globalFreightInrCandy + globalTotalTaxDutyInrCandy + globalHandlingCandy;
   const globalLandedInrKg = globalLandedInrCandy / kgsPerCandy;
 
@@ -2438,10 +2448,14 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
       
       const fobInr = (fob / 100) * lbsPerCandy * usdInrRate;
       const freightInr = (freight * usdInrRate) / candiesPerContainer;
-      const bcdInr = fobInr * (bcd / 100);
-      const aidcInr = fobInr * (aidc / 100);
+      const cifInr = fobInr + freightInr;
+      const assessableValue = cifInr * 1.01;
+      const bcdInr = assessableValue * (bcd / 100);
+      const aidcInr = assessableValue * (aidc / 100);
       const swsInr = bcdInr * (sws / 100);
-      const taxInr = bcdInr + aidcInr + swsInr;
+      const customsDuty = bcdInr + aidcInr + swsInr;
+      const igstInr = (assessableValue + customsDuty) * (importGstRate / 100);
+      const taxInr = customsDuty + igstInr;
       const landedCandy = fobInr + freightInr + taxInr + handling;
       return { candy: landedCandy, kg: landedCandy / kgsPerCandy };
     } else {
@@ -2622,7 +2636,7 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
                   <div>
                     <label className="text-[10px] font-mono font-bold text-outline block mb-1">
-                      OCEAN FREIGHT (USD/CONTAINER)
+                      OCEAN FREIGHT (USD/CONTAINER - ~56.24 Candies / 20t)
                     </label>
                     <input
                       type="number"
@@ -2693,11 +2707,15 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                     <span className="font-bold text-on-surface">₹{Math.round(globalFreightInrCandy).toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex justify-between items-center text-xs font-mono border-b border-dashed border-outline-variant pb-2">
-                    <span className="text-on-surface-variant">Taxes (BCD + AIDC + SWS):</span>
+                    <span className="text-on-surface-variant">Taxes (BCD+AIDC+SWS+IGST):</span>
                     <span className="font-bold text-on-surface">
                       ₹{Math.round(globalTotalTaxDutyInrCandy).toLocaleString('en-IN')} 
                       <span className="text-[10px] text-outline ml-1">
-                        ({(globalBcdRate + globalAidcRate + (globalBcdRate * globalSwsRate / 100)).toFixed(1.5)}% Eff.)
+                        {(() => {
+                          const effCustoms = globalBcdRate + globalAidcRate + (globalBcdRate * globalSwsRate / 100);
+                          const effTotal = effCustoms + (1 + effCustoms / 100) * importGstRate;
+                          return `(${effTotal.toFixed(2)}% Eff. on AV)`;
+                        })()}
                       </span>
                     </span>
                   </div>
