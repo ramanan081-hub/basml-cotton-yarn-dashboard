@@ -2250,7 +2250,7 @@ const cottonTypeSpecs = {
   'Bunny': {
     name: 'Bunny',
     desc: 'Central India long staple variety. Great dye absorption and uniform strength profiles.',
-    basePriceDomestic: 63800,
+    basePriceDomestic: 65500,
     basePriceGlobalCentsLb: 82.0,
     importBcd: 10,
     importSws: 10,
@@ -2261,7 +2261,7 @@ const cottonTypeSpecs = {
   'Bunny Bt / RCH-2 Bt': {
     name: 'Bunny Bt / RCH-2 Bt',
     desc: 'Bt transgenic long-staple variants. Resistant to bollworm, high uniformity index, favored for high-efficiency spinning runs.',
-    basePriceDomestic: 64500,
+    basePriceDomestic: 66200,
     basePriceGlobalCentsLb: 83.5,
     importBcd: 10,
     importSws: 10,

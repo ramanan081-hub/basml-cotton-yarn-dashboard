@@ -8,28 +8,28 @@ export const cottonAnalysis = {
       origin: 'Telangana, Andhra Pradesh & Maharashtra',
       description: 'Bunny (NCS-145) is a highly popular Bt cotton variety in Central and Southern India. Highly preferred for combing and carding spinning lines due to low contamination and optimal micronaire.',
       dayWisePlan: [
-        { day: 'Day 1', date: '20 May 2026', targetBales: 1000, priceForecast: 63800, triggerLevel: 63600, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 2', date: '21 May 2026', targetBales: 2200, priceForecast: 63500, triggerLevel: 63300, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
-        { day: 'Day 3', date: '22 May 2026', targetBales: 1200, priceForecast: 64000, triggerLevel: 63800, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
-        { day: 'Day 4', date: '23 May 2026', targetBales: 800, priceForecast: 64300, triggerLevel: 63900, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
-        { day: 'Day 5', date: '24 May 2026', targetBales: 1000, priceForecast: 64100, triggerLevel: 63800, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
-        { day: 'Day 6', date: '25 May 2026', targetBales: 1800, priceForecast: 63700, triggerLevel: 63500, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
-        { day: 'Day 7', date: '26 May 2026', targetBales: 2500, priceForecast: 63400, triggerLevel: 63400, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' }
+        { day: 'Day 1', date: '20 May 2026', targetBales: 1000, priceForecast: 65500, triggerLevel: 65300, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
+        { day: 'Day 2', date: '21 May 2026', targetBales: 2200, priceForecast: 65200, triggerLevel: 65000, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' },
+        { day: 'Day 3', date: '22 May 2026', targetBales: 1200, priceForecast: 65700, triggerLevel: 65500, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
+        { day: 'Day 4', date: '23 May 2026', targetBales: 800, priceForecast: 66000, triggerLevel: 65600, recommendation: 'Hold / Wait', actionColor: 'var(--text-secondary)' },
+        { day: 'Day 5', date: '24 May 2026', targetBales: 1000, priceForecast: 65800, triggerLevel: 65500, recommendation: 'Moderate Buy', actionColor: 'var(--ios-blue)' },
+        { day: 'Day 6', date: '25 May 2026', targetBales: 1800, priceForecast: 65400, triggerLevel: 65200, recommendation: 'Buy on Dip', actionColor: 'var(--accent-gold)' },
+        { day: 'Day 7', date: '26 May 2026', targetBales: 2500, priceForecast: 65100, triggerLevel: 64900, recommendation: 'Aggressive Buy', actionColor: 'var(--ios-green)' }
       ],
       monthWisePlan: [
-        { month: 'May 2026', targetBales: 25000, avgPrice: 63800, allocatedBudgetCr: 80.2, hedgingRatio: 30 },
-        { month: 'Jun 2026', targetBales: 28000, avgPrice: 64400, allocatedBudgetCr: 90.1, hedgingRatio: 35 },
-        { month: 'Jul 2026', targetBales: 30000, avgPrice: 65100, allocatedBudgetCr: 97.6, hedgingRatio: 40 },
-        { month: 'Aug 2026', targetBales: 22000, avgPrice: 65500, allocatedBudgetCr: 72.0, hedgingRatio: 45 },
-        { month: 'Sep 2026', targetBales: 15000, avgPrice: 64300, allocatedBudgetCr: 48.2, hedgingRatio: 25 },
-        { month: 'Oct 2026', targetBales: 20000, avgPrice: 62700, allocatedBudgetCr: 62.7, hedgingRatio: 20 }
+        { month: 'May 2026', targetBales: 25000, avgPrice: 65500, allocatedBudgetCr: 80.2, hedgingRatio: 30 },
+        { month: 'Jun 2026', targetBales: 28000, avgPrice: 66100, allocatedBudgetCr: 90.1, hedgingRatio: 35 },
+        { month: 'Jul 2026', targetBales: 30000, avgPrice: 66800, allocatedBudgetCr: 97.6, hedgingRatio: 40 },
+        { month: 'Aug 2026', targetBales: 22000, avgPrice: 67200, allocatedBudgetCr: 72.0, hedgingRatio: 45 },
+        { month: 'Sep 2026', targetBales: 15000, avgPrice: 66000, allocatedBudgetCr: 48.2, hedgingRatio: 25 },
+        { month: 'Oct 2026', targetBales: 20000, avgPrice: 64400, allocatedBudgetCr: 62.7, hedgingRatio: 20 }
       ],
       yearWisePlan: [
-        { year: '2022-23', totalPurchaseBales: 3.1, estPrice: 61000, productionOutlook: 215.5 },
-        { year: '2023-24', totalPurchaseBales: 3.4, estPrice: 62400, productionOutlook: 228.0 },
-        { year: '2024-25', totalPurchaseBales: 3.6, estPrice: 62800, productionOutlook: 202.4 },
-        { year: '2025-26 (Est)', totalPurchaseBales: 3.8, estPrice: 63800, productionOutlook: 198.5 },
-        { year: '2026-27 (Proj)', totalPurchaseBales: 4.2, estPrice: 65200, productionOutlook: 220.0 }
+        { year: '2022-23', totalPurchaseBales: 3.1, estPrice: 62000, productionOutlook: 215.5 },
+        { year: '2023-24', totalPurchaseBales: 3.4, estPrice: 63500, productionOutlook: 228.0 },
+        { year: '2024-25', totalPurchaseBales: 3.6, estPrice: 64500, productionOutlook: 202.4 },
+        { year: '2025-26 (Est)', totalPurchaseBales: 3.8, estPrice: 65500, productionOutlook: 198.5 },
+        { year: '2026-27 (Proj)', totalPurchaseBales: 4.2, estPrice: 67200, productionOutlook: 220.0 }
       ],
       affectingFactors: [
         { factor: 'Central India Monsoon Spreads', impactLevel: 'Critical', direction: 'Alters Sowing Success', weight: 45 },

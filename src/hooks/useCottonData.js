@@ -151,7 +151,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
           types[2].est = Math.floor(types[2].current * 1.02);
 
           // Bunny (NCS-145)
-          types[3].current = Math.floor(shankar6Spot * 1.03);
+          types[3].current = Math.floor(shankar6Spot * 1.096);
           types[3].est = Math.floor(types[3].current * 1.015);
 
           // Kohinoor 212+
