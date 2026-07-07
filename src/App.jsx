@@ -2512,6 +2512,121 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   const [importSimCount, setImportSimCount] = useState('30s Combed');
   const [simCottonSource, setSimCottonSource] = useState('global');
   
+  // Logistics Variety Selection States
+  const [selectedImportCottonType, setSelectedImportCottonType] = useState('Shankar-6');
+  const [selectedExportYarnType, setSelectedExportYarnType] = useState('30s Combed');
+
+  const handleImportCottonSelect = (name) => {
+    setSelectedImportCottonType(name);
+    const spec = cottonTypeSpecs[name];
+    if (spec) {
+      if (spec.originType === 'Global') {
+        setGlobalFobCentsLb(spec.basePriceGlobalCentsLb);
+        setGlobalBcdRate(spec.importBcd ?? 10);
+        setGlobalSwsRate(spec.importSws ?? 10);
+        setGlobalAidcRate(spec.importAidc ?? 0);
+        // Map to corresponding country presets
+        if (name === 'US Upland') {
+          setSelectedGlobalOrigin('USA');
+          setGlobalOceanFreight(importPresets['USA'].freight);
+          setGlobalHandlingCandy(importPresets['USA'].handling);
+        } else if (name === 'Brazil Cerrado') {
+          setSelectedGlobalOrigin('Brazil');
+          setGlobalOceanFreight(importPresets['Brazil'].freight);
+          setGlobalHandlingCandy(importPresets['Brazil'].handling);
+        } else if (name.includes('Giza')) {
+          setSelectedGlobalOrigin('Egypt');
+          setGlobalOceanFreight(importPresets['Egypt'].freight);
+          setGlobalHandlingCandy(importPresets['Egypt'].handling);
+        } else if (name.includes('West African')) {
+          setSelectedGlobalOrigin('West Africa');
+          setGlobalOceanFreight(importPresets['West Africa'].freight);
+          setGlobalHandlingCandy(importPresets['West Africa'].handling);
+        } else if (name.includes('Australian') || name.includes('Australia')) {
+          setSelectedGlobalOrigin('Australia');
+          setGlobalOceanFreight(importPresets['Australia'].freight);
+          setGlobalHandlingCandy(importPresets['Australia'].handling);
+        } else if (name.includes('Greek')) {
+          setSelectedGlobalOrigin('Greece');
+          setGlobalOceanFreight(importPresets['Greece'].freight);
+          setGlobalHandlingCandy(importPresets['Greece'].handling);
+        } else if (name.includes('Turkish')) {
+          setSelectedGlobalOrigin('Turkey');
+          setGlobalOceanFreight(importPresets['Turkey'].freight);
+          setGlobalHandlingCandy(importPresets['Turkey'].handling);
+        }
+      } else {
+        // Domestic
+        let currentPrice = spec.basePriceDomestic;
+        if (name === 'Shankar-6' && liveShankar6) currentPrice = liveShankar6;
+        else if (name === 'MCU-5' && data?.indianCotton?.prices?.types?.[1]?.current) currentPrice = data.indianCotton.prices.types[1].current;
+        else if (name === 'DCH-32 / Suvin' && data?.indianCotton?.prices?.types?.[2]?.current) currentPrice = data.indianCotton.prices.types[2].current;
+        else if (name === 'Bunny' && data?.indianCotton?.prices?.types?.[3]?.current) currentPrice = data.indianCotton.prices.types[3].current;
+        
+        setDomesticMandiPrice(currentPrice);
+        
+        if (name === 'Shankar-6') {
+          setSelectedDomesticOrigin('Gujarat (Dom)');
+          setDomesticInlandFreight(importPresets['Gujarat (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Gujarat (Dom)'].handling);
+        } else if (name === 'MCU-5') {
+          setSelectedDomesticOrigin('Andhra Pradesh (Dom)');
+          setDomesticInlandFreight(importPresets['Andhra Pradesh (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Andhra Pradesh (Dom)'].handling);
+        } else if (name === 'DCH-32 (ELS)' || name === 'Suvin' || name === 'DCH-32 / Suvin') {
+          setSelectedDomesticOrigin('Karnataka (Dom)');
+          setDomesticInlandFreight(importPresets['Karnataka (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Karnataka (Dom)'].handling);
+        } else if (name === 'Tamil Nadu (Dom)') {
+          setSelectedDomesticOrigin('Tamil Nadu (Dom)');
+          setDomesticInlandFreight(importPresets['Tamil Nadu (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Tamil Nadu (Dom)'].handling);
+        } else if (name.includes('Punjab') || name.includes('J-34')) {
+          setSelectedDomesticOrigin('Punjab (Dom)');
+          setDomesticInlandFreight(importPresets['Punjab (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Punjab (Dom)'].handling);
+        } else if (name.includes('G.Cot') || name.includes('V797')) {
+          setSelectedDomesticOrigin('Gujarat (Dom)');
+          setDomesticInlandFreight(importPresets['Gujarat (Dom)'].freight);
+          setDomesticHandlingCandy(importPresets['Gujarat (Dom)'].handling);
+        }
+      }
+    }
+  };
+
+  const handleExportYarnSelect = (yarnType) => {
+    setSelectedExportYarnType(yarnType);
+    
+    // Live domestic price of this count
+    const liveDomesticPriceObj = data?.yarns?.india?.prices?.find(p => p.type.includes(yarnType));
+    const liveDomesticPrice = liveDomesticPriceObj ? liveDomesticPriceObj.current : 295;
+    setGlobalExportLocalPriceInrKg(liveDomesticPrice);
+    
+    // Export price (USD/KG) from global database or fallback
+    let liveExportPriceUsd = 3.40;
+    if (data?.yarns?.global?.prices) {
+      const globalPriceObj = data.yarns.global.prices.find(gp => gp.type.includes(yarnType.replace(' ELS', '')));
+      if (globalPriceObj) {
+        liveExportPriceUsd = globalPriceObj.current;
+      } else {
+        const fallbackExportPrices = {
+          '20s Carded': 2.65,
+          '30s Combed': 3.30,
+          '40s Compact': 3.60,
+          '60s Combed': 4.70,
+          '80s Compact': 6.20,
+          '100s Compact ELS': 7.80
+        };
+        liveExportPriceUsd = fallbackExportPrices[yarnType] || 3.40;
+      }
+    }
+    setExportPriceUsdKg(liveExportPriceUsd);
+
+    // Domestic Desk targets
+    setDomesticTargetPriceInrKg(Math.round(liveDomesticPrice * 1.05));
+    setDomesticExportLocalPriceInrKg(liveDomesticPrice);
+  };
+  
   // Export States
   const [exportChannel, setExportChannel] = useState('global'); // 'global' or 'domestic'
   const [exportDest, setExportDest] = useState('Bangladesh');
@@ -3204,6 +3319,38 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
             </div>
           </div>
 
+          {/* Sourcing Cotton Variety Filter */}
+          <div className="card-table-orange p-5 rounded-xxl border border-primary/20 bg-surface-container-low/60 space-y-3 animate-fade-in">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-xl text-primary animate-pulse">filter_alt</span>
+                <div>
+                  <h4 className="text-xs font-mono font-bold text-on-surface uppercase">Filter Sourcing Cotton Variety</h4>
+                  <p className="text-[10px] text-on-surface-variant font-medium">Select a cotton type to auto-populate the corresponding calculators with live pricing and trade duty configurations.</p>
+                </div>
+              </div>
+              
+              <div className="w-full md:w-72">
+                <select
+                  value={selectedImportCottonType}
+                  onChange={(e) => handleImportCottonSelect(e.target.value)}
+                  className="w-full bg-surface-container border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface focus:outline-none focus:border-primary cursor-pointer"
+                >
+                  <optgroup label="Domestic Cotton Varieties">
+                    {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Domestic' || cottonTypeSpecs[k].originType === 'Both').map(name => (
+                      <option key={name} value={name}>{name} (Base: ₹{cottonTypeSpecs[name].basePriceDomestic?.toLocaleString('en-IN')})</option>
+                    ))}
+                  </optgroup>
+                  <optgroup label="Global Sourcing Varieties">
+                    {Object.keys(cottonTypeSpecs).filter(k => cottonTypeSpecs[k].originType === 'Global').map(name => (
+                      <option key={name} value={name}>{name} (Base: {cottonTypeSpecs[name].basePriceGlobalCentsLb} ¢/lb)</option>
+                    ))}
+                  </optgroup>
+                </select>
+              </div>
+            </div>
+          </div>
+
           <div className="grid grid-cols-12 gap-gutter">
             {/* Left Column: Global Sourcing Desk */}
             <div className="col-span-12 lg:col-span-6 space-y-gutter">
@@ -3882,6 +4029,31 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
               <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container border border-outline-variant/30 text-on-surface font-bold">
                 <span className="material-symbols-outlined text-sm text-forest-green">home_pin</span>
                 <span>Domestic: {exportState}</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Yarn Count Export Variety Filter */}
+          <div className="card-table-orange p-5 rounded-xxl border border-primary/20 bg-surface-container-low/60 space-y-3 animate-fade-in">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="material-symbols-outlined text-xl text-primary animate-pulse">filter_alt</span>
+                <div>
+                  <h4 className="text-xs font-mono font-bold text-on-surface uppercase">Filter Export Yarn Count</h4>
+                  <p className="text-[10px] text-on-surface-variant font-medium">Select a yarn count to auto-populate the export desks with real-time global export realizations and local ex-mill prices.</p>
+                </div>
+              </div>
+              
+              <div className="w-full md:w-72">
+                <select
+                  value={selectedExportYarnType}
+                  onChange={(e) => handleExportYarnSelect(e.target.value)}
+                  className="w-full bg-surface-container border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface focus:outline-none focus:border-primary cursor-pointer"
+                >
+                  {Object.keys(countParams).map(cnt => (
+                    <option key={cnt} value={cnt}>{cnt}</option>
+                  ))}
+                </select>
               </div>
             </div>
           </div>
