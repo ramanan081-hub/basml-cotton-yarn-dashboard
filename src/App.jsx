@@ -6550,18 +6550,24 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
 
       if (data.indianCotton?.prices?.types) {
         const indTypes = data.indianCotton.prices.types;
-        if (normalized.includes('shankar-6') || normalized === 'shankar 6') {
+        if (normalized.includes('shankar-6') || normalized.includes('shankar 6')) {
           livePrice = indTypes[0]?.current;
         } else if (normalized.includes('mcu-5') || normalized === 'mcu 5') {
           livePrice = indTypes[1]?.current;
         } else if (normalized.includes('dch-32') || normalized.includes('suvin')) {
           livePrice = indTypes[2]?.current;
-        } else if (normalized.includes('j-34') || normalized === 'j 34') {
+        } else if (normalized.includes('bunny')) {
+          livePrice = indTypes[3]?.current;
+        } else if (normalized.includes('kohinoor')) {
           livePrice = indTypes[4]?.current;
-        } else if (normalized.includes('v797')) {
+        } else if (normalized.includes('mcu-7')) {
           livePrice = indTypes[5]?.current;
-        } else if (normalized.includes('ice cotton')) {
+        } else if (normalized.includes('j-34') || normalized === 'j 34') {
           livePrice = indTypes[6]?.current;
+        } else if (normalized.includes('v797')) {
+          livePrice = indTypes[7]?.current;
+        } else if (normalized.includes('ice cotton')) {
+          livePrice = indTypes[8]?.current;
         }
       }
 

@@ -155,38 +155,45 @@ export default function CottonDashboard({ data, darkMode, colors }) {
         if (data) {
           if (isGlobal) {
             // Global cotton prices in data.globalCotton.prices.types
-            const types = data.globalCotton?.prices?.types;
-            if (types) {
+            const gTypes = data.globalCotton?.prices?.types;
+            if (gTypes) {
               if (item.name.includes('ICE US') || item.name.includes('ICE Cotton')) {
-                base = types[1]?.current || base;
+                base = gTypes[1]?.current || base;
               } else if (item.name.includes('Cotlook A')) {
-                base = types[0]?.current || base;
+                base = gTypes[0]?.current || base;
               } else if (item.name.includes('Brazil')) {
-                base = types[3]?.current || base;
+                base = gTypes[3]?.current || base;
               } else if (item.name.includes('Supima') || item.name.includes('Pima')) {
-                base = types[4]?.current || base;
+                base = gTypes[4]?.current || base;
               } else if (item.name.includes('Giza') || item.name.includes('Egyptian')) {
-                base = types[5]?.current || base;
+                base = gTypes[5]?.current || base;
               } else if (item.name.includes('West African')) {
-                base = types[10]?.current || base;
+                base = gTypes[10]?.current || base;
               }
             }
           } else {
             // Indian cotton prices in data.indianCotton.prices.types
-            const types = data.indianCotton?.prices?.types;
-            if (types) {
-              if (item.name.includes('Shankar-6')) {
-                base = types[0]?.current || base;
-              } else if (item.name.includes('MCU-5')) {
-                base = types[1]?.current || base;
-              } else if (item.name.includes('DCH-32') || item.name.includes('Suvin')) {
-                base = types[2]?.current || base;
-              } else if (item.name.includes('MECH-1') || item.name.includes('Bunny') || item.name.includes('Brahma')) {
-                base = types[3]?.current || base;
-              } else if (item.name.includes('J-34')) {
-                base = types[4]?.current || base;
-              } else if (item.name.includes('V797')) {
-                base = types[5]?.current || base;
+            const indTypes = data.indianCotton?.prices?.types;
+            if (indTypes) {
+              const nameLower = item.name.toLowerCase();
+              if (nameLower.includes('shankar-6') || nameLower.includes('shankar 6')) {
+                base = indTypes[0]?.current || base;
+              } else if (nameLower.includes('mcu-5') || nameLower === 'mcu 5') {
+                base = indTypes[1]?.current || base;
+              } else if (nameLower.includes('dch-32') || nameLower.includes('suvin')) {
+                base = indTypes[2]?.current || base;
+              } else if (nameLower.includes('mech-1') || nameLower.includes('bunny') || nameLower.includes('brahma')) {
+                base = indTypes[3]?.current || base;
+              } else if (nameLower.includes('kohinoor')) {
+                base = indTypes[4]?.current || base;
+              } else if (nameLower.includes('mcu-7')) {
+                base = indTypes[5]?.current || base;
+              } else if (nameLower.includes('j-34') || nameLower === 'j 34') {
+                base = indTypes[6]?.current || base;
+              } else if (nameLower.includes('v797')) {
+                base = indTypes[7]?.current || base;
+              } else if (nameLower.includes('ice cotton')) {
+                base = indTypes[8]?.current || base;
               }
             }
           }
