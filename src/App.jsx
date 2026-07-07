@@ -5304,6 +5304,29 @@ function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, su
   const gF1Label = _fSN[(_fNow.getMonth() + 2) % 12];
   const gF2Label = _fSN[(_fNow.getMonth() + 3) % 12];
 
+  // Dynamic rollover logic: Cotton Inc releases Monthly Economic Letters around the 10th-15th of the month.
+  // Fall back to the previous month's PDF if accessed before the 15th day of the current month.
+  const getCottonIncPdf = () => {
+    let year = _fNow.getFullYear();
+    let month = _fNow.getMonth(); // 0-indexed (e.g. 6 = July)
+    
+    if (_fNow.getDate() < 15) {
+      month -= 1;
+      if (month < 0) {
+        month = 11;
+        year -= 1;
+      }
+    }
+    
+    const monthStr = String(month + 1).padStart(2, '0');
+    return {
+      url: `https://www.cottoninc.com/wp-content/uploads/${year}/${monthStr}/${year}-${monthStr}-Monthly-Economic-Letter.pdf`,
+      label: `Open Cotton Inc. Economic Letter (${_fSN[month]} ${year})`
+    };
+  };
+
+  const cottonIncPdf = getCottonIncPdf();
+
   return (
     <div className="space-y-gutter">
       {/* Tab Header / Welcome bar */}
@@ -5333,13 +5356,13 @@ function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, su
           </p>
           <div className="pt-2">
             <a
-              href={`https://www.cottoninc.com/wp-content/uploads/${new Date().getFullYear()}/${String(new Date().getMonth() + 1).padStart(2, '0')}/${new Date().getFullYear()}-${String(new Date().getMonth() + 1).padStart(2, '0')}-Monthly-Economic-Letter.pdf`}
+              href={cottonIncPdf.url}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-tertiary hover:bg-tertiary/90 text-white font-mono text-xs font-bold transition-all shadow-md hover:shadow-lg hover:scale-[1.02] active:scale-[0.98] border border-white/20"
             >
               <span className="material-symbols-outlined text-sm">picture_as_pdf</span>
-              Open Cotton Inc. Economic Letter ({['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][new Date().getMonth()]} {new Date().getFullYear()})
+              {cottonIncPdf.label}
             </a>
           </div>
         </div>
