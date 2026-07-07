@@ -2597,25 +2597,53 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   const handleExportYarnSelect = (yarnType) => {
     setSelectedExportYarnType(yarnType);
     
-    // Live domestic price of this count
-    const liveDomesticPriceObj = data?.yarns?.india?.prices?.find(p => p.type.includes(yarnType));
-    const liveDomesticPrice = liveDomesticPriceObj ? liveDomesticPriceObj.current : 295;
+    // 1. Get live domestic price of this count
+    let liveDomesticPrice = 295;
+    let priceObj = data?.yarns?.india?.prices?.find(p => p.type.toLowerCase().includes(yarnType.toLowerCase()));
+    if (priceObj) {
+      liveDomesticPrice = priceObj.current;
+    } else {
+      priceObj = data?.yarns?.nonCotton?.india?.prices?.find(p => p.type.toLowerCase().includes(yarnType.toLowerCase()));
+      if (priceObj) liveDomesticPrice = priceObj.current;
+    }
     setGlobalExportLocalPriceInrKg(liveDomesticPrice);
     
-    // Export price (USD/KG) from global database or fallback
+    // 2. Get export price (USD/KG) from global database or fallback
     let liveExportPriceUsd = 3.40;
-    if (data?.yarns?.global?.prices) {
-      const globalPriceObj = data.yarns.global.prices.find(gp => gp.type.includes(yarnType.replace(' ELS', '')));
+    let globalPriceObj = data?.yarns?.global?.prices?.find(gp => gp.type.toLowerCase().includes(yarnType.toLowerCase().replace(' els', '')));
+    if (globalPriceObj) {
+      liveExportPriceUsd = globalPriceObj.current;
+    } else {
+      globalPriceObj = data?.yarns?.nonCotton?.global?.prices?.find(gp => gp.type.toLowerCase().includes(yarnType.toLowerCase()));
       if (globalPriceObj) {
         liveExportPriceUsd = globalPriceObj.current;
       } else {
         const fallbackExportPrices = {
-          '20s Carded': 2.65,
-          '30s Combed': 3.30,
-          '40s Compact': 3.60,
-          '60s Combed': 4.70,
-          '80s Compact': 6.20,
-          '100s Compact ELS': 7.80
+          '10s–16s Carded / Open End': 1.85,
+          '20s Carded': 2.85,
+          '30s Combed': 3.55,
+          '40s Compact': 3.90,
+          '60s Combed': 5.10,
+          '80s Compact': 6.80,
+          '100s Compact ELS': 7.80,
+          'Organic Cotton 30s': 4.40,
+          'Recycled Cotton 20s': 2.10,
+          'ICE-Linked US Yarn': 4.12,
+          '30s PC Blend (65/35)': 2.45,
+          '40s PV Blend (65/35)': 2.20,
+          'Pure Merino Wool': 9.35,
+          'Baby Alpaca Blend': 17.35,
+          'Pure Cashmere': 50.30,
+          'Mohair Blend': 10.65,
+          'Mulberry Silk': 33.50,
+          'Pure Linen': 8.15,
+          'Bamboo Spun': 2.50,
+          'Pure Hemp': 5.75,
+          'Lyocell (Tencel)': 2.95,
+          'Spun Acrylic': 2.85,
+          'Nylon Filament': 3.70,
+          'Spun Polyester': 1.62,
+          'Spun Viscose': 2.15
         };
         liveExportPriceUsd = fallbackExportPrices[yarnType] || 3.40;
       }
@@ -2771,12 +2799,31 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
   // Spinning count properties for simulator
   const countParams = {
+    '10s–16s Carded / Open End': { yieldRate: 0.93, conversion: 28 },
     '20s Carded': { yieldRate: 0.91, conversion: 45 },
     '30s Combed': { yieldRate: 0.80, conversion: 65 },
     '40s Compact': { yieldRate: 0.77, conversion: 95 },
     '60s Combed': { yieldRate: 0.625, conversion: 160 },
     '80s Compact': { yieldRate: 0.50, conversion: 265 },
-    '100s Compact ELS': { yieldRate: 0.435, conversion: 360 }
+    '100s Compact ELS': { yieldRate: 0.435, conversion: 360 },
+    'Organic Cotton 30s': { yieldRate: 0.80, conversion: 75 },
+    'Recycled Cotton 20s': { yieldRate: 0.88, conversion: 40 },
+    'ICE-Linked US Yarn': { yieldRate: 0.80, conversion: 65 },
+    '30s PC Blend (65/35)': { yieldRate: 0.85, conversion: 55 },
+    '40s PV Blend (65/35)': { yieldRate: 0.88, conversion: 75 },
+    'Pure Merino Wool': { yieldRate: 0.85, conversion: 300 },
+    'Baby Alpaca Blend': { yieldRate: 0.80, conversion: 500 },
+    'Pure Cashmere': { yieldRate: 0.75, conversion: 1500 },
+    'Mohair Blend': { yieldRate: 0.80, conversion: 400 },
+    'Mulberry Silk': { yieldRate: 0.95, conversion: 800 },
+    'Pure Linen': { yieldRate: 0.70, conversion: 120 },
+    'Bamboo Spun': { yieldRate: 0.88, conversion: 45 },
+    'Pure Hemp': { yieldRate: 0.75, conversion: 90 },
+    'Lyocell (Tencel)': { yieldRate: 0.90, conversion: 50 },
+    'Spun Acrylic': { yieldRate: 0.88, conversion: 45 },
+    'Nylon Filament': { yieldRate: 0.98, conversion: 60 },
+    'Spun Polyester': { yieldRate: 0.95, conversion: 35 },
+    'Spun Viscose': { yieldRate: 0.92, conversion: 40 }
   };
 
   // Cotton specifications, harvesting cycles, and SWOT profiles
@@ -3225,8 +3272,40 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
   const domesticImportParity = domesticLandedInrCandy - shankar6Price;
 
   const getImportYarnPrice = (countName) => {
-    const priceObj = data?.yarns?.india?.prices?.find(p => p.type.includes(countName));
-    return priceObj ? priceObj.current : 295;
+    let priceObj = data?.yarns?.india?.prices?.find(p => p.type.toLowerCase().includes(countName.toLowerCase()));
+    if (priceObj) return priceObj.current;
+    
+    priceObj = data?.yarns?.nonCotton?.india?.prices?.find(p => p.type.toLowerCase().includes(countName.toLowerCase()));
+    if (priceObj) return priceObj.current;
+    
+    const fallbacks = {
+      '10s–16s Carded / Open End': 195,
+      '20s Carded': 245,
+      '30s Combed': 295,
+      '40s Compact': 320,
+      '60s Combed': 410,
+      '80s Compact': 580,
+      '100s Compact ELS': 720,
+      'Organic Cotton 30s': 365,
+      'Recycled Cotton 20s': 210,
+      'ICE-Linked US Yarn': 344,
+      '30s PC Blend (65/35)': 215,
+      '40s PV Blend (65/35)': 198,
+      'Pure Merino Wool': 780,
+      'Baby Alpaca Blend': 1450,
+      'Pure Cashmere': 4200,
+      'Mohair Blend': 890,
+      'Mulberry Silk': 2800,
+      'Pure Linen': 680,
+      'Bamboo Spun': 210,
+      'Pure Hemp': 480,
+      'Lyocell (Tencel)': 245,
+      'Spun Acrylic': 240,
+      'Nylon Filament': 310,
+      'Spun Polyester': 135,
+      'Spun Viscose': 180
+    };
+    return fallbacks[countName] || 295;
   };
 
   const getImportYarnMargin = (countName, source = simCottonSource) => {
@@ -3797,21 +3876,43 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
 
                   <div>
                     <label className="text-[10px] font-mono font-bold text-outline block mb-1.5">SELECT YARN COUNT TO SIMULATE SPINNING</label>
-                    <div className="grid grid-cols-3 gap-1.5">
-                      {Object.keys(countParams).map(cnt => (
-                        <button
-                          key={cnt}
-                          onClick={() => setImportSimCount(cnt)}
-                          className={`py-1 px-1 rounded-lg text-[9px] font-mono font-bold border transition-all ${
-                            importSimCount === cnt
-                              ? 'bg-primary text-on-primary border-primary font-extrabold shadow-sm'
-                              : 'bg-surface-container-high text-on-surface border-outline-variant hover:bg-surface-container-highest'
-                          }`}
-                        >
-                          {cnt}
-                        </button>
-                      ))}
-                    </div>
+                    <select
+                      value={importSimCount}
+                      onChange={(e) => setImportSimCount(e.target.value)}
+                      className="w-full bg-surface-container border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface focus:outline-none focus:border-primary cursor-pointer"
+                    >
+                      <optgroup label="Cotton Yarns">
+                        <option value="10s–16s Carded / Open End">10s–16s Carded / Open End</option>
+                        <option value="20s Carded">20s Carded</option>
+                        <option value="30s Combed">30s Combed</option>
+                        <option value="40s Compact">40s Compact</option>
+                        <option value="60s Combed">60s Combed</option>
+                        <option value="80s Compact">80s Compact</option>
+                        <option value="100s Compact ELS">100s Compact ELS</option>
+                        <option value="Organic Cotton 30s">Organic Cotton 30s</option>
+                        <option value="Recycled Cotton 20s">Recycled Cotton 20s</option>
+                        <option value="ICE-Linked US Yarn">ICE-Linked US Yarn</option>
+                      </optgroup>
+                      <optgroup label="Blended Yarns">
+                        <option value="30s PC Blend (65/35)">30s PC Blend (65/35)</option>
+                        <option value="40s PV Blend (65/35)">40s PV Blend (65/35)</option>
+                      </optgroup>
+                      <optgroup label="Non-Cotton & Specialty Yarns">
+                        <option value="Pure Merino Wool">Pure Merino Wool</option>
+                        <option value="Baby Alpaca Blend">Baby Alpaca Blend</option>
+                        <option value="Pure Cashmere">Pure Cashmere</option>
+                        <option value="Mohair Blend">Mohair Blend</option>
+                        <option value="Mulberry Silk">Mulberry Silk</option>
+                        <option value="Pure Linen">Pure Linen</option>
+                        <option value="Bamboo Spun">Bamboo Spun</option>
+                        <option value="Pure Hemp">Pure Hemp</option>
+                        <option value="Lyocell (Tencel)">Lyocell (Tencel)</option>
+                        <option value="Spun Acrylic">Spun Acrylic</option>
+                        <option value="Nylon Filament">Nylon Filament</option>
+                        <option value="Spun Polyester">Spun Polyester</option>
+                        <option value="Spun Viscose">Spun Viscose</option>
+                      </optgroup>
+                    </select>
                   </div>
                   
                   {/* Simulator Output Details */}
@@ -4050,9 +4151,37 @@ function ImportExportDashboard({ colors, data, subTab = 'import', setSubTab }) {
                   onChange={(e) => handleExportYarnSelect(e.target.value)}
                   className="w-full bg-surface-container border border-outline-variant rounded-lg p-2 text-xs font-mono font-bold text-on-surface focus:outline-none focus:border-primary cursor-pointer"
                 >
-                  {Object.keys(countParams).map(cnt => (
-                    <option key={cnt} value={cnt}>{cnt}</option>
-                  ))}
+                  <optgroup label="Cotton Yarns">
+                    <option value="10s–16s Carded / Open End">10s–16s Carded / Open End</option>
+                    <option value="20s Carded">20s Carded</option>
+                    <option value="30s Combed">30s Combed</option>
+                    <option value="40s Compact">40s Compact</option>
+                    <option value="60s Combed">60s Combed</option>
+                    <option value="80s Compact">80s Compact</option>
+                    <option value="100s Compact ELS">100s Compact ELS</option>
+                    <option value="Organic Cotton 30s">Organic Cotton 30s</option>
+                    <option value="Recycled Cotton 20s">Recycled Cotton 20s</option>
+                    <option value="ICE-Linked US Yarn">ICE-Linked US Yarn</option>
+                  </optgroup>
+                  <optgroup label="Blended Yarns">
+                    <option value="30s PC Blend (65/35)">30s PC Blend (65/35)</option>
+                    <option value="40s PV Blend (65/35)">40s PV Blend (65/35)</option>
+                  </optgroup>
+                  <optgroup label="Non-Cotton & Specialty Yarns">
+                    <option value="Pure Merino Wool">Pure Merino Wool</option>
+                    <option value="Baby Alpaca Blend">Baby Alpaca Blend</option>
+                    <option value="Pure Cashmere">Pure Cashmere</option>
+                    <option value="Mohair Blend">Mohair Blend</option>
+                    <option value="Mulberry Silk">Mulberry Silk</option>
+                    <option value="Pure Linen">Pure Linen</option>
+                    <option value="Bamboo Spun">Bamboo Spun</option>
+                    <option value="Pure Hemp">Pure Hemp</option>
+                    <option value="Lyocell (Tencel)">Lyocell (Tencel)</option>
+                    <option value="Spun Acrylic">Spun Acrylic</option>
+                    <option value="Nylon Filament">Nylon Filament</option>
+                    <option value="Spun Polyester">Spun Polyester</option>
+                    <option value="Spun Viscose">Spun Viscose</option>
+                  </optgroup>
                 </select>
               </div>
             </div>
