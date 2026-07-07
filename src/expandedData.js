@@ -320,7 +320,7 @@ export const expandedCottonVarieties = [
   },
   {
     "id": "bunny_ncs_145",
-    "name": "Bunny (NCS-145)",
+    "name": "Bunny Cotton",
     "group": "Indian Cotton",
     "category": "LONG STAPLE VARIETIES (25-28",
     "specs": {
