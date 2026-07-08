@@ -1,9 +1,9 @@
 {
-  "iceCottonCentsPerLb": 80.26,
+  "iceCottonCentsPerLb": 80.35,
   "usdInr": 95.55,
-  "eurInr": 109.02,
-  "brentCrude": 80.23,
-  "lastUpdated": "2026-07-08T15:57:15.657Z",
+  "eurInr": 109.08,
+  "brentCrude": 78.75,
+  "lastUpdated": "2026-07-08T17:25:36.147Z",
   "source": "yahoo-CTZ26.NYB",
   "erSource": "yahoo-finance-live",
   "note": "Auto-updated 3x daily (6:30 AM, 12:30 PM, 4:30 PM IST) by GitHub Actions."
