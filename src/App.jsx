@@ -181,7 +181,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
               </tbody>
             </table>
           </div>
-          <div className="border border-outline-variant/30 rounded-xl p-4 h-[260px] bg-surface-container-lowest">
+          <div className="border border-outline-variant/30 rounded-xl p-4 h-[260px] bg-transparent">
             <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <BarChart data={data.globalCotton.balanceSheet.historical} margin={{ top: 10, right: 10, left: -25, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" vertical={false} />
@@ -216,7 +216,7 @@ function PresentationDashboard({ data, darkMode, colors }) {
           <span className="text-[10px] font-mono font-bold px-3 py-1 rounded-full bg-primary/10 text-primary">Slide 3 / 5</span>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 flex-1 mt-6">
-          <div className="border border-outline-variant/30 rounded-xl p-4 h-[260px] bg-surface-container-lowest">
+          <div className="border border-outline-variant/30 rounded-xl p-4 h-[260px] bg-transparent">
             <ResponsiveContainer width="100%" height="100%" minWidth={0}>
               <BarChart data={stateProdData.slice(0, 6)} layout="vertical" margin={{ top: 10, right: 10, left: -10, bottom: 0 }}>
                 <CartesianGrid strokeDasharray="3 3" horizontal={false} />
