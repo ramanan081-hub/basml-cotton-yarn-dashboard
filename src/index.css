@@ -493,72 +493,17 @@ svg *:focus {
   border: 1px solid rgba(59, 130, 246, 0.35) !important;
   box-shadow: 0 2px 8px rgba(59, 130, 246, 0.20) !important;
 }
-
-/* Sidebar sub-item active state: transparent blue */
-.sidebar-sub-active {
-  color: #3b82f6 !important;
-  background: rgba(59, 130, 246, 0.10) !important;
-  font-weight: 700 !important;
-}
-.dark .sidebar-sub-active {
+.dark .sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(99, 102, 241, 0.10) 100%) !important;
   color: #93c5fd !important;
-  background: rgba(59, 130, 246, 0.15) !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.20) !important;
 }
 
-/* Sidebar overall: blue-tinted glass */
-.sidebar-desktop {
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.07) 0%, rgba(255, 255, 255, 0.55) 100%) !important;
-  backdrop-filter: blur(24px) !important;
-  -webkit-backdrop-filter: blur(24px) !important;
-  border-right: 1px solid rgba(59, 130, 246, 0.15) !important;
-}
-.dark .sidebar-desktop {
-  background: linear-gradient(180deg, rgba(59, 130, 246, 0.10) 0%, rgba(31, 31, 33, 0.85) 100%) !important;
-  border-right: 1px solid rgba(59, 130, 246, 0.20) !important;
-}
-
-/* Global compact table adjustments to fix alignment and text wrapping */
-main table td {
-  font-size: 11px !important;
-  padding-top: 5px !important;
-  padding-bottom: 5px !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-}
-
-main table th {
-  font-size: 10px !important;
-  padding-top: 6px !important;
-  padding-bottom: 6px !important;
-  padding-left: 8px !important;
-  padding-right: 8px !important;
-}
-
-/* Force vertical-only scrolling on desktop, preventing horizontal scrollbars */
-@media (min-width: 1024px) {
-  main table {
-    table-layout: auto !important;
-    width: 100% !important;
-  }
-  main table td, main table th {
-    white-space: normal !important;
-    word-break: break-word !important;
-  }
-}
-
-/* Fix Recharts ResponsiveContainer width/height calculation warnings */
-.recharts-responsive-container {
-  min-width: 0 !important;
-  min-height: 0 !important;
-}
-
-/* On mobile and tablet, let tables scroll horizontally by keeping cells on one line */
+/* Hide mobile bottom nav (only on mobile widths) */
 @media (max-width: 1023px) {
-  main table td, main table th {
-    white-space: nowrap !important;
+  /* Tailwind class with colon needs escaping in CSS selector */
+  .md\:hidden.fixed.bottom-0 {
+    display: none !important;
   }
 }
-
-
-
-
