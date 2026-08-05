@@ -1226,8 +1226,7 @@ function App() {
     analysis: false
   });
   const [darkMode, setDarkMode] = useState(() => {
-    return localStorage.getItem('theme') === 'dark' || 
-      (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    return localStorage.getItem('theme') === 'dark';
   });
 
   // Use the custom hook to load real-time market data
@@ -1565,7 +1564,7 @@ function App() {
                 {lastUpdated.toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', second: '2-digit' })} IST
               </span>
             </div>
-            <button onClick={() => setDarkMode(!darkMode)} className="text-primary hover:bg-surface-container p-2 rounded-full transition-colors hidden sm:block">
+            <button onClick={() => setDarkMode(!darkMode)} className="text-primary hover:bg-surface-container p-2 rounded-full transition-colors flex items-center justify-center" title={darkMode ? "Switch to Light Theme" : "Switch to Dark Theme"}>
               <span className="material-symbols-outlined">{darkMode ? 'light_mode' : 'dark_mode'}</span>
             </button>
           </div>
@@ -1731,7 +1730,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4 mb-16 lg:mb-0">
+        <footer className="px-6 md:px-8 py-8 border-t border-outline-variant bg-surface-container-low text-on-surface-variant text-xs flex flex-col sm:flex-row justify-between items-center gap-4 mb-0">
           <div>
             <p className="font-mono font-semibold">© 2026 BASML.COTTON.YARN.ANALYSIS</p>
             <p className="opacity-70 mt-0.5">Confidential Industrial Intelligence - Internal Use Only</p>
@@ -1743,30 +1742,6 @@ function App() {
           </div>
         </footer>
       </main>
-
-      {/* Mobile Navigation Bar (Bottom) - Only active on mobile when drawer is closed */}
-      <nav className="lg:hidden fixed bottom-0 left-0 right-0 h-16 bg-surface border-t border-outline-variant flex items-center justify-around px-4 z-50">
-        <button onClick={() => setActiveTab('global')} className={`flex flex-col items-center gap-1 ${activeTab === 'global' ? 'text-primary' : 'text-on-surface-variant'}`}>
-          <span className="material-symbols-outlined">public</span>
-          <span className="font-mono text-[9px]">GLOBAL</span>
-        </button>
-        <button onClick={() => setActiveTab('india')} className={`flex flex-col items-center gap-1 ${activeTab === 'india' ? 'text-primary' : 'text-on-surface-variant'}`}>
-          <span className="material-symbols-outlined">location_on</span>
-          <span className="font-mono text-[9px]">INDIA</span>
-        </button>
-        <button onClick={() => setActiveTab('cotton')} className={`flex flex-col items-center gap-1 ${activeTab === 'cotton' ? 'text-primary' : 'text-on-surface-variant'}`}>
-          <span className="material-symbols-outlined">grass</span>
-          <span className="font-mono text-[9px]">COTTON</span>
-        </button>
-        <button onClick={() => setActiveTab('yarn')} className={`flex flex-col items-center gap-1 ${activeTab === 'yarn' ? 'text-primary' : 'text-on-surface-variant'}`}>
-          <span className="material-symbols-outlined">show_chart</span>
-          <span className="font-mono text-[9px]">YARN</span>
-        </button>
-        <button onClick={() => setSidebarOpen(true)} className="flex flex-col items-center gap-1 text-on-surface-variant">
-          <span className="material-symbols-outlined">menu</span>
-          <span className="font-mono text-[9px]">MORE</span>
-        </button>
-      </nav>
 
       {/* Floating 3D Props for Atmospheric Visuals */}
       <div id="floating-3d-props" className="fixed right-10 bottom-20 z-0 pointer-events-none opacity-40 select-none hidden md:block transition-transform duration-300 ease-out">

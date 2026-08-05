@@ -241,11 +241,6 @@ tr:hover td {
   border-color: rgba(255, 255, 255, 0.8);
 }
 
-.glass-card:hover {
-  transform: translateY(-2px);
-  border-color: rgba(255, 255, 255, 0.2);
-}
-
 .liquid-glass-card {
   background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(32px);
@@ -274,12 +269,12 @@ tr:hover td {
 
 .liquid-glass-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(255,255,255,0.3);
+  border-color: rgba(255, 255, 255, 0.3);
   box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.3);
 }
 
 .light .liquid-glass-card:hover {
-  border-color: rgba(255,255,255,0.8);
+  border-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 20px 40px -12px rgba(92, 95, 97, 0.15);
 }
 
@@ -308,4 +303,207 @@ tr:hover td {
   border-radius: 50%;
   border: 1px solid rgba(255, 255, 255, 0.3);
   box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.2), 0 0 0 8px rgba(255, 255, 255, 0.05);
+  position: relative;
+  overflow: hidden;
+}
+
+.light .lens-effect {
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: inset 0 0 40px rgba(255, 255, 255, 0.4), 0 0 0 8px rgba(255, 255, 255, 0.1);
+}
+
+.lens-effect::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.1) 100%);
+  pointer-events: none;
+}
+
+.light .lens-effect::after {
+  background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+}
+
+/* Recharts styling tweaks to respect dark mode */
+.recharts-cartesian-grid-horizontal line,
+.recharts-cartesian-grid-vertical line {
+  stroke: var(--color-outline-variant) !important;
+  opacity: 0.4;
+}
+
+.recharts-legend-item-text {
+  color: var(--color-on-surface) !important;
+  font-size: 11px !important;
+  font-family: Inter, sans-serif !important;
+}
+
+.recharts-text {
+  fill: var(--color-on-surface-variant) !important;
+  font-family: 'JetBrains Mono', monospace !important;
+  font-size: 10px !important;
+}
+
+.recharts-tooltip-cursor {
+  fill: var(--color-surface-container-high) !important;
+  opacity: 0.3;
+}
+
+/* Disable focus outline on Recharts components and SVG elements when clicked */
+.recharts-wrapper:focus,
+.recharts-wrapper *:focus,
+.recharts-surface:focus,
+.recharts-surface *:focus,
+.recharts-responsive-container:focus,
+svg:focus,
+svg *:focus {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* Deep Muted Green for Table Highlights */
+.table-highlight-text {
+  color: #1b5e20 !important;
+}
+.dark .table-highlight-text {
+  color: #81c784 !important;
+}
+
+.table-highlight-bg {
+  background-color: rgba(27, 94, 32, 0.1) !important;
+  color: #1b5e20 !important;
+  border-color: rgba(27, 94, 32, 0.2) !important;
+}
+.dark .table-highlight-bg {
+  background-color: rgba(129, 199, 132, 0.1) !important;
+  color: #81c784 !important;
+  border-color: rgba(129, 199, 132, 0.2) !important;
+}
+
+/* Liquid Glass Text - Clean, normal, bold branding */
+.liquid-glass-text {
+  font-family: var(--font-headline);
+  font-weight: 800;
+  color: var(--color-primary);
+  letter-spacing: -0.02em;
+  display: inline-block;
+}
+
+.dark .liquid-glass-text {
+  color: var(--color-primary);
+}
+
+/* Hover elevation and z-index rise for Bento Cards */
+.neumorphic-raised, .neumorphic-raised-sm, .glass-card {
+  position: relative;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), box-shadow 0.3s cubic-bezier(0.25, 0.8, 0.25, 1), z-index 0.3s;
+}
+
+.neumorphic-raised:hover, .neumorphic-raised-sm:hover, .glass-card:not(.sidebar-desktop):hover {
+  transform: translateY(-4px);
+  box-shadow: 
+    0 14px 28px rgba(0, 0, 0, 0.15), 
+    0 10px 10px rgba(0, 0, 0, 0.1);
+  z-index: 40 !important;
+}
+
+/* Ensure desktop sidebar is position: fixed and never moves or scales on hover */
+.sidebar-desktop {
+  position: fixed !important;
+  box-shadow: none !important;
+}
+
+.sidebar-desktop:hover {
+  box-shadow: none !important;
+}
+
+
+/* Ensure all Recharts Tooltips render above other containers */
+.recharts-tooltip-wrapper {
+  z-index: 1000 !important;
+}
+
+/* Premium Low-Translucent Glassmorphic Chart Styling */
+.recharts-rectangle, .recharts-bar-rectangle {
+  fill-opacity: 0.8 !important;
+}
+
+.recharts-line-curve {
+  stroke-opacity: 0.85 !important;
+}
+
+.recharts-area-area {
+  fill-opacity: 0.75 !important;
+}
+
+.recharts-pie-sector, .recharts-sector {
+  fill-opacity: 0.85 !important;
+}
+
+/* Card specific soft gradients for Tables and Charts */
+.card-table-orange {
+  background: linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(251, 140, 0, 0.2) !important;
+}
+.dark .card-table-orange {
+  background: linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(251, 140, 0, 0.3) !important;
+}
+
+.card-chart-green {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+.dark .card-chart-green {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+}
+
+/* Blue metric/info cards for Quality, News, Analysis and all neutral cards */
+.card-metric-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.18) !important;
+}
+.dark .card-metric-blue {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.13) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.28) !important;
+}
+
+/* Purple gradient cards — Live News tab */
+.card-live-purple {
+  background: linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  border: 1px solid rgba(147, 51, 234, 0.22) !important;
+}
+.dark .card-live-purple {
+  background: linear-gradient(135deg, rgba(167, 80, 255, 0.15) 0%, var(--card-bg) 100%) !important;
+  border: 1px solid rgba(167, 80, 255, 0.30) !important;
+}
+
+/* Sidebar nav item – active state: transparent blue glass */
+.sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.20) 0%, rgba(99, 102, 241, 0.12) 100%) !important;
+  color: #3b82f6 !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15) !important;
+  font-weight: 700 !important;
+  backdrop-filter: blur(4px);
+}
+.dark .sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(99, 102, 241, 0.10) 100%) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.20) !important;
+}
+.dark .sidebar-nav-active {
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.22) 0%, rgba(99, 102, 241, 0.10) 100%) !important;
+  color: #93c5fd !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.20) !important;
+}
+
+/* Hide mobile bottom nav (only on mobile widths) */
+@media (max-width: 1023px) {
+  /* Tailwind class with colon needs escaping in CSS selector */
+  .md\:hidden.fixed.bottom-0 {
+    display: none !important;
+  }
 }
