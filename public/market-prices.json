@@ -3,7 +3,7 @@
   "usdInr": 95.43,
   "eurInr": 110.36,
   "brentCrude": 88.52,
-  "lastUpdated": "2026-08-16T08:16:57.504Z",
+  "lastUpdated": "2026-08-16T10:13:02.670Z",
   "source": "yahoo-CTZ26.NYB",
   "erSource": "yahoo-finance-live",
   "note": "Auto-updated 3x daily (6:30 AM, 12:30 PM, 4:30 PM IST) by GitHub Actions."
