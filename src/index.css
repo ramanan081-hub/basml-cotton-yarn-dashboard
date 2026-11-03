@@ -424,47 +424,79 @@ svg *:focus {
   fill-opacity: 0.85 !important;
 }
 
-/* Card specific soft gradients for Tables and Charts */
+/* Card specific soft gradients for Tables and Charts matching Image 2 format */
 .card-table-orange {
-  background: linear-gradient(135deg, rgba(251, 140, 0, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  background: linear-gradient(135deg, #FFF3E0 0%, #FFF8F2 100%) !important;
   background-color: #FFF8F2 !important;
-  border: 1px solid rgba(251, 140, 0, 0.2) !important;
+  border: 1px solid rgba(251, 140, 0, 0.28) !important;
+  box-shadow: 0 4px 14px rgba(251, 140, 0, 0.08) !important;
 }
 .dark .card-table-orange {
-  background: linear-gradient(135deg, rgba(251, 140, 0, 0.15) 0%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(251, 140, 0, 0.3) !important;
+  background: linear-gradient(135deg, rgba(251, 140, 0, 0.18) 0%, #1f1610 100%) !important;
+  background-color: #1f1610 !important;
+  border: 1px solid rgba(251, 140, 0, 0.35) !important;
 }
 
 .card-chart-green {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  background: linear-gradient(135deg, #E8F5E9 0%, #F0F8F4 100%) !important;
   background-color: #F0F8F4 !important;
-  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+  border: 1px solid rgba(16, 185, 129, 0.28) !important;
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.08) !important;
 }
 .dark .card-chart-green {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(16, 185, 129, 0.3) !important;
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.18) 0%, #101c15 100%) !important;
+  background-color: #101c15 !important;
+  border: 1px solid rgba(16, 185, 129, 0.35) !important;
 }
 
 /* Blue metric/info cards for Quality, News, Analysis and all neutral cards */
 .card-metric-blue {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.10) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  background: linear-gradient(135deg, #E3F2FD 0%, #F0F6FF 100%) !important;
   background-color: #F0F6FF !important;
-  border: 1px solid rgba(59, 130, 246, 0.18) !important;
+  border: 1px solid rgba(59, 130, 246, 0.25) !important;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.08) !important;
 }
 .dark .card-metric-blue {
-  background: linear-gradient(135deg, rgba(59, 130, 246, 0.13) 0%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(59, 130, 246, 0.28) !important;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.18) 0%, #0f172a 100%) !important;
+  background-color: #0f172a !important;
+  border: 1px solid rgba(59, 130, 246, 0.35) !important;
 }
 
 /* Purple gradient cards — Live News tab */
 .card-live-purple {
-  background: linear-gradient(135deg, rgba(147, 51, 234, 0.12) 0%, rgba(255, 255, 255, 1) 100%) !important;
+  background: linear-gradient(135deg, #F3E5F5 0%, #FAF5FF 100%) !important;
   background-color: #FAF5FF !important;
-  border: 1px solid rgba(147, 51, 234, 0.22) !important;
+  border: 1px solid rgba(147, 51, 234, 0.28) !important;
+  box-shadow: 0 4px 14px rgba(147, 51, 234, 0.08) !important;
 }
 .dark .card-live-purple {
-  background: linear-gradient(135deg, rgba(167, 80, 255, 0.15) 0%, var(--card-bg) 100%) !important;
-  border: 1px solid rgba(167, 80, 255, 0.30) !important;
+  background: linear-gradient(135deg, rgba(167, 80, 255, 0.18) 0%, #1c1024 100%) !important;
+  background-color: #1c1024 !important;
+  border: 1px solid rgba(167, 80, 255, 0.35) !important;
+}
+
+/* Ensure card background colors are never overridden by neumorphic-raised */
+.card-table-orange.neumorphic-raised,
+.card-chart-green.neumorphic-raised,
+.card-metric-blue.neumorphic-raised,
+.card-live-purple.neumorphic-raised {
+  box-shadow: var(--box-shadow-raised);
+}
+
+/* Inner table transparent overrides so card backgrounds shine through */
+.card-table-orange table,
+.card-chart-green table,
+.card-metric-blue table {
+  background: transparent !important;
+}
+
+.card-table-orange thead tr,
+.card-chart-green thead tr {
+  background: rgba(0, 0, 0, 0.03) !important;
+}
+.dark .card-table-orange thead tr,
+.dark .card-chart-green thead tr {
+  background: rgba(255, 255, 255, 0.05) !important;
 }
 
 /* Sidebar nav item – active state: transparent blue glass */

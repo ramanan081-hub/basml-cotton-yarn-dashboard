@@ -259,7 +259,7 @@ export function useCottonData(refreshInterval = 60 * 1000) {
         if (updated.yarns && updated.yarns.india && updated.yarns.india.prices) {
           const prices = updated.yarns.india.prices;
           const shankar6Spot = updated.indianCotton.prices.types[0].current;
-          const iceInrEquivalent = updated.indianCotton.prices.types[6].current;
+          const iceInrEquivalent = updated.indianCotton.prices.types[8]?.current || Math.floor(iceCottonPrice * 7.84 * usdInr);
 
           prices[0].current = Math.floor((shankar6Spot / 356) * 1.0 + 40); // 10s-16s Carded
           prices[0].est = Math.floor(prices[0].current * 1.035);

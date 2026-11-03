@@ -28,7 +28,7 @@ function FreshnessBadge() {
 }
 
 // Shared Trading Desk Information Highlight Box
-function TradingDeskInfoBox({ selectedName, colors }) {
+function TradingDeskInfoBox({ selectedName, basePrice = 65000, colors }) {
   const priceMovements = {
     'Shankar-6': { week: '-0.50%', month: '+1.80%', direction: 'down', reason: 'CCI buffer auction releases satisfying local private mill demands.', events: 'Gujarat local mandis arrival rate drying up seasonally.' },
     'MCU-5': { week: '+1.20%', month: '+2.40%', direction: 'up', reason: 'Coimbatore mills purchasing actively for fine-combed counts spinning.', events: 'South India yarn dispatch volumes increasing 8% interstate.' },
@@ -56,7 +56,7 @@ function TradingDeskInfoBox({ selectedName, colors }) {
   const monthPct = parseFloat(move.month.replace('%', '')) || 0;
   const trendSlope = (weekPct + monthPct) / 2;
 
-  const base = 65000;
+  const base = basePrice || 65000;
   const amplitude = base * 0.008;
   const drift = base * (trendSlope / 100) * 0.1;
 
@@ -574,7 +574,7 @@ export default function CottonDashboard({ data, darkMode, colors }) {
 
       {/* Spot Price Line Chart Desk */}
       <div className="card-chart-green rounded-xl p-6">
-        <TradingDeskInfoBox selectedName={selectedVariety} colors={colors} />
+        <TradingDeskInfoBox selectedName={selectedVariety} basePrice={activeVarietyObj?.base} colors={colors} />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 glass-card rounded-xl p-5 border border-outline-variant/20 bg-surface-container-low">

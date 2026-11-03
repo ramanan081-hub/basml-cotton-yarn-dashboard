@@ -26,7 +26,7 @@ function FreshnessBadge() {
 }
 
 // Shared Trading Desk Information Highlight Box
-function TradingDeskInfoBox({ selectedName, colors }) {
+function TradingDeskInfoBox({ selectedName, basePrice = 280, colors }) {
   const priceMovements = {
     '10s-16s Carded': { week: '+0.80%', month: '+2.10%', direction: 'up', reason: 'Strong demand from denim and heavy fabrics sector; open-end spinning capacity utilization at 88%.', events: 'Denim export orders from Bangladesh driving coarse count demand.' },
     '20s Carded': { week: '+0.40%', month: '+1.50%', direction: 'up', reason: 'Power loom hosiery demand from Tirupur and Ludhiana steady.', events: 'Seasonal t-shirt production ramping up across southern mills.' },
@@ -56,7 +56,7 @@ function TradingDeskInfoBox({ selectedName, colors }) {
   const monthPct = parseFloat(move.month.replace('%', '')) || 0;
   const trendSlope = (weekPct + monthPct) / 2;
 
-  const base = 280;
+  const base = basePrice || 280;
   const amplitude = base * 0.008;
   const drift = base * (trendSlope / 100) * 0.1;
 
@@ -119,7 +119,7 @@ function TradingDeskInfoBox({ selectedName, colors }) {
   );
 }
 
-export default function YarnDashboard({ data, darkMode, colors }) {
+export default function YarnDashboard({ data, cottonData, darkMode, colors }) {
   const [selectedYarn, setSelectedYarn] = useState('Cotton Yarn 30s Carded');
   const [selectedCalculatorYarn, setSelectedCalculatorYarn] = useState('Cotton Yarn 30s Carded');
   const [selectedStates, setSelectedStates] = useState(['Tamil Nadu']);
@@ -227,9 +227,9 @@ export default function YarnDashboard({ data, darkMode, colors }) {
     const sellingPrice = calculatorYarnObj.base;
     const cat = (calculatorYarnObj.category || '').toLowerCase();
 
-    // Raw Cotton Cost per Candy (modelled from standard Shankar-6 spot equivalent)
-    const rawCandy = 65000;
-    // Map raw cotton cost to ₹/kg
+    // Raw Cotton Cost per Candy (modelled from live Shankar-6 spot equivalent)
+    const rawCandy = cottonData?.prices?.types?.[0]?.current || 65000;
+    // Map raw cotton cost to ₹/kg (1 Candy = 355.62 kg)
     const rawCottonKg = Math.round(rawCandy / 355.62);
 
     // Determine category based properties
@@ -267,7 +267,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
       sellingPrice,
       spread
     };
-  }, [calculatorYarnObj]);
+  }, [calculatorYarnObj, cottonData]);
 
   const millIntelligence = data.millIntelligence || [];
   
@@ -586,7 +586,7 @@ export default function YarnDashboard({ data, darkMode, colors }) {
 
       {/* Spot Price Line Chart Desk */}
       <div className="card-chart-green rounded-xl p-6">
-        <TradingDeskInfoBox selectedName={selectedYarn} colors={colors} />
+        <TradingDeskInfoBox selectedName={selectedYarn} basePrice={activeYarnObj?.base} colors={colors} />
         
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           <div className="lg:col-span-2 glass-card rounded-xl p-5 border border-outline-variant/20 bg-surface-container-low">

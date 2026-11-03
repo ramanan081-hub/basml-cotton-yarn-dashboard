@@ -1720,7 +1720,7 @@ function App() {
           {activeTab === 'global' && <GlobalDashboard data={data.globalCotton} yarns={data.yarns} usdInr={data.exchangeRates?.usdInr} brentCrude={data.brentCrude} darkMode={darkMode} colors={themeColors} subTab={globalSubTab} setSubTab={setGlobalSubTab} />}
           {activeTab === 'india' && <IndiaDashboard data={data.indianCotton} yarns={data.yarns} darkMode={darkMode} colors={themeColors} subTab={indiaSubTab} setSubTab={setIndiaSubTab} />}
           {activeTab === 'cotton' && <CottonDashboard data={data} darkMode={darkMode} colors={themeColors} />}
-          {activeTab === 'yarn' && <YarnDashboard data={data.yarns} darkMode={darkMode} colors={themeColors} />}
+          {activeTab === 'yarn' && <YarnDashboard data={data.yarns} cottonData={data.indianCotton} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'impexp' && <ImportExportDashboard colors={themeColors} data={data} subTab={impexpSubTab} setSubTab={setImpexpSubTab} />}
           {activeTab === 'news' && <LiveNews exchangeRates={data.exchangeRates} darkMode={darkMode} colors={themeColors} />}
           {activeTab === 'analysis' && <AnalysisDashboard darkMode={darkMode} colors={themeColors} data={data} subTab={analysisSubTab} setSubTab={setAnalysisSubTab} />}
@@ -5379,7 +5379,7 @@ function GlobalDashboard({ data, yarns, usdInr, brentCrude, darkMode, colors, su
             <div className="overflow-x-auto mt-6 border rounded-xl card-table-orange shadow-xs">
               <table className="min-w-full">
                 <thead>
-                  <tr className="bg-surface-container-low">
+                  <tr className="bg-black/5 dark:bg-white/5">
                     <th className="px-4 py-2 text-left text-xs font-semibold text-on-surface-variant">Crop Year</th>
                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Supply</th>
                     <th className="px-4 py-2 text-right text-xs font-semibold text-on-surface-variant">Production</th>
@@ -5694,7 +5694,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
           {/* Prominent Benchmarks & Arbitrage Metrics Panel */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {/* Card 1: MCX Cotton Spot (Bale basis) */}
-        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden">
           <div className="flex justify-between items-start mb-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Domestic Benchmark</span>
@@ -5721,7 +5721,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         </div>
 
         {/* Card 2: Shankar-6 Spot (Candy basis) */}
-        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden">
           <div className="flex justify-between items-start mb-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Physical Market Standard</span>
@@ -5755,7 +5755,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
         </div>
 
         {/* Card 3: MCU-5 / Bunny (29-31mm) Spot */}
-        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-container-high">
+        <div className="card-table-orange rounded-xxl neumorphic-raised p-5 border border-outline-variant/30 flex flex-col justify-between relative overflow-hidden">
           <div className="flex justify-between items-start mb-4">
             <div>
               <span className="text-[10px] font-mono font-bold uppercase tracking-wider text-outline">Premium Long Staple</span>
@@ -5789,7 +5789,7 @@ function IndiaDashboard({ data, yarns, darkMode, colors, subTab = 'overview', se
       </div>
 
       {/* Indian Cotton Varieties Price Benchmarks & Comparative Chart */}
-      <div className="card-table-orange rounded-xxl neumorphic-raised p-6 border border-outline-variant/30 space-y-6 bg-gradient-to-br from-surface-container-low to-surface-container-high text-left">
+      <div className="card-table-orange rounded-xxl neumorphic-raised p-6 border border-outline-variant/30 space-y-6 text-left">
         <div className="flex justify-between items-center border-b border-outline-variant/20 pb-3">
           <h3 className="text-base font-headline font-bold text-primary flex items-center gap-2">
             <span className="material-symbols-outlined text-xl font-bold">format_list_bulleted</span>
@@ -7040,14 +7040,21 @@ function AnalysisDashboard({ darkMode, colors, data, subTab = 'cotton', setSubTa
         });
 
         if (matchedItem) {
-          return { ...matchedItem, month: monthLabel };
+          const liveScale = currentCotton?.livePrice && staticPlan[0]?.avgPrice ? (currentCotton.livePrice / staticPlan[0].avgPrice) : 1;
+          const dynamicAvgPrice = Math.round(matchedItem.avgPrice * liveScale);
+          const dynamicBudget = parseFloat(((matchedItem.targetBales * dynamicAvgPrice / 2.09188) / 10000000).toFixed(1));
+          return { ...matchedItem, month: monthLabel, avgPrice: dynamicAvgPrice, allocatedBudgetCr: dynamicBudget };
         } else {
           const lastItem = staticPlan[staticPlan.length - 1] || {};
+          const liveScale = currentCotton?.livePrice && staticPlan[0]?.avgPrice ? (currentCotton.livePrice / staticPlan[0].avgPrice) : 1;
+          const targetBales = Math.round((lastItem.targetBales || 20000) * 0.95);
+          const dynamicAvgPrice = Math.round((lastItem.avgPrice || 60000) * liveScale);
+          const dynamicBudget = parseFloat(((targetBales * dynamicAvgPrice / 2.09188) / 10000000).toFixed(1));
           return {
             month: monthLabel,
-            targetBales: Math.round((lastItem.targetBales || 20000) * 0.9),
-            avgPrice: lastItem.avgPrice || 60000,
-            allocatedBudgetCr: lastItem.allocatedBudgetCr || 50.0,
+            targetBales,
+            avgPrice: dynamicAvgPrice,
+            allocatedBudgetCr: dynamicBudget,
             hedgingRatio: lastItem.hedgingRatio || 30,
             combedCompactDemand: lastItem.combedCompactDemand || 80,
             blendedYarnDemand: lastItem.blendedYarnDemand || 60,
